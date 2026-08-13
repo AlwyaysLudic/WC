@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Road to World Champion — BJJ</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080a0f;
+    --panel: #11151d;
+    --panel2: #171c25;
+    --border: #29313d;
+    --text: #f5f7fa;
+    --muted: #8e98a8;
+    --gold: #ffc247;
+    --red: #ff5c5c;
+    --green: #52d273;
+    --blue: #5aa9ff;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background:
+        radial-gradient(circle at top right, #2b1d0840, transparent 35%),
+        radial-gradient(circle at bottom left, #11233a55, transparent 35%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: min(1200px, 94%);
+    margin: auto;
+    padding: 25px 0 50px;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: var(--gold);
+    color: #111;
+    border-radius: 16px;
+    font-size: 28px;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(25px, 4vw, 38px);
+}
+
+.subtitle {
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.rank {
+    padding: 11px 17px;
+    border: 1px solid #4b3a1c;
+    background: #1c160b;
+    color: var(--gold);
+    border-radius: 999px;
+    font-weight: 900;
+}
+
+/* GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+}
+
+.card {
+    grid-column: span 4;
+    background: linear-gradient(145deg, var(--panel), #0e1218);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 19px;
+    box-shadow: 0 15px 40px #0005;
+}
+
+.card.wide {
+    grid-column: span 8;
+}
+
+.card.full {
+    grid-column: 1 / -1;
+}
+
+.card h2 {
+    margin: 0 0 16px;
+    font-size: 18px;
+}
+
+/* XP */
+
+.xp-number {
+    font-size: 42px;
+    font-weight: 950;
+    color: var(--gold);
+}
+
+.level {
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.progress {
+    width: 100%;
+    height: 12px;
+    background: #242b35;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff9f1c, #ffe07a);
+    transition: width .4s ease;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+}
+
+.stat {
+    background: #0b0e14;
+    padding: 14px 10px;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 14px;
+}
+
+button {
+    border: 0;
+    border-radius: 10px;
+    padding: 11px 15px;
+    font-weight: 850;
+    background: var(--gold);
+    color: #111;
+    transition: .15s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+button.secondary {
+    background: #252c37;
+    color: white;
+}
+
+button.green {
+    background: var(--green);
+}
+
+button.red {
+    background: #60272b;
+    color: white;
+}
+
+/* FORMS */
+
+label {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+input,
+select {
+    width: 100%;
+    margin-top: 6px;
+    border: 1px solid var(--border);
+    background: #0b0e14;
+    color: white;
+    border-radius: 10px;
+    padding: 11px;
+}
+
+/* WORKOUT */
+
+.workout {
+    display: grid;
+    gap: 9px;
+}
+
+.exercise {
+    padding: 14px;
+    background: #0b0f15;
+    border-radius: 12px;
+    border-left: 4px solid var(--gold);
+}
+
+.exercise-title {
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.exercise-info {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.exercise.done {
+    opacity: .45;
+    border-left-color: var(--green);
+}
+
+/* CHALLENGE */
+
+.challenge {
+    background: #0b0e14;
+    border-radius: 13px;
+    padding: 15px;
+}
+
+.challenge-title {
+    font-weight: 900;
+    color: var(--gold);
+    font-size: 17px;
+}
+
+.challenge-description {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+/* COMPETITION */
+
+.countdown {
+    font-size: 38px;
+    font-weight: 950;
+    color: var(--red);
+}
+
+.prep-bar {
+    margin-top: 10px;
+    height: 9px;
+    border-radius: 99px;
+    background: #282d35;
+    overflow: hidden;
+}
+
+.prep-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+}
+
+/* ACHIEVEMENTS */
+
+.achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+.achievement {
+    padding: 14px;
+    border-radius: 12px;
+    background: #0b0e14;
+    border: 1px solid var(--border);
+}
+
+.achievement.locked {
+    opacity: .35;
+}
+
+.achievement-icon {
+    font-size: 25px;
+}
+
+.achievement-title {
+    font-weight: 850;
+    margin-top: 5px;
+}
+
+/* LOG */
+
+.log {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 10px 0;
+    border-bottom: 1px solid #252b35;
+    color: #cbd1da;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+    .card,
+    .card.wide {
+        grid-column: 1 / -1;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🥋
+        </div>
+
+        <div>
+            <h1>ROAD TO WC</h1>
+            <div class="subtitle">
+                Brazilian Jiu-Jitsu Training Engine
+            </div>
+        </div>
+
+    </div>
+
+    <div class="rank" id="rank">
+        BEGINNER
+    </div>
+
+</header>
+
+
+<div class="grid">
+
+
+<!-- XP -->
+
+<section class="card wide">
+
+    <h2>🏆 Progression</h2>
+
+    <div class="xp-number">
+        <span id="xp">0</span> XP
+    </div>
+
+    <div class="level" id="level">
+        Niveau 1
+    </div>
+
+    <div class="progress">
+        <div class="progress-fill" id="xpBar"></div>
+    </div>
+
+    <p class="subtitle">
+        Ton objectif : passer du premier entraînement au niveau World Champion.
+    </p>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="card">
+
+    <h2>📊 Statistiques</h2>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-number" id="rounds">0</div>
+            <div class="stat-label">Rounds</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number" id="minutes">0</div>
+            <div class="stat-label">Minutes</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number" id="sessions">0</div>
+            <div class="stat-label">Séances</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section class="card">
+
+    <h2>⚙️ Profil</h2>
+
+    <label>
+        Ceinture
+
+        <select id="belt">
+
+            <option>Blanche</option>
+            <option>Bleue</option>
+            <option>Violette</option>
+            <option>Marron</option>
+            <option>Noire</option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+        Objectif
+
+        <select id="goal">
+
+            <option>Devenir compétiteur</option>
+            <option>Gagner ma prochaine compétition</option>
+            <option>Atteindre le niveau élite</option>
+            <option>World Championship</option>
+
+        </select>
+
+    </label>
+
+
+    <button onclick="saveProfile()">
+        Sauvegarder
+    </button>
+
+</section>
+
+
+<!-- WORKOUT -->
+
+<section class="card wide">
+
+    <h2>🔥 Séance du jour</h2>
+
+    <div class="workout" id="workout">
+
+        <div class="exercise">
+
+            <div class="exercise-title">
+                Aucune séance
+            </div>
+
+            <div class="exercise-info">
+                Génère ton entraînement.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button onclick="generateWorkout()">
+            🎲 Générer une séance
+        </button>
+
+        <button
+            class="green"
+            onclick="completeWorkout()">
+
+            ✅ Séance terminée
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CHALLENGE -->
+
+<section class="card">
+
+    <h2>🎯 Défi du jour</h2>
+
+    <div class="challenge" id="challenge">
+
+        Aucun défi.
+
+    </div>
+
+    <div class="buttons">
+
+        <button onclick="newChallenge()">
+            🎲 Nouveau défi
+        </button>
+
+        <button
+            class="green"
+            onclick="completeChallenge()">
+
+            🏅 Réussi
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- COMPETITION -->
+
+<section class="card">
+
+    <h2>🥊 Compétition</h2>
+
+    <label>
+
+        Jours avant compétition
+
+        <input
+            type="number"
+            id="days"
+            min="0"
+            value="90">
+
+    </label>
+
+    <button onclick="saveDays()">
+        Mettre à jour
+    </button>
+
+    <div class="countdown" id="countdown">
+        90 jours
+    </div>
+
+    <div class="prep-bar">
+
+        <div
+            class="prep-fill"
+            id="prepBar">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section class="card full">
+
+    <h2>🏅 Achievements</h2>
+
+    <div
+        class="achievements"
+        id="achievements">
+    </div>
+
+</section>
+
+
+<!-- JOURNAL -->
+
+<section class="card full">
+
+    <h2>📜 Journal</h2>
+
+    <div
+        class="log"
+        id="log">
+    </div>
+
+    <div class="buttons">
+
+        <button
+            class="red"
+            onclick="resetProgress()">
+
+            ☢️ Reset progression
+
+        </button>
+
+    </div>
+
+</section>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   DATA
+========================================== */
+
+const STORAGE_KEY = "road_to_wc_bjj_v2";
+
+
+let data =
+JSON.parse(localStorage.getItem(STORAGE_KEY))
+||
+{
+
+    xp: 0,
+
+    rounds: 0,
+
+    minutes: 0,
+
+    sessions: 0,
+
+    belt: "Blanche",
+
+    goal: "Devenir compétiteur",
+
+    days: 90,
+
+    workout: null,
+
+    challenge: null,
+
+    logs: [],
+
+    achievements: []
+
+};
+
+
+/* ==========================================
+   WORKOUT DATABASE
+========================================== */
+
+const workouts = [
+
+    {
+        title: "Échauffement",
+        time: "10 min",
+        text: "Mobilité des hanches, épaules, shrimping, bridging et technical stand-up."
+    },
+
+    {
+        title: "Technique",
+        time: "20 min",
+        text: "Choisis une séquence technique. 5 répétitions lentes puis 10 répétitions à vitesse réelle."
+    },
+
+    {
+        title: "Drilling",
+        time: "15 min",
+        text: "Travaille une entrée, un contrôle et une finition. Priorité à la précision."
+    },
+
+    {
+        title: "Positionnel",
+        time: "20 min",
+        text: "Commence chaque round dans une mauvaise position et cherche uniquement à t'échapper."
+    },
+
+    {
+        title: "Sparring",
+        time: "30 min",
+        text: "6 rounds de 5 minutes. Intensité progressive. Reste technique sous fatigue."
+    },
+
+    {
+        title: "Conditionnement",
+        time: "10 min",
+        text: "10 × 30 secondes intenses / 30 secondes récupération."
+    },
+
+    {
+        title: "Analyse",
+        time: "10 min",
+        text: "Note une erreur, une réussite et une technique à travailler à la prochaine séance."
+    },
+
+    {
+        title: "Retour au calme",
+        time: "5 min",
+        text: "Respiration et mobilité légère."
+    }
+
+];
+
+
+/* ==========================================
+   CHALLENGES
+========================================== */
+
+const challenges = [
+
+    {
+        title: "🧱 WALL",
+        text: "Faire 50 répétitions propres d'une entrée de garde."
+    },
+
+    {
+        title: "⚔️ ATTACK",
+        text: "Choisir une soumission et réaliser 30 répétitions techniques."
+    },
+
+    {
+        title: "🛡️ DEFENSE",
+        text: "Pendant 3 rounds, privilégier la défense et les escapes."
+    },
+
+    {
+        title: "🔥 ENGINE",
+        text: "Faire 10 intervalles de 30 secondes intenses."
+    },
+
+    {
+        title: "🧠 STUDY",
+        text: "Analyser 20 minutes de vidéo et noter 3 détails techniques."
+    },
+
+    {
+        title: "🥋 POSITIONAL",
+        text: "Faire 5 rounds de 3 minutes depuis une position défavorable."
+    },
+
+    {
+        title: "💀 SURVIVAL",
+        text: "Faire 3 rounds en commençant sous mount et survivre techniquement."
+    },
+
+    {
+        title: "⚡ SPEED",
+        text: "Faire 5 minutes de drilling explosif sans sacrifier la technique."
+    }
+
+];
+
+
+/* ==========================================
+   ACHIEVEMENTS
+========================================== */
+
+const achievements = [
+
+    {
+        id: "first",
+        icon: "🥋",
+        title: "Premier pas",
+        text: "Terminer ta première séance.",
+        check: () => data.sessions >= 1
+    },
+
+    {
+        id: "100rounds",
+        icon: "💯",
+        title: "100 rounds",
+        text: "Atteindre 100 rounds.",
+        check: () => data.rounds >= 100
+    },
+
+    {
+        id: "500rounds",
+        icon: "🔥",
+        title: "500 rounds",
+        text: "Atteindre 500 rounds.",
+        check: () => data.rounds >= 500
+    },
+
+    {
+        id: "1000rounds",
+        icon: "💀",
+        title: "Round Monster",
+        text: "Atteindre 1000 rounds.",
+        check: () => data.rounds >= 1000
+    },
+
+    {
+        id: "10kxp",
+        icon: "🏆",
+        title: "10K XP",
+        text: "Atteindre 10 000 XP.",
+        check: () => data.xp >= 10000
+    },
+
+    {
+        id: "world",
+        icon: "🌎",
+        title: "WORLD LEVEL",
+        text: "Atteindre 50 000 XP.",
+        check: () => data.xp >= 50000
+    }
+
+];
+
+
+/* ==========================================
+   RANKS
+========================================== */
+
+function getRank() {
+
+    if (data.xp >= 50000)
+        return "WORLD CHAMPION";
+
+    if (data.xp >= 30000)
+        return "WORLD LEVEL";
+
+    if (data.xp >= 20000)
+        return "ELITE";
+
+    if (data.xp >= 12000)
+        return "ADVANCED";
+
+    if (data.xp >= 6000)
+        return "COMPETITOR";
+
+    if (data.xp >= 2000)
+        return "GRINDER";
+
+    return "BEGINNER";
+}
+
+
+/* ==========================================
+   SAVE
+========================================== */
+
+function save() {
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+
+    render();
+
+}
+
+
+/* ==========================================
+   LOG
+========================================== */
+
+function log(message) {
+
+    const date =
+        new Date().toLocaleString("fr-FR");
+
+    data.logs.push(
+        `${date} — ${message}`
+    );
+
+    data.logs =
+        data.logs.slice(-100);
+
+}
+
+
+/* ==========================================
+   WORKOUT GENERATOR
+========================================== */
+
+function generateWorkout() {
+
+    const shuffled =
+        [...workouts]
+        .sort(() => Math.random() - 0.5);
+
+    data.workout =
+        shuffled.slice(0, 6);
+
+    log("🔥 Nouvelle séance générée.");
+
+    save();
+
+}
+
+
+/* ==========================================
+   COMPLETE WORKOUT
+========================================== */
+
+function completeWorkout() {
+
+    if (!data.workout) {
+
+        alert(
+            "Génère d'abord une séance 😭"
+        );
+
+        return;
+
+    }
+
+
+    const xpGain = 250;
+
+    data.xp += xpGain;
+
+    data.sessions++;
+
+    data.rounds += 6;
+
+    data.minutes += 90;
+
+
+    log(
+        `✅ Séance terminée : +${xpGain} XP • +6 rounds • +90 min`
+    );
+
+
+    data.workout = null;
+
+
+    checkAchievements();
+
+    save();
+
+}
+
+
+/* ==========================================
+   CHALLENGE
+========================================== */
+
+function newChallenge() {
+
+    data.challenge =
+        challenges[
+            Math.floor(
+                Math.random() *
+                challenges.length
+            )
+        ];
+
+    log(
+        `🎯 Nouveau défi : ${data.challenge.title}`
+    );
+
+    save();
+
+}
+
+
+function completeChallenge() {
+
+    if (!data.challenge) {
+
+        alert(
+            "Choisis d'abord un défi."
+        );
+
+        return;
+
+    }
+
+
+    data.xp += 100;
+
+
+    log(
+        `🏅 Défi réussi : ${data.challenge.title} • +100 XP`
+    );
+
+
+    data.challenge = null;
+
+
+    checkAchievements();
+
+    save();
+
+}
+
+
+/* ==========================================
+   PROFILE
+========================================== */
+
+function saveProfile() {
+
+    data.belt =
+        document.getElementById("belt").value;
+
+    data.goal =
+        document.getElementById("goal").value;
+
+
+    log("⚙️ Profil mis à jour.");
+
+    save();
+
+}
+
+
+/* ==========================================
+   COMPETITION
+========================================== */
+
+function saveDays() {
+
+    const value =
+        Number(
+            document.getElementById("days").value
+        );
+
+
+    data.days =
+        Math.max(
+            0,
+            value || 0
+        );
+
+
+    log(
+        `📅 Compétition dans ${data.days} jours.`
+    );
+
+
+    save();
+
+}
+
+
+/* ==========================================
+   ACHIEVEMENTS
+========================================== */
+
+function checkAchievements() {
+
+    achievements.forEach(a => {
+
+        if (
+            a.check() &&
+            !data.achievements.includes(a.id)
+        ) {
+
+            data.achievements.push(a.id);
+
+            data.xp += 50;
+
+            log(
+                `🏆 Achievement débloqué : ${a.title} • +50 XP`
+            );
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetProgress() {
+
+    const confirmation =
+        confirm(
+            "Tu veux vraiment supprimer toute ta progression ?"
+        );
+
+
+    if (!confirmation)
+        return;
+
+
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+
+    location.reload();
+
+}
+
+
+/* ==========================================
+   RENDER
+========================================== */
+
+function render() {
+
+    /* XP */
+
+    document.getElementById("xp")
+        .textContent = data.xp;
+
+
+    const level =
+        Math.floor(data.xp / 500) + 1;
+
+
+    const currentXP =
+        data.xp % 500;
+
+
+    document.getElementById("level")
+        .textContent =
+        `Niveau ${level} • ${currentXP}/500 XP`;
+
+
+    document.getElementById("xpBar")
+        .style.width =
+        `${(currentXP / 500) * 100}%`;
+
+
+    /* RANK */
+
+    document.getElementById("rank")
+        .textContent =
+        getRank();
+
+
+    /* STATS */
+
+    document.getElementById("rounds")
+        .textContent =
+        data.rounds;
+
+
+    document.getElementById("minutes")
+        .textContent =
+        data.minutes;
+
+
+    document.getElementById("sessions")
+        .textContent =
+        data.sessions;
+
+
+    /* PROFILE */
+
+    document.getElementById("belt")
+        .value =
+        data.belt;
+
+
+    document.getElementById("goal")
+        .value =
+        data.goal;
+
+
+    /* COUNTDOWN */
+
+    document.getElementById("days")
+        .value =
+        data.days;
+
+
+    document.getElementById("countdown")
+        .textContent =
+        `${data.days} jour${data.days > 1 ? "s" : ""}`;
+
+
+    const prep =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                100 - (data.days / 365 * 100)
+            )
+        );
+
+
+    document.getElementById("prepBar")
+        .style.width =
+        `${prep}%`;
+
+
+    /* WORKOUT */
+
+    const workout =
+        document.getElementById("workout");
+
+
+    if (!data.workout) {
+
+        workout.innerHTML = `
+            <div class="exercise">
+
+                <div class="exercise-title">
+                    Aucune séance
+                </div>
+
+                <div class="exercise-info">
+                    Clique sur « Générer une séance ».
+                </div>
+
+            </div>
+        `;
+
+    } else {
+
+        workout.innerHTML =
+            data.workout
+            .map((item, index) => `
+
+                <div class="exercise">
+
+                    <div class="exercise-title">
+                        ${index + 1}. ${item.title}
+                    </div>
+
+                    <div class="exercise-info">
+                        <strong>${item.time}</strong>
+                        — ${item.text}
+                    </div>
+
+                </div>
+
+            `)
+            .join("");
+
+    }
+
+
+    /* CHALLENGE */
+
+    const challenge =
+        document.getElementById("challenge");
+
+
+    if (!data.challenge) {
+
+        challenge.innerHTML = `
+            <div class="challenge-description">
+                Aucun défi sélectionné.
+            </div>
+        `;
+
+    } else {
+
+        challenge.innerHTML = `
+
+            <div class="challenge-title">
+                ${data.challenge.title}
+            </div>
+
+            <div class="challenge-description">
+                ${data.challenge.text}
+            </div>
+
+        `;
+
+    }
+
+
+    /* ACHIEVEMENTS */
+
+    const achievementContainer =
+        document.getElementById("achievements");
+
+
+    achievementContainer.innerHTML =
+        achievements
+        .map(a => {
+
+            const unlocked =
+                data.achievements
+                .includes(a.id);
+
+
+            return `
+
+                <div class="achievement
+                    ${unlocked ? "" : "locked"}">
+
+                    <div class="achievement-icon">
+                        ${a.icon}
+                    </div>
+
+                    <div class="achievement-title">
+                        ${a.title}
+                    </div>
+
+                    <div class="subtitle">
+                        ${a.text}
+                    </div>
+
+                </div>
+
+            `;
+
+        })
+        .join("");
+
+
+    /* LOG */
+
+    const logContainer =
+        document.getElementById("log");
+
+
+    if (!data.logs.length) {
+
+        logContainer.innerHTML =
+            `<div class="subtitle">
+                Ton journal est vide.
+            </div>`;
+
+    } else {
+
+        logContainer.innerHTML =
+            data.logs
+            .slice()
+            .reverse()
+            .map(entry => `
+                <div class="log-entry">
+                    ${entry}
+                </div>
+            `)
+            .join("");
+
+    }
+
+}
+
+
+/* ==========================================
+   INITIALISATION
+========================================== */
+
+checkAchievements();
+
+if (!data.workout)
+    generateWorkout();
+
+if (!data.challenge)
+    newChallenge();
+
+render();
+
+</script>
+
+</body>
+</html>
