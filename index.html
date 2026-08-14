@@ -2,145 +2,224 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>BJJ OS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0f17">
+
+<title>BJJ OS — Training System</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* =========================================================
+   BJJ OS
+   ========================================================= */
 
 :root {
-    --bg: #f4f6fa;
-    --surface: #ffffff;
-    --surface2: #eef1f6;
+    --bg: #eef1f6;
+    --panel: #ffffff;
+    --panel-2: #f5f7fa;
     --text: #111827;
-    --muted: #7b8494;
-    --border: #e1e5ec;
+    --muted: #788397;
+    --border: #dfe4ec;
+
     --accent: #315efb;
-    --accent2: #6c7cff;
-    --green: #20b26b;
-    --orange: #f59e0b;
-    --danger: #ef4444;
-    --shadow: 0 15px 40px rgba(25,35,55,.08);
+    --accent-hover: #244bd2;
+
+    --green: #19a96b;
+    --orange: #ef9d18;
+    --red: #e5484d;
+
+    --shadow: 0 12px 35px rgba(20, 30, 50, .08);
 }
 
 body.dark {
-    --bg: #0b0e14;
-    --surface: #131822;
-    --surface2: #1a202c;
-    --text: #f3f5f9;
-    --muted: #8992a3;
-    --border: #252d3a;
-    --accent: #6d83ff;
-    --accent2: #8295ff;
-    --green: #35d88a;
+    --bg: #090c12;
+    --panel: #111620;
+    --panel-2: #181e2a;
+    --text: #f5f7fb;
+    --muted: #8994a7;
+    --border: #252d3b;
+
+    --accent: #6680ff;
+    --accent-hover: #7b91ff;
+
+    --green: #35d48b;
     --orange: #ffb52e;
-    --danger: #ff5b63;
-    --shadow: 0 15px 40px rgba(0,0,0,.25);
+    --red: #ff6269;
+
+    --shadow: 0 15px 40px rgba(0,0,0,.28);
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html,
 body {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    margin: 0;
 }
 
 body {
-    font-family: Inter, sans-serif;
+    overflow: hidden;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     background: var(--bg);
     color: var(--text);
-    transition: background .25s,color .25s;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
 }
 
-/* =====================================
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
    APP
-===================================== */
+   ========================================================= */
 
 .app {
+    width: 100%;
     height: 100vh;
+
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 230px minmax(0, 1fr);
+
+    background: var(--bg);
 }
 
-/* =====================================
-   NAVIGATION
-===================================== */
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 .sidebar {
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 22px 15px;
+    height: 100vh;
+
     display: flex;
     flex-direction: column;
+
+    padding: 22px 14px;
+
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+
+    min-width: 0;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px 28px;
+    gap: 11px;
+
+    padding: 5px 9px 25px;
 }
 
-.logo-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: var(--accent);
-    color: white;
+.logo-mark {
+    width: 36px;
+    height: 36px;
+
     display: grid;
     place-items: center;
+
+    border-radius: 11px;
+
+    background: var(--accent);
+    color: white;
+
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.logo-title {
+    font-size: 14px;
     font-weight: 800;
 }
 
-.logo strong {
-    font-size: 15px;
-}
-
-.logo small {
-    display: block;
+.logo-subtitle {
     color: var(--muted);
-    font-size: 9px;
+    font-size: 8px;
+    letter-spacing: 1px;
     margin-top: 2px;
 }
 
-.menu {
+.nav {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
-.menu button {
+.nav-button {
     width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 12px;
+
     border: 0;
+    border-radius: 10px;
+
     background: transparent;
     color: var(--muted);
-    padding: 12px;
-    border-radius: 10px;
-    text-align: left;
-    cursor: pointer;
-    font-size: 12px;
-    transition: .2s;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease;
 }
 
-.menu button:hover {
-    background: var(--surface2);
+.nav-button:hover {
+    background: var(--panel-2);
     color: var(--text);
 }
 
-.menu button.active {
+.nav-button:active {
+    transform: scale(.98);
+}
+
+.nav-button.active {
     background: var(--accent);
     color: white;
 }
 
-.menu-icon {
-    display: inline-block;
-    width: 23px;
+.nav-icon {
+    width: 21px;
+    text-align: center;
+    font-size: 14px;
 }
 
 .sidebar-bottom {
@@ -149,86 +228,117 @@ body {
 
 .theme-button {
     width: 100%;
+
     border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text);
-    padding: 11px;
     border-radius: 10px;
-    cursor: pointer;
-    font-size: 11px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    padding: 10px;
+
+    font-size: 10px;
+    font-weight: 600;
 }
 
-/* =====================================
-   CONTENT
-===================================== */
 
-.content {
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main {
     min-width: 0;
+    min-height: 0;
+
     display: flex;
     flex-direction: column;
 }
 
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
 .topbar {
-    height: 70px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    height: 68px;
+    flex: 0 0 68px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
+
+    padding: 0 clamp(16px, 3vw, 34px);
+
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
 }
 
-.page-name {
+.page-title {
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .page-date {
-    color: var(--muted);
-    font-size: 11px;
     margin-top: 3px;
+
+    color: var(--muted);
+    font-size: 9px;
 }
 
-.profile-mini {
+.user-mini {
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: 11px;
+
+    font-size: 10px;
+    color: var(--muted);
 }
 
-.avatar {
-    width: 32px;
-    height: 32px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 50%;
+.avatar-mini {
+    width: 31px;
+    height: 31px;
+
     display: grid;
     place-items: center;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    background: var(--panel-2);
 }
 
-/* =====================================
+
+/* =========================================================
    VIEWS
-===================================== */
+   ========================================================= */
 
 .views {
+    position: relative;
+
     flex: 1;
     min-height: 0;
-    position: relative;
 }
 
 .view {
     position: absolute;
     inset: 0;
-    padding: 27px 30px;
+
     display: none;
-    animation: appear .18s ease;
+
+    padding:
+        clamp(16px, 2.5vw, 30px)
+        clamp(16px, 3vw, 35px);
+
+    overflow: hidden;
+
+    animation: viewIn .18s ease;
 }
 
 .view.active {
     display: block;
 }
 
-@keyframes appear {
+@keyframes viewIn {
     from {
         opacity: 0;
         transform: translateY(5px);
@@ -240,618 +350,1085 @@ body {
     }
 }
 
-/* =====================================
+
+/* =========================================================
    COMMON
-===================================== */
+   ========================================================= */
 
-.view-title {
-    font-size: 24px;
-    font-weight: 800;
+.view-heading {
+    height: 50px;
 }
 
-.view-subtitle {
+.view-heading h1 {
+    margin: 0;
+
+    font-size: clamp(19px, 2vw, 25px);
+    line-height: 1;
+}
+
+.view-heading p {
+    margin: 6px 0 0;
+
     color: var(--muted);
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-.grid {
-    display: grid;
-    gap: 14px;
+    font-size: 10px;
 }
 
 .card {
-    background: var(--surface);
+    min-width: 0;
+
+    background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 15px;
+
     box-shadow: var(--shadow);
 }
 
 .card-title {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 800;
 }
 
 .card-label {
     color: var(--muted);
-    font-size: 9px;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
     text-transform: uppercase;
-    letter-spacing: .8px;
 }
 
 .primary {
     border: 0;
+    border-radius: 9px;
+
     background: var(--accent);
     color: white;
-    border-radius: 9px;
-    padding: 11px 15px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 11px;
+
+    padding: 10px 14px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    transition: .18s;
+}
+
+.primary:hover {
+    background: var(--accent-hover);
 }
 
 .secondary {
     border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text);
     border-radius: 9px;
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 11px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    padding: 9px 13px;
+
+    font-size: 10px;
+    font-weight: 700;
 }
 
-.danger {
-    background: var(--danger);
+.small-button {
+    padding: 7px 9px;
+    font-size: 9px;
 }
 
-/* =====================================
+
+/* =========================================================
    HOME
-===================================== */
+   ========================================================= */
 
-.home-grid {
-    height: 100%;
+.home-layout {
+    height: calc(100% - 50px);
+
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    grid-template-rows: 1fr 1fr;
+
+    grid-template-columns: minmax(0, 1.45fr) minmax(240px, .8fr);
+
+    grid-template-rows: minmax(0, 1fr) minmax(105px, .45fr);
+
     gap: 14px;
 }
 
-.welcome {
-    padding: 28px;
-    background:
-        linear-gradient(135deg, var(--accent), #6376ff);
-    color: white;
+.hero {
     position: relative;
+
+    padding: clamp(22px, 4vw, 38px);
+
     overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            #687cff
+        );
+
+    color: white;
 }
 
-.welcome::after {
+.hero::after {
     content: "🥋";
+
     position: absolute;
-    right: 35px;
-    bottom: 15px;
-    font-size: 115px;
-    opacity: .15;
+
+    right: 5%;
+    bottom: -20px;
+
+    font-size: clamp(90px, 12vw, 170px);
+
+    opacity: .13;
 }
 
-.welcome .card-label {
-    color: rgba(255,255,255,.7);
+.hero .card-label {
+    color: rgba(255,255,255,.65);
 }
 
-.welcome h2 {
-    font-size: 32px;
-    max-width: 400px;
-    margin-top: 10px;
-    line-height: 1.1;
+.hero h2 {
+    position: relative;
+    z-index: 2;
+
+    margin: 13px 0 0;
+
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: .98;
+
+    letter-spacing: -2px;
 }
 
-.welcome p {
-    color: rgba(255,255,255,.75);
-    font-size: 11px;
-    max-width: 390px;
+.hero p {
+    position: relative;
+    z-index: 2;
+
+    max-width: 470px;
+
+    margin: 16px 0 0;
+
+    color: rgba(255,255,255,.78);
+
+    font-size: 10px;
     line-height: 1.6;
-    margin-top: 12px;
 }
 
-.welcome .primary {
+.hero-buttons {
+    position: relative;
+    z-index: 3;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-top: 22px;
+}
+
+.hero .primary {
     background: white;
     color: var(--accent);
-    margin-top: 20px;
 }
 
-.today {
-    padding: 22px;
+.hero .secondary {
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.25);
+    color: white;
 }
 
-.session-row {
+.today-card {
+    padding: 21px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.today-workout {
+    margin-top: 18px;
+
     display: flex;
     align-items: center;
-    gap: 13px;
-    margin-top: 17px;
+    gap: 11px;
 }
 
-.session-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 11px;
-    background: var(--surface2);
+.workout-icon {
+    width: 41px;
+    height: 41px;
+
     display: grid;
     place-items: center;
-    font-size: 18px;
+
+    border-radius: 11px;
+
+    background: var(--panel-2);
+
+    font-size: 17px;
 }
 
-.session-row strong {
-    font-size: 12px;
-}
-
-.session-row small {
+.today-workout strong {
     display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 3px;
+
+    font-size: 11px;
 }
 
-.stats-home {
+.today-workout span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.day-status {
+    margin-top: auto;
+
+    padding: 8px 10px;
+
+    border-radius: 8px;
+
+    background: rgba(25,169,107,.1);
+    color: var(--green);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.home-stats {
     grid-column: 1 / -1;
+
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
     gap: 14px;
 }
 
 .stat {
-    padding: 20px;
+    padding: 16px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .stat-value {
-    font-size: 31px;
-    font-weight: 800;
-    margin-top: 8px;
+    margin-top: 7px;
+
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 900;
 }
 
 .stat-change {
+    margin-top: 3px;
+
     color: var(--green);
-    font-size: 9px;
-    margin-top: 5px;
+
+    font-size: 8px;
 }
 
-/* =====================================
+
+/* =========================================================
    TRAINING
-===================================== */
+   ========================================================= */
 
 .training-layout {
-    height: calc(100% - 58px);
+    height: calc(100% - 50px);
+
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+
+    grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
+
     gap: 14px;
-    margin-top: 22px;
 }
 
-.session-builder {
-    padding: 23px;
+.session-card {
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+}
+
+.exercise-list {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10px;
 }
 
 .exercise {
+    flex: 1;
+
+    min-height: 42px;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 13px 0;
+    justify-content: space-between;
+
     border-bottom: 1px solid var(--border);
 }
 
 .exercise:last-child {
-    border: 0;
+    border-bottom: 0;
 }
 
-.exercise-info {
+.exercise-left {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.exercise-num {
+.exercise-number {
     color: var(--accent);
-    font-weight: 800;
+
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.exercise-name {
     font-size: 10px;
+    font-weight: 800;
 }
 
-.exercise strong {
-    font-size: 11px;
+.exercise-description {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 8px;
 }
 
-.exercise small {
-    display: block;
+.exercise-duration {
     color: var(--muted);
     font-size: 9px;
-    margin-top: 3px;
-}
-
-.exercise-time {
-    color: var(--muted);
-    font-size: 10px;
 }
 
 .training-side {
+    min-height: 0;
+
     display: grid;
     grid-template-rows: 1fr 1fr;
+
     gap: 14px;
 }
 
 .focus-card {
-    padding: 23px;
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.focus-technique {
-    font-size: 28px;
-    font-weight: 800;
-    margin-top: 20px;
+.focus-big {
+    margin-top: 15px;
+
+    font-size: clamp(24px, 3vw, 35px);
+    font-weight: 900;
+    letter-spacing: -1px;
 }
 
-.focus-description {
-    color: var(--muted);
-    font-size: 10px;
-    line-height: 1.5;
+.focus-text {
+    max-width: 350px;
+
     margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+    line-height: 1.5;
 }
 
-/* =====================================
+.focus-button {
+    margin-top: 16px;
+    align-self: flex-start;
+}
+
+
+/* =========================================================
+   GENERATOR
+   ========================================================= */
+
+.generator-layout {
+    height: calc(100% - 50px);
+
+    display: grid;
+
+    grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr);
+
+    gap: 14px;
+}
+
+.generator-options {
+    padding: 20px;
+}
+
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 7px;
+
+    margin-top: 15px;
+}
+
+.type-button {
+    min-height: 58px;
+
+    border: 1px solid var(--border);
+    border-radius: 11px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    padding: 8px;
+
+    text-align: left;
+
+    transition: .18s;
+}
+
+.type-button:hover {
+    border-color: var(--accent);
+}
+
+.type-button.selected {
+    border-color: var(--accent);
+    background: rgba(49,94,251,.1);
+}
+
+.type-emoji {
+    display: block;
+
+    font-size: 17px;
+}
+
+.type-name {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.generated-card {
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+}
+
+.generated-content {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 13px;
+}
+
+.generated-exercise {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.generated-exercise:last-child {
+    border-bottom: 0;
+}
+
+.generated-exercise strong {
+    display: block;
+
+    font-size: 10px;
+}
+
+.generated-exercise small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+}
+
+.generated-right {
+    color: var(--accent);
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
    TIMER
-===================================== */
+   ========================================================= */
 
 .timer-layout {
-    height: calc(100% - 58px);
+    height: calc(100% - 50px);
+
     display: grid;
-    place-items: center;
+    grid-template-columns: minmax(0, 1fr) 230px;
+
+    gap: 14px;
 }
 
-.timer-box {
-    width: min(600px,90%);
+.timer-main {
+    display: grid;
+    place-items: center;
+
+    padding: 25px;
+}
+
+.timer-inner {
+    width: min(600px, 100%);
+
     text-align: center;
-    padding: 45px;
 }
 
 .timer-round {
     color: var(--accent);
-    font-size: 11px;
-    font-weight: 700;
+
+    font-size: 10px;
+    font-weight: 900;
+
     letter-spacing: 2px;
 }
 
 .timer-number {
-    font-size: clamp(80px,13vw,145px);
-    line-height: 1;
-    font-weight: 800;
+    margin: 17px 0;
+
+    font-size: clamp(70px, 12vw, 145px);
+    line-height: .85;
+
+    font-weight: 900;
     letter-spacing: -7px;
-    margin: 20px 0;
 }
 
 .timer-status {
     color: var(--muted);
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .timer-controls {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 25px;
-}
 
-.timer-controls button {
-    min-width: 80px;
-}
+    gap: 7px;
 
-/* =====================================
-   PLANNING
-===================================== */
-
-.week {
-    height: calc(100% - 70px);
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    gap: 10px;
     margin-top: 22px;
 }
 
-.day-card {
-    padding: 15px;
+.timer-settings {
+    padding: 20px;
+}
+
+.setting {
+    margin-top: 17px;
+}
+
+.setting label {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.setting input,
+.setting select {
+    width: 100%;
+
+    margin-top: 7px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    padding: 9px;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   PLANNING
+   ========================================================= */
+
+.planning-layout {
+    height: calc(100% - 50px);
+
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+.day {
+    padding: 13px;
+
     display: flex;
     flex-direction: column;
+
+    min-width: 0;
+}
+
+.day.today {
+    border-color: var(--accent);
+}
+
+.day-top {
+    display: flex;
+    justify-content: space-between;
 }
 
 .day-name {
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 9px;
+    font-weight: 900;
 }
 
 .day-number {
     color: var(--muted);
-    font-size: 9px;
-    margin-top: 3px;
-}
-
-.day-workout {
-    margin-top: 25px;
-    padding: 10px;
-    border-radius: 9px;
-    background: var(--surface2);
-}
-
-.day-workout strong {
-    font-size: 9px;
-}
-
-.day-workout small {
-    display: block;
-    color: var(--muted);
     font-size: 8px;
-    margin-top: 4px;
 }
 
-/* =====================================
+.day-type {
+    margin-top: 18px;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
+    background: var(--panel-2);
+}
+
+.day-type-icon {
+    font-size: 17px;
+}
+
+.day-type strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 8px;
+}
+
+.day-type small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+    line-height: 1.4;
+}
+
+.day-button {
+    width: 100%;
+
+    margin-top: auto;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: transparent;
+    color: var(--muted);
+
+    padding: 7px;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
    PROGRESS
-===================================== */
+   ========================================================= */
 
 .progress-layout {
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
+
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr);
+
     gap: 14px;
-    margin-top: 22px;
 }
 
-.progress-card {
+.progress-main {
     padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.progress-circle {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    margin: 25px auto;
+.progress-ring {
+    width: clamp(145px, 18vw, 210px);
+    aspect-ratio: 1;
+
     display: grid;
     place-items: center;
-    background: conic-gradient(
-        var(--accent) 0 72%,
-        var(--surface2) 72% 100%
-    );
+
+    margin: 17px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--accent) 0 72%,
+            var(--panel-2) 72% 100%
+        );
+
     position: relative;
 }
 
-.progress-circle::after {
+.progress-ring::after {
     content: "";
+
     position: absolute;
-    inset: 13px;
+    inset: 12px;
+
     border-radius: 50%;
-    background: var(--surface);
+
+    background: var(--panel);
 }
 
-.progress-circle span {
+.progress-ring span {
     position: relative;
     z-index: 2;
-    font-size: 31px;
-    font-weight: 800;
+
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.progress-side {
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .metric {
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
-.metric-top {
+.metric-head {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
+
+    font-size: 9px;
 }
 
-.bar {
-    height: 7px;
-    background: var(--surface2);
-    border-radius: 20px;
-    overflow: hidden;
+.metric-head span:last-child {
+    color: var(--muted);
+}
+
+.progress-bar {
+    height: 6px;
+
     margin-top: 7px;
+
+    border-radius: 20px;
+
+    background: var(--panel-2);
+
+    overflow: hidden;
 }
 
-.bar span {
+.progress-bar span {
     display: block;
+
     height: 100%;
-    background: var(--accent);
+
     border-radius: inherit;
+
+    background: var(--accent);
 }
 
-/* =====================================
+
+/* =========================================================
    COMPETITION
-===================================== */
+   ========================================================= */
 
 .competition-layout {
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
+
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr);
+
     gap: 14px;
-    margin-top: 22px;
 }
 
-.comp-main {
-    padding: 30px;
+.countdown-card {
+    padding: clamp(25px, 4vw, 45px);
+
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.comp-days {
-    font-size: 80px;
-    font-weight: 800;
+.countdown {
+    margin-top: 10px;
+
     color: var(--accent);
-    line-height: .9;
+
+    font-size: clamp(65px, 10vw, 130px);
+    line-height: .85;
+
+    font-weight: 900;
+    letter-spacing: -6px;
 }
 
-.comp-label {
+.countdown-label {
     color: var(--muted);
-    font-size: 10px;
-    margin-top: 7px;
+
+    font-size: 9px;
 }
 
-.comp-name {
-    font-size: 23px;
-    font-weight: 800;
+.event-name {
     margin-top: 35px;
+
+    font-size: 23px;
+    font-weight: 900;
 }
 
-.comp-date {
+.event-date {
+    margin-top: 4px;
+
     color: var(--muted);
-    font-size: 10px;
-    margin-top: 5px;
+
+    font-size: 9px;
 }
 
-.comp-side {
-    padding: 25px;
+.camp-card {
+    padding: 23px;
 }
 
-.target {
+.camp-goal {
     padding: 14px 0;
+
     border-bottom: 1px solid var(--border);
 }
 
-.target:last-child {
-    border: 0;
+.camp-goal:last-child {
+    border-bottom: 0;
 }
 
-.target strong {
-    font-size: 11px;
+.camp-goal strong {
+    font-size: 10px;
 }
 
-.target p {
+.camp-goal p {
+    margin: 4px 0 0;
+
     color: var(--muted);
-    font-size: 9px;
-    margin-top: 4px;
+
+    font-size: 8px;
+    line-height: 1.5;
 }
 
-/* =====================================
+
+/* =========================================================
    JOURNAL
-===================================== */
+   ========================================================= */
 
 .journal-layout {
-    height: calc(100% - 70px);
+    height: calc(100% - 50px);
+
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, .8fr);
+
     gap: 14px;
-    margin-top: 22px;
 }
 
-.journal-list {
+.entries {
     padding: 20px;
+
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.entry-list {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .entry {
-    padding: 16px 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     border-bottom: 1px solid var(--border);
 }
 
 .entry:last-child {
-    border: 0;
+    border-bottom: 0;
 }
 
 .entry-date {
     color: var(--accent);
-    font-size: 9px;
+
+    font-size: 8px;
+    font-weight: 800;
 }
 
 .entry-title {
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 5px;
+    margin-top: 4px;
+
+    font-size: 10px;
+    font-weight: 800;
 }
 
 .entry-text {
+    max-width: 600px;
+
+    margin-top: 4px;
+
     color: var(--muted);
-    font-size: 10px;
+
+    font-size: 8px;
     line-height: 1.5;
-    margin-top: 5px;
 }
 
-.journal-form {
+.new-entry {
     padding: 20px;
 }
 
-textarea,
-input,
-select {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 9px;
-    padding: 11px;
-    margin-top: 10px;
-    outline: 0;
-    font-size: 10px;
-}
-
 textarea {
-    height: 110px;
+    width: 100%;
+
+    height: 130px;
+
+    margin-top: 14px;
+
     resize: none;
-}
 
-.journal-form button {
-    margin-top: 10px;
-}
+    border: 1px solid var(--border);
+    border-radius: 9px;
 
-/* =====================================
-   PROFILE
-===================================== */
+    background: var(--panel-2);
+    color: var(--text);
 
-.profile-layout {
-    height: calc(100% - 70px);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-top: 22px;
-}
+    padding: 11px;
 
-.profile-card {
-    padding: 30px;
-}
-
-.big-avatar {
-    width: 85px;
-    height: 85px;
-    border-radius: 25px;
-    background: var(--accent);
-    color: white;
-    display: grid;
-    place-items: center;
-    font-size: 30px;
-    font-weight: 800;
-}
-
-.profile-name {
-    font-size: 25px;
-    font-weight: 800;
-    margin-top: 18px;
-}
-
-.profile-details {
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 5px;
-}
-
-.form-row {
-    margin-top: 18px;
-}
-
-.form-row label {
-    display: block;
-    color: var(--muted);
     font-size: 9px;
 }
 
-/* =====================================
-   MOBILE
-===================================== */
 
-@media(max-width:850px) {
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-layout {
+    height: calc(100% - 50px);
+
+    display: grid;
+
+    grid-template-columns: minmax(240px, .7fr) minmax(0, 1.3fr);
+
+    gap: 14px;
+}
+
+.profile-card {
+    padding: 25px;
+}
+
+.profile-avatar {
+    width: 78px;
+    height: 78px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 23px;
+
+    background: var(--accent);
+    color: white;
+
+    font-size: 29px;
+    font-weight: 900;
+}
+
+.profile-name {
+    margin-top: 15px;
+
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.profile-info {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.form-group {
+    margin-top: 16px;
+}
+
+.form-group label {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    margin-top: 6px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    padding: 9px;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
 
     .app {
         grid-template-columns: 1fr;
@@ -859,16 +1436,24 @@ textarea {
 
     .sidebar {
         position: fixed;
-        z-index: 50;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
+
+        z-index: 100;
+
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+
+        width: auto;
         height: 62px;
+
         padding: 5px;
+
         border: 1px solid var(--border);
         border-radius: 16px;
-        flex-direction: row;
+
         box-shadow: var(--shadow);
+
+        flex-direction: row;
     }
 
     .logo,
@@ -876,84 +1461,276 @@ textarea {
         display: none;
     }
 
-    .menu {
+    .nav {
         width: 100%;
-        flex-direction: row;
+
+        display: grid;
+
+        grid-template-columns: repeat(8, 1fr);
+
+        gap: 2px;
     }
 
-    .menu button {
-        text-align: center;
-        padding: 7px 2px;
-        font-size: 8px;
+    .nav-button {
+        height: 51px;
+
+        padding: 3px 1px;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 2px;
+
+        font-size: 7px;
     }
 
-    .menu-icon {
-        display: block;
+    .nav-icon {
         width: auto;
-        margin-bottom: 3px;
-    }
-
-    .content {
-        height: 100vh;
+        font-size: 13px;
     }
 
     .topbar {
-        padding: 0 17px;
+        height: 61px;
+        flex-basis: 61px;
     }
 
     .view {
-        padding: 18px;
+        padding-bottom: 78px;
     }
 
-    .home-grid,
+    .home-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    .home-stats {
+        grid-column: auto;
+    }
+
+    .today-card {
+        display: none;
+    }
+
     .training-layout,
+    .generator-layout,
+    .timer-layout,
     .progress-layout,
     .competition-layout,
     .journal-layout,
     .profile-layout {
-        display: block;
-    }
-
-    .home-grid {
-        height: auto;
-    }
-
-    .welcome,
-    .today,
-    .stats-home {
-        margin-bottom: 10px;
-    }
-
-    .stats-home {
-        grid-template-columns: 1fr 1fr;
-        display: grid;
+        grid-template-columns: 1fr;
     }
 
     .training-side {
-        margin-top: 10px;
+        display: none;
     }
 
-    .week {
-        height: auto;
-        grid-template-columns: repeat(7, minmax(85px,1fr));
-        overflow: hidden;
+    .generator-options {
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    .day-card {
-        min-height: 170px;
+    .generator-options .card-title,
+    .generator-options > .card-label {
+        display: none;
     }
 
-    .progress-card,
-    .comp-main,
-    .comp-side,
-    .journal-list,
-    .journal-form,
-    .profile-card {
-        margin-bottom: 10px;
+    .type-grid {
+        width: 100%;
+        margin-top: 0;
+
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .type-button {
+        min-height: 48px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    .type-name {
+        display: none;
+    }
+
+    .type-emoji {
+        margin: 0;
+    }
+
+    .generated-card {
+        min-height: 0;
+    }
+
+    .timer-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .timer-settings {
+        display: none;
+    }
+
+    .planning-layout {
+        grid-template-columns: repeat(7, minmax(65px, 1fr));
+
+        gap: 5px;
+    }
+
+    .day {
+        padding: 8px;
+    }
+
+    .day-type {
+        padding: 7px;
+    }
+
+    .day-button {
+        display: none;
+    }
+
+    .competition-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .journal-layout {
+        grid-template-columns: 1.2fr .8fr;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL WINDOW
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .user-mini span {
+        display: none;
+    }
+
+    .home-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat {
+        padding: 9px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .stat-change {
+        display: none;
+    }
+
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        font-size: 9px;
+    }
+
+    .hero::after {
+        font-size: 85px;
+    }
+
+    .type-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .type-button {
+        padding: 4px;
     }
 
     .timer-number {
-        font-size: 80px;
+        font-size: 65px;
+        letter-spacing: -4px;
+    }
+
+    .competition-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .camp-card {
+        display: none;
+    }
+
+    .journal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .new-entry {
+        display: none;
+    }
+
+    .profile-layout {
+        grid-template-columns: 1fr 1.3fr;
+    }
+
+    .profile-avatar {
+        width: 58px;
+        height: 58px;
+        font-size: 21px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   HEIGHT ADAPTATION
+   ========================================================= */
+
+@media (max-height: 700px) and (min-width: 901px) {
+
+    .sidebar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .logo {
+        padding-bottom: 12px;
+    }
+
+    .nav-button {
+        padding: 8px 10px;
+    }
+
+    .topbar {
+        height: 56px;
+        flex-basis: 56px;
+    }
+
+    .view {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .view-heading {
+        height: 43px;
+    }
+
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        margin-top: 8px;
+    }
+
+    .hero-buttons {
+        margin-top: 12px;
     }
 }
 
@@ -965,75 +1742,111 @@ textarea {
 
 <div class="app">
 
-<!-- =================================
+<!-- ========================================================
      SIDEBAR
-================================= -->
+======================================================== -->
 
 <aside class="sidebar">
 
     <div class="logo">
 
-        <div class="logo-icon">
+        <div class="logo-mark">
             B
         </div>
 
         <div>
-            <strong>BJJ OS</strong>
-            <small>TRAINING SYSTEM</small>
+            <div class="logo-title">BJJ OS</div>
+            <div class="logo-subtitle">GRAPPLING SYSTEM</div>
         </div>
 
     </div>
 
 
-    <div class="menu">
+    <nav class="nav">
 
-        <button class="active" onclick="showView('home',this)">
-            <span class="menu-icon">⌂</span>
+        <button
+            class="nav-button active"
+            data-view="home"
+            onclick="navigate('home', this)"
+        >
+            <span class="nav-icon">⌂</span>
             Accueil
         </button>
 
-        <button onclick="showView('training',this)">
-            <span class="menu-icon">🥋</span>
-            Training
+        <button
+            class="nav-button"
+            data-view="training"
+            onclick="navigate('training', this)"
+        >
+            <span class="nav-icon">🥋</span>
+            JJB
         </button>
 
-        <button onclick="showView('timer',this)">
-            <span class="menu-icon">⏱</span>
+        <button
+            class="nav-button"
+            data-view="generator"
+            onclick="navigate('generator', this)"
+        >
+            <span class="nav-icon">⚡</span>
+            Générer
+        </button>
+
+        <button
+            class="nav-button"
+            data-view="timer"
+            onclick="navigate('timer', this)"
+        >
+            <span class="nav-icon">⏱</span>
             Timer
         </button>
 
-        <button onclick="showView('planning',this)">
-            <span class="menu-icon">▦</span>
+        <button
+            class="nav-button"
+            data-view="planning"
+            onclick="navigate('planning', this)"
+        >
+            <span class="nav-icon">▦</span>
             Planning
         </button>
 
-        <button onclick="showView('progress',this)">
-            <span class="menu-icon">↗</span>
+        <button
+            class="nav-button"
+            data-view="progress"
+            onclick="navigate('progress', this)"
+        >
+            <span class="nav-icon">↗</span>
             Progress
         </button>
 
-        <button onclick="showView('competition',this)">
-            <span class="menu-icon">🏆</span>
+        <button
+            class="nav-button"
+            data-view="competition"
+            onclick="navigate('competition', this)"
+        >
+            <span class="nav-icon">🏆</span>
             Combat
         </button>
 
-        <button onclick="showView('journal',this)">
-            <span class="menu-icon">✎</span>
+        <button
+            class="nav-button"
+            data-view="journal"
+            onclick="navigate('journal', this)"
+        >
+            <span class="nav-icon">✎</span>
             Journal
         </button>
 
-        <button onclick="showView('profile',this)">
-            <span class="menu-icon">●</span>
-            Profil
-        </button>
-
-    </div>
+    </nav>
 
 
     <div class="sidebar-bottom">
 
-        <button class="theme-button" onclick="toggleTheme()" id="themeBtn">
-            ☀️ Mode jour
+        <button
+            class="theme-button"
+            id="themeButton"
+            onclick="toggleTheme()"
+        >
+            🌙 Mode nuit
         </button>
 
     </div>
@@ -1041,34 +1854,39 @@ textarea {
 </aside>
 
 
-<!-- =================================
-     CONTENT
-================================= -->
+<!-- ========================================================
+     MAIN
+======================================================== -->
 
-<div class="content">
+<main class="main">
 
 <header class="topbar">
 
     <div>
-
-        <div class="page-name" id="pageName">
+        <div
+            class="page-title"
+            id="pageTitle"
+        >
             Accueil
         </div>
 
-        <div class="page-date" id="date"></div>
-
+        <div
+            class="page-date"
+            id="pageDate"
+        >
+        </div>
     </div>
 
 
-    <div class="profile-mini">
-
-        <div class="avatar">
-            🥋
-        </div>
+    <div class="user-mini">
 
         <span id="topBelt">
             Ceinture blanche
         </span>
+
+        <div class="avatar-mini">
+            🥋
+        </div>
 
     </div>
 
@@ -1078,269 +1896,372 @@ textarea {
 <div class="views">
 
 
-<!-- =================================
+<!-- ========================================================
      HOME
-================================= -->
+======================================================== -->
 
-<section class="view active" id="home">
+<section
+    class="view active"
+    id="home"
+>
 
-<div class="home-grid">
+    <div class="view-heading">
 
-    <div class="card welcome">
-
-        <div class="card-label">
-            SESSION DU JOUR
-        </div>
-
-        <h2>
-            Prêt à<br>
-            t'entraîner ?
-        </h2>
+        <h1>
+            Ton espace de combat.
+        </h1>
 
         <p>
-            Ta séance du jour est prête.
-            90 minutes pour travailler ta technique
-            et tes rounds.
+            JJB + préparation physique + récupération.
         </p>
 
-        <button class="primary" onclick="showViewById('training')">
-            VOIR LA SÉANCE →
-        </button>
-
     </div>
 
 
-    <div class="card today">
+    <div class="home-layout">
 
-        <div class="card-title">
-            Aujourd'hui
+        <div class="card hero">
+
+            <div class="card-label">
+                PROGRAMME DU JOUR
+            </div>
+
+            <h2 id="todayTitle">
+                JJB<br>
+                Technique + Sparring
+            </h2>
+
+            <p id="todayDescription">
+                Travaille ta technique, répète tes mouvements
+                puis termine par des rounds de sparring.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary"
+                    onclick="navigateTo('training')"
+                >
+                    VOIR LA SÉANCE
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="navigateTo('timer')"
+                >
+                    ⏱ TIMER
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="session-row">
 
-            <div class="session-icon">
-                🥋
+        <div class="card today-card">
+
+            <div class="card-label">
+                AUJOURD'HUI
             </div>
 
-            <div>
-                <strong>Technique + Sparring</strong>
-                <small>90 minutes</small>
+            <div class="today-workout">
+
+                <div class="workout-icon">
+                    🥋
+                </div>
+
+                <div>
+                    <strong id="todayMiniTitle">
+                        JJB
+                    </strong>
+
+                    <span id="todayMiniText">
+                        Technique + sparring
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="today-workout">
+
+                <div class="workout-icon">
+                    ⏱
+                </div>
+
+                <div>
+                    <strong>
+                        90 minutes
+                    </strong>
+
+                    <span>
+                        durée recommandée
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="day-status">
+                ● JOUR D'ENTRAÎNEMENT
             </div>
 
         </div>
 
 
-        <div class="session-row">
+        <div class="home-stats">
 
-            <div class="session-icon">
-                ⚡
+            <div class="card stat">
+
+                <div class="card-label">
+                    SÉANCES
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="sessionsStat"
+                >
+                    4
+                </div>
+
+                <div class="stat-change">
+                    +1 cette semaine
+                </div>
+
             </div>
 
-            <div>
-                <strong>6 rounds</strong>
-                <small>5 min / round</small>
+
+            <div class="card stat">
+
+                <div class="card-label">
+                    ROUNDS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="roundsStat"
+                >
+                    18
+                </div>
+
+                <div class="stat-change">
+                    objectif 25
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="card-label">
+                    MINUTES
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="minutesStat"
+                >
+                    270
+                </div>
+
+                <div class="stat-change">
+                    cette semaine
+                </div>
+
+            </div>
+
+
+            <div class="card stat">
+
+                <div class="card-label">
+                    STREAK
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="streakStat"
+                >
+                    7
+                </div>
+
+                <div class="stat-change">
+                    🔥 jours
+                </div>
+
             </div>
 
         </div>
 
     </div>
-
-
-    <div class="stats-home">
-
-        <div class="card stat">
-
-            <div class="card-label">
-                SÉANCES
-            </div>
-
-            <div class="stat-value" id="statSessions">
-                4
-            </div>
-
-            <div class="stat-change">
-                +1 cette semaine
-            </div>
-
-        </div>
-
-
-        <div class="card stat">
-
-            <div class="card-label">
-                ROUNDS
-            </div>
-
-            <div class="stat-value">
-                18
-            </div>
-
-            <div class="stat-change">
-                +6 aujourd'hui
-            </div>
-
-        </div>
-
-
-        <div class="card stat">
-
-            <div class="card-label">
-                MINUTES
-            </div>
-
-            <div class="stat-value">
-                270
-            </div>
-
-            <div class="stat-change">
-                +90 aujourd'hui
-            </div>
-
-        </div>
-
-
-        <div class="card stat">
-
-            <div class="card-label">
-                STREAK
-            </div>
-
-            <div class="stat-value">
-                7
-            </div>
-
-            <div class="stat-change">
-                🔥 jours
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 </section>
 
 
-<!-- =================================
-     TRAINING
-================================= -->
+<!-- ========================================================
+     JJB TRAINING
+======================================================== -->
 
-<section class="view" id="training">
+<section
+    class="view"
+    id="training"
+>
 
-    <div class="view-title">
-        Training
-    </div>
+    <div class="view-heading">
 
-    <div class="view-subtitle">
-        Ta séance personnalisée du jour
+        <h1>
+            Séance JJB
+        </h1>
+
+        <p>
+            Lundi · mercredi · vendredi
+        </p>
+
     </div>
 
 
     <div class="training-layout">
 
-        <div class="card session-builder">
+        <div class="card session-card">
 
             <div class="card-title">
-                PROGRAMME · 90 MIN
+                SESSION · 90 MIN
             </div>
 
 
-            <div class="exercise">
+            <div class="exercise-list">
 
-                <div class="exercise-info">
+                <div class="exercise">
 
-                    <div class="exercise-num">01</div>
+                    <div class="exercise-left">
 
-                    <div>
-                        <strong>Warm-up</strong>
-                        <small>Mobilité + activation</small>
+                        <span class="exercise-number">
+                            01
+                        </span>
+
+                        <div>
+                            <div class="exercise-name">
+                                Warm-up
+                            </div>
+
+                            <div class="exercise-description">
+                                Mobilité + mouvements JJB
+                            </div>
+                        </div>
+
                     </div>
 
+                    <span class="exercise-duration">
+                        10 min
+                    </span>
+
                 </div>
 
-                <div class="exercise-time">
-                    10 min
-                </div>
 
-            </div>
+                <div class="exercise">
 
+                    <div class="exercise-left">
 
-            <div class="exercise">
+                        <span class="exercise-number">
+                            02
+                        </span>
 
-                <div class="exercise-info">
+                        <div>
+                            <div class="exercise-name">
+                                Technique
+                            </div>
 
-                    <div class="exercise-num">02</div>
+                            <div class="exercise-description">
+                                Mouvement principal du jour
+                            </div>
+                        </div>
 
-                    <div>
-                        <strong>Technique</strong>
-                        <small>Passage de garde</small>
                     </div>
 
+                    <span class="exercise-duration">
+                        25 min
+                    </span>
+
                 </div>
 
-                <div class="exercise-time">
-                    25 min
-                </div>
 
-            </div>
+                <div class="exercise">
 
+                    <div class="exercise-left">
 
-            <div class="exercise">
+                        <span class="exercise-number">
+                            03
+                        </span>
 
-                <div class="exercise-info">
+                        <div>
+                            <div class="exercise-name">
+                                Drilling
+                            </div>
 
-                    <div class="exercise-num">03</div>
+                            <div class="exercise-description">
+                                Répétitions contrôlées
+                            </div>
+                        </div>
 
-                    <div>
-                        <strong>Drilling</strong>
-                        <small>Repetitions</small>
                     </div>
 
+                    <span class="exercise-duration">
+                        20 min
+                    </span>
+
                 </div>
 
-                <div class="exercise-time">
-                    20 min
-                </div>
 
-            </div>
+                <div class="exercise">
 
+                    <div class="exercise-left">
 
-            <div class="exercise">
+                        <span class="exercise-number">
+                            04
+                        </span>
 
-                <div class="exercise-info">
+                        <div>
+                            <div class="exercise-name">
+                                Situations
+                            </div>
 
-                    <div class="exercise-num">04</div>
+                            <div class="exercise-description">
+                                Départ depuis une position
+                            </div>
+                        </div>
 
-                    <div>
-                        <strong>Sparring</strong>
-                        <small>6 × 5 minutes</small>
                     </div>
 
+                    <span class="exercise-duration">
+                        15 min
+                    </span>
+
                 </div>
 
-                <div class="exercise-time">
-                    30 min
-                </div>
 
-            </div>
+                <div class="exercise">
 
+                    <div class="exercise-left">
 
-            <div class="exercise">
+                        <span class="exercise-number">
+                            05
+                        </span>
 
-                <div class="exercise-info">
+                        <div>
+                            <div class="exercise-name">
+                                Sparring
+                            </div>
 
-                    <div class="exercise-num">05</div>
+                            <div class="exercise-description">
+                                6 rounds × 5 minutes
+                            </div>
+                        </div>
 
-                    <div>
-                        <strong>Cool down</strong>
-                        <small>Respiration</small>
                     </div>
 
-                </div>
+                    <span class="exercise-duration">
+                        30 min
+                    </span>
 
-                <div class="exercise-time">
-                    5 min
                 </div>
 
             </div>
@@ -1348,10 +2269,9 @@ textarea {
 
             <button
                 class="primary"
-                style="margin-top:20px;width:100%;"
-                onclick="showViewById('timer')"
+                onclick="navigateTo('timer')"
             >
-                LANCER LE TIMER
+                LANCER LES ROUNDS →
             </button>
 
         </div>
@@ -1362,17 +2282,24 @@ textarea {
             <div class="card focus-card">
 
                 <div class="card-label">
-                    FOCUS DU JOUR
+                    FOCUS TECHNIQUE
                 </div>
 
-                <div class="focus-technique">
+                <div class="focus-big">
                     Knee Cut
                 </div>
 
-                <div class="focus-description">
-                    Garde ouverte → contrôle du genou →
-                    pression → contrôle latéral.
+                <div class="focus-text">
+                    Contrôle du genou, pression avec le haut du corps,
+                    passage puis stabilisation en side control.
                 </div>
+
+                <button
+                    class="primary focus-button"
+                    onclick="generateWorkout('jjb')"
+                >
+                    TRAVAILLER ÇA
+                </button>
 
             </div>
 
@@ -1380,16 +2307,17 @@ textarea {
             <div class="card focus-card">
 
                 <div class="card-label">
-                    OBJECTIF
+                    OBJECTIF DU JOUR
                 </div>
 
-                <div class="focus-technique">
+                <div class="focus-big">
                     6 rounds
                 </div>
 
-                <div class="focus-description">
-                    Reste concentré sur la pression
-                    et le contrôle pendant chaque round.
+                <div class="focus-text">
+                    Garde ton rythme, travaille ton game plan
+                    et essaie de reproduire la technique pendant
+                    les situations.
                 </div>
 
             </div>
@@ -1401,348 +2329,131 @@ textarea {
 </section>
 
 
-<!-- =================================
-     TIMER
-================================= -->
+<!-- ========================================================
+     GENERATOR
+======================================================== -->
 
-<section class="view" id="timer">
+<section
+    class="view"
+    id="generator"
+>
 
-    <div class="view-title">
-        Round Timer
+    <div class="view-heading">
+
+        <h1>
+            Générateur
+        </h1>
+
+        <p>
+            Construis une séance complémentaire au JJB.
+        </p>
+
     </div>
 
-    <div class="view-subtitle">
-        5 minutes · 6 rounds
-    </div>
 
+    <div class="generator-layout">
 
-    <div class="timer-layout">
+        <div class="card generator-options">
 
-        <div class="card timer-box">
-
-            <div class="timer-round" id="timerRound">
-                ROUND 01 / 06
+            <div class="card-title">
+                TYPE DE SÉANCE
             </div>
 
-            <div class="timer-number" id="timerDisplay">
-                05:00
-            </div>
-
-            <div class="timer-status" id="timerStatus">
-                Prêt
-            </div>
-
-            <div class="timer-controls">
+            <div class="type-grid">
 
                 <button
-                    class="primary"
-                    onclick="toggleTimer()"
-                    id="timerButton"
+                    class="type-button selected"
+                    data-type="grip"
+                    onclick="selectWorkoutType('grip', this)"
                 >
-                    START
+                    <span class="type-emoji">🤝</span>
+                    <span class="type-name">Grip</span>
                 </button>
+
 
                 <button
-                    class="secondary"
-                    onclick="resetTimer()"
+                    class="type-button"
+                    data-type="force"
+                    onclick="selectWorkoutType('force', this)"
                 >
-                    RESET
+                    <span class="type-emoji">💪</span>
+                    <span class="type-name">Force</span>
+                </button>
+
+
+                <button
+                    class="type-button"
+                    data-type="core"
+                    onclick="selectWorkoutType('core', this)"
+                >
+                    <span class="type-emoji">🧱</span>
+                    <span class="type-name">Core</span>
+                </button>
+
+
+                <button
+                    class="type-button"
+                    data-type="legs"
+                    onclick="selectWorkoutType('legs', this)"
+                >
+                    <span class="type-emoji">🦵</span>
+                    <span class="type-name">Jambes</span>
+                </button>
+
+
+                <button
+                    class="type-button"
+                    data-type="conditioning"
+                    onclick="selectWorkoutType('conditioning', this)"
+                >
+                    <span class="type-emoji">❤️</span>
+                    <span class="type-name">Cardio</span>
+                </button>
+
+
+                <button
+                    class="type-button"
+                    data-type="mobility"
+                    onclick="selectWorkoutType('mobility', this)"
+                >
+                    <span class="type-emoji">🧘</span>
+                    <span class="type-name">Mobilité</span>
                 </button>
 
             </div>
 
-        </div>
 
-    </div>
+            <button
+                class="primary"
+                style="margin-top:15px;width:100%;"
+                onclick="generateSelectedWorkout()"
+            >
+                🎲 GÉNÉRER UNE SÉANCE
+            </button>
 
-</section>
-
-
-<!-- =================================
-     PLANNING
-================================= -->
-
-<section class="view" id="planning">
-
-    <div class="view-title">
-        Planning
-    </div>
-
-    <div class="view-subtitle">
-        Cette semaine
-    </div>
-
-
-    <div class="week">
-
-        <div class="card day-card">
-            <div class="day-name">LUN</div>
-            <div class="day-number">10</div>
-
-            <div class="day-workout">
-                <strong>Technique</strong>
-                <small>Passes</small>
-            </div>
         </div>
 
 
-        <div class="card day-card">
-            <div class="day-name">MAR</div>
-            <div class="day-number">11</div>
-
-            <div class="day-workout">
-                <strong>Sparring</strong>
-                <small>6 rounds</small>
-            </div>
-        </div>
-
-
-        <div class="card day-card">
-            <div class="day-name">MER</div>
-            <div class="day-number">12</div>
-
-            <div class="day-workout">
-                <strong>Repos</strong>
-                <small>Recovery</small>
-            </div>
-        </div>
-
-
-        <div class="card day-card">
-            <div class="day-name">JEU</div>
-            <div class="day-number">13</div>
-
-            <div class="day-workout">
-                <strong>Drilling</strong>
-                <small>Guard</small>
-            </div>
-        </div>
-
-
-        <div class="card day-card">
-            <div class="day-name">VEN</div>
-            <div class="day-number">14</div>
-
-            <div class="day-workout">
-                <strong>Training</strong>
-                <small>90 min</small>
-            </div>
-        </div>
-
-
-        <div class="card day-card">
-            <div class="day-name">SAM</div>
-            <div class="day-number">15</div>
-
-            <div class="day-workout">
-                <strong>Sparring</strong>
-                <small>Hard rounds</small>
-            </div>
-        </div>
-
-
-        <div class="card day-card">
-            <div class="day-name">DIM</div>
-            <div class="day-number">16</div>
-
-            <div class="day-workout">
-                <strong>Repos</strong>
-                <small>Recovery</small>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =================================
-     PROGRESS
-================================= -->
-
-<section class="view" id="progress">
-
-    <div class="view-title">
-        Progression
-    </div>
-
-    <div class="view-subtitle">
-        Ta progression cette semaine
-    </div>
-
-
-    <div class="progress-layout">
-
-        <div class="card progress-card">
+        <div class="card generated-card">
 
             <div class="card-title">
-                OBJECTIF HEBDOMADAIRE
+                <span id="generatedTitle">
+                    Grip · 20 min
+                </span>
             </div>
 
-            <div class="progress-circle">
-                <span>72%</span>
-            </div>
-
-            <div style="text-align:center;color:var(--muted);font-size:10px;">
-                18 / 25 rounds
-            </div>
-
-        </div>
-
-
-        <div class="card progress-card">
-
-            <div class="card-title">
-                MÉTRIQUES
+            <div
+                class="generated-content"
+                id="generatedContent"
+            >
             </div>
 
 
-            <div class="metric">
-
-                <div class="metric-top">
-                    <span>Sessions</span>
-                    <span>4 / 5</span>
-                </div>
-
-                <div class="bar">
-                    <span style="width:80%"></span>
-                </div>
-
-            </div>
-
-
-            <div class="metric">
-
-                <div class="metric-top">
-                    <span>Rounds</span>
-                    <span>18 / 25</span>
-                </div>
-
-                <div class="bar">
-                    <span style="width:72%"></span>
-                </div>
-
-            </div>
-
-
-            <div class="metric">
-
-                <div class="metric-top">
-                    <span>Technique</span>
-                    <span>65%</span>
-                </div>
-
-                <div class="bar">
-                    <span style="width:65%"></span>
-                </div>
-
-            </div>
-
-
-            <div class="metric">
-
-                <div class="metric-top">
-                    <span>Conditioning</span>
-                    <span>82%</span>
-                </div>
-
-                <div class="bar">
-                    <span style="width:82%"></span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =================================
-     COMPETITION
-================================= -->
-
-<section class="view" id="competition">
-
-    <div class="view-title">
-        Competition
-    </div>
-
-    <div class="view-subtitle">
-        Road to your next fight
-    </div>
-
-
-    <div class="competition-layout">
-
-        <div class="card comp-main">
-
-            <div class="card-label">
-                COUNTDOWN
-            </div>
-
-            <div class="comp-days" id="compDays">
-                71
-            </div>
-
-            <div class="comp-label">
-                JOURS RESTANTS
-            </div>
-
-            <div class="comp-name">
-                Prochain tournoi
-            </div>
-
-            <div class="comp-date">
-                24 octobre 2026
-            </div>
-
-        </div>
-
-
-        <div class="card comp-side">
-
-            <div class="card-title">
-                OBJECTIFS DU CAMP
-            </div>
-
-
-            <div class="target">
-
-                <strong>Technique</strong>
-
-                <p>
-                    Améliorer le knee cut et les sorties de garde.
-                </p>
-
-            </div>
-
-
-            <div class="target">
-
-                <strong>Conditioning</strong>
-
-                <p>
-                    Maintenir le rythme pendant 6 rounds.
-                </p>
-
-            </div>
-
-
-            <div class="target">
-
-                <strong>Game plan</strong>
-
-                <p>
-                    Garde → passage → contrôle → soumission.
-                </p>
-
-            </div>
-
-
-            <button class="primary" style="margin-top:20px;">
-                MODIFIER LE CAMP
+            <button
+                class="primary"
+                onclick="startGeneratedWorkout()"
+            >
+                ⏱ LANCER CETTE SÉANCE
             </button>
 
         </div>
@@ -1752,74 +2463,73 @@ textarea {
 </section>
 
 
-<!-- =================================
-     JOURNAL
-================================= -->
+<!-- ========================================================
+     TIMER
+======================================================== -->
 
-<section class="view" id="journal">
+<section
+    class="view"
+    id="timer"
+>
 
-    <div class="view-title">
-        Journal
+    <div class="view-heading">
+
+        <h1>
+            Timer
+        </h1>
+
+        <p>
+            Rounds JJB ou travail complémentaire.
+        </p>
+
     </div>
 
-    <div class="view-subtitle">
-        Tes dernières sessions
-    </div>
 
+    <div class="timer-layout">
 
-    <div class="journal-layout">
+        <div class="card timer-main">
 
-        <div class="card journal-list">
+            <div class="timer-inner">
 
-            <div class="entry">
-
-                <div class="entry-date">
-                    14 AOÛT 2026
+                <div
+                    class="timer-round"
+                    id="timerRound"
+                >
+                    ROUND 01 / 06
                 </div>
 
-                <div class="entry-title">
-                    Bonne session de sparring
+                <div
+                    class="timer-number"
+                    id="timerDisplay"
+                >
+                    05:00
                 </div>
 
-                <div class="entry-text">
-                    Meilleure pression depuis la side control.
-                    Difficulté à sortir de mount.
+                <div
+                    class="timer-status"
+                    id="timerStatus"
+                >
+                    Prêt
                 </div>
 
-            </div>
 
+                <div class="timer-controls">
 
-            <div class="entry">
+                    <button
+                        class="primary"
+                        id="timerStartButton"
+                        onclick="toggleTimer()"
+                    >
+                        START
+                    </button>
 
-                <div class="entry-date">
-                    12 AOÛT 2026
-                </div>
+                    <button
+                        class="secondary"
+                        onclick="resetTimer()"
+                    >
+                        RESET
+                    </button>
 
-                <div class="entry-title">
-                    Travail de passage
-                </div>
-
-                <div class="entry-text">
-                    Knee cut beaucoup plus propre.
-                    Continuer les répétitions.
-                </div>
-
-            </div>
-
-
-            <div class="entry">
-
-                <div class="entry-date">
-                    10 AOÛT 2026
-                </div>
-
-                <div class="entry-title">
-                    Six rounds
-                </div>
-
-                <div class="entry-text">
-                    Bonne endurance mais perte de pression
-                    sur les deux derniers rounds.
                 </div>
 
             </div>
@@ -1827,19 +2537,684 @@ textarea {
         </div>
 
 
-        <div class="card journal-form">
+        <div class="card timer-settings">
+
+            <div class="card-title">
+                CONFIGURATION
+            </div>
+
+
+            <div class="setting">
+
+                <label>
+                    DURÉE D'UN ROUND
+                </label>
+
+                <select id="roundDuration">
+
+                    <option value="60">
+                        1 minute
+                    </option>
+
+                    <option value="180">
+                        3 minutes
+                    </option>
+
+                    <option
+                        value="300"
+                        selected
+                    >
+                        5 minutes
+                    </option>
+
+                    <option value="600">
+                        10 minutes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="setting">
+
+                <label>
+                    NOMBRE DE ROUNDS
+                </label>
+
+                <select id="roundCount">
+
+                    <option value="3">
+                        3 rounds
+                    </option>
+
+                    <option
+                        value="5"
+                        selected
+                    >
+                        5 rounds
+                    </option>
+
+                    <option value="6">
+                        6 rounds
+                    </option>
+
+                    <option value="8">
+                        8 rounds
+                    </option>
+
+                    <option value="10">
+                        10 rounds
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="secondary"
+                style="width:100%;margin-top:18px;"
+                onclick="applyTimerSettings()"
+            >
+                APPLIQUER
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     PLANNING
+======================================================== -->
+
+<section
+    class="view"
+    id="planning"
+>
+
+    <div class="view-heading">
+
+        <h1>
+            Planning
+        </h1>
+
+        <p>
+            Une semaine pensée autour de tes trois séances JJB.
+        </p>
+
+    </div>
+
+
+    <div class="planning-layout">
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">LUN</span>
+                <span class="day-number">10</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">🥋</div>
+
+                <strong>
+                    JJB
+                </strong>
+
+                <small>
+                    Technique<br>
+                    Drilling<br>
+                    Sparring
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">MAR</span>
+                <span class="day-number">11</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">🤝</div>
+
+                <strong>
+                    Grip + Core
+                </strong>
+
+                <small>
+                    20–30 min<br>
+                    Complémentaire
+                </small>
+            </div>
+
+            <button
+                class="day-button"
+                onclick="generateWorkout('grip')"
+            >
+                GÉNÉRER
+            </button>
+
+        </div>
+
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">MER</span>
+                <span class="day-number">12</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">🥋</div>
+
+                <strong>
+                    JJB
+                </strong>
+
+                <small>
+                    Garde<br>
+                    Passages<br>
+                    Situations
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">JEU</span>
+                <span class="day-number">13</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">🧘</div>
+
+                <strong>
+                    Recovery
+                </strong>
+
+                <small>
+                    Mobilité<br>
+                    Hanches<br>
+                    Épaules
+                </small>
+            </div>
+
+            <button
+                class="day-button"
+                onclick="generateWorkout('mobility')"
+            >
+                GÉNÉRER
+            </button>
+
+        </div>
+
+
+        <div class="card day today">
+
+            <div class="day-top">
+                <span class="day-name">VEN</span>
+                <span class="day-number">14</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">🥋</div>
+
+                <strong>
+                    JJB
+                </strong>
+
+                <small>
+                    Technique<br>
+                    Situations<br>
+                    Sparring
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">SAM</span>
+                <span class="day-number">15</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">❤️</div>
+
+                <strong>
+                    Conditioning
+                </strong>
+
+                <small>
+                    Optionnel<br>
+                    Intensité modérée
+                </small>
+            </div>
+
+            <button
+                class="day-button"
+                onclick="generateWorkout('conditioning')"
+            >
+                GÉNÉRER
+            </button>
+
+        </div>
+
+
+        <div class="card day">
+
+            <div class="day-top">
+                <span class="day-name">DIM</span>
+                <span class="day-number">16</span>
+            </div>
+
+            <div class="day-type">
+                <div class="day-type-icon">😴</div>
+
+                <strong>
+                    Repos
+                </strong>
+
+                <small>
+                    Récupération<br>
+                    complète
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     PROGRESS
+======================================================== -->
+
+<section
+    class="view"
+    id="progress"
+>
+
+    <div class="view-heading">
+
+        <h1>
+            Progression
+        </h1>
+
+        <p>
+            Construis ton niveau sans brûler les étapes.
+        </p>
+
+    </div>
+
+
+    <div class="progress-layout">
+
+        <div class="card progress-main">
+
+            <div class="card-label">
+                OBJECTIF HEBDOMADAIRE
+            </div>
+
+            <div class="progress-ring">
+                <span id="progressPercent">
+                    72%
+                </span>
+            </div>
+
+            <div
+                style="
+                    color:var(--muted);
+                    font-size:9px;
+                "
+            >
+                18 / 25 rounds
+            </div>
+
+        </div>
+
+
+        <div class="card progress-side">
+
+            <div class="card-title">
+                TES DOMAINES
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>JJB</span>
+                    <span>80%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:80%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>Grip</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:65%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>Force</span>
+                    <span>58%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:58%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>Core</span>
+                    <span>74%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:74%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>Conditioning</span>
+                    <span>82%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:82%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-head">
+                    <span>Mobilité</span>
+                    <span>69%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <span style="width:69%"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     COMPETITION
+======================================================== -->
+
+<section
+    class="view"
+    id="competition"
+>
+
+    <div class="view-heading">
+
+        <h1>
+            Combat
+        </h1>
+
+        <p>
+            Ton espace compétition.
+        </p>
+
+    </div>
+
+
+    <div class="competition-layout">
+
+        <div class="card countdown-card">
+
+            <div class="card-label">
+                PROCHAIN TOURNOI
+            </div>
+
+            <div
+                class="countdown"
+                id="countdown"
+            >
+                71
+            </div>
+
+            <div class="countdown-label">
+                JOURS RESTANTS
+            </div>
+
+            <div class="event-name">
+                Prochain tournoi
+            </div>
+
+            <div class="event-date">
+                24 octobre 2026
+            </div>
+
+        </div>
+
+
+        <div class="card camp-card">
+
+            <div class="card-title">
+                CAMP D'ENTRAÎNEMENT
+            </div>
+
+
+            <div class="camp-goal">
+
+                <strong>
+                    🥋 Technique
+                </strong>
+
+                <p>
+                    Construire un game plan simple
+                    et répétable.
+                </p>
+
+            </div>
+
+
+            <div class="camp-goal">
+
+                <strong>
+                    🤝 Grip
+                </strong>
+
+                <p>
+                    Être capable de conserver les grips
+                    sous fatigue.
+                </p>
+
+            </div>
+
+
+            <div class="camp-goal">
+
+                <strong>
+                    💪 Force
+                </strong>
+
+                <p>
+                    Développer la force de tirage,
+                    le dos et les hanches.
+                </p>
+
+            </div>
+
+
+            <div class="camp-goal">
+
+                <strong>
+                    ❤️ Cardio
+                </strong>
+
+                <p>
+                    Garder un rythme stable pendant
+                    plusieurs rounds.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     JOURNAL
+======================================================== -->
+
+<section
+    class="view"
+    id="journal"
+>
+
+    <div class="view-heading">
+
+        <h1>
+            Journal
+        </h1>
+
+        <p>
+            Note ce qui fonctionne et ce qui doit progresser.
+        </p>
+
+    </div>
+
+
+    <div class="journal-layout">
+
+        <div class="card entries">
+
+            <div class="card-title">
+                DERNIÈRES NOTES
+            </div>
+
+
+            <div
+                class="entry-list"
+                id="entryList"
+            >
+
+                <div class="entry">
+
+                    <div class="entry-date">
+                        14 AOÛT
+                    </div>
+
+                    <div class="entry-title">
+                        Bon sparring
+                    </div>
+
+                    <div class="entry-text">
+                        Bonne pression depuis la side control.
+                        Penser à mieux protéger le dos.
+                    </div>
+
+                </div>
+
+
+                <div class="entry">
+
+                    <div class="entry-date">
+                        12 AOÛT
+                    </div>
+
+                    <div class="entry-title">
+                        Knee cut
+                    </div>
+
+                    <div class="entry-text">
+                        Passage plus fluide aujourd'hui.
+                        Continuer les répétitions.
+                    </div>
+
+                </div>
+
+
+                <div class="entry">
+
+                    <div class="entry-date">
+                        10 AOÛT
+                    </div>
+
+                    <div class="entry-title">
+                        Six rounds
+                    </div>
+
+                    <div class="entry-text">
+                        Bonne endurance mais baisse de rythme
+                        sur les deux derniers rounds.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card new-entry">
 
             <div class="card-title">
                 NOUVELLE NOTE
             </div>
 
             <textarea
-                id="journalText"
-                placeholder="Comment s'est passée ta session ?"
+                id="journalInput"
+                placeholder="Comment s'est passée ta séance ?"
             ></textarea>
 
             <button
                 class="primary"
+                style="width:100%;"
                 onclick="saveJournal()"
             >
                 ENREGISTRER
@@ -1852,229 +3227,553 @@ textarea {
 </section>
 
 
-<!-- =================================
-     PROFILE
-================================= -->
-
-<section class="view" id="profile">
-
-    <div class="view-title">
-        Profil
-    </div>
-
-    <div class="view-subtitle">
-        Tes informations de combattant
-    </div>
-
-
-    <div class="profile-layout">
-
-        <div class="card profile-card">
-
-            <div class="big-avatar">
-                B
-            </div>
-
-            <div class="profile-name">
-                Fighter
-            </div>
-
-            <div class="profile-details">
-                BJJ · Training mode
-            </div>
-
-        </div>
-
-
-        <div class="card profile-card">
-
-            <div class="card-title">
-                INFORMATIONS
-            </div>
-
-
-            <div class="form-row">
-
-                <label>
-                    CEINTURE
-                </label>
-
-                <select id="belt">
-
-                    <option>Blanche</option>
-                    <option>Bleue</option>
-                    <option>Violette</option>
-                    <option>Marron</option>
-                    <option>Noire</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-row">
-
-                <label>
-                    CATÉGORIE DE POIDS
-                </label>
-
-                <input
-                    id="weight"
-                    placeholder="-76 kg"
-                >
-
-            </div>
-
-
-            <button
-                class="primary"
-                style="margin-top:20px;"
-                onclick="saveProfile()"
-            >
-                SAUVEGARDER
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
 </div>
-</div>
+
+</main>
 
 </div>
 
 
 <script>
 
-/* =====================================
-   DATE
-===================================== */
-
-const date = new Date();
-
-document.getElementById("date").textContent =
-    date.toLocaleDateString("fr-FR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
-
-
-/* =====================================
+/* =========================================================
    NAVIGATION
-===================================== */
+========================================================= */
 
-const names = {
+const pageNames = {
     home: "Accueil",
-    training: "Training",
-    timer: "Round Timer",
+    training: "JJB",
+    generator: "Générateur",
+    timer: "Timer",
     planning: "Planning",
     progress: "Progression",
-    competition: "Competition",
-    journal: "Journal",
-    profile: "Profil"
+    competition: "Combat",
+    journal: "Journal"
 };
 
-function showView(id, button) {
+
+function navigate(viewId, button) {
 
     document.querySelectorAll(".view")
-        .forEach(view => view.classList.remove("active"));
+        .forEach(view => {
+            view.classList.remove("active");
+        });
 
-    document.getElementById(id)
-        .classList.add("active");
 
-    document.querySelectorAll(".menu button")
-        .forEach(btn => btn.classList.remove("active"));
+    const view = document.getElementById(viewId);
+
+    if (!view) return;
+
+    view.classList.add("active");
+
+
+    document.querySelectorAll(".nav-button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
 
     if (button) {
         button.classList.add("active");
+    } else {
+
+        const matching =
+            document.querySelector(
+                `.nav-button[data-view="${viewId}"]`
+            );
+
+        if (matching) {
+            matching.classList.add("active");
+        }
     }
 
-    document.getElementById("pageName").textContent =
-        names[id];
+
+    document.getElementById("pageTitle")
+        .textContent =
+        pageNames[viewId] || "BJJ OS";
 }
 
 
-function showViewById(id) {
+function navigateTo(viewId) {
 
-    const buttons =
-        document.querySelectorAll(".menu button");
+    navigate(viewId);
 
-    const index =
-        Object.keys(names).indexOf(id);
+}
 
-    showView(
-        id,
-        buttons[index]
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function updateDate() {
+
+    const now = new Date();
+
+    document.getElementById("pageDate")
+        .textContent =
+        now.toLocaleDateString(
+            "fr-FR",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+}
+
+updateDate();
+
+
+/* =========================================================
+   DAY SYSTEM
+========================================================= */
+
+function getDayInfo() {
+
+    const day = new Date().getDay();
+
+    /*
+       0 = dimanche
+       1 = lundi
+       2 = mardi
+       3 = mercredi
+       4 = jeudi
+       5 = vendredi
+       6 = samedi
+    */
+
+    const schedule = {
+
+        0: {
+            title: "Repos",
+            mini: "Recovery complète",
+            description:
+                "Aujourd'hui : récupération. Laisse ton corps assimiler le travail de la semaine.",
+            icon: "😴"
+        },
+
+        1: {
+            title: "JJB",
+            mini: "Technique + Sparring",
+            description:
+                "Travaille ta technique, répète tes mouvements puis termine par des rounds.",
+            icon: "🥋"
+        },
+
+        2: {
+            title: "Grip + Core",
+            mini: "Préparation physique",
+            description:
+                "Une courte séance complémentaire pour renforcer le grip et le tronc.",
+            icon: "🤝"
+        },
+
+        3: {
+            title: "JJB",
+            mini: "Garde + Passages",
+            description:
+                "Travail de garde, passages et situations spécifiques.",
+            icon: "🥋"
+        },
+
+        4: {
+            title: "Recovery",
+            mini: "Mobilité",
+            description:
+                "Mobilité des hanches, épaules et récupération active.",
+            icon: "🧘"
+        },
+
+        5: {
+            title: "JJB",
+            mini: "Situations + Sparring",
+            description:
+                "Travail spécifique puis rounds de sparring.",
+            icon: "🥋"
+        },
+
+        6: {
+            title: "Conditioning",
+            mini: "Cardio optionnel",
+            description:
+                "Conditioning léger si tu te sens en forme. Sinon : repos.",
+            icon: "❤️"
+        }
+
+    };
+
+    return schedule[day];
+}
+
+
+function updateToday() {
+
+    const info = getDayInfo();
+
+    document.getElementById("todayTitle")
+        .innerHTML =
+        `${info.title}<br>${info.mini}`;
+
+    document.getElementById("todayDescription")
+        .textContent =
+        info.description;
+
+    document.getElementById("todayMiniTitle")
+        .textContent =
+        info.title;
+
+    document.getElementById("todayMiniText")
+        .textContent =
+        info.mini;
+
+}
+
+updateToday();
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function applyTheme(theme) {
+
+    const dark =
+        theme === "dark";
+
+    document.body.classList.toggle(
+        "dark",
+        dark
+    );
+
+    document.getElementById("themeButton")
+        .textContent =
+        dark
+            ? "☀️ Mode jour"
+            : "🌙 Mode nuit";
+
+    localStorage.setItem(
+        "bjjTheme",
+        theme
     );
 }
 
 
-/* =====================================
-   THEME
-===================================== */
-
 function toggleTheme() {
-
-    document.body.classList.toggle("dark");
 
     const dark =
         document.body.classList.contains("dark");
 
-    localStorage.setItem(
-        "bjjTheme",
-        dark ? "dark" : "light"
+    applyTheme(
+        dark
+            ? "light"
+            : "dark"
     );
 
-    document.getElementById("themeBtn").textContent =
-        dark ? "☀️ Mode jour" : "🌙 Mode nuit";
 }
 
 
-if (
-    localStorage.getItem("bjjTheme") === "dark"
+const savedTheme =
+    localStorage.getItem("bjjTheme");
+
+if (savedTheme) {
+
+    applyTheme(savedTheme);
+
+} else if (
+    window.matchMedia &&
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    ).matches
 ) {
 
-    document.body.classList.add("dark");
+    applyTheme("dark");
 
-    document.getElementById("themeBtn").textContent =
-        "☀️ Mode jour";
 }
 
 
-/* =====================================
+/* =========================================================
+   WORKOUT GENERATOR
+========================================================= */
+
+const workouts = {
+
+    grip: {
+
+        title: "Grip · 20 min",
+
+        exercises: [
+            ["Dead Hang", "3 × 30 secondes", "Repos 45 s"],
+            ["Towel Hang", "3 × 20 secondes", "Repos 45 s"],
+            ["Farmer Carry", "3 × 40 mètres", "Lourd mais propre"],
+            ["Pinch Grip", "3 × 30 secondes", "Contrôle"],
+            ["Wrist Curls", "3 × 15", "Lentement"]
+        ]
+
+    },
+
+
+    force: {
+
+        title: "Force · 30 min",
+
+        exercises: [
+            ["Tractions", "4 × 5–8", "Dos + grip"],
+            ["Pompes", "3 × 10–15", "Contrôle"],
+            ["Bulgarian Split Squat", "3 × 8 / jambe", "Jambes"],
+            ["Hip Thrust", "3 × 10", "Hanches"],
+            ["Farmer Carry", "3 × 40 m", "Grip + posture"]
+        ]
+
+    },
+
+
+    core: {
+
+        title: "Core · 20 min",
+
+        exercises: [
+            ["Hollow Body", "3 × 30 s", "Gainage"],
+            ["Side Plank", "3 × 30 s / côté", "Obliques"],
+            ["Leg Raises", "3 × 10", "Contrôle"],
+            ["Dead Bug", "3 × 10 / côté", "Stabilité"],
+            ["Plank", "3 × 45 s", "Finisher"]
+        ]
+
+    },
+
+
+    legs: {
+
+        title: "Jambes · 25 min",
+
+        exercises: [
+            ["Squats", "4 × 10", "Contrôle"],
+            ["Cossack Squat", "3 × 8 / côté", "Mobilité"],
+            ["Reverse Lunges", "3 × 10 / jambe", "Stabilité"],
+            ["Hip Thrust", "3 × 12", "Hanches"],
+            ["Calf Raises", "3 × 15", "Mollets"]
+        ]
+
+    },
+
+
+    conditioning: {
+
+        title: "Conditioning · 20 min",
+
+        exercises: [
+            ["Burpees", "30 s", "30 s repos"],
+            ["Mountain Climbers", "30 s", "30 s repos"],
+            ["High Knees", "30 s", "30 s repos"],
+            ["Squat Jumps", "30 s", "30 s repos"],
+            ["Shadow Grappling", "60 s", "Rythme contrôlé"]
+        ]
+
+    },
+
+
+    mobility: {
+
+        title: "Mobilité · 20 min",
+
+        exercises: [
+            ["Hip 90/90", "2 × 60 s", "Hanches"],
+            ["Cossack Hold", "2 × 30 s", "Adducteurs"],
+            ["Shoulder Mobility", "2 × 60 s", "Épaules"],
+            ["Deep Squat Hold", "2 × 45 s", "Chevilles"],
+            ["Cat-Cow", "2 × 60 s", "Colonne"]
+        ]
+
+    },
+
+
+    jjb: {
+
+        title: "JJB Focus · 25 min",
+
+        exercises: [
+            ["Knee Cut", "3 × 10", "Technique"],
+            ["Hip Switch", "3 × 10", "Mobilité"],
+            ["Side Control", "3 × 60 s", "Contrôle"],
+            ["Technical Stand Up", "3 × 10", "Mouvement"],
+            ["Shadow Grappling", "3 × 2 min", "Fluidité"]
+        ]
+
+    }
+
+};
+
+
+let selectedWorkout =
+    localStorage.getItem("selectedWorkout")
+    || "grip";
+
+
+function selectWorkoutType(type, button) {
+
+    selectedWorkout = type;
+
+    localStorage.setItem(
+        "selectedWorkout",
+        type
+    );
+
+
+    document.querySelectorAll(".type-button")
+        .forEach(btn => {
+            btn.classList.remove("selected");
+        });
+
+
+    if (button) {
+        button.classList.add("selected");
+    }
+
+
+    renderWorkout(type);
+}
+
+
+function renderWorkout(type) {
+
+    const workout =
+        workouts[type];
+
+    if (!workout) return;
+
+
+    document.getElementById("generatedTitle")
+        .textContent =
+        workout.title;
+
+
+    const container =
+        document.getElementById("generatedContent");
+
+    container.innerHTML = "";
+
+
+    workout.exercises.forEach(
+        (exercise, index) => {
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "generated-exercise";
+
+            row.innerHTML = `
+
+                <div>
+                    <strong>
+                        ${index + 1}. ${exercise[0]}
+                    </strong>
+
+                    <small>
+                        ${exercise[2]}
+                    </small>
+                </div>
+
+                <div class="generated-right">
+                    ${exercise[1]}
+                </div>
+
+            `;
+
+            container.appendChild(row);
+
+        }
+    );
+
+}
+
+
+function generateSelectedWorkout() {
+
+    renderWorkout(selectedWorkout);
+
+}
+
+
+function generateWorkout(type) {
+
+    selectedWorkout = type;
+
+    navigateTo("generator");
+
+    document.querySelectorAll(".type-button")
+        .forEach(btn => {
+
+            btn.classList.toggle(
+                "selected",
+                btn.dataset.type === type
+            );
+
+        });
+
+    renderWorkout(type);
+
+}
+
+
+function startGeneratedWorkout() {
+
+    const workout =
+        workouts[selectedWorkout];
+
+    if (!workout) return;
+
+    localStorage.setItem(
+        "lastWorkout",
+        selectedWorkout
+    );
+
+    navigateTo("timer");
+
+    resetTimer();
+
+}
+
+
+renderWorkout(selectedWorkout);
+
+
+/* =========================================================
    TIMER
-===================================== */
+========================================================= */
 
 let timerSeconds = 300;
 let timerRunning = false;
 let timerInterval = null;
+
 let currentRound = 1;
+let totalRounds = 5;
+let roundDuration = 300;
 
 
-function updateTimer() {
+function updateTimerDisplay() {
 
     const minutes =
         Math.floor(timerSeconds / 60)
             .toString()
-            .padStart(2,"0");
+            .padStart(2, "0");
 
     const seconds =
         (timerSeconds % 60)
             .toString()
-            .padStart(2,"0");
+            .padStart(2, "0");
+
 
     document.getElementById("timerDisplay")
         .textContent =
         `${minutes}:${seconds}`;
 
+
     document.getElementById("timerRound")
         .textContent =
-        `ROUND ${String(currentRound).padStart(2,"0")} / 06`;
+        `ROUND ${String(currentRound).padStart(2,"0")} / ${String(totalRounds).padStart(2,"0")}`;
 }
 
 
@@ -2082,26 +3781,22 @@ function toggleTimer() {
 
     if (timerRunning) {
 
-        clearInterval(timerInterval);
-
-        timerRunning = false;
-
-        document.getElementById("timerButton")
-            .textContent = "START";
-
-        document.getElementById("timerStatus")
-            .textContent = "En pause";
+        pauseTimer();
 
         return;
     }
 
+
     timerRunning = true;
 
-    document.getElementById("timerButton")
-        .textContent = "PAUSE";
+    document.getElementById("timerStartButton")
+        .textContent =
+        "PAUSE";
 
     document.getElementById("timerStatus")
-        .textContent = "En cours";
+        .textContent =
+        "Round en cours";
+
 
     timerInterval =
         setInterval(() => {
@@ -2110,166 +3805,446 @@ function toggleTimer() {
 
             if (timerSeconds <= 0) {
 
-                if (currentRound < 6) {
+                if (currentRound < totalRounds) {
 
                     currentRound++;
 
-                    timerSeconds = 300;
+                    timerSeconds =
+                        roundDuration;
 
-                    navigator.vibrate?.(300);
+                    if (
+                        navigator.vibrate
+                    ) {
+                        navigator.vibrate(250);
+                    }
 
                 } else {
 
-                    clearInterval(timerInterval);
+                    clearInterval(
+                        timerInterval
+                    );
 
                     timerRunning = false;
 
-                    timerSeconds = 300;
+                    document.getElementById(
+                        "timerStartButton"
+                    ).textContent =
+                        "START";
+
+                    document.getElementById(
+                        "timerStatus"
+                    ).textContent =
+                        "Session terminée 🔥";
+
+                    timerSeconds =
+                        roundDuration;
 
                     currentRound = 1;
 
-                    document.getElementById("timerButton")
-                        .textContent = "START";
+                    updateTimerDisplay();
 
-                    document.getElementById("timerStatus")
-                        .textContent =
-                        "Session terminée 🔥";
+                    addRoundStats();
+
+                    return;
                 }
             }
 
-            updateTimer();
+            updateTimerDisplay();
 
-        },1000);
+        }, 1000);
+
+}
+
+
+function pauseTimer() {
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerRunning = false;
+
+    document.getElementById(
+        "timerStartButton"
+    ).textContent =
+        "REPRENDRE";
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "En pause";
+
 }
 
 
 function resetTimer() {
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
     timerRunning = false;
 
-    timerSeconds = 300;
-
     currentRound = 1;
 
-    document.getElementById("timerButton")
-        .textContent = "START";
+    timerSeconds =
+        roundDuration;
 
-    document.getElementById("timerStatus")
-        .textContent = "Prêt";
 
-    updateTimer();
+    document.getElementById(
+        "timerStartButton"
+    ).textContent =
+        "START";
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "Prêt";
+
+    updateTimerDisplay();
+
 }
 
 
-updateTimer();
+function applyTimerSettings() {
 
+    roundDuration =
+        Number(
+            document.getElementById(
+                "roundDuration"
+            ).value
+        );
 
-/* =====================================
-   PROFILE
-===================================== */
+    totalRounds =
+        Number(
+            document.getElementById(
+                "roundCount"
+            ).value
+        );
 
-const savedProfile =
-    JSON.parse(
-        localStorage.getItem("bjjProfile") || "{}"
-    );
+    resetTimer();
 
-
-if (savedProfile.belt) {
-
-    document.getElementById("belt").value =
-        savedProfile.belt;
-
-    document.getElementById("topBelt").textContent =
-        "Ceinture " + savedProfile.belt.toLowerCase();
 }
 
 
-if (savedProfile.weight) {
+function addRoundStats() {
 
-    document.getElementById("weight").value =
-        savedProfile.weight;
-}
+    let rounds =
+        Number(
+            localStorage.getItem(
+                "rounds"
+            ) || 18
+        );
 
-
-function saveProfile() {
-
-    const belt =
-        document.getElementById("belt").value;
-
-    const weight =
-        document.getElementById("weight").value;
+    rounds++;
 
     localStorage.setItem(
-        "bjjProfile",
-        JSON.stringify({
-            belt,
-            weight
-        })
+        "rounds",
+        rounds
     );
 
-    document.getElementById("topBelt").textContent =
-        "Ceinture " + belt.toLowerCase();
+    document.getElementById(
+        "roundsStat"
+    ).textContent =
+        rounds;
 
-    alert("Profil sauvegardé 🥋");
 }
 
 
-/* =====================================
+const savedRounds =
+    Number(
+        localStorage.getItem("rounds")
+        || 18
+    );
+
+document.getElementById(
+    "roundsStat"
+).textContent =
+    savedRounds;
+
+updateTimerDisplay();
+
+
+/* =========================================================
    JOURNAL
-===================================== */
+========================================================= */
 
 function saveJournal() {
 
+    const input =
+        document.getElementById(
+            "journalInput"
+        );
+
     const text =
-        document.getElementById("journalText").value.trim();
+        input.value.trim();
 
     if (!text) {
 
-        alert("Écris quelque chose avant de sauvegarder.");
+        alert(
+            "Écris quelque chose avant de sauvegarder 🙂"
+        );
 
         return;
     }
 
+
     const entries =
         JSON.parse(
-            localStorage.getItem("bjjJournal") || "[]"
+            localStorage.getItem(
+                "journalEntries"
+            ) || "[]"
         );
 
+
     entries.unshift({
-        date: new Date().toLocaleDateString("fr-FR"),
+
+        date:
+            new Date().toLocaleDateString(
+                "fr-FR",
+                {
+                    day: "numeric",
+                    month: "long"
+                }
+            ),
+
         text
+
     });
 
+
     localStorage.setItem(
-        "bjjJournal",
+        "journalEntries",
         JSON.stringify(entries)
     );
 
-    document.getElementById("journalText").value = "";
 
-    alert("Note ajoutée au journal ✍️");
+    input.value = "";
+
+    renderJournal();
+
 }
 
 
-/* =====================================
-   KEYBOARD SHORTCUT
-===================================== */
+function renderJournal() {
 
-document.addEventListener("keydown", event => {
+    const saved =
+        JSON.parse(
+            localStorage.getItem(
+                "journalEntries"
+            ) || "[]"
+        );
 
-    if (
-        event.key === " " &&
-        document.getElementById("timer").classList.contains("active")
-    ) {
 
-        event.preventDefault();
+    const container =
+        document.getElementById(
+            "entryList"
+        );
 
-        toggleTimer();
+
+    saved.slice(0, 3)
+        .forEach(entry => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "entry";
+
+            div.innerHTML = `
+
+                <div class="entry-date">
+                    ${entry.date}
+                </div>
+
+                <div class="entry-title">
+                    Session
+                </div>
+
+                <div class="entry-text">
+                    ${escapeHTML(entry.text)}
+                </div>
+
+            `;
+
+            container.prepend(div);
+
+        });
+
+}
+
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+renderJournal();
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function saveProfile() {
+
+    const belt =
+        document.getElementById(
+            "belt"
+        )?.value;
+
+    const weight =
+        document.getElementById(
+            "weight"
+        )?.value;
+
+    if (belt) {
+
+        localStorage.setItem(
+            "belt",
+            belt
+        );
+
+        document.getElementById(
+            "topBelt"
+        ).textContent =
+            "Ceinture " +
+            belt.toLowerCase();
+
     }
 
-});
+    if (weight) {
+
+        localStorage.setItem(
+            "weight",
+            weight
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   COMPETITION COUNTDOWN
+========================================================= */
+
+function updateCompetitionCountdown() {
+
+    const target =
+        new Date(
+            "2026-10-24T10:00:00"
+        );
+
+    const now =
+        new Date();
+
+    const diff =
+        target - now;
+
+    const days =
+        Math.max(
+            0,
+            Math.ceil(
+                diff /
+                (1000 * 60 * 60 * 24)
+            )
+        );
+
+
+    document.getElementById(
+        "countdown"
+    ).textContent =
+        days;
+
+}
+
+updateCompetitionCountdown();
+
+
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
+
+const savedBelt =
+    localStorage.getItem("belt");
+
+if (savedBelt) {
+
+    document.getElementById(
+        "topBelt"
+    ).textContent =
+        "Ceinture " +
+        savedBelt.toLowerCase();
+
+}
+
+
+/* =========================================================
+   KEYBOARD TIMER SHORTCUT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.code === "Space" &&
+            document
+                .getElementById("timer")
+                .classList
+                .contains("active")
+        ) {
+
+            event.preventDefault();
+
+            toggleTimer();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   WINDOW ADAPTATION
+========================================================= */
+
+function adaptInterface() {
+
+    /*
+       Rien de fixe ici volontairement :
+       CSS Grid + Flex + clamp() font le travail.
+       Cette fonction peut servir plus tard si tu veux
+       ajouter des comportements spécifiques selon
+       la taille de la fenêtre.
+    */
+
+    const width =
+        window.innerWidth;
+
+    document.body.dataset.size =
+        width < 650
+            ? "small"
+            : width < 900
+                ? "medium"
+                : "large";
+
+}
+
+window.addEventListener(
+    "resize",
+    adaptInterface
+);
+
+adaptInterface();
 
 </script>
 
