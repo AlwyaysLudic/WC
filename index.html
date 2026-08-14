@@ -1,74 +1,41 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BJJ Training Dashboard</title>
+<meta name="theme-color" content="#0b0b0d">
+<title>BJJ // Fight Camp</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #080809;
+    --panel: #101012;
+    --panel2: #151518;
+    --border: #27272b;
+    --text: #f4f4f5;
+    --muted: #85858e;
+    --red: #e53935;
+    --red-dark: #8f1d1d;
+    --green: #49c878;
+    --yellow: #e7b84b;
+}
 
 * {
     box-sizing: border-box;
-}
-
-:root {
-    --bg: #f5f6f8;
-    --surface: #ffffff;
-    --surface-2: #f0f1f4;
-    --border: #e1e4e8;
-
-    --text: #15171b;
-    --muted: #737985;
-
-    --accent: #b88935;
-    --accent-soft: #f3ead9;
-
-    --success: #2f8f5b;
-    --danger: #c54b4b;
-
-    --shadow: 0 10px 35px rgba(0,0,0,.06);
-}
-
-[data-theme="dark"] {
-    --bg: #0d0f12;
-    --surface: #15181d;
-    --surface-2: #1c2026;
-    --border: #292e36;
-
-    --text: #f1f3f5;
-    --muted: #9299a5;
-
-    --accent: #d3a64f;
-    --accent-soft: #302719;
-
-    --success: #50b879;
-    --danger: #e06767;
-
-    --shadow: 0 10px 35px rgba(0,0,0,.25);
-}
-
-html {
-    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-
-    background: var(--bg);
+    font-family: "Inter", sans-serif;
+    background:
+        radial-gradient(circle at 80% 0%, rgba(229,57,53,.12), transparent 28%),
+        radial-gradient(circle at 0% 70%, rgba(120,20,20,.08), transparent 30%),
+        var(--bg);
     color: var(--text);
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    transition:
-        background .25s ease,
-        color .25s ease;
+    min-height: 100vh;
 }
 
 button,
@@ -82,2124 +49,1081 @@ button {
     cursor: pointer;
 }
 
-/* =========================
-   LAYOUT
-========================= */
-
 .app {
-    width: min(1250px, 94%);
-    margin: auto;
-    padding: 28px 0 60px;
+    display: flex;
+    min-height: 100vh;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* ================= SIDEBAR ================= */
 
-header {
+.sidebar {
+    width: 245px;
+    border-right: 1px solid var(--border);
+    background: rgba(10,10,11,.92);
+    padding: 28px 18px;
+    position: fixed;
+    inset: 0 auto 0 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 30px;
+    gap: 12px;
+    margin-bottom: 45px;
+    padding: 0 10px;
 }
 
-.brand h1 {
-    margin: 0;
-
-    font-size: 30px;
-    letter-spacing: -.8px;
-}
-
-.brand p {
-    margin: 5px 0 0;
-
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-.header-actions {
-    display: flex;
-    gap: 9px;
-}
-
-.icon-button {
-    width: 42px;
-    height: 42px;
-
+.logo-mark {
+    width: 38px;
+    height: 38px;
+    background: var(--red);
+    border-radius: 10px;
     display: grid;
     place-items: center;
+    font-weight: 900;
+    transform: rotate(-5deg);
+}
 
-    border: 1px solid var(--border);
-    border-radius: 11px;
+.logo-text strong {
+    display: block;
+    font-family: "Space Grotesk";
+    font-size: 17px;
+    letter-spacing: .5px;
+}
 
-    background: var(--surface);
-    color: var(--text);
+.logo-text span {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-    box-shadow: var(--shadow);
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
+.nav button {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 9px;
     transition: .2s;
 }
 
-.icon-button:hover {
-    transform: translateY(-1px);
+.nav button:hover,
+.nav button.active {
+    color: white;
+    background: #19191c;
 }
 
-/* =========================
-   GRID
-========================= */
-
-.dashboard {
-    display: grid;
-
-    grid-template-columns:
-        repeat(12, 1fr);
-
-    gap: 17px;
+.nav button.active {
+    border-left: 3px solid var(--red);
 }
 
-.card {
-    grid-column: span 4;
-
-    background: var(--surface);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 16px;
-
-    padding: 20px;
-
-    box-shadow: var(--shadow);
-
-    transition:
-        background .25s ease,
-        border .25s ease;
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
 }
 
-.card.wide {
-    grid-column: span 8;
+.sidebar-bottom small {
+    color: var(--muted);
+    display: block;
+    margin-bottom: 7px;
 }
 
-.card.full {
-    grid-column: 1 / -1;
+.sidebar-bottom strong {
+    font-size: 13px;
 }
 
-.card-header {
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    padding: 35px 42px 60px;
+    max-width: 1500px;
+}
+
+.topbar {
     display: flex;
-
-    align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 17px;
+    align-items: center;
+    margin-bottom: 34px;
 }
 
-.card-title {
-    margin: 0;
+.eyebrow {
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
 
-    font-size: 16px;
+h1 {
+    font-family: "Space Grotesk";
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1;
+}
+
+.date {
+    color: var(--muted);
+    margin-top: 9px;
+    font-size: 13px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 270px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background:
+        linear-gradient(105deg, rgba(229,57,53,.14), transparent 55%),
+        linear-gradient(135deg, #161619, #0d0d0f);
+    padding: 34px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero::after {
+    content: "BJJ";
+    position: absolute;
+    right: -20px;
+    top: -55px;
+    font-size: 210px;
+    font-weight: 900;
+    color: rgba(255,255,255,.025);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    font-family: "Space Grotesk";
+    font-size: clamp(30px, 4vw, 52px);
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #aaaab1;
+    max-width: 530px;
+    line-height: 1.6;
+}
+
+.hero-tag {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    background: rgba(229,57,53,.13);
+    color: #ff6b67;
+    border: 1px solid rgba(229,57,53,.3);
+    padding: 7px 11px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.hero-side {
+    position: relative;
+    z-index: 1;
+    min-width: 210px;
+}
+
+.round {
+    font-family: "Space Grotesk";
+    font-size: 48px;
     font-weight: 700;
 }
 
-.card-subtitle {
+.round-label {
     color: var(--muted);
-
     font-size: 12px;
 }
 
-/* =========================
-   TODAY
-========================= */
-
-.today {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
+.progress {
+    height: 5px;
+    background: #28282c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 14px 0 18px;
 }
 
-.today-date {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    margin-bottom: 5px;
+.progress span {
+    display: block;
+    width: 68%;
+    height: 100%;
+    background: var(--red);
 }
 
-.today-title {
-    font-size: 25px;
-
-    font-weight: 750;
-
-    letter-spacing: -.5px;
-}
-
-.today-description {
-    color: var(--muted);
-
-    margin-top: 6px;
-
-    font-size: 14px;
-}
-
-.session-status {
-    display: inline-flex;
-
-    margin-top: 13px;
-
-    padding: 6px 10px;
-
-    border-radius: 999px;
-
-    background: var(--surface-2);
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.session-status.completed {
-    background: #dff3e7;
-
-    color: var(--success);
-}
-
-[data-theme="dark"]
-.session-status.completed {
-    background: #173224;
-}
-
-/* =========================
-   BUTTONS
-========================= */
+/* ================= BUTTONS ================= */
 
 .primary {
+    margin-top: 24px;
+    background: var(--red);
+    color: white;
     border: 0;
-
-    padding: 11px 16px;
-
-    border-radius: 10px;
-
-    background: var(--text);
-    color: var(--bg);
-
-    font-weight: 700;
-
+    border-radius: 9px;
+    padding: 13px 18px;
+    font-weight: 800;
     transition: .2s;
 }
 
 .primary:hover {
+    background: #f04440;
     transform: translateY(-1px);
 }
 
 .secondary {
-    border:
-        1px solid
-        var(--border);
-
-    padding: 10px 14px;
-
-    border-radius: 10px;
-
-    background: var(--surface);
-    color: var(--text);
-
-    font-weight: 650;
+    background: #19191c;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 11px 15px;
 }
 
-.danger {
-    border:
-        1px solid
-        rgba(197,75,75,.3);
+/* ================= GRID ================= */
 
-    padding: 10px 14px;
-
-    border-radius: 10px;
-
-    background: transparent;
-    color: var(--danger);
-
-    font-weight: 650;
+.section {
+    margin-top: 28px;
 }
 
-.button-row {
+.section-title {
     display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 9px;
-
-    margin-top: 16px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
 }
 
-/* =========================
-   STATS
-========================= */
+.section-title h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.section-title span {
+    color: var(--muted);
+    font-size: 12px;
+}
 
 .stats {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
 }
 
-.stat {
-    background: var(--surface-2);
-
-    border-radius: 12px;
-
-    padding: 14px;
+.card {
+    border: 1px solid var(--border);
+    background: rgba(16,16,18,.9);
+    border-radius: 14px;
+    padding: 20px;
 }
 
-.stat-value {
-    font-size: 25px;
-
-    font-weight: 800;
+.stat-number {
+    font-family: "Space Grotesk";
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .stat-label {
-    margin-top: 3px;
-
     color: var(--muted);
-
     font-size: 12px;
 }
 
-/* =========================
-   TRAINING PLAN
-========================= */
-
-.training-list {
-    display: grid;
-
-    gap: 8px;
+.stat-change {
+    color: var(--green);
+    font-size: 11px;
+    margin-top: 12px;
 }
 
-.training-item {
+/* ================= TWO COLUMNS ================= */
+
+.columns {
     display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+}
 
-    grid-template-columns:
-        80px
-        1fr
-        auto;
+.workout-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
 
+.workout {
+    display: flex;
     align-items: center;
-
-    gap: 12px;
-
-    padding: 12px;
-
-    border-radius: 11px;
-
-    background: var(--surface-2);
-}
-
-.training-day {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.training-name {
-    font-weight: 700;
-
-    font-size: 14px;
-}
-
-.training-detail {
-    color: var(--muted);
-
-    font-size: 12px;
-
-    margin-top: 2px;
-}
-
-.training-duration {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-/* =========================
-   SESSION BUILDER
-========================= */
-
-.exercise-list {
-    display: grid;
-
-    gap: 8px;
-}
-
-.exercise {
-    padding: 14px;
-
-    border-left:
-        3px solid
-        var(--accent);
-
-    background: var(--surface-2);
-
-    border-radius: 9px;
-}
-
-.exercise-top {
-    display: flex;
-
     justify-content: space-between;
-
-    gap: 15px;
-}
-
-.exercise-name {
-    font-weight: 700;
-}
-
-.exercise-time {
-    color: var(--muted);
-
-    font-size: 12px;
-
-    white-space: nowrap;
-}
-
-.exercise-description {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    margin-top: 5px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-}
-
-label {
-    display: block;
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-
-    margin-top: 6px;
-
-    padding: 10px 11px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 9px;
-
-    outline: none;
-
-    background: var(--surface-2);
-    color: var(--text);
-}
-
-textarea {
-    min-height: 110px;
-
-    resize: vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--accent);
-}
-
-/* =========================
-   GOALS
-========================= */
-
-.goal {
-    padding: 14px;
-
-    border-radius: 11px;
-
-    background: var(--surface-2);
-
-    margin-bottom: 8px;
-}
-
-.goal-top {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 10px;
-}
-
-.goal-name {
-    font-weight: 700;
-}
-
-.goal-progress {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.goal-bar {
-    height: 7px;
-
-    margin-top: 9px;
-
-    border-radius: 99px;
-
-    background: var(--border);
-
-    overflow: hidden;
-}
-
-.goal-fill {
-    height: 100%;
-
-    width: 0;
-
-    background: var(--accent);
-
-    transition: width .3s;
-}
-
-/* =========================
-   COMPETITION
-========================= */
-
-.competition-date {
-    font-size: 27px;
-
-    font-weight: 800;
-}
-
-.competition-days {
-    color: var(--accent);
-
-    font-size: 13px;
-
-    margin-top: 4px;
-}
-
-.competition-note {
-    color: var(--muted);
-
-    line-height: 1.5;
-
-    font-size: 13px;
-
-    margin-top: 14px;
-}
-
-/* =========================
-   JOURNAL
-========================= */
-
-.journal-list {
-    display: grid;
-
-    gap: 8px;
-
-    max-height: 310px;
-
-    overflow-y: auto;
-}
-
-.journal-entry {
     padding: 13px;
-
-    border-bottom:
-        1px solid
-        var(--border);
+    background: #151518;
+    border: 1px solid #242428;
+    border-radius: 10px;
 }
 
-.journal-date {
-    color: var(--muted);
+.workout-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
+.workout-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: #222226;
+}
+
+.workout strong {
+    font-size: 13px;
+}
+
+.workout small {
+    color: var(--muted);
+    display: block;
+    margin-top: 3px;
+}
+
+.time {
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* ================= CALENDAR ================= */
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.day {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    padding: 7px 0;
+}
+
+.day-box {
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #151518;
+    border: 1px solid #222226;
+    font-size: 12px;
+}
+
+.day-box.done {
+    background: rgba(229,57,53,.16);
+    border-color: rgba(229,57,53,.35);
+    color: #ff6965;
+}
+
+.day-box.today {
+    border: 1px solid white;
+}
+
+/* ================= COMPETITION ================= */
+
+.competition {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comp-date {
+    font-family: "Space Grotesk";
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.comp-info {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.countdown {
+    text-align: right;
+}
+
+.countdown strong {
+    display: block;
+    font-size: 22px;
+}
+
+.countdown span {
+    color: var(--muted);
     font-size: 11px;
 }
 
-.journal-title {
-    font-weight: 700;
+/* ================= FORM ================= */
 
-    margin-top: 4px;
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
-.journal-text {
+.field label {
+    display: block;
     color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 7px;
+}
 
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: #0d0d0f;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.field textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: var(--red);
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+/* ================= JOURNAL ================= */
+
+.journal-entry {
+    border-left: 2px solid var(--red);
+    padding: 3px 0 3px 15px;
+    margin-bottom: 17px;
+}
+
+.journal-entry strong {
     font-size: 13px;
-
-    margin-top: 4px;
-
-    line-height: 1.5;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-
-    .card,
-    .card.wide {
-        grid-column: 1 / -1;
-    }
-
+.journal-entry p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
 }
 
-@media (max-width: 600px) {
+/* ================= MOBILE ================= */
 
-    .app {
-        padding-top: 20px;
+.mobile-nav {
+    display: none;
+}
+
+@media(max-width: 950px) {
+    .sidebar {
+        display: none;
     }
 
-    header {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-    .today {
-        flex-direction: column;
-
-        align-items: flex-start;
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 25px 18px 90px;
     }
 
     .stats {
-        grid-template-columns:
-            1fr 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .columns {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    .hero-side {
+        width: 100%;
+    }
+
+    .mobile-nav {
+        position: fixed;
+        display: flex;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        z-index: 20;
+        background: rgba(20,20,22,.94);
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        padding: 7px;
+        backdrop-filter: blur(15px);
+    }
+
+    .mobile-nav button {
+        flex: 1;
+        background: transparent;
+        border: 0;
+        color: var(--muted);
+        padding: 10px 5px;
+        font-size: 10px;
+    }
+
+    .mobile-nav button.active {
+        color: white;
+    }
+}
+
+@media(max-width: 600px) {
+    .stats {
+        grid-template-columns: 1fr 1fr;
     }
 
     .form-grid {
         grid-template-columns: 1fr;
     }
 
-    .training-item {
-        grid-template-columns:
-            60px
-            1fr;
+    .full {
+        grid-column: auto;
     }
 
-    .training-duration {
-        grid-column: 2;
+    .hero {
+        padding: 25px;
     }
 
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+    }
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-<header>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-    <div class="brand">
+        <div class="logo">
+            <div class="logo-mark">B</div>
 
-        <h1>BJJ Training</h1>
-
-        <p>
-            Personal training dashboard
-        </p>
-
-    </div>
-
-
-    <div class="header-actions">
-
-        <button
-            class="icon-button"
-            id="themeButton"
-            title="Changer de thème"
-            onclick="toggleTheme()">
-
-            🌙
-
-        </button>
-
-    </div>
-
-</header>
-
-
-<main class="dashboard">
-
-
-<!-- =========================
-     TODAY
-========================= -->
-
-<section class="card wide">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Aujourd'hui
-        </h2>
-
-        <span
-            class="card-subtitle"
-            id="currentDate">
-        </span>
-
-    </div>
-
-
-    <div class="today">
-
-        <div>
-
-            <div class="today-title">
-                Session BJJ
+            <div class="logo-text">
+                <strong>FIGHT CAMP</strong>
+                <span>BJJ TRAINING</span>
             </div>
-
-            <div class="today-description">
-                Technique, drilling et sparring.
-            </div>
-
-            <div
-                class="session-status"
-                id="todayStatus">
-
-                Prévue
-
-            </div>
-
         </div>
 
+        <nav class="nav">
+            <button class="active">◉ &nbsp; Dashboard</button>
+            <button>🥋 &nbsp; Training</button>
+            <button>▣ &nbsp; Planning</button>
+            <button>◒ &nbsp; Progression</button>
+            <button>⚔ &nbsp; Competition</button>
+            <button>▤ &nbsp; Journal</button>
+        </nav>
 
-        <button
-            class="primary"
-            onclick="completeToday()">
-
-            Marquer terminée
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     STATS
-========================= -->
-
-<section class="card">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Cette semaine
-        </h2>
-
-    </div>
-
-
-    <div class="stats">
-
-        <div class="stat">
-
-            <div
-                class="stat-value"
-                id="weekSessions">
-
-                0
-
-            </div>
-
-            <div class="stat-label">
-                Séances
-            </div>
-
+        <div class="sidebar-bottom">
+            <small>STREAK</small>
+            <strong>🔥 7 jours consécutifs</strong>
         </div>
 
+    </aside>
 
-        <div class="stat">
+    <!-- MAIN -->
+    <main class="main">
 
-            <div
-                class="stat-value"
-                id="weekRounds">
+        <header class="topbar">
 
-                0
+            <div>
+                <div class="eyebrow">Training Dashboard</div>
+                <h1>Bon entraînement.</h1>
+                <div class="date" id="today"></div>
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-btn" onclick="toggleTheme()">◐</button>
+            </div>
+
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    ● SESSION DU JOUR
+                </div>
+
+                <h2>Technique.<br>Drilling. Sparring.</h2>
+
+                <p>
+                    Aujourd'hui, on travaille proprement.
+                    Priorité à la technique, puis intensité progressive.
+                </p>
+
+                <button class="primary" onclick="startWorkout()">
+                    COMMENCER LA SESSION →
+                </button>
 
             </div>
 
-            <div class="stat-label">
-                Rounds
-            </div>
+            <div class="hero-side">
 
-        </div>
+                <div class="round">01 / 06</div>
+                <div class="round-label">ROUND DE LA SESSION</div>
 
+                <div class="progress">
+                    <span></span>
+                </div>
 
-        <div class="stat">
-
-            <div
-                class="stat-value"
-                id="weekMinutes">
-
-                0
+                <div class="round-label">
+                    Session recommandée · 90 min
+                </div>
 
             </div>
 
-            <div class="stat-label">
-                Minutes
+        </section>
+
+        <!-- STATS -->
+        <section class="section">
+
+            <div class="section-title">
+                <h3>Cette semaine</h3>
+                <span>Mis à jour aujourd'hui</span>
             </div>
 
-        </div>
+            <div class="stats">
+
+                <div class="card">
+                    <div class="stat-number" id="sessions">0</div>
+                    <div class="stat-label">SÉANCES</div>
+                    <div class="stat-change">↑ objectif 4</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-number" id="rounds">0</div>
+                    <div class="stat-label">ROUNDS</div>
+                    <div class="stat-change">↑ cette semaine</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-number" id="minutes">0</div>
+                    <div class="stat-label">MINUTES</div>
+                    <div class="stat-change">↑ volume</div>
+                </div>
+
+                <div class="card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">STREAK</div>
+                    <div class="stat-change">🔥 jours</div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- WORKOUT + CALENDAR -->
+        <section class="section columns">
+
+            <div class="card">
+
+                <div class="section-title">
+                    <h3>Séance recommandée</h3>
+                    <span>90 MIN</span>
+                </div>
+
+                <div class="workout-list">
+
+                    <div class="workout">
+                        <div class="workout-left">
+                            <div class="workout-icon">🏃</div>
+                            <div>
+                                <strong>Warm-up</strong>
+                                <small>Mobilité + activation</small>
+                            </div>
+                        </div>
+                        <span class="time">10 min</span>
+                    </div>
+
+                    <div class="workout">
+                        <div class="workout-left">
+                            <div class="workout-icon">🥋</div>
+                            <div>
+                                <strong>Technique</strong>
+                                <small>Passage de garde</small>
+                            </div>
+                        </div>
+                        <span class="time">25 min</span>
+                    </div>
+
+                    <div class="workout">
+                        <div class="workout-left">
+                            <div class="workout-icon">🔁</div>
+                            <div>
+                                <strong>Drilling</strong>
+                                <small>Repetitions contrôlées</small>
+                            </div>
+                        </div>
+                        <span class="time">20 min</span>
+                    </div>
+
+                    <div class="workout">
+                        <div class="workout-left">
+                            <div class="workout-icon">⚡</div>
+                            <div>
+                                <strong>Sparring</strong>
+                                <small>6 × 5 min</small>
+                            </div>
+                        </div>
+                        <span class="time">30 min</span>
+                    </div>
+
+                    <div class="workout">
+                        <div class="workout-left">
+                            <div class="workout-icon">🧘</div>
+                            <div>
+                                <strong>Cool down</strong>
+                                <small>Retour au calme</small>
+                            </div>
+                        </div>
+                        <span class="time">5 min</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
 
-    </div>
+                <div class="section-title">
+                    <h3>Planning</h3>
+                    <span>Cette semaine</span>
+                </div>
 
-</section>
+                <div class="calendar">
 
+                    <div class="day">LUN</div>
+                    <div class="day">MAR</div>
+                    <div class="day">MER</div>
+                    <div class="day">JEU</div>
+                    <div class="day">VEN</div>
+                    <div class="day">SAM</div>
+                    <div class="day">DIM</div>
 
-<!-- =========================
-     SESSION
-========================= -->
+                    <div class="day-box done">10</div>
+                    <div class="day-box">11</div>
+                    <div class="day-box done">12</div>
+                    <div class="day-box">13</div>
+                    <div class="day-box today">14</div>
+                    <div class="day-box">15</div>
+                    <div class="day-box">16</div>
+
+                </div>
 
-<section class="card wide">
+                <button class="secondary" style="margin-top:20px;width:100%;">
+                    Voir le planning →
+                </button>
 
-    <div class="card-header">
+            </div>
 
-        <h2 class="card-title">
-            Séance recommandée
-        </h2>
+        </section>
 
-        <span
-            class="card-subtitle"
-            id="sessionDuration">
+        <!-- COMPETITION -->
+        <section class="section">
 
-            90 min
+            <div class="section-title">
+                <h3>Prochaine compétition</h3>
+                <span>FIGHT CAMP</span>
+            </div>
 
-        </span>
+            <div class="card competition">
 
-    </div>
+                <div>
+                    <div class="comp-date" id="competitionDate">—</div>
+                    <div class="comp-info">Aucune compétition définie</div>
+                </div>
 
+                <div class="countdown">
+                    <strong id="countdown">—</strong>
+                    <span>jours restants</span>
+                </div>
 
-    <div
-        class="exercise-list"
-        id="sessionList">
+            </div>
 
-    </div>
+        </section>
 
+        <!-- PROFILE -->
+        <section class="section columns">
 
-    <div class="button-row">
+            <div class="card">
 
-        <button
-            class="primary"
-            onclick="generateSession()">
+                <div class="section-title">
+                    <h3>Profil combattant</h3>
+                    <span>PERSONNEL</span>
+                </div>
 
-            Générer une séance
+                <div class="form-grid">
 
-        </button>
+                    <div class="field">
+                        <label>CEINTURE</label>
+                        <select id="belt">
+                            <option>Blanche</option>
+                            <option>Bleue</option>
+                            <option>Violette</option>
+                            <option>Marron</option>
+                            <option>Noire</option>
+                        </select>
+                    </div>
 
-    </div>
+                    <div class="field">
+                        <label>CATÉGORIE</label>
+                        <input id="weight" placeholder="-76 kg">
+                    </div>
 
-</section>
+                </div>
 
+                <button class="primary" onclick="saveProfile()">
+                    ENREGISTRER
+                </button>
 
-<!-- =========================
-     PROFILE
-========================= -->
+            </div>
 
-<section class="card">
+            <!-- GOALS -->
+            <div class="card">
 
-    <div class="card-header">
+                <div class="section-title">
+                    <h3>Objectifs</h3>
+                    <span>PROGRESSION</span>
+                </div>
 
-        <h2 class="card-title">
-            Profil
-        </h2>
+                <div style="margin-bottom:20px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;">
+                        <span>4 séances / semaine</span>
+                        <span style="color:var(--muted)">2 / 4</span>
+                    </div>
 
-    </div>
+                    <div class="progress">
+                        <span style="width:50%"></span>
+                    </div>
+                </div>
 
+                <div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px;">
+                        <span>30 rounds / semaine</span>
+                        <span style="color:var(--muted)">18 / 30</span>
+                    </div>
 
-    <div class="form-grid">
+                    <div class="progress">
+                        <span style="width:60%"></span>
+                    </div>
+                </div>
 
-        <label>
+            </div>
 
-            Ceinture
+        </section>
 
-            <select id="belt">
+        <!-- JOURNAL -->
+        <section class="section">
 
-                <option>Blanche</option>
-                <option>Bleue</option>
-                <option>Violette</option>
-                <option>Marron</option>
-                <option>Noire</option>
+            <div class="section-title">
+                <h3>Journal d'entraînement</h3>
+                <span>RECENT</span>
+            </div>
 
-            </select>
+            <div class="card">
 
-        </label>
+                <div class="journal-entry">
+                    <strong>Sparring du jeudi</strong>
+                    <p>6 rounds · Bonne pression depuis la side control. Travail à améliorer : sorties de mount.</p>
+                </div>
 
+                <div class="journal-entry">
+                    <strong>Technique — passage de garde</strong>
+                    <p>4 rounds · Meilleure connexion entre knee cut et contrôle latéral.</p>
+                </div>
 
-        <label>
+                <button class="secondary">
+                    + Ajouter une séance
+                </button>
 
-            Catégorie
+            </div>
 
-            <input
-                id="weight"
-                placeholder="Ex : -76 kg">
+        </section>
 
-        </label>
-
-    </div>
-
-
-    <div class="button-row">
-
-        <button
-            class="secondary"
-            onclick="saveProfile()">
-
-            Enregistrer
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     WEEK PLAN
-========================= -->
-
-<section class="card full">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Planning de la semaine
-        </h2>
-
-        <span class="card-subtitle">
-            Vue d'ensemble
-        </span>
-
-    </div>
-
-
-    <div
-        class="training-list"
-        id="weeklyPlan">
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     GOALS
-========================= -->
-
-<section class="card wide">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Objectifs
-        </h2>
-
-    </div>
-
-
-    <div id="goals">
-
-    </div>
-
-
-    <div class="button-row">
-
-        <button
-            class="secondary"
-            onclick="updateGoals()">
-
-            Modifier les objectifs
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     COMPETITION
-========================= -->
-
-<section class="card">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Compétition
-        </h2>
-
-    </div>
-
-
-    <label>
-
-        Date
-
-        <input
-            type="date"
-            id="competitionDate">
-
-    </label>
-
-
-    <div
-        class="competition-date"
-        id="competitionCountdown">
-
-        —
-
-    </div>
-
-
-    <div
-        class="competition-days"
-        id="competitionDays">
-
-        Aucune compétition définie.
-
-    </div>
-
-
-    <div class="button-row">
-
-        <button
-            class="secondary"
-            onclick="saveCompetition()">
-
-            Enregistrer
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     JOURNAL
-========================= -->
-
-<section class="card full">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Journal d'entraînement
-        </h2>
-
-    </div>
-
-
-    <div class="form-grid">
-
-        <label>
-
-            Titre
-
-            <input
-                id="journalTitle"
-                placeholder="Ex : Sparring du jeudi">
-
-        </label>
-
-
-        <label>
-
-            Rounds
-
-            <input
-                type="number"
-                id="journalRounds"
-                min="0"
-                placeholder="Ex : 6">
-
-        </label>
-
-    </div>
-
-
-    <label style="margin-top:12px">
-
-        Notes
-
-        <textarea
-            id="journalNotes"
-            placeholder="Ce qui a marché, difficultés, techniques à retravailler..."></textarea>
-
-    </label>
-
-
-    <div class="button-row">
-
-        <button
-            class="primary"
-            onclick="addJournalEntry()">
-
-            Ajouter au journal
-
-        </button>
-
-    </div>
-
-
-    <div
-        class="journal-list"
-        id="journalList"
-        style="margin-top:20px">
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     RESET
-========================= -->
-
-<section class="card full">
-
-    <div class="card-header">
-
-        <h2 class="card-title">
-            Données
-        </h2>
-
-    </div>
-
-    <p class="card-subtitle">
-
-        Les données sont actuellement sauvegardées
-        uniquement dans ce navigateur.
-
-    </p>
-
-
-    <div class="button-row">
-
-        <button
-            class="danger"
-            onclick="resetData()">
-
-            Réinitialiser les données
-
-        </button>
-
-    </div>
-
-</section>
-
-
-</main>
+    </main>
 
 </div>
+
+<!-- MOBILE NAV -->
+
+<nav class="mobile-nav">
+    <button class="active">⌂<br>Accueil</button>
+    <button>🥋<br>Training</button>
+    <button>▣<br>Planning</button>
+    <button>📈<br>Stats</button>
+    <button>☰<br>Plus</button>
+</nav>
 
 
 <script>
 
-/* =====================================================
-   STORAGE
-===================================================== */
+/* ================= DATE ================= */
 
-const STORAGE_KEY =
-    "bjj_training_dashboard";
+const dateElement = document.getElementById("today");
 
+const now = new Date();
 
-let data =
-    JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-    )
-    ||
-    {
-
-        theme: "light",
-
-        belt: "Blanche",
-
-        weight: "",
-
-        competitionDate: "",
-
-        completedToday: false,
-
-        session: null,
-
-        week: {
-            sessions: 0,
-            rounds: 0,
-            minutes: 0
-        },
-
-        goals: [
-            {
-                name: "Sessions cette semaine",
-                current: 0,
-                target: 4
-            },
-
-            {
-                name: "Rounds de sparring",
-                current: 0,
-                target: 20
-            },
-
-            {
-                name: "Travail technique",
-                current: 0,
-                target: 3
-            }
-        ],
-
-        journal: []
-
-    };
-
-
-function save() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-}
-
-
-/* =====================================================
-   THEME
-===================================================== */
-
-function applyTheme() {
-
-    document.documentElement
-        .setAttribute(
-            "data-theme",
-            data.theme
-        );
-
-
-    document.getElementById(
-        "themeButton"
-    ).textContent =
-        data.theme === "dark"
-            ? "☀️"
-            : "🌙";
-
-}
-
-
-function toggleTheme() {
-
-    data.theme =
-        data.theme === "dark"
-            ? "light"
-            : "dark";
-
-
-    save();
-
-    applyTheme();
-
-}
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function renderDate() {
-
-    const now = new Date();
-
-    const formatted =
-        now.toLocaleDateString(
-            "fr-FR",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long"
-            }
-        );
-
-
-    document.getElementById(
-        "currentDate"
-    ).textContent = formatted;
-
-}
-
-
-/* =====================================================
-   SESSION DATABASE
-===================================================== */
-
-const sessions = [
-
-    {
-        duration: 90,
-
-        exercises: [
-
-            {
-                name: "Échauffement",
-                time: "10 min",
-                description:
-                    "Mobilité, déplacements, shrimping, bridging et technical stand-up."
-            },
-
-            {
-                name: "Technique",
-                time: "20 min",
-                description:
-                    "Travail d'une séquence technique avec répétitions lentes puis à vitesse réelle."
-            },
-
-            {
-                name: "Drilling",
-                time: "15 min",
-                description:
-                    "Répétitions continues d'une entrée, d'un contrôle et d'une finition."
-            },
-
-            {
-                name: "Positionnel",
-                time: "15 min",
-                description:
-                    "Commencer dans une position défavorable et chercher une sortie propre."
-            },
-
-            {
-                name: "Sparring",
-                time: "25 min",
-                description:
-                    "5 rounds de 5 minutes. Intensité progressive."
-            },
-
-            {
-                name: "Retour au calme",
-                time: "5 min",
-                description:
-                    "Respiration et mobilité légère."
-            }
-
-        ]
-
-    },
-
-
-    {
-        duration: 75,
-
-        exercises: [
-
-            {
-                name: "Échauffement",
-                time: "10 min",
-                description:
-                    "Mobilité générale et mouvements spécifiques BJJ."
-            },
-
-            {
-                name: "Takedowns",
-                time: "15 min",
-                description:
-                    "Entrées de takedown et répétitions techniques."
-            },
-
-            {
-                name: "Guard passing",
-                time: "15 min",
-                description:
-                    "Travail du passage de garde avec résistance progressive."
-            },
-
-            {
-                name: "Positionnel",
-                time: "15 min",
-                description:
-                    "Rounds depuis la garde fermée."
-            },
-
-            {
-                name: "Sparring",
-                time: "15 min",
-                description:
-                    "3 rounds de 5 minutes."
-            },
-
-            {
-                name: "Retour au calme",
-                time: "5 min",
-                description:
-                    "Respiration et récupération."
-            }
-
-        ]
-
-    },
-
-
-    {
-        duration: 60,
-
-        exercises: [
-
-            {
-                name: "Échauffement",
-                time: "8 min",
-                description:
-                    "Mobilité et déplacements."
-            },
-
-            {
-                name: "Technique",
-                time: "15 min",
-                description:
-                    "Une seule séquence travaillée avec beaucoup de répétitions."
-            },
-
-            {
-                name: "Drilling",
-                time: "12 min",
-                description:
-                    "Drilling continu à intensité modérée."
-            },
-
-            {
-                name: "Sparring",
-                time: "20 min",
-                description:
-                    "4 rounds de 5 minutes."
-            },
-
-            {
-                name: "Retour au calme",
-                time: "5 min",
-                description:
-                    "Respiration et mobilité."
-            }
-
-        ]
-
-    }
-
-];
-
-
-/* =====================================================
-   GENERATE SESSION
-===================================================== */
-
-function generateSession() {
-
-    const random =
-        sessions[
-            Math.floor(
-                Math.random() *
-                sessions.length
-            )
-        ];
-
-
-    data.session = random;
-
-    save();
-
-    renderSession();
-
-}
-
-
-function renderSession() {
-
-    const container =
-        document.getElementById(
-            "sessionList"
-        );
-
-
-    if (!data.session) {
-
-        container.innerHTML = `
-            <div class="exercise">
-
-                <div class="exercise-name">
-                    Aucune séance sélectionnée
-                </div>
-
-                <div class="exercise-description">
-                    Génère une séance recommandée.
-                </div>
-
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "sessionDuration"
-    ).textContent =
-        `${data.session.duration} min`;
-
-
-    container.innerHTML =
-        data.session.exercises
-        .map(exercise => `
-
-            <div class="exercise">
-
-                <div class="exercise-top">
-
-                    <div class="exercise-name">
-                        ${exercise.name}
-                    </div>
-
-                    <div class="exercise-time">
-                        ${exercise.time}
-                    </div>
-
-                </div>
-
-                <div class="exercise-description">
-                    ${exercise.description}
-                </div>
-
-            </div>
-
-        `)
-        .join("");
-
-}
-
-
-/* =====================================================
-   TODAY
-===================================================== */
-
-function completeToday() {
-
-    data.completedToday =
-        !data.completedToday;
-
-
-    if (data.completedToday) {
-
-        data.week.sessions++;
-
-        data.week.minutes +=
-            data.session
-                ? data.session.duration
-                : 90;
-
-        data.week.rounds += 5;
-
-    }
-
-
-    save();
-
-    renderStats();
-
-    renderToday();
-
-}
-
-
-function renderToday() {
-
-    const status =
-        document.getElementById(
-            "todayStatus"
-        );
-
-
-    if (data.completedToday) {
-
-        status.textContent =
-            "Terminée";
-
-        status.classList.add(
-            "completed"
-        );
-
-    } else {
-
-        status.textContent =
-            "Prévue";
-
-        status.classList.remove(
-            "completed"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   WEEK STATS
-===================================================== */
-
-function renderStats() {
-
-    document.getElementById(
-        "weekSessions"
-    ).textContent =
-        data.week.sessions;
-
-
-    document.getElementById(
-        "weekRounds"
-    ).textContent =
-        data.week.rounds;
-
-
-    document.getElementById(
-        "weekMinutes"
-    ).textContent =
-        data.week.minutes;
-
-}
-
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-function saveProfile() {
-
-    data.belt =
-        document.getElementById(
-            "belt"
-        ).value;
-
-
-    data.weight =
-        document.getElementById(
-            "weight"
-        ).value;
-
-
-    save();
-
-}
-
-
-/* =====================================================
-   WEEKLY PLAN
-===================================================== */
-
-function renderWeeklyPlan() {
-
-    const plan = [
-
-        ["Lundi", "Technique", "Drilling + technique", "90 min"],
-
-        ["Mardi", "Sparring", "Positionnel + rounds", "75 min"],
-
-        ["Mercredi", "Récupération", "Mobilité / repos", "30 min"],
-
-        ["Jeudi", "Technique", "Takedowns + passing", "90 min"],
-
-        ["Vendredi", "Sparring", "Rounds spécifiques", "90 min"],
-
-        ["Samedi", "Open mat", "Travail libre", "Selon séance"],
-
-        ["Dimanche", "Repos", "Récupération", "—"]
-
-    ];
-
-
-    document.getElementById(
-        "weeklyPlan"
-    ).innerHTML =
-
-        plan.map(day => `
-
-            <div class="training-item">
-
-                <div class="training-day">
-                    ${day[0]}
-                </div>
-
-                <div>
-
-                    <div class="training-name">
-                        ${day[1]}
-                    </div>
-
-                    <div class="training-detail">
-                        ${day[2]}
-                    </div>
-
-                </div>
-
-                <div class="training-duration">
-                    ${day[3]}
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-/* =====================================================
-   GOALS
-===================================================== */
-
-function renderGoals() {
-
-    document.getElementById(
-        "goals"
-    ).innerHTML =
-
-        data.goals.map(goal => {
-
-            const percent =
-                Math.min(
-                    100,
-                    (goal.current /
-                    goal.target) * 100
-                );
-
-
-            return `
-
-                <div class="goal">
-
-                    <div class="goal-top">
-
-                        <div class="goal-name">
-                            ${goal.name}
-                        </div>
-
-                        <div class="goal-progress">
-                            ${goal.current} / ${goal.target}
-                        </div>
-
-                    </div>
-
-                    <div class="goal-bar">
-
-                        <div
-                            class="goal-fill"
-                            style="width:${percent}%">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-function updateGoals() {
-
-    const sessionsTarget =
-        prompt(
-            "Combien de séances veux-tu faire cette semaine ?",
-            data.goals[0].target
-        );
-
-
-    if (sessionsTarget !== null) {
-
-        data.goals[0].target =
-            Math.max(
-                1,
-                Number(sessionsTarget)
-            );
-
-    }
-
-
-    const roundsTarget =
-        prompt(
-            "Combien de rounds de sparring ?",
-            data.goals[1].target
-        );
-
-
-    if (roundsTarget !== null) {
-
-        data.goals[1].target =
-            Math.max(
-                1,
-                Number(roundsTarget)
-            );
-
-    }
-
-
-    save();
-
-    renderGoals();
-
-}
-
-
-/* =====================================================
-   COMPETITION
-===================================================== */
-
-function saveCompetition() {
-
-    data.competitionDate =
-        document.getElementById(
-            "competitionDate"
-        ).value;
-
-
-    save();
-
-    renderCompetition();
-
-}
-
-
-function renderCompetition() {
-
-    const countdown =
-        document.getElementById(
-            "competitionCountdown"
-        );
-
-
-    const daysElement =
-        document.getElementById(
-            "competitionDays"
-        );
-
-
-    if (!data.competitionDate) {
-
-        countdown.textContent = "—";
-
-        daysElement.textContent =
-            "Aucune compétition définie.";
-
-        return;
-
-    }
-
-
-    const target =
-        new Date(
-            data.competitionDate +
-            "T00:00:00"
-        );
-
-
-    const now =
-        new Date();
-
-
-    const difference =
-        target - now;
-
-
-    const days =
-        Math.ceil(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    countdown.textContent =
-        days > 0
-            ? `${days} jour${days > 1 ? "s" : ""}`
-            : "Aujourd'hui";
-
-
-    daysElement.textContent =
-        new Date(
-            data.competitionDate +
-            "T00:00:00"
-        ).toLocaleDateString(
-            "fr-FR",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-}
-
-
-/* =====================================================
-   JOURNAL
-===================================================== */
-
-function addJournalEntry() {
-
-    const title =
-        document.getElementById(
-            "journalTitle"
-        ).value.trim();
-
-
-    const rounds =
-        Number(
-            document.getElementById(
-                "journalRounds"
-            ).value
-        ) || 0;
-
-
-    const notes =
-        document.getElementById(
-            "journalNotes"
-        ).value.trim();
-
-
-    if (!title && !notes) {
-
-        alert(
-            "Ajoute au moins un titre ou une note."
-        );
-
-        return;
-
-    }
-
-
-    data.journal.unshift({
-
-        date:
-            new Date().toLocaleDateString(
-                "fr-FR"
-            ),
-
-        title:
-            title || "Séance",
-
-        rounds,
-
-        notes
-
+dateElement.textContent =
+    now.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
     });
 
 
-    data.journal =
-        data.journal.slice(0, 100);
+/* ================= LOCAL STORAGE ================= */
 
+const savedProfile =
+    JSON.parse(localStorage.getItem("bjjProfile") || "{}");
 
-    document.getElementById(
-        "journalTitle"
-    ).value = "";
+if (savedProfile.belt) {
+    document.getElementById("belt").value = savedProfile.belt;
+}
 
-
-    document.getElementById(
-        "journalRounds"
-    ).value = "";
-
-
-    document.getElementById(
-        "journalNotes"
-    ).value = "";
-
-
-    save();
-
-    renderJournal();
-
+if (savedProfile.weight) {
+    document.getElementById("weight").value = savedProfile.weight;
 }
 
 
-function renderJournal() {
+function saveProfile() {
 
-    const container =
-        document.getElementById(
-            "journalList"
-        );
+    const profile = {
+        belt: document.getElementById("belt").value,
+        weight: document.getElementById("weight").value
+    };
 
-
-    if (!data.journal.length) {
-
-        container.innerHTML = `
-            <div class="card-subtitle">
-                Aucun entraînement enregistré.
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-
-        data.journal.map(entry => `
-
-            <div class="journal-entry">
-
-                <div class="journal-date">
-                    ${entry.date}
-                    ${entry.rounds
-                        ? " · " + entry.rounds + " rounds"
-                        : ""}
-                </div>
-
-                <div class="journal-title">
-                    ${escapeHTML(entry.title)}
-                </div>
-
-                <div class="journal-text">
-                    ${escapeHTML(entry.notes)}
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-/* =====================================================
-   SECURITY HELPER
-===================================================== */
-
-function escapeHTML(text) {
-
-    return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetData() {
-
-    if (
-        !confirm(
-            "Réinitialiser toutes les données locales ?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    localStorage.removeItem(
-        STORAGE_KEY
+    localStorage.setItem(
+        "bjjProfile",
+        JSON.stringify(profile)
     );
 
-
-    location.reload();
-
+    alert("Profil enregistré 🥋");
 }
 
 
-/* =====================================================
-   INIT
-===================================================== */
+/* ================= WORKOUT ================= */
 
-function renderAll() {
+function startWorkout() {
 
-    applyTheme();
+    const sessions =
+        Number(localStorage.getItem("bjjSessions") || 0);
 
-    renderDate();
+    localStorage.setItem(
+        "bjjSessions",
+        sessions + 1
+    );
 
-    renderToday();
+    document.getElementById("sessions").textContent =
+        sessions + 1;
 
-    renderStats();
-
-    renderSession();
-
-    renderWeeklyPlan();
-
-    renderGoals();
-
-    renderCompetition();
-
-    renderJournal();
-
-    document.getElementById(
-        "belt"
-    ).value = data.belt;
-
-
-    document.getElementById(
-        "weight"
-    ).value = data.weight;
-
+    alert(
+        "🔥 Session lancée !\n\n" +
+        "Warm-up → Technique → Drilling → Sparring"
+    );
 }
 
 
-if (!data.session) {
+/* ================= LOAD STATS ================= */
 
-    data.session =
-        sessions[0];
+document.getElementById("sessions").textContent =
+    localStorage.getItem("bjjSessions") || "0";
 
-    save();
+document.getElementById("rounds").textContent =
+    localStorage.getItem("bjjRounds") || "0";
 
+document.getElementById("minutes").textContent =
+    localStorage.getItem("bjjMinutes") || "0";
+
+
+/* ================= THEME ================= */
+
+function toggleTheme() {
+
+    const light =
+        document.body.dataset.theme === "light";
+
+    if (light) {
+
+        document.body.dataset.theme = "";
+
+        document.body.style.background = "";
+
+    } else {
+
+        document.body.dataset.theme = "light";
+
+        document.body.style.background =
+            "#e9e9eb";
+
+        document.body.style.color =
+            "#111";
+
+        alert(
+            "Mode clair expérimental.\n" +
+            "La V2 complète aura un vrai thème clair."
+        );
+    }
 }
-
-
-document.getElementById(
-    "competitionDate"
-).value =
-    data.competitionDate;
-
-
-renderAll();
 
 </script>
 
 </body>
 </html>
-```
