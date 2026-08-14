@@ -2,19 +2,40 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIGHT LAB — BJJ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BJJ OS</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --black: #0b0b0a;
-    --white: #f1f0eb;
-    --red: #ff3b30;
-    --grey: #a09f99;
-    --line: #292925;
-    --dark: #121210;
+    --bg: #f4f6fa;
+    --surface: #ffffff;
+    --surface2: #eef1f6;
+    --text: #111827;
+    --muted: #7b8494;
+    --border: #e1e5ec;
+    --accent: #315efb;
+    --accent2: #6c7cff;
+    --green: #20b26b;
+    --orange: #f59e0b;
+    --danger: #ef4444;
+    --shadow: 0 15px 40px rgba(25,35,55,.08);
+}
+
+body.dark {
+    --bg: #0b0e14;
+    --surface: #131822;
+    --surface2: #1a202c;
+    --text: #f3f5f9;
+    --muted: #8992a3;
+    --border: #252d3a;
+    --accent: #6d83ff;
+    --accent2: #8295ff;
+    --green: #35d88a;
+    --orange: #ffb52e;
+    --danger: #ff5b63;
+    --shadow: 0 15px 40px rgba(0,0,0,.25);
 }
 
 * {
@@ -23,941 +44,1352 @@
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-    background: var(--black);
-    color: var(--white);
-    font-family: "Space Grotesk", sans-serif;
+    font-family: Inter, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background .25s,color .25s;
 }
 
-/* =========================
-   TOP BAR
-========================= */
+/* =====================================
+   APP
+===================================== */
 
-header {
-    height: 82px;
-    border-bottom: 1px solid var(--line);
+.app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+}
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+.sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 22px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 5vw;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(11,11,10,.92);
-    backdrop-filter: blur(15px);
+    gap: 10px;
+    padding: 8px 10px 28px;
 }
 
-.brand {
+.logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+}
+
+.logo strong {
+    font-size: 15px;
+}
+
+.logo small {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 2px;
+}
+
+.menu {
     display: flex;
-    align-items: center;
-    gap: 13px;
-    font-weight: 700;
-    letter-spacing: -1px;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.brand-mark {
-    width: 29px;
-    height: 29px;
-    background: var(--red);
-    transform: rotate(45deg);
-}
-
-.brand span {
-    font-size: 17px;
-}
-
-nav {
-    display: flex;
-    gap: 30px;
-}
-
-nav a {
-    color: var(--grey);
-    text-decoration: none;
+.menu button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 12px;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
     font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
     transition: .2s;
 }
 
-nav a:hover {
+.menu button:hover {
+    background: var(--surface2);
+    color: var(--text);
+}
+
+.menu button.active {
+    background: var(--accent);
     color: white;
 }
 
-.header-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "DM Mono", monospace;
-    font-size: 10px;
-    color: var(--grey);
-}
-
-.status-dot {
-    width: 7px;
-    height: 7px;
-    background: #5ce681;
-    border-radius: 50%;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: calc(100vh - 82px);
-    padding: 8vh 5vw 7vh;
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1.7fr 1fr;
-    gap: 5vw;
-    align-items: center;
-}
-
-.hero::before {
-    content: "BJJ";
-    position: absolute;
-    font-size: 32vw;
-    font-weight: 700;
-    letter-spacing: -35px;
-    right: -5vw;
-    top: 4vh;
-    color: transparent;
-    -webkit-text-stroke: 1px #20201d;
-    pointer-events: none;
-}
-
-.hero-left {
-    position: relative;
-    z-index: 2;
-}
-
-.kicker {
-    font-family: "DM Mono", monospace;
-    color: var(--red);
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
-}
-
-.hero h1 {
-    font-size: clamp(70px, 10vw, 160px);
-    line-height: .79;
-    letter-spacing: -8px;
-    text-transform: uppercase;
-    max-width: 850px;
-}
-
-.hero h1 span {
-    color: var(--red);
-}
-
-.hero-description {
-    max-width: 430px;
-    color: var(--grey);
-    line-height: 1.6;
-    font-size: 14px;
-    margin-top: 45px;
-}
-
-.hero-action {
-    margin-top: 35px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.start {
-    border: 0;
-    background: var(--red);
-    color: white;
-    padding: 16px 23px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.start:hover {
-    background: #ff554b;
-}
-
-.shortcut {
-    color: var(--grey);
-    font-family: "DM Mono";
-    font-size: 10px;
-}
-
-/* =========================
-   FIGHT CARD
-========================= */
-
-.fight-card {
-    position: relative;
-    z-index: 2;
-    border: 1px solid var(--line);
-    background: var(--dark);
-    padding: 27px;
-    transform: rotate(1.5deg);
-}
-
-.card-top {
-    display: flex;
-    justify-content: space-between;
-    color: var(--grey);
-    font-family: "DM Mono";
-    font-size: 9px;
-    text-transform: uppercase;
-}
-
-.card-title {
-    font-size: 32px;
-    margin: 55px 0 35px;
-    line-height: 1;
-}
-
-.card-number {
-    font-size: 105px;
-    line-height: .8;
-    font-weight: 700;
-    letter-spacing: -7px;
-}
-
-.card-number small {
-    font-size: 15px;
-    letter-spacing: 0;
-    color: var(--grey);
-}
-
-.card-line {
-    height: 1px;
-    background: var(--line);
-    margin: 30px 0 20px;
-}
-
-.card-bottom {
-    display: flex;
-    justify-content: space-between;
-    font-family: "DM Mono";
-    font-size: 10px;
-    color: var(--grey);
-}
-
-/* =========================
-   TICKER
-========================= */
-
-.ticker {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 13px 0;
-    font-family: "DM Mono";
-    color: var(--grey);
-    font-size: 10px;
-    letter-spacing: 2px;
-}
-
-.ticker span {
+.menu-icon {
     display: inline-block;
-    margin-right: 50px;
+    width: 23px;
 }
 
-.ticker b {
-    color: var(--red);
+.sidebar-bottom {
+    margin-top: auto;
 }
 
-/* =========================
-   TRAINING
-========================= */
-
-section {
-    padding: 120px 5vw;
-}
-
-.section-label {
-    color: var(--red);
-    font-family: "DM Mono";
-    font-size: 10px;
-    letter-spacing: 3px;
-    margin-bottom: 25px;
-}
-
-.section-title {
-    font-size: clamp(45px, 7vw, 100px);
-    letter-spacing: -5px;
-    line-height: .9;
-    max-width: 800px;
-}
-
-.training-grid {
-    margin-top: 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-}
-
-.training {
-    min-height: 260px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 25px;
-    position: relative;
-    transition: .3s;
-}
-
-.training:hover {
-    background: #151512;
-}
-
-.training:nth-child(2) {
-    transform: translateY(45px);
-}
-
-.training:nth-child(3) {
-    transform: translateY(-20px);
-}
-
-.training-number {
-    font-family: "DM Mono";
-    color: var(--red);
+.theme-button {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    padding: 11px;
+    border-radius: 10px;
+    cursor: pointer;
     font-size: 11px;
 }
 
-.training h3 {
-    font-size: 27px;
-    margin-top: 80px;
+/* =====================================
+   CONTENT
+===================================== */
+
+.content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-.training p {
-    color: var(--grey);
-    font-size: 12px;
-    line-height: 1.5;
-    max-width: 250px;
-    margin-top: 10px;
+.topbar {
+    height: 70px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
 }
 
-.training-time {
-    position: absolute;
-    bottom: 23px;
-    right: 25px;
-    font-family: "DM Mono";
+.page-name {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.page-date {
+    color: var(--muted);
     font-size: 11px;
-    color: var(--grey);
+    margin-top: 3px;
 }
 
-/* =========================
-   NUMBERS
-========================= */
-
-.numbers {
-    background: var(--white);
-    color: var(--black);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 75px 5vw;
+.profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 11px;
 }
 
-.number {
-    border-left: 1px solid #c9c8c2;
-    padding-left: 25px;
-}
-
-.number:first-child {
-    border: 0;
-}
-
-.number-value {
-    font-size: clamp(55px, 7vw, 100px);
-    letter-spacing: -6px;
-    line-height: .8;
-}
-
-.number-label {
-    font-family: "DM Mono";
-    font-size: 9px;
-    color: #77766f;
-    text-transform: uppercase;
-    margin-top: 22px;
-}
-
-/* =========================
-   CAMP
-========================= */
-
-.camp {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 10vw;
-}
-
-.camp-info {
-    padding-top: 30px;
-}
-
-.camp-info p {
-    color: var(--grey);
-    max-width: 420px;
-    line-height: 1.7;
-    margin-top: 30px;
-}
-
-.competition {
-    border-top: 1px solid var(--line);
-    margin-top: 45px;
-    padding-top: 25px;
-}
-
-.competition-label {
-    color: var(--grey);
-    font-family: "DM Mono";
-    font-size: 9px;
-}
-
-.competition-date {
-    font-size: 48px;
-    margin-top: 8px;
-}
-
-.timeline {
-    border-left: 1px solid var(--line);
-}
-
-.timeline-item {
-    min-height: 145px;
-    padding: 20px 30px;
-    border-bottom: 1px solid var(--line);
-    position: relative;
-}
-
-.timeline-item::before {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 8px;
+.avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 50%;
-    background: var(--red);
-    left: -4px;
-    top: 25px;
+    display: grid;
+    place-items: center;
 }
 
-.timeline-day {
-    font-family: "DM Mono";
-    color: var(--red);
-    font-size: 10px;
+/* =====================================
+   VIEWS
+===================================== */
+
+.views {
+    flex: 1;
+    min-height: 0;
+    position: relative;
 }
 
-.timeline-title {
-    font-size: 25px;
-    margin-top: 12px;
+.view {
+    position: absolute;
+    inset: 0;
+    padding: 27px 30px;
+    display: none;
+    animation: appear .18s ease;
 }
 
-.timeline-sub {
-    color: var(--grey);
-    font-size: 12px;
+.view.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =====================================
+   COMMON
+===================================== */
+
+.view-title {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.view-subtitle {
+    color: var(--muted);
+    font-size: 11px;
     margin-top: 5px;
 }
 
-/* =========================
-   QUOTE
-========================= */
-
-.quote {
-    min-height: 65vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+.grid {
+    display: grid;
+    gap: 14px;
 }
 
-.quote h2 {
-    font-size: clamp(45px, 8vw, 115px);
-    letter-spacing: -6px;
-    line-height: .88;
-    max-width: 1100px;
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
 }
 
-.quote h2 span {
-    color: var(--red);
+.card-title {
+    font-size: 12px;
+    font-weight: 700;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    padding: 40px 5vw;
-    display: flex;
-    justify-content: space-between;
-    color: var(--grey);
-    font-family: "DM Mono";
+.card-label {
+    color: var(--muted);
     font-size: 9px;
     text-transform: uppercase;
+    letter-spacing: .8px;
 }
 
-/* =========================
+.primary {
+    border: 0;
+    background: var(--accent);
+    color: white;
+    border-radius: 9px;
+    padding: 11px 15px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.secondary {
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    border-radius: 9px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.danger {
+    background: var(--danger);
+}
+
+/* =====================================
+   HOME
+===================================== */
+
+.home-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+}
+
+.welcome {
+    padding: 28px;
+    background:
+        linear-gradient(135deg, var(--accent), #6376ff);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome::after {
+    content: "🥋";
+    position: absolute;
+    right: 35px;
+    bottom: 15px;
+    font-size: 115px;
+    opacity: .15;
+}
+
+.welcome .card-label {
+    color: rgba(255,255,255,.7);
+}
+
+.welcome h2 {
+    font-size: 32px;
+    max-width: 400px;
+    margin-top: 10px;
+    line-height: 1.1;
+}
+
+.welcome p {
+    color: rgba(255,255,255,.75);
+    font-size: 11px;
+    max-width: 390px;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+.welcome .primary {
+    background: white;
+    color: var(--accent);
+    margin-top: 20px;
+}
+
+.today {
+    padding: 22px;
+}
+
+.session-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 17px;
+}
+
+.session-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: var(--surface2);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+}
+
+.session-row strong {
+    font-size: 12px;
+}
+
+.session-row small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.stats-home {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px;
+}
+
+.stat {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-value {
+    font-size: 31px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.stat-change {
+    color: var(--green);
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+/* =====================================
+   TRAINING
+===================================== */
+
+.training-layout {
+    height: calc(100% - 58px);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.session-builder {
+    padding: 23px;
+}
+
+.exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.exercise:last-child {
+    border: 0;
+}
+
+.exercise-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.exercise-num {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 10px;
+}
+
+.exercise strong {
+    font-size: 11px;
+}
+
+.exercise small {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+.exercise-time {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.training-side {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+}
+
+.focus-card {
+    padding: 23px;
+}
+
+.focus-technique {
+    font-size: 28px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+.focus-description {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+    margin-top: 7px;
+}
+
+/* =====================================
+   TIMER
+===================================== */
+
+.timer-layout {
+    height: calc(100% - 58px);
+    display: grid;
+    place-items: center;
+}
+
+.timer-box {
+    width: min(600px,90%);
+    text-align: center;
+    padding: 45px;
+}
+
+.timer-round {
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.timer-number {
+    font-size: clamp(80px,13vw,145px);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -7px;
+    margin: 20px 0;
+}
+
+.timer-status {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.timer-controls button {
+    min-width: 80px;
+}
+
+/* =====================================
+   PLANNING
+===================================== */
+
+.week {
+    height: calc(100% - 70px);
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.day-card {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.day-name {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.day-number {
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+.day-workout {
+    margin-top: 25px;
+    padding: 10px;
+    border-radius: 9px;
+    background: var(--surface2);
+}
+
+.day-workout strong {
+    font-size: 9px;
+}
+
+.day-workout small {
+    display: block;
+    color: var(--muted);
+    font-size: 8px;
+    margin-top: 4px;
+}
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+.progress-layout {
+    height: calc(100% - 70px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.progress-card {
+    padding: 24px;
+}
+
+.progress-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 25px auto;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+        var(--accent) 0 72%,
+        var(--surface2) 72% 100%
+    );
+    position: relative;
+}
+
+.progress-circle::after {
+    content: "";
+    position: absolute;
+    inset: 13px;
+    border-radius: 50%;
+    background: var(--surface);
+}
+
+.progress-circle span {
+    position: relative;
+    z-index: 2;
+    font-size: 31px;
+    font-weight: 800;
+}
+
+.metric {
+    margin-top: 16px;
+}
+
+.metric-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+.bar {
+    height: 7px;
+    background: var(--surface2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 7px;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: inherit;
+}
+
+/* =====================================
+   COMPETITION
+===================================== */
+
+.competition-layout {
+    height: calc(100% - 70px);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.comp-main {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comp-days {
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: .9;
+}
+
+.comp-label {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 7px;
+}
+
+.comp-name {
+    font-size: 23px;
+    font-weight: 800;
+    margin-top: 35px;
+}
+
+.comp-date {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.comp-side {
+    padding: 25px;
+}
+
+.target {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.target:last-child {
+    border: 0;
+}
+
+.target strong {
+    font-size: 11px;
+}
+
+.target p {
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+/* =====================================
+   JOURNAL
+===================================== */
+
+.journal-layout {
+    height: calc(100% - 70px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.journal-list {
+    padding: 20px;
+}
+
+.entry {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.entry:last-child {
+    border: 0;
+}
+
+.entry-date {
+    color: var(--accent);
+    font-size: 9px;
+}
+
+.entry-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.entry-text {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+    margin-top: 5px;
+}
+
+.journal-form {
+    padding: 20px;
+}
+
+textarea,
+input,
+select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 9px;
+    padding: 11px;
+    margin-top: 10px;
+    outline: 0;
+    font-size: 10px;
+}
+
+textarea {
+    height: 110px;
+    resize: none;
+}
+
+.journal-form button {
+    margin-top: 10px;
+}
+
+/* =====================================
+   PROFILE
+===================================== */
+
+.profile-layout {
+    height: calc(100% - 70px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.profile-card {
+    padding: 30px;
+}
+
+.big-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 25px;
+    background: var(--accent);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.profile-name {
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 18px;
+}
+
+.profile-details {
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.form-row {
+    margin-top: 18px;
+}
+
+.form-row label {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+/* =====================================
    MOBILE
-========================= */
+===================================== */
 
-@media(max-width: 850px) {
+@media(max-width:850px) {
 
-    header {
-        padding: 0 20px;
+    .app {
+        grid-template-columns: 1fr;
     }
 
-    nav {
+    .sidebar {
+        position: fixed;
+        z-index: 50;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        height: 62px;
+        padding: 5px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        flex-direction: row;
+        box-shadow: var(--shadow);
+    }
+
+    .logo,
+    .sidebar-bottom {
         display: none;
     }
 
-    .header-status {
-        display: none;
+    .menu {
+        width: 100%;
+        flex-direction: row;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding: 70px 20px;
+    .menu button {
+        text-align: center;
+        padding: 7px 2px;
+        font-size: 8px;
     }
 
-    .hero h1 {
-        font-size: 18vw;
-        letter-spacing: -4px;
+    .menu-icon {
+        display: block;
+        width: auto;
+        margin-bottom: 3px;
     }
 
-    .hero::before {
-        font-size: 55vw;
+    .content {
+        height: 100vh;
     }
 
-    .fight-card {
-        transform: none;
-        margin-top: 30px;
+    .topbar {
+        padding: 0 17px;
     }
 
-    section {
-        padding: 80px 20px;
+    .view {
+        padding: 18px;
     }
 
-    .training-grid {
-        grid-template-columns: 1fr;
-        margin-top: 45px;
+    .home-grid,
+    .training-layout,
+    .progress-layout,
+    .competition-layout,
+    .journal-layout,
+    .profile-layout {
+        display: block;
     }
 
-    .training:nth-child(2),
-    .training:nth-child(3) {
-        transform: none;
+    .home-grid {
+        height: auto;
     }
 
-    .numbers {
+    .welcome,
+    .today,
+    .stats-home {
+        margin-bottom: 10px;
+    }
+
+    .stats-home {
         grid-template-columns: 1fr 1fr;
-        gap: 45px 20px;
-        padding: 60px 20px;
+        display: grid;
     }
 
-    .number:nth-child(3) {
-        border: 0;
+    .training-side {
+        margin-top: 10px;
     }
 
-    .camp {
-        grid-template-columns: 1fr;
-        gap: 60px;
+    .week {
+        height: auto;
+        grid-template-columns: repeat(7, minmax(85px,1fr));
+        overflow: hidden;
     }
 
-    .timeline {
-        border-left: 0;
-        border-top: 1px solid var(--line);
+    .day-card {
+        min-height: 170px;
     }
 
-    .timeline-item {
-        padding-left: 20px;
+    .progress-card,
+    .comp-main,
+    .comp-side,
+    .journal-list,
+    .journal-form,
+    .profile-card {
+        margin-bottom: 10px;
     }
 
-    .timeline-item::before {
-        display: none;
-    }
-
-    .quote {
-        min-height: 50vh;
-        padding: 40px 20px;
-    }
-
-    .quote h2 {
-        letter-spacing: -3px;
-    }
-
-    footer {
-        padding: 30px 20px;
-        flex-direction: column;
-        gap: 10px;
+    .timer-number {
+        font-size: 80px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<header>
+<div class="app">
 
-    <div class="brand">
-        <div class="brand-mark"></div>
-        <span>FIGHT LAB</span>
+<!-- =================================
+     SIDEBAR
+================================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            B
+        </div>
+
+        <div>
+            <strong>BJJ OS</strong>
+            <small>TRAINING SYSTEM</small>
+        </div>
+
     </div>
 
-    <nav>
-        <a href="#training">Training</a>
-        <a href="#camp">Camp</a>
-        <a href="#stats">Stats</a>
-        <a href="#mindset">Mindset</a>
-    </nav>
 
-    <div class="header-status">
-        <div class="status-dot"></div>
-        SYSTEM ONLINE
+    <div class="menu">
+
+        <button class="active" onclick="showView('home',this)">
+            <span class="menu-icon">⌂</span>
+            Accueil
+        </button>
+
+        <button onclick="showView('training',this)">
+            <span class="menu-icon">🥋</span>
+            Training
+        </button>
+
+        <button onclick="showView('timer',this)">
+            <span class="menu-icon">⏱</span>
+            Timer
+        </button>
+
+        <button onclick="showView('planning',this)">
+            <span class="menu-icon">▦</span>
+            Planning
+        </button>
+
+        <button onclick="showView('progress',this)">
+            <span class="menu-icon">↗</span>
+            Progress
+        </button>
+
+        <button onclick="showView('competition',this)">
+            <span class="menu-icon">🏆</span>
+            Combat
+        </button>
+
+        <button onclick="showView('journal',this)">
+            <span class="menu-icon">✎</span>
+            Journal
+        </button>
+
+        <button onclick="showView('profile',this)">
+            <span class="menu-icon">●</span>
+            Profil
+        </button>
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <button class="theme-button" onclick="toggleTheme()" id="themeBtn">
+            ☀️ Mode jour
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =================================
+     CONTENT
+================================= -->
+
+<div class="content">
+
+<header class="topbar">
+
+    <div>
+
+        <div class="page-name" id="pageName">
+            Accueil
+        </div>
+
+        <div class="page-date" id="date"></div>
+
+    </div>
+
+
+    <div class="profile-mini">
+
+        <div class="avatar">
+            🥋
+        </div>
+
+        <span id="topBelt">
+            Ceinture blanche
+        </span>
+
     </div>
 
 </header>
 
 
-<!-- HERO -->
+<div class="views">
 
-<main>
 
-<section class="hero">
+<!-- =================================
+     HOME
+================================= -->
 
-    <div class="hero-left">
+<section class="view active" id="home">
 
-        <div class="kicker">
-            // BJJ PERFORMANCE SYSTEM
+<div class="home-grid">
+
+    <div class="card welcome">
+
+        <div class="card-label">
+            SESSION DU JOUR
         </div>
 
-        <h1>
-            TRAIN<br>
-            <span>HARD.</span><br>
-            THINK<br>
-            HARDER.
-        </h1>
+        <h2>
+            Prêt à<br>
+            t'entraîner ?
+        </h2>
 
-        <p class="hero-description">
-            Ton espace personnel pour structurer tes entraînements,
-            suivre ton volume et préparer ton prochain combat.
+        <p>
+            Ta séance du jour est prête.
+            90 minutes pour travailler ta technique
+            et tes rounds.
         </p>
 
-        <div class="hero-action">
-            <button class="start" onclick="startSession()">
-                Start session
-            </button>
-
-            <span class="shortcut">
-                ENTER ↵
-            </span>
-        </div>
+        <button class="primary" onclick="showViewById('training')">
+            VOIR LA SÉANCE →
+        </button>
 
     </div>
 
 
-    <div class="fight-card">
-
-        <div class="card-top">
-            <span>FIGHT LAB / 001</span>
-            <span>READY</span>
-        </div>
+    <div class="card today">
 
         <div class="card-title">
-            TODAY'S<br>
-            SESSION
+            Aujourd'hui
         </div>
 
-        <div class="card-number">
-            90<small> MIN</small>
+        <div class="session-row">
+
+            <div class="session-icon">
+                🥋
+            </div>
+
+            <div>
+                <strong>Technique + Sparring</strong>
+                <small>90 minutes</small>
+            </div>
+
         </div>
 
-        <div class="card-line"></div>
 
-        <div class="card-bottom">
-            <span>TECH + ROUNDS</span>
-            <span>01 / 06</span>
+        <div class="session-row">
+
+            <div class="session-icon">
+                ⚡
+            </div>
+
+            <div>
+                <strong>6 rounds</strong>
+                <small>5 min / round</small>
+            </div>
+
         </div>
 
     </div>
 
-</section>
+
+    <div class="stats-home">
+
+        <div class="card stat">
+
+            <div class="card-label">
+                SÉANCES
+            </div>
+
+            <div class="stat-value" id="statSessions">
+                4
+            </div>
+
+            <div class="stat-change">
+                +1 cette semaine
+            </div>
+
+        </div>
 
 
-<!-- TICKER -->
+        <div class="card stat">
 
-<div class="ticker">
-    <span><b>●</b> TRAINING MODE ACTIVE</span>
-    <span>DISCIPLINE OVER MOTIVATION</span>
-    <span><b>●</b> NEXT SESSION TODAY</span>
-    <span>TECHNIQUE / PRESSURE / CONTROL</span>
-    <span><b>●</b> FIGHT CAMP</span>
+            <div class="card-label">
+                ROUNDS
+            </div>
+
+            <div class="stat-value">
+                18
+            </div>
+
+            <div class="stat-change">
+                +6 aujourd'hui
+            </div>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <div class="card-label">
+                MINUTES
+            </div>
+
+            <div class="stat-value">
+                270
+            </div>
+
+            <div class="stat-change">
+                +90 aujourd'hui
+            </div>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <div class="card-label">
+                STREAK
+            </div>
+
+            <div class="stat-value">
+                7
+            </div>
+
+            <div class="stat-change">
+                🔥 jours
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-
-<!-- TRAINING -->
-
-<section id="training">
-
-    <div class="section-label">
-        01 — SESSION
-    </div>
-
-    <h2 class="section-title">
-        TODAY'S<br>
-        WORK.
-    </h2>
-
-    <div class="training-grid">
-
-        <article class="training">
-
-            <div class="training-number">01</div>
-
-            <h3>Warm Up</h3>
-
-            <p>
-                Mobilité, déplacements et activation.
-                Préparer le corps avant l'intensité.
-            </p>
-
-            <div class="training-time">
-                10 MIN
-            </div>
-
-        </article>
-
-
-        <article class="training">
-
-            <div class="training-number">02</div>
-
-            <h3>Technique</h3>
-
-            <p>
-                Passage de garde, contrôle et enchaînements
-                à répéter jusqu'à automatisation.
-            </p>
-
-            <div class="training-time">
-                25 MIN
-            </div>
-
-        </article>
-
-
-        <article class="training">
-
-            <div class="training-number">03</div>
-
-            <h3>Drilling</h3>
-
-            <p>
-                Reps propres. Intensité progressive.
-                Aucun mouvement inutile.
-            </p>
-
-            <div class="training-time">
-                20 MIN
-            </div>
-
-        </article>
-
-
-        <article class="training">
-
-            <div class="training-number">04</div>
-
-            <h3>Sparring</h3>
-
-            <p>
-                Six rounds. Cinq minutes.
-                Objectif : appliquer sous pression.
-            </p>
-
-            <div class="training-time">
-                30 MIN
-            </div>
-
-        </article>
-
-
-        <article class="training">
-
-            <div class="training-number">05</div>
-
-            <h3>Cool Down</h3>
-
-            <p>
-                Retour au calme, respiration et récupération.
-            </p>
-
-            <div class="training-time">
-                05 MIN
-            </div>
-
-        </article>
-
-
-        <article class="training">
-
-            <div class="training-number">06</div>
-
-            <h3>Journal</h3>
-
-            <p>
-                Noter ce qui fonctionne.
-                Identifier ce qui doit être amélioré.
-            </p>
-
-            <div class="training-time">
-                05 MIN
-            </div>
-
-        </article>
-
-    </div>
-
 </section>
 
 
-<!-- NUMBERS -->
+<!-- =================================
+     TRAINING
+================================= -->
 
-<section class="numbers" id="stats">
+<section class="view" id="training">
 
-    <div class="number">
-        <div class="number-value" id="sessions">0</div>
-        <div class="number-label">Sessions cette semaine</div>
+    <div class="view-title">
+        Training
     </div>
 
-    <div class="number">
-        <div class="number-value" id="rounds">18</div>
-        <div class="number-label">Rounds complétés</div>
+    <div class="view-subtitle">
+        Ta séance personnalisée du jour
     </div>
 
-    <div class="number">
-        <div class="number-value" id="minutes">270</div>
-        <div class="number-label">Minutes sur le tapis</div>
-    </div>
 
-    <div class="number">
-        <div class="number-value">07</div>
-        <div class="number-label">Jours de streak</div>
-    </div>
+    <div class="training-layout">
 
-</section>
+        <div class="card session-builder">
 
-
-<!-- CAMP -->
-
-<section id="camp">
-
-    <div class="camp">
-
-        <div class="camp-info">
-
-            <div class="section-label">
-                02 — FIGHT CAMP
+            <div class="card-title">
+                PROGRAMME · 90 MIN
             </div>
 
-            <h2 class="section-title">
-                BUILD<br>
-                FOR<br>
-                WAR.
-            </h2>
 
-            <p>
-                Chaque entraînement doit avoir un objectif.
-                Le but n'est pas simplement de faire plus,
-                mais de devenir plus difficile à battre.
-            </p>
+            <div class="exercise">
 
-            <div class="competition">
+                <div class="exercise-info">
 
-                <div class="competition-label">
-                    NEXT COMPETITION
+                    <div class="exercise-num">01</div>
+
+                    <div>
+                        <strong>Warm-up</strong>
+                        <small>Mobilité + activation</small>
+                    </div>
+
                 </div>
 
-                <div class="competition-date">
-                    24 OCT.
+                <div class="exercise-time">
+                    10 min
                 </div>
 
             </div>
+
+
+            <div class="exercise">
+
+                <div class="exercise-info">
+
+                    <div class="exercise-num">02</div>
+
+                    <div>
+                        <strong>Technique</strong>
+                        <small>Passage de garde</small>
+                    </div>
+
+                </div>
+
+                <div class="exercise-time">
+                    25 min
+                </div>
+
+            </div>
+
+
+            <div class="exercise">
+
+                <div class="exercise-info">
+
+                    <div class="exercise-num">03</div>
+
+                    <div>
+                        <strong>Drilling</strong>
+                        <small>Repetitions</small>
+                    </div>
+
+                </div>
+
+                <div class="exercise-time">
+                    20 min
+                </div>
+
+            </div>
+
+
+            <div class="exercise">
+
+                <div class="exercise-info">
+
+                    <div class="exercise-num">04</div>
+
+                    <div>
+                        <strong>Sparring</strong>
+                        <small>6 × 5 minutes</small>
+                    </div>
+
+                </div>
+
+                <div class="exercise-time">
+                    30 min
+                </div>
+
+            </div>
+
+
+            <div class="exercise">
+
+                <div class="exercise-info">
+
+                    <div class="exercise-num">05</div>
+
+                    <div>
+                        <strong>Cool down</strong>
+                        <small>Respiration</small>
+                    </div>
+
+                </div>
+
+                <div class="exercise-time">
+                    5 min
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary"
+                style="margin-top:20px;width:100%;"
+                onclick="showViewById('timer')"
+            >
+                LANCER LE TIMER
+            </button>
 
         </div>
 
 
-        <div class="timeline">
+        <div class="training-side">
 
-            <div class="timeline-item">
+            <div class="card focus-card">
 
-                <div class="timeline-day">
-                    MON / 10
+                <div class="card-label">
+                    FOCUS DU JOUR
                 </div>
 
-                <div class="timeline-title">
-                    Technique
+                <div class="focus-technique">
+                    Knee Cut
                 </div>
 
-                <div class="timeline-sub">
-                    Passing + positional drilling
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-day">
-                    WED / 12
-                </div>
-
-                <div class="timeline-title">
-                    Hard Rounds
-                </div>
-
-                <div class="timeline-sub">
-                    6 × 5 min / competition pace
+                <div class="focus-description">
+                    Garde ouverte → contrôle du genou →
+                    pression → contrôle latéral.
                 </div>
 
             </div>
 
 
-            <div class="timeline-item">
+            <div class="card focus-card">
 
-                <div class="timeline-day">
-                    FRI / 14
+                <div class="card-label">
+                    OBJECTIF
                 </div>
 
-                <div class="timeline-title">
-                    Mixed Session
+                <div class="focus-technique">
+                    6 rounds
                 </div>
 
-                <div class="timeline-sub">
-                    Technique + situational sparring
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item">
-
-                <div class="timeline-day">
-                    SAT / 15
-                </div>
-
-                <div class="timeline-title">
-                    Recovery
-                </div>
-
-                <div class="timeline-sub">
-                    Mobility + light drilling
+                <div class="focus-description">
+                    Reste concentré sur la pression
+                    et le contrôle pendant chaque round.
                 </div>
 
             </div>
@@ -969,85 +1401,872 @@ footer {
 </section>
 
 
-<!-- MINDSET -->
+<!-- =================================
+     TIMER
+================================= -->
 
-<section class="quote" id="mindset">
+<section class="view" id="timer">
 
-    <h2>
-        DON'T TRAIN<br>
-        TO <span>FEEL GOOD.</span><br>
-        TRAIN TO<br>
-        <span>GET BETTER.</span>
-    </h2>
+    <div class="view-title">
+        Round Timer
+    </div>
+
+    <div class="view-subtitle">
+        5 minutes · 6 rounds
+    </div>
+
+
+    <div class="timer-layout">
+
+        <div class="card timer-box">
+
+            <div class="timer-round" id="timerRound">
+                ROUND 01 / 06
+            </div>
+
+            <div class="timer-number" id="timerDisplay">
+                05:00
+            </div>
+
+            <div class="timer-status" id="timerStatus">
+                Prêt
+            </div>
+
+            <div class="timer-controls">
+
+                <button
+                    class="primary"
+                    onclick="toggleTimer()"
+                    id="timerButton"
+                >
+                    START
+                </button>
+
+                <button
+                    class="secondary"
+                    onclick="resetTimer()"
+                >
+                    RESET
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-</main>
+<!-- =================================
+     PLANNING
+================================= -->
+
+<section class="view" id="planning">
+
+    <div class="view-title">
+        Planning
+    </div>
+
+    <div class="view-subtitle">
+        Cette semaine
+    </div>
 
 
-<footer>
+    <div class="week">
 
-    <span>FIGHT LAB / BJJ PERFORMANCE</span>
+        <div class="card day-card">
+            <div class="day-name">LUN</div>
+            <div class="day-number">10</div>
 
-    <span id="year"></span>
+            <div class="day-workout">
+                <strong>Technique</strong>
+                <small>Passes</small>
+            </div>
+        </div>
 
-</footer>
+
+        <div class="card day-card">
+            <div class="day-name">MAR</div>
+            <div class="day-number">11</div>
+
+            <div class="day-workout">
+                <strong>Sparring</strong>
+                <small>6 rounds</small>
+            </div>
+        </div>
+
+
+        <div class="card day-card">
+            <div class="day-name">MER</div>
+            <div class="day-number">12</div>
+
+            <div class="day-workout">
+                <strong>Repos</strong>
+                <small>Recovery</small>
+            </div>
+        </div>
+
+
+        <div class="card day-card">
+            <div class="day-name">JEU</div>
+            <div class="day-number">13</div>
+
+            <div class="day-workout">
+                <strong>Drilling</strong>
+                <small>Guard</small>
+            </div>
+        </div>
+
+
+        <div class="card day-card">
+            <div class="day-name">VEN</div>
+            <div class="day-number">14</div>
+
+            <div class="day-workout">
+                <strong>Training</strong>
+                <small>90 min</small>
+            </div>
+        </div>
+
+
+        <div class="card day-card">
+            <div class="day-name">SAM</div>
+            <div class="day-number">15</div>
+
+            <div class="day-workout">
+                <strong>Sparring</strong>
+                <small>Hard rounds</small>
+            </div>
+        </div>
+
+
+        <div class="card day-card">
+            <div class="day-name">DIM</div>
+            <div class="day-number">16</div>
+
+            <div class="day-workout">
+                <strong>Repos</strong>
+                <small>Recovery</small>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     PROGRESS
+================================= -->
+
+<section class="view" id="progress">
+
+    <div class="view-title">
+        Progression
+    </div>
+
+    <div class="view-subtitle">
+        Ta progression cette semaine
+    </div>
+
+
+    <div class="progress-layout">
+
+        <div class="card progress-card">
+
+            <div class="card-title">
+                OBJECTIF HEBDOMADAIRE
+            </div>
+
+            <div class="progress-circle">
+                <span>72%</span>
+            </div>
+
+            <div style="text-align:center;color:var(--muted);font-size:10px;">
+                18 / 25 rounds
+            </div>
+
+        </div>
+
+
+        <div class="card progress-card">
+
+            <div class="card-title">
+                MÉTRIQUES
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-top">
+                    <span>Sessions</span>
+                    <span>4 / 5</span>
+                </div>
+
+                <div class="bar">
+                    <span style="width:80%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-top">
+                    <span>Rounds</span>
+                    <span>18 / 25</span>
+                </div>
+
+                <div class="bar">
+                    <span style="width:72%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-top">
+                    <span>Technique</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="bar">
+                    <span style="width:65%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="metric">
+
+                <div class="metric-top">
+                    <span>Conditioning</span>
+                    <span>82%</span>
+                </div>
+
+                <div class="bar">
+                    <span style="width:82%"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     COMPETITION
+================================= -->
+
+<section class="view" id="competition">
+
+    <div class="view-title">
+        Competition
+    </div>
+
+    <div class="view-subtitle">
+        Road to your next fight
+    </div>
+
+
+    <div class="competition-layout">
+
+        <div class="card comp-main">
+
+            <div class="card-label">
+                COUNTDOWN
+            </div>
+
+            <div class="comp-days" id="compDays">
+                71
+            </div>
+
+            <div class="comp-label">
+                JOURS RESTANTS
+            </div>
+
+            <div class="comp-name">
+                Prochain tournoi
+            </div>
+
+            <div class="comp-date">
+                24 octobre 2026
+            </div>
+
+        </div>
+
+
+        <div class="card comp-side">
+
+            <div class="card-title">
+                OBJECTIFS DU CAMP
+            </div>
+
+
+            <div class="target">
+
+                <strong>Technique</strong>
+
+                <p>
+                    Améliorer le knee cut et les sorties de garde.
+                </p>
+
+            </div>
+
+
+            <div class="target">
+
+                <strong>Conditioning</strong>
+
+                <p>
+                    Maintenir le rythme pendant 6 rounds.
+                </p>
+
+            </div>
+
+
+            <div class="target">
+
+                <strong>Game plan</strong>
+
+                <p>
+                    Garde → passage → contrôle → soumission.
+                </p>
+
+            </div>
+
+
+            <button class="primary" style="margin-top:20px;">
+                MODIFIER LE CAMP
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     JOURNAL
+================================= -->
+
+<section class="view" id="journal">
+
+    <div class="view-title">
+        Journal
+    </div>
+
+    <div class="view-subtitle">
+        Tes dernières sessions
+    </div>
+
+
+    <div class="journal-layout">
+
+        <div class="card journal-list">
+
+            <div class="entry">
+
+                <div class="entry-date">
+                    14 AOÛT 2026
+                </div>
+
+                <div class="entry-title">
+                    Bonne session de sparring
+                </div>
+
+                <div class="entry-text">
+                    Meilleure pression depuis la side control.
+                    Difficulté à sortir de mount.
+                </div>
+
+            </div>
+
+
+            <div class="entry">
+
+                <div class="entry-date">
+                    12 AOÛT 2026
+                </div>
+
+                <div class="entry-title">
+                    Travail de passage
+                </div>
+
+                <div class="entry-text">
+                    Knee cut beaucoup plus propre.
+                    Continuer les répétitions.
+                </div>
+
+            </div>
+
+
+            <div class="entry">
+
+                <div class="entry-date">
+                    10 AOÛT 2026
+                </div>
+
+                <div class="entry-title">
+                    Six rounds
+                </div>
+
+                <div class="entry-text">
+                    Bonne endurance mais perte de pression
+                    sur les deux derniers rounds.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card journal-form">
+
+            <div class="card-title">
+                NOUVELLE NOTE
+            </div>
+
+            <textarea
+                id="journalText"
+                placeholder="Comment s'est passée ta session ?"
+            ></textarea>
+
+            <button
+                class="primary"
+                onclick="saveJournal()"
+            >
+                ENREGISTRER
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     PROFILE
+================================= -->
+
+<section class="view" id="profile">
+
+    <div class="view-title">
+        Profil
+    </div>
+
+    <div class="view-subtitle">
+        Tes informations de combattant
+    </div>
+
+
+    <div class="profile-layout">
+
+        <div class="card profile-card">
+
+            <div class="big-avatar">
+                B
+            </div>
+
+            <div class="profile-name">
+                Fighter
+            </div>
+
+            <div class="profile-details">
+                BJJ · Training mode
+            </div>
+
+        </div>
+
+
+        <div class="card profile-card">
+
+            <div class="card-title">
+                INFORMATIONS
+            </div>
+
+
+            <div class="form-row">
+
+                <label>
+                    CEINTURE
+                </label>
+
+                <select id="belt">
+
+                    <option>Blanche</option>
+                    <option>Bleue</option>
+                    <option>Violette</option>
+                    <option>Marron</option>
+                    <option>Noire</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <label>
+                    CATÉGORIE DE POIDS
+                </label>
+
+                <input
+                    id="weight"
+                    placeholder="-76 kg"
+                >
+
+            </div>
+
+
+            <button
+                class="primary"
+                style="margin-top:20px;"
+                onclick="saveProfile()"
+            >
+                SAUVEGARDER
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+</div>
+
+</div>
 
 
 <script>
 
-/* ===============================
-   DATE / YEAR
-================================ */
+/* =====================================
+   DATE
+===================================== */
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+const date = new Date();
 
-
-/* ===============================
-   LOCAL STORAGE
-================================ */
-
-let sessions =
-    Number(localStorage.getItem("fightLabSessions") || 0);
-
-document.getElementById("sessions").textContent =
-    sessions;
+document.getElementById("date").textContent =
+    date.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
 
 
-/* ===============================
-   START SESSION
-================================ */
+/* =====================================
+   NAVIGATION
+===================================== */
 
-function startSession() {
+const names = {
+    home: "Accueil",
+    training: "Training",
+    timer: "Round Timer",
+    planning: "Planning",
+    progress: "Progression",
+    competition: "Competition",
+    journal: "Journal",
+    profile: "Profil"
+};
 
-    sessions++;
+function showView(id, button) {
 
-    localStorage.setItem(
-        "fightLabSessions",
-        sessions
-    );
+    document.querySelectorAll(".view")
+        .forEach(view => view.classList.remove("active"));
 
-    document.getElementById("sessions").textContent =
-        sessions;
+    document.getElementById(id)
+        .classList.add("active");
 
-    alert(
-        "SESSION STARTED.\n\n" +
-        "Warm Up → Technique → Drilling → Sparring\n\n" +
-        "90 MIN. LET'S WORK."
+    document.querySelectorAll(".menu button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    if (button) {
+        button.classList.add("active");
+    }
+
+    document.getElementById("pageName").textContent =
+        names[id];
+}
+
+
+function showViewById(id) {
+
+    const buttons =
+        document.querySelectorAll(".menu button");
+
+    const index =
+        Object.keys(names).indexOf(id);
+
+    showView(
+        id,
+        buttons[index]
     );
 }
 
 
-/* ===============================
-   ENTER = START
-================================ */
+/* =====================================
+   THEME
+===================================== */
 
-document.addEventListener("keydown", function(event) {
+function toggleTheme() {
 
-    if (event.key === "Enter") {
-        startSession();
+    document.body.classList.toggle("dark");
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "bjjTheme",
+        dark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        dark ? "☀️ Mode jour" : "🌙 Mode nuit";
+}
+
+
+if (
+    localStorage.getItem("bjjTheme") === "dark"
+) {
+
+    document.body.classList.add("dark");
+
+    document.getElementById("themeBtn").textContent =
+        "☀️ Mode jour";
+}
+
+
+/* =====================================
+   TIMER
+===================================== */
+
+let timerSeconds = 300;
+let timerRunning = false;
+let timerInterval = null;
+let currentRound = 1;
+
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(timerSeconds / 60)
+            .toString()
+            .padStart(2,"0");
+
+    const seconds =
+        (timerSeconds % 60)
+            .toString()
+            .padStart(2,"0");
+
+    document.getElementById("timerDisplay")
+        .textContent =
+        `${minutes}:${seconds}`;
+
+    document.getElementById("timerRound")
+        .textContent =
+        `ROUND ${String(currentRound).padStart(2,"0")} / 06`;
+}
+
+
+function toggleTimer() {
+
+    if (timerRunning) {
+
+        clearInterval(timerInterval);
+
+        timerRunning = false;
+
+        document.getElementById("timerButton")
+            .textContent = "START";
+
+        document.getElementById("timerStatus")
+            .textContent = "En pause";
+
+        return;
+    }
+
+    timerRunning = true;
+
+    document.getElementById("timerButton")
+        .textContent = "PAUSE";
+
+    document.getElementById("timerStatus")
+        .textContent = "En cours";
+
+    timerInterval =
+        setInterval(() => {
+
+            timerSeconds--;
+
+            if (timerSeconds <= 0) {
+
+                if (currentRound < 6) {
+
+                    currentRound++;
+
+                    timerSeconds = 300;
+
+                    navigator.vibrate?.(300);
+
+                } else {
+
+                    clearInterval(timerInterval);
+
+                    timerRunning = false;
+
+                    timerSeconds = 300;
+
+                    currentRound = 1;
+
+                    document.getElementById("timerButton")
+                        .textContent = "START";
+
+                    document.getElementById("timerStatus")
+                        .textContent =
+                        "Session terminée 🔥";
+                }
+            }
+
+            updateTimer();
+
+        },1000);
+}
+
+
+function resetTimer() {
+
+    clearInterval(timerInterval);
+
+    timerRunning = false;
+
+    timerSeconds = 300;
+
+    currentRound = 1;
+
+    document.getElementById("timerButton")
+        .textContent = "START";
+
+    document.getElementById("timerStatus")
+        .textContent = "Prêt";
+
+    updateTimer();
+}
+
+
+updateTimer();
+
+
+/* =====================================
+   PROFILE
+===================================== */
+
+const savedProfile =
+    JSON.parse(
+        localStorage.getItem("bjjProfile") || "{}"
+    );
+
+
+if (savedProfile.belt) {
+
+    document.getElementById("belt").value =
+        savedProfile.belt;
+
+    document.getElementById("topBelt").textContent =
+        "Ceinture " + savedProfile.belt.toLowerCase();
+}
+
+
+if (savedProfile.weight) {
+
+    document.getElementById("weight").value =
+        savedProfile.weight;
+}
+
+
+function saveProfile() {
+
+    const belt =
+        document.getElementById("belt").value;
+
+    const weight =
+        document.getElementById("weight").value;
+
+    localStorage.setItem(
+        "bjjProfile",
+        JSON.stringify({
+            belt,
+            weight
+        })
+    );
+
+    document.getElementById("topBelt").textContent =
+        "Ceinture " + belt.toLowerCase();
+
+    alert("Profil sauvegardé 🥋");
+}
+
+
+/* =====================================
+   JOURNAL
+===================================== */
+
+function saveJournal() {
+
+    const text =
+        document.getElementById("journalText").value.trim();
+
+    if (!text) {
+
+        alert("Écris quelque chose avant de sauvegarder.");
+
+        return;
+    }
+
+    const entries =
+        JSON.parse(
+            localStorage.getItem("bjjJournal") || "[]"
+        );
+
+    entries.unshift({
+        date: new Date().toLocaleDateString("fr-FR"),
+        text
+    });
+
+    localStorage.setItem(
+        "bjjJournal",
+        JSON.stringify(entries)
+    );
+
+    document.getElementById("journalText").value = "";
+
+    alert("Note ajoutée au journal ✍️");
+}
+
+
+/* =====================================
+   KEYBOARD SHORTCUT
+===================================== */
+
+document.addEventListener("keydown", event => {
+
+    if (
+        event.key === " " &&
+        document.getElementById("timer").classList.contains("active")
+    ) {
+
+        event.preventDefault();
+
+        toggleTimer();
     }
 
 });
