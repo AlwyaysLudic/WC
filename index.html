@@ -3,23 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0b0d">
-<title>BJJ // Fight Camp</title>
+<title>FIGHT LAB — BJJ</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-    --bg: #080809;
-    --panel: #101012;
-    --panel2: #151518;
-    --border: #27272b;
-    --text: #f4f4f5;
-    --muted: #85858e;
-    --red: #e53935;
-    --red-dark: #8f1d1d;
-    --green: #49c878;
-    --yellow: #e7b84b;
+    --black: #0b0b0a;
+    --white: #f1f0eb;
+    --red: #ff3b30;
+    --grey: #a09f99;
+    --line: #292925;
+    --dark: #121210;
 }
 
 * {
@@ -28,616 +23,579 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: "Inter", sans-serif;
-    background:
-        radial-gradient(circle at 80% 0%, rgba(229,57,53,.12), transparent 28%),
-        radial-gradient(circle at 0% 70%, rgba(120,20,20,.08), transparent 30%),
-        var(--bg);
-    color: var(--text);
-    min-height: 100vh;
+    background: var(--black);
+    color: var(--white);
+    font-family: "Space Grotesk", sans-serif;
 }
 
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
+/* =========================
+   TOP BAR
+========================= */
 
-button {
-    cursor: pointer;
-}
-
-.app {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* ================= SIDEBAR ================= */
-
-.sidebar {
-    width: 245px;
-    border-right: 1px solid var(--border);
-    background: rgba(10,10,11,.92);
-    padding: 28px 18px;
-    position: fixed;
-    inset: 0 auto 0 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-}
-
-.logo {
+header {
+    height: 82px;
+    border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 45px;
-    padding: 0 10px;
+    justify-content: space-between;
+    padding: 0 5vw;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,11,10,.92);
+    backdrop-filter: blur(15px);
 }
 
-.logo-mark {
-    width: 38px;
-    height: 38px;
-    background: var(--red);
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    transform: rotate(-5deg);
-}
-
-.logo-text strong {
-    display: block;
-    font-family: "Space Grotesk";
-    font-size: 17px;
-    letter-spacing: .5px;
-}
-
-.logo-text span {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.nav {
+.brand {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    align-items: center;
+    gap: 13px;
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
-.nav button {
-    border: 0;
-    background: transparent;
-    color: var(--muted);
-    text-align: left;
-    padding: 13px 14px;
-    border-radius: 9px;
+.brand-mark {
+    width: 29px;
+    height: 29px;
+    background: var(--red);
+    transform: rotate(45deg);
+}
+
+.brand span {
+    font-size: 17px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     transition: .2s;
 }
 
-.nav button:hover,
-.nav button.active {
+nav a:hover {
     color: white;
-    background: #19191c;
 }
 
-.nav button.active {
-    border-left: 3px solid var(--red);
-}
-
-.sidebar-bottom {
-    margin-top: auto;
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--panel);
-}
-
-.sidebar-bottom small {
-    color: var(--muted);
-    display: block;
-    margin-bottom: 7px;
-}
-
-.sidebar-bottom strong {
-    font-size: 13px;
-}
-
-/* ================= MAIN ================= */
-
-.main {
-    margin-left: 245px;
-    width: calc(100% - 245px);
-    padding: 35px 42px 60px;
-    max-width: 1500px;
-}
-
-.topbar {
+.header-status {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 34px;
+    gap: 8px;
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: var(--grey);
 }
 
-.eyebrow {
-    color: var(--red);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 11px;
-    font-weight: 800;
-    margin-bottom: 8px;
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #5ce681;
+    border-radius: 50%;
 }
 
-h1 {
-    font-family: "Space Grotesk";
-    font-size: clamp(30px, 4vw, 46px);
-    line-height: 1;
-}
-
-.date {
-    color: var(--muted);
-    margin-top: 9px;
-    font-size: 13px;
-}
-
-.top-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.icon-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: white;
-}
-
-/* ================= HERO ================= */
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    min-height: 270px;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    background:
-        linear-gradient(105deg, rgba(229,57,53,.14), transparent 55%),
-        linear-gradient(135deg, #161619, #0d0d0f);
-    padding: 34px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    overflow: hidden;
+    min-height: calc(100vh - 82px);
+    padding: 8vh 5vw 7vh;
     position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 5vw;
+    align-items: center;
 }
 
-.hero::after {
+.hero::before {
     content: "BJJ";
     position: absolute;
-    right: -20px;
-    top: -55px;
-    font-size: 210px;
-    font-weight: 900;
-    color: rgba(255,255,255,.025);
+    font-size: 32vw;
+    font-weight: 700;
+    letter-spacing: -35px;
+    right: -5vw;
+    top: 4vh;
+    color: transparent;
+    -webkit-text-stroke: 1px #20201d;
     pointer-events: none;
 }
 
-.hero-content {
+.hero-left {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
-.hero h2 {
-    font-family: "Space Grotesk";
-    font-size: clamp(30px, 4vw, 52px);
-    max-width: 600px;
-    margin-bottom: 12px;
-}
-
-.hero p {
-    color: #aaaab1;
-    max-width: 530px;
-    line-height: 1.6;
-}
-
-.hero-tag {
-    display: inline-flex;
-    gap: 8px;
-    align-items: center;
-    background: rgba(229,57,53,.13);
-    color: #ff6b67;
-    border: 1px solid rgba(229,57,53,.3);
-    padding: 7px 11px;
-    border-radius: 100px;
+.kicker {
+    font-family: "DM Mono", monospace;
+    color: var(--red);
     font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: clamp(70px, 10vw, 160px);
+    line-height: .79;
+    letter-spacing: -8px;
+    text-transform: uppercase;
+    max-width: 850px;
+}
+
+.hero h1 span {
+    color: var(--red);
+}
+
+.hero-description {
+    max-width: 430px;
+    color: var(--grey);
+    line-height: 1.6;
+    font-size: 14px;
+    margin-top: 45px;
+}
+
+.hero-action {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.start {
+    border: 0;
+    background: var(--red);
+    color: white;
+    padding: 16px 23px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-}
-
-.hero-side {
-    position: relative;
-    z-index: 1;
-    min-width: 210px;
-}
-
-.round {
-    font-family: "Space Grotesk";
-    font-size: 48px;
-    font-weight: 700;
-}
-
-.round-label {
-    color: var(--muted);
     font-size: 12px;
+    cursor: pointer;
 }
 
-.progress {
-    height: 5px;
-    background: #28282c;
-    border-radius: 10px;
+.start:hover {
+    background: #ff554b;
+}
+
+.shortcut {
+    color: var(--grey);
+    font-family: "DM Mono";
+    font-size: 10px;
+}
+
+/* =========================
+   FIGHT CARD
+========================= */
+
+.fight-card {
+    position: relative;
+    z-index: 2;
+    border: 1px solid var(--line);
+    background: var(--dark);
+    padding: 27px;
+    transform: rotate(1.5deg);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--grey);
+    font-family: "DM Mono";
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.card-title {
+    font-size: 32px;
+    margin: 55px 0 35px;
+    line-height: 1;
+}
+
+.card-number {
+    font-size: 105px;
+    line-height: .8;
+    font-weight: 700;
+    letter-spacing: -7px;
+}
+
+.card-number small {
+    font-size: 15px;
+    letter-spacing: 0;
+    color: var(--grey);
+}
+
+.card-line {
+    height: 1px;
+    background: var(--line);
+    margin: 30px 0 20px;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-family: "DM Mono";
+    font-size: 10px;
+    color: var(--grey);
+}
+
+/* =========================
+   TICKER
+========================= */
+
+.ticker {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     overflow: hidden;
-    margin: 14px 0 18px;
+    white-space: nowrap;
+    padding: 13px 0;
+    font-family: "DM Mono";
+    color: var(--grey);
+    font-size: 10px;
+    letter-spacing: 2px;
 }
 
-.progress span {
-    display: block;
-    width: 68%;
-    height: 100%;
-    background: var(--red);
+.ticker span {
+    display: inline-block;
+    margin-right: 50px;
 }
 
-/* ================= BUTTONS ================= */
-
-.primary {
-    margin-top: 24px;
-    background: var(--red);
-    color: white;
-    border: 0;
-    border-radius: 9px;
-    padding: 13px 18px;
-    font-weight: 800;
-    transition: .2s;
+.ticker b {
+    color: var(--red);
 }
 
-.primary:hover {
-    background: #f04440;
-    transform: translateY(-1px);
+/* =========================
+   TRAINING
+========================= */
+
+section {
+    padding: 120px 5vw;
 }
 
-.secondary {
-    background: #19191c;
-    color: white;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    padding: 11px 15px;
-}
-
-/* ================= GRID ================= */
-
-.section {
-    margin-top: 28px;
+.section-label {
+    color: var(--red);
+    font-family: "DM Mono";
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
 }
 
 .section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 13px;
+    font-size: clamp(45px, 7vw, 100px);
+    letter-spacing: -5px;
+    line-height: .9;
+    max-width: 800px;
 }
 
-.section-title h3 {
-    font-size: 15px;
-    font-weight: 700;
+.training-grid {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
 }
 
-.section-title span {
-    color: var(--muted);
+.training {
+    min-height: 260px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 25px;
+    position: relative;
+    transition: .3s;
+}
+
+.training:hover {
+    background: #151512;
+}
+
+.training:nth-child(2) {
+    transform: translateY(45px);
+}
+
+.training:nth-child(3) {
+    transform: translateY(-20px);
+}
+
+.training-number {
+    font-family: "DM Mono";
+    color: var(--red);
+    font-size: 11px;
+}
+
+.training h3 {
+    font-size: 27px;
+    margin-top: 80px;
+}
+
+.training p {
+    color: var(--grey);
     font-size: 12px;
+    line-height: 1.5;
+    max-width: 250px;
+    margin-top: 10px;
 }
 
-.stats {
+.training-time {
+    position: absolute;
+    bottom: 23px;
+    right: 25px;
+    font-family: "DM Mono";
+    font-size: 11px;
+    color: var(--grey);
+}
+
+/* =========================
+   NUMBERS
+========================= */
+
+.numbers {
+    background: var(--white);
+    color: var(--black);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    padding: 75px 5vw;
 }
 
-.card {
-    border: 1px solid var(--border);
-    background: rgba(16,16,18,.9);
-    border-radius: 14px;
-    padding: 20px;
+.number {
+    border-left: 1px solid #c9c8c2;
+    padding-left: 25px;
 }
 
-.stat-number {
-    font-family: "Space Grotesk";
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 5px;
+.number:first-child {
+    border: 0;
 }
 
-.stat-label {
-    color: var(--muted);
-    font-size: 12px;
+.number-value {
+    font-size: clamp(55px, 7vw, 100px);
+    letter-spacing: -6px;
+    line-height: .8;
 }
 
-.stat-change {
-    color: var(--green);
-    font-size: 11px;
+.number-label {
+    font-family: "DM Mono";
+    font-size: 9px;
+    color: #77766f;
+    text-transform: uppercase;
+    margin-top: 22px;
+}
+
+/* =========================
+   CAMP
+========================= */
+
+.camp {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 10vw;
+}
+
+.camp-info {
+    padding-top: 30px;
+}
+
+.camp-info p {
+    color: var(--grey);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-top: 30px;
+}
+
+.competition {
+    border-top: 1px solid var(--line);
+    margin-top: 45px;
+    padding-top: 25px;
+}
+
+.competition-label {
+    color: var(--grey);
+    font-family: "DM Mono";
+    font-size: 9px;
+}
+
+.competition-date {
+    font-size: 48px;
+    margin-top: 8px;
+}
+
+.timeline {
+    border-left: 1px solid var(--line);
+}
+
+.timeline-item {
+    min-height: 145px;
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    left: -4px;
+    top: 25px;
+}
+
+.timeline-day {
+    font-family: "DM Mono";
+    color: var(--red);
+    font-size: 10px;
+}
+
+.timeline-title {
+    font-size: 25px;
     margin-top: 12px;
 }
 
-/* ================= TWO COLUMNS ================= */
-
-.columns {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 14px;
-}
-
-.workout-list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.workout {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 13px;
-    background: #151518;
-    border: 1px solid #242428;
-    border-radius: 10px;
-}
-
-.workout-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.workout-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    background: #222226;
-}
-
-.workout strong {
-    font-size: 13px;
-}
-
-.workout small {
-    color: var(--muted);
-    display: block;
-    margin-top: 3px;
-}
-
-.time {
-    color: #aaa;
-    font-size: 12px;
-}
-
-/* ================= CALENDAR ================= */
-
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-}
-
-.day {
-    text-align: center;
-    color: var(--muted);
-    font-size: 10px;
-    padding: 7px 0;
-}
-
-.day-box {
-    height: 48px;
-    display: grid;
-    place-items: center;
-    border-radius: 8px;
-    background: #151518;
-    border: 1px solid #222226;
-    font-size: 12px;
-}
-
-.day-box.done {
-    background: rgba(229,57,53,.16);
-    border-color: rgba(229,57,53,.35);
-    color: #ff6965;
-}
-
-.day-box.today {
-    border: 1px solid white;
-}
-
-/* ================= COMPETITION ================= */
-
-.competition {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.comp-date {
-    font-family: "Space Grotesk";
-    font-size: 35px;
-    font-weight: 700;
-}
-
-.comp-info {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.countdown {
-    text-align: right;
-}
-
-.countdown strong {
-    display: block;
-    font-size: 22px;
-}
-
-.countdown span {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-/* ================= FORM ================= */
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.field label {
-    display: block;
-    color: var(--muted);
-    font-size: 11px;
-    margin-bottom: 7px;
-}
-
-.field input,
-.field select,
-.field textarea {
-    width: 100%;
-    border: 1px solid var(--border);
-    background: #0d0d0f;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    outline: none;
-}
-
-.field textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-    border-color: var(--red);
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-
-/* ================= JOURNAL ================= */
-
-.journal-entry {
-    border-left: 2px solid var(--red);
-    padding: 3px 0 3px 15px;
-    margin-bottom: 17px;
-}
-
-.journal-entry strong {
-    font-size: 13px;
-}
-
-.journal-entry p {
-    color: var(--muted);
+.timeline-sub {
+    color: var(--grey);
     font-size: 12px;
     margin-top: 5px;
 }
 
-/* ================= MOBILE ================= */
+/* =========================
+   QUOTE
+========================= */
 
-.mobile-nav {
-    display: none;
+.quote {
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 }
 
-@media(max-width: 950px) {
-    .sidebar {
+.quote h2 {
+    font-size: clamp(45px, 8vw, 115px);
+    letter-spacing: -6px;
+    line-height: .88;
+    max-width: 1100px;
+}
+
+.quote h2 span {
+    color: var(--red);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 40px 5vw;
+    display: flex;
+    justify-content: space-between;
+    color: var(--grey);
+    font-family: "DM Mono";
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 850px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
         display: none;
     }
 
-    .main {
-        margin-left: 0;
-        width: 100%;
-        padding: 25px 18px 90px;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
+    .header-status {
+        display: none;
     }
 
     .hero {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
+        grid-template-columns: 1fr;
+        padding: 70px 20px;
     }
 
-    .hero-side {
-        width: 100%;
+    .hero h1 {
+        font-size: 18vw;
+        letter-spacing: -4px;
     }
 
-    .mobile-nav {
-        position: fixed;
-        display: flex;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        z-index: 20;
-        background: rgba(20,20,22,.94);
-        border: 1px solid var(--border);
-        border-radius: 15px;
-        padding: 7px;
-        backdrop-filter: blur(15px);
+    .hero::before {
+        font-size: 55vw;
     }
 
-    .mobile-nav button {
-        flex: 1;
-        background: transparent;
-        border: 0;
-        color: var(--muted);
-        padding: 10px 5px;
-        font-size: 10px;
+    .fight-card {
+        transform: none;
+        margin-top: 30px;
     }
 
-    .mobile-nav button.active {
-        color: white;
+    section {
+        padding: 80px 20px;
     }
-}
 
-@media(max-width: 600px) {
-    .stats {
+    .training-grid {
+        grid-template-columns: 1fr;
+        margin-top: 45px;
+    }
+
+    .training:nth-child(2),
+    .training:nth-child(3) {
+        transform: none;
+    }
+
+    .numbers {
         grid-template-columns: 1fr 1fr;
+        gap: 45px 20px;
+        padding: 60px 20px;
     }
 
-    .form-grid {
+    .number:nth-child(3) {
+        border: 0;
+    }
+
+    .camp {
         grid-template-columns: 1fr;
+        gap: 60px;
     }
 
-    .full {
-        grid-column: auto;
+    .timeline {
+        border-left: 0;
+        border-top: 1px solid var(--line);
     }
 
-    .hero {
-        padding: 25px;
+    .timeline-item {
+        padding-left: 20px;
     }
 
-    .hero h2 {
-        font-size: 32px;
+    .timeline-item::before {
+        display: none;
     }
 
-    .topbar {
-        align-items: flex-start;
+    .quote {
+        min-height: 50vh;
+        padding: 40px 20px;
+    }
+
+    .quote h2 {
+        letter-spacing: -3px;
+    }
+
+    footer {
+        padding: 30px 20px;
+        flex-direction: column;
+        gap: 10px;
     }
 }
 </style>
@@ -645,483 +603,454 @@ h1 {
 
 <body>
 
-<div class="app">
+<header>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <div class="brand">
+        <div class="brand-mark"></div>
+        <span>FIGHT LAB</span>
+    </div>
 
-        <div class="logo">
-            <div class="logo-mark">B</div>
+    <nav>
+        <a href="#training">Training</a>
+        <a href="#camp">Camp</a>
+        <a href="#stats">Stats</a>
+        <a href="#mindset">Mindset</a>
+    </nav>
 
-            <div class="logo-text">
-                <strong>FIGHT CAMP</strong>
-                <span>BJJ TRAINING</span>
-            </div>
+    <div class="header-status">
+        <div class="status-dot"></div>
+        SYSTEM ONLINE
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <div class="kicker">
+            // BJJ PERFORMANCE SYSTEM
         </div>
 
-        <nav class="nav">
-            <button class="active">◉ &nbsp; Dashboard</button>
-            <button>🥋 &nbsp; Training</button>
-            <button>▣ &nbsp; Planning</button>
-            <button>◒ &nbsp; Progression</button>
-            <button>⚔ &nbsp; Competition</button>
-            <button>▤ &nbsp; Journal</button>
-        </nav>
+        <h1>
+            TRAIN<br>
+            <span>HARD.</span><br>
+            THINK<br>
+            HARDER.
+        </h1>
 
-        <div class="sidebar-bottom">
-            <small>STREAK</small>
-            <strong>🔥 7 jours consécutifs</strong>
+        <p class="hero-description">
+            Ton espace personnel pour structurer tes entraînements,
+            suivre ton volume et préparer ton prochain combat.
+        </p>
+
+        <div class="hero-action">
+            <button class="start" onclick="startSession()">
+                Start session
+            </button>
+
+            <span class="shortcut">
+                ENTER ↵
+            </span>
         </div>
 
-    </aside>
+    </div>
 
-    <!-- MAIN -->
-    <main class="main">
 
-        <header class="topbar">
+    <div class="fight-card">
 
-            <div>
-                <div class="eyebrow">Training Dashboard</div>
-                <h1>Bon entraînement.</h1>
-                <div class="date" id="today"></div>
-            </div>
+        <div class="card-top">
+            <span>FIGHT LAB / 001</span>
+            <span>READY</span>
+        </div>
 
-            <div class="top-actions">
-                <button class="icon-btn" onclick="toggleTheme()">◐</button>
-            </div>
+        <div class="card-title">
+            TODAY'S<br>
+            SESSION
+        </div>
 
-        </header>
+        <div class="card-number">
+            90<small> MIN</small>
+        </div>
 
-        <!-- HERO -->
-        <section class="hero">
+        <div class="card-line"></div>
 
-            <div class="hero-content">
+        <div class="card-bottom">
+            <span>TECH + ROUNDS</span>
+            <span>01 / 06</span>
+        </div>
 
-                <div class="hero-tag">
-                    ● SESSION DU JOUR
-                </div>
+    </div>
 
-                <h2>Technique.<br>Drilling. Sparring.</h2>
+</section>
 
-                <p>
-                    Aujourd'hui, on travaille proprement.
-                    Priorité à la technique, puis intensité progressive.
-                </p>
 
-                <button class="primary" onclick="startWorkout()">
-                    COMMENCER LA SESSION →
-                </button>
+<!-- TICKER -->
 
-            </div>
-
-            <div class="hero-side">
-
-                <div class="round">01 / 06</div>
-                <div class="round-label">ROUND DE LA SESSION</div>
-
-                <div class="progress">
-                    <span></span>
-                </div>
-
-                <div class="round-label">
-                    Session recommandée · 90 min
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- STATS -->
-        <section class="section">
-
-            <div class="section-title">
-                <h3>Cette semaine</h3>
-                <span>Mis à jour aujourd'hui</span>
-            </div>
-
-            <div class="stats">
-
-                <div class="card">
-                    <div class="stat-number" id="sessions">0</div>
-                    <div class="stat-label">SÉANCES</div>
-                    <div class="stat-change">↑ objectif 4</div>
-                </div>
-
-                <div class="card">
-                    <div class="stat-number" id="rounds">0</div>
-                    <div class="stat-label">ROUNDS</div>
-                    <div class="stat-change">↑ cette semaine</div>
-                </div>
-
-                <div class="card">
-                    <div class="stat-number" id="minutes">0</div>
-                    <div class="stat-label">MINUTES</div>
-                    <div class="stat-change">↑ volume</div>
-                </div>
-
-                <div class="card">
-                    <div class="stat-number">7</div>
-                    <div class="stat-label">STREAK</div>
-                    <div class="stat-change">🔥 jours</div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- WORKOUT + CALENDAR -->
-        <section class="section columns">
-
-            <div class="card">
-
-                <div class="section-title">
-                    <h3>Séance recommandée</h3>
-                    <span>90 MIN</span>
-                </div>
-
-                <div class="workout-list">
-
-                    <div class="workout">
-                        <div class="workout-left">
-                            <div class="workout-icon">🏃</div>
-                            <div>
-                                <strong>Warm-up</strong>
-                                <small>Mobilité + activation</small>
-                            </div>
-                        </div>
-                        <span class="time">10 min</span>
-                    </div>
-
-                    <div class="workout">
-                        <div class="workout-left">
-                            <div class="workout-icon">🥋</div>
-                            <div>
-                                <strong>Technique</strong>
-                                <small>Passage de garde</small>
-                            </div>
-                        </div>
-                        <span class="time">25 min</span>
-                    </div>
-
-                    <div class="workout">
-                        <div class="workout-left">
-                            <div class="workout-icon">🔁</div>
-                            <div>
-                                <strong>Drilling</strong>
-                                <small>Repetitions contrôlées</small>
-                            </div>
-                        </div>
-                        <span class="time">20 min</span>
-                    </div>
-
-                    <div class="workout">
-                        <div class="workout-left">
-                            <div class="workout-icon">⚡</div>
-                            <div>
-                                <strong>Sparring</strong>
-                                <small>6 × 5 min</small>
-                            </div>
-                        </div>
-                        <span class="time">30 min</span>
-                    </div>
-
-                    <div class="workout">
-                        <div class="workout-left">
-                            <div class="workout-icon">🧘</div>
-                            <div>
-                                <strong>Cool down</strong>
-                                <small>Retour au calme</small>
-                            </div>
-                        </div>
-                        <span class="time">5 min</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="section-title">
-                    <h3>Planning</h3>
-                    <span>Cette semaine</span>
-                </div>
-
-                <div class="calendar">
-
-                    <div class="day">LUN</div>
-                    <div class="day">MAR</div>
-                    <div class="day">MER</div>
-                    <div class="day">JEU</div>
-                    <div class="day">VEN</div>
-                    <div class="day">SAM</div>
-                    <div class="day">DIM</div>
-
-                    <div class="day-box done">10</div>
-                    <div class="day-box">11</div>
-                    <div class="day-box done">12</div>
-                    <div class="day-box">13</div>
-                    <div class="day-box today">14</div>
-                    <div class="day-box">15</div>
-                    <div class="day-box">16</div>
-
-                </div>
-
-                <button class="secondary" style="margin-top:20px;width:100%;">
-                    Voir le planning →
-                </button>
-
-            </div>
-
-        </section>
-
-        <!-- COMPETITION -->
-        <section class="section">
-
-            <div class="section-title">
-                <h3>Prochaine compétition</h3>
-                <span>FIGHT CAMP</span>
-            </div>
-
-            <div class="card competition">
-
-                <div>
-                    <div class="comp-date" id="competitionDate">—</div>
-                    <div class="comp-info">Aucune compétition définie</div>
-                </div>
-
-                <div class="countdown">
-                    <strong id="countdown">—</strong>
-                    <span>jours restants</span>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- PROFILE -->
-        <section class="section columns">
-
-            <div class="card">
-
-                <div class="section-title">
-                    <h3>Profil combattant</h3>
-                    <span>PERSONNEL</span>
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>CEINTURE</label>
-                        <select id="belt">
-                            <option>Blanche</option>
-                            <option>Bleue</option>
-                            <option>Violette</option>
-                            <option>Marron</option>
-                            <option>Noire</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>CATÉGORIE</label>
-                        <input id="weight" placeholder="-76 kg">
-                    </div>
-
-                </div>
-
-                <button class="primary" onclick="saveProfile()">
-                    ENREGISTRER
-                </button>
-
-            </div>
-
-            <!-- GOALS -->
-            <div class="card">
-
-                <div class="section-title">
-                    <h3>Objectifs</h3>
-                    <span>PROGRESSION</span>
-                </div>
-
-                <div style="margin-bottom:20px;">
-                    <div style="display:flex;justify-content:space-between;font-size:12px;">
-                        <span>4 séances / semaine</span>
-                        <span style="color:var(--muted)">2 / 4</span>
-                    </div>
-
-                    <div class="progress">
-                        <span style="width:50%"></span>
-                    </div>
-                </div>
-
-                <div>
-                    <div style="display:flex;justify-content:space-between;font-size:12px;">
-                        <span>30 rounds / semaine</span>
-                        <span style="color:var(--muted)">18 / 30</span>
-                    </div>
-
-                    <div class="progress">
-                        <span style="width:60%"></span>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- JOURNAL -->
-        <section class="section">
-
-            <div class="section-title">
-                <h3>Journal d'entraînement</h3>
-                <span>RECENT</span>
-            </div>
-
-            <div class="card">
-
-                <div class="journal-entry">
-                    <strong>Sparring du jeudi</strong>
-                    <p>6 rounds · Bonne pression depuis la side control. Travail à améliorer : sorties de mount.</p>
-                </div>
-
-                <div class="journal-entry">
-                    <strong>Technique — passage de garde</strong>
-                    <p>4 rounds · Meilleure connexion entre knee cut et contrôle latéral.</p>
-                </div>
-
-                <button class="secondary">
-                    + Ajouter une séance
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
+<div class="ticker">
+    <span><b>●</b> TRAINING MODE ACTIVE</span>
+    <span>DISCIPLINE OVER MOTIVATION</span>
+    <span><b>●</b> NEXT SESSION TODAY</span>
+    <span>TECHNIQUE / PRESSURE / CONTROL</span>
+    <span><b>●</b> FIGHT CAMP</span>
 </div>
 
-<!-- MOBILE NAV -->
 
-<nav class="mobile-nav">
-    <button class="active">⌂<br>Accueil</button>
-    <button>🥋<br>Training</button>
-    <button>▣<br>Planning</button>
-    <button>📈<br>Stats</button>
-    <button>☰<br>Plus</button>
-</nav>
+<!-- TRAINING -->
+
+<section id="training">
+
+    <div class="section-label">
+        01 — SESSION
+    </div>
+
+    <h2 class="section-title">
+        TODAY'S<br>
+        WORK.
+    </h2>
+
+    <div class="training-grid">
+
+        <article class="training">
+
+            <div class="training-number">01</div>
+
+            <h3>Warm Up</h3>
+
+            <p>
+                Mobilité, déplacements et activation.
+                Préparer le corps avant l'intensité.
+            </p>
+
+            <div class="training-time">
+                10 MIN
+            </div>
+
+        </article>
+
+
+        <article class="training">
+
+            <div class="training-number">02</div>
+
+            <h3>Technique</h3>
+
+            <p>
+                Passage de garde, contrôle et enchaînements
+                à répéter jusqu'à automatisation.
+            </p>
+
+            <div class="training-time">
+                25 MIN
+            </div>
+
+        </article>
+
+
+        <article class="training">
+
+            <div class="training-number">03</div>
+
+            <h3>Drilling</h3>
+
+            <p>
+                Reps propres. Intensité progressive.
+                Aucun mouvement inutile.
+            </p>
+
+            <div class="training-time">
+                20 MIN
+            </div>
+
+        </article>
+
+
+        <article class="training">
+
+            <div class="training-number">04</div>
+
+            <h3>Sparring</h3>
+
+            <p>
+                Six rounds. Cinq minutes.
+                Objectif : appliquer sous pression.
+            </p>
+
+            <div class="training-time">
+                30 MIN
+            </div>
+
+        </article>
+
+
+        <article class="training">
+
+            <div class="training-number">05</div>
+
+            <h3>Cool Down</h3>
+
+            <p>
+                Retour au calme, respiration et récupération.
+            </p>
+
+            <div class="training-time">
+                05 MIN
+            </div>
+
+        </article>
+
+
+        <article class="training">
+
+            <div class="training-number">06</div>
+
+            <h3>Journal</h3>
+
+            <p>
+                Noter ce qui fonctionne.
+                Identifier ce qui doit être amélioré.
+            </p>
+
+            <div class="training-time">
+                05 MIN
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- NUMBERS -->
+
+<section class="numbers" id="stats">
+
+    <div class="number">
+        <div class="number-value" id="sessions">0</div>
+        <div class="number-label">Sessions cette semaine</div>
+    </div>
+
+    <div class="number">
+        <div class="number-value" id="rounds">18</div>
+        <div class="number-label">Rounds complétés</div>
+    </div>
+
+    <div class="number">
+        <div class="number-value" id="minutes">270</div>
+        <div class="number-label">Minutes sur le tapis</div>
+    </div>
+
+    <div class="number">
+        <div class="number-value">07</div>
+        <div class="number-label">Jours de streak</div>
+    </div>
+
+</section>
+
+
+<!-- CAMP -->
+
+<section id="camp">
+
+    <div class="camp">
+
+        <div class="camp-info">
+
+            <div class="section-label">
+                02 — FIGHT CAMP
+            </div>
+
+            <h2 class="section-title">
+                BUILD<br>
+                FOR<br>
+                WAR.
+            </h2>
+
+            <p>
+                Chaque entraînement doit avoir un objectif.
+                Le but n'est pas simplement de faire plus,
+                mais de devenir plus difficile à battre.
+            </p>
+
+            <div class="competition">
+
+                <div class="competition-label">
+                    NEXT COMPETITION
+                </div>
+
+                <div class="competition-date">
+                    24 OCT.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-day">
+                    MON / 10
+                </div>
+
+                <div class="timeline-title">
+                    Technique
+                </div>
+
+                <div class="timeline-sub">
+                    Passing + positional drilling
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-day">
+                    WED / 12
+                </div>
+
+                <div class="timeline-title">
+                    Hard Rounds
+                </div>
+
+                <div class="timeline-sub">
+                    6 × 5 min / competition pace
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-day">
+                    FRI / 14
+                </div>
+
+                <div class="timeline-title">
+                    Mixed Session
+                </div>
+
+                <div class="timeline-sub">
+                    Technique + situational sparring
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-day">
+                    SAT / 15
+                </div>
+
+                <div class="timeline-title">
+                    Recovery
+                </div>
+
+                <div class="timeline-sub">
+                    Mobility + light drilling
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MINDSET -->
+
+<section class="quote" id="mindset">
+
+    <h2>
+        DON'T TRAIN<br>
+        TO <span>FEEL GOOD.</span><br>
+        TRAIN TO<br>
+        <span>GET BETTER.</span>
+    </h2>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <span>FIGHT LAB / BJJ PERFORMANCE</span>
+
+    <span id="year"></span>
+
+</footer>
 
 
 <script>
 
-/* ================= DATE ================= */
+/* ===============================
+   DATE / YEAR
+================================ */
 
-const dateElement = document.getElementById("today");
-
-const now = new Date();
-
-dateElement.textContent =
-    now.toLocaleDateString("fr-FR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 
-/* ================= LOCAL STORAGE ================= */
+/* ===============================
+   LOCAL STORAGE
+================================ */
 
-const savedProfile =
-    JSON.parse(localStorage.getItem("bjjProfile") || "{}");
+let sessions =
+    Number(localStorage.getItem("fightLabSessions") || 0);
 
-if (savedProfile.belt) {
-    document.getElementById("belt").value = savedProfile.belt;
-}
-
-if (savedProfile.weight) {
-    document.getElementById("weight").value = savedProfile.weight;
-}
+document.getElementById("sessions").textContent =
+    sessions;
 
 
-function saveProfile() {
+/* ===============================
+   START SESSION
+================================ */
 
-    const profile = {
-        belt: document.getElementById("belt").value,
-        weight: document.getElementById("weight").value
-    };
+function startSession() {
+
+    sessions++;
 
     localStorage.setItem(
-        "bjjProfile",
-        JSON.stringify(profile)
-    );
-
-    alert("Profil enregistré 🥋");
-}
-
-
-/* ================= WORKOUT ================= */
-
-function startWorkout() {
-
-    const sessions =
-        Number(localStorage.getItem("bjjSessions") || 0);
-
-    localStorage.setItem(
-        "bjjSessions",
-        sessions + 1
+        "fightLabSessions",
+        sessions
     );
 
     document.getElementById("sessions").textContent =
-        sessions + 1;
+        sessions;
 
     alert(
-        "🔥 Session lancée !\n\n" +
-        "Warm-up → Technique → Drilling → Sparring"
+        "SESSION STARTED.\n\n" +
+        "Warm Up → Technique → Drilling → Sparring\n\n" +
+        "90 MIN. LET'S WORK."
     );
 }
 
 
-/* ================= LOAD STATS ================= */
+/* ===============================
+   ENTER = START
+================================ */
 
-document.getElementById("sessions").textContent =
-    localStorage.getItem("bjjSessions") || "0";
+document.addEventListener("keydown", function(event) {
 
-document.getElementById("rounds").textContent =
-    localStorage.getItem("bjjRounds") || "0";
-
-document.getElementById("minutes").textContent =
-    localStorage.getItem("bjjMinutes") || "0";
-
-
-/* ================= THEME ================= */
-
-function toggleTheme() {
-
-    const light =
-        document.body.dataset.theme === "light";
-
-    if (light) {
-
-        document.body.dataset.theme = "";
-
-        document.body.style.background = "";
-
-    } else {
-
-        document.body.dataset.theme = "light";
-
-        document.body.style.background =
-            "#e9e9eb";
-
-        document.body.style.color =
-            "#111";
-
-        alert(
-            "Mode clair expérimental.\n" +
-            "La V2 complète aura un vrai thème clair."
-        );
+    if (event.key === "Enter") {
+        startSession();
     }
-}
+
+});
 
 </script>
 
