@@ -4,49 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JJB Training Hub</title>
+<title>JJB Coach</title>
 
 <style>
 /* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-    --bg: #f4f5f7;
-    --surface: #ffffff;
-    --surface-2: #eef0f3;
-    --text: #17191d;
-    --muted: #6d737d;
-    --border: #dfe2e6;
-
-    --accent: #e63946;
-    --accent-dark: #b92734;
-
-    --green: #19a974;
-    --blue: #3b82f6;
-    --orange: #f59e0b;
-    --purple: #8b5cf6;
-
-    --shadow: 0 12px 35px rgba(0,0,0,.08);
-    --radius: 22px;
-}
-
-body.dark {
-    --bg: #0e1013;
-    --surface: #171a1f;
-    --surface-2: #20242b;
-    --text: #f2f3f5;
-    --muted: #9ba1aa;
-    --border: #2d323a;
-
-    --accent: #ff4d5a;
-    --accent-dark: #e23745;
-
-    --shadow: 0 15px 45px rgba(0,0,0,.35);
-}
-
-/* =========================================================
-   BASE
+   RESET
 ========================================================= */
 
 * {
@@ -61,7 +23,6 @@ body {
     margin: 0;
     font-family:
         Inter,
-        ui-sans-serif,
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
@@ -71,22 +32,60 @@ body {
     background: var(--bg);
     color: var(--text);
 
-    min-height: 100vh;
-
-    transition:
-        background .25s ease,
-        color .25s ease;
-}
-
-button {
-    font: inherit;
+    transition: background .25s, color .25s;
 }
 
 button,
-.card,
-.progress-bar,
-.task {
-    transition: .2s ease;
+select,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =========================================================
+   THEME
+========================================================= */
+
+:root {
+    --bg: #f4f5f7;
+    --panel: #ffffff;
+    --panel2: #eef0f3;
+
+    --text: #16181c;
+    --muted: #707680;
+
+    --border: #dfe2e7;
+
+    --accent: #e63946;
+    --accent2: #b92330;
+
+    --green: #19a974;
+    --blue: #3b82f6;
+    --orange: #f59e0b;
+    --purple: #8b5cf6;
+
+    --shadow:
+        0 15px 40px rgba(0,0,0,.07);
+}
+
+body.dark {
+    --bg: #0d0f12;
+    --panel: #171a1f;
+    --panel2: #20242a;
+
+    --text: #f4f5f7;
+    --muted: #9ca3ad;
+
+    --border: #2c3138;
+
+    --accent: #ff4d5a;
+    --accent2: #d72f3c;
+
+    --shadow:
+        0 15px 45px rgba(0,0,0,.35);
 }
 
 /* =========================================================
@@ -98,37 +97,36 @@ header {
     top: 0;
     z-index: 100;
 
+    backdrop-filter: blur(18px);
+
     background: color-mix(
         in srgb,
         var(--bg) 90%,
         transparent
     );
 
-    backdrop-filter: blur(18px);
-
     border-bottom: 1px solid var(--border);
 }
 
 .header-inner {
-    width: min(1200px, 94%);
-    margin: auto;
+    width: min(1150px, 94%);
+    min-height: 70px;
 
-    min-height: 74px;
+    margin: auto;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 15px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 
     font-weight: 900;
-    letter-spacing: -.5px;
 }
 
 .logo-icon {
@@ -138,68 +136,58 @@ header {
     display: grid;
     place-items: center;
 
-    border-radius: 13px;
-
     background: var(--accent);
     color: white;
 
-    font-size: 21px;
+    border-radius: 13px;
 
     box-shadow:
-        0 7px 20px rgba(230,57,70,.25);
+        0 8px 22px rgba(230,57,70,.25);
 }
 
-.logo-text span {
-    display: block;
-    font-size: 12px;
+.logo-name {
+    font-size: 17px;
+}
+
+.logo-sub {
     color: var(--muted);
-    font-weight: 600;
+    font-size: 10px;
     margin-top: 2px;
 }
 
-/* =========================================================
-   NAV
-========================================================= */
-
-.nav {
+nav {
     display: flex;
-    align-items: center;
-    gap: 7px;
+    gap: 5px;
 }
 
-.nav button {
+nav button {
     border: 0;
-    background: transparent;
 
+    background: transparent;
     color: var(--muted);
 
     padding: 10px 13px;
-    border-radius: 12px;
 
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 14px;
+    border-radius: 11px;
+
+    font-weight: 750;
 }
 
-.nav button:hover,
-.nav button.active {
-    background: var(--surface);
+nav button:hover,
+nav button.active {
     color: var(--text);
-    box-shadow: 0 4px 15px rgba(0,0,0,.05);
+    background: var(--panel);
 }
 
-.theme-btn {
-    width: 43px;
-    height: 43px;
+.theme {
+    width: 42px;
+    height: 42px;
 
     border: 1px solid var(--border);
-    border-radius: 13px;
+    border-radius: 12px;
 
-    background: var(--surface);
+    background: var(--panel);
     color: var(--text);
-
-    cursor: pointer;
-    font-size: 19px;
 }
 
 /* =========================================================
@@ -207,21 +195,23 @@ header {
 ========================================================= */
 
 main {
-    width: min(1200px, 94%);
+    width: min(1150px, 94%);
+
     margin: auto;
-    padding: 45px 0 80px;
+
+    padding: 35px 0 80px;
 }
 
 .page {
     display: none;
-    animation: appear .3s ease;
 }
 
 .page.active {
     display: block;
+    animation: pageIn .25s ease;
 }
 
-@keyframes appear {
+@keyframes pageIn {
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -234,38 +224,42 @@ main {
 }
 
 /* =========================================================
-   HERO
+   HOME
 ========================================================= */
 
 .hero {
     display: grid;
-    grid-template-columns: 1.5fr .8fr;
-    gap: 25px;
 
-    margin-bottom: 25px;
+    grid-template-columns:
+        1.5fr
+        .8fr;
+
+    gap: 20px;
 }
 
 .hero-main {
-    min-height: 310px;
+    min-height: 340px;
 
-    padding: 42px;
+    padding: 40px;
 
     border-radius: 30px;
 
+    color: white;
+
     background:
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(255,255,255,.18),
+            transparent 30%
+        ),
         linear-gradient(
             135deg,
             var(--accent),
-            #8f1d29
+            #851b26
         );
-
-    color: white;
 
     position: relative;
     overflow: hidden;
-
-    box-shadow:
-        0 20px 45px rgba(230,57,70,.22);
 }
 
 .hero-main::after {
@@ -274,57 +268,65 @@ main {
     position: absolute;
 
     right: -15px;
-    bottom: -55px;
+    bottom: -70px;
 
-    font-size: 210px;
+    font-size: 230px;
 
-    opacity: .12;
+    opacity: .1;
 
-    transform: rotate(-12deg);
+    transform: rotate(-10deg);
 }
 
 .hero-main h1 {
     margin: 0;
-    font-size: clamp(34px, 5vw, 65px);
-    line-height: .95;
-    letter-spacing: -3px;
-    max-width: 600px;
+
+    font-size:
+        clamp(40px, 6vw, 70px);
+
+    line-height: .9;
+
+    letter-spacing: -4px;
 }
 
 .hero-main p {
-    max-width: 570px;
-    color: rgba(255,255,255,.8);
+    max-width: 580px;
+
     line-height: 1.6;
+
+    color: rgba(255,255,255,.8);
+
     margin: 25px 0;
 }
 
-.hero-btn {
+.big-btn {
     border: 0;
-    padding: 13px 18px;
 
-    background: white;
-    color: #17191d;
+    padding: 15px 20px;
 
     border-radius: 13px;
 
-    cursor: pointer;
-    font-weight: 800;
+    background: white;
+    color: #17181c;
+
+    font-weight: 900;
 }
 
-.hero-btn:hover {
+.big-btn:hover {
     transform: translateY(-2px);
 }
 
 /* =========================================================
-   WEEKLY CARD
+   TODAY
 ========================================================= */
 
-.week-card {
-    background: var(--surface);
+.today {
+    background: var(--panel);
+
     border: 1px solid var(--border);
 
     border-radius: 30px;
-    padding: 30px;
+
+    padding: 28px;
 
     box-shadow: var(--shadow);
 
@@ -333,100 +335,88 @@ main {
     justify-content: space-between;
 }
 
-.week-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.week-title {
-    font-size: 14px;
+.today-label {
     color: var(--muted);
-    font-weight: 800;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
     text-transform: uppercase;
+
     letter-spacing: 1px;
 }
 
-.percent {
-    font-size: 54px;
-    font-weight: 950;
-    letter-spacing: -3px;
-    margin-top: 8px;
+.today h2 {
+    margin: 7px 0;
+
+    font-size: 31px;
+
+    letter-spacing: -1.5px;
 }
 
-.percent small {
-    font-size: 22px;
+.today p {
     color: var(--muted);
-}
 
-.progress-track {
-    height: 12px;
+    line-height: 1.5;
 
-    background: var(--surface-2);
-
-    border-radius: 100px;
-
-    overflow: hidden;
-
-    margin-top: 20px;
-}
-
-.progress-bar {
-    width: 0%;
-    height: 100%;
-
-    background: var(--accent);
-
-    border-radius: inherit;
-}
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
-
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin: 40px 0 18px;
-}
-
-.section-title h2 {
-    margin: 0;
-    font-size: 25px;
-    letter-spacing: -.7px;
-}
-
-.section-title span {
-    color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 /* =========================================================
    CARDS
 ========================================================= */
 
-.grid {
+.section-title {
+    margin: 38px 0 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: end;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 24px;
+
+    letter-spacing: -.8px;
+}
+
+.section-title span {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
 }
 
 .card {
-    background: var(--surface);
+    background: var(--panel);
 
     border: 1px solid var(--border);
 
-    border-radius: var(--radius);
+    border-radius: 21px;
 
-    padding: 23px;
+    padding: 22px;
 
-    box-shadow: 0 7px 25px rgba(0,0,0,.04);
+    box-shadow:
+        0 6px 22px rgba(0,0,0,.03);
+
+    transition: .2s;
 }
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
+
     box-shadow: var(--shadow);
 }
 
@@ -437,236 +427,245 @@ main {
     display: grid;
     place-items: center;
 
-    border-radius: 15px;
+    background: var(--panel2);
 
-    background: var(--surface-2);
+    border-radius: 14px;
 
-    font-size: 24px;
+    font-size: 23px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 .card h3 {
-    margin: 0 0 8px;
-    font-size: 20px;
+    margin: 0 0 7px;
+
+    font-size: 18px;
 }
 
 .card p {
     margin: 0;
+
     color: var(--muted);
+
     line-height: 1.55;
-    font-size: 14px;
-}
 
-/* =========================================================
-   TRAINING
-========================================================= */
-
-.training-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-}
-
-.training {
-    position: relative;
-    overflow: hidden;
-}
-
-.training::before {
-    content: "";
-
-    position: absolute;
-
-    width: 90px;
-    height: 90px;
-
-    border-radius: 50%;
-
-    right: -30px;
-    top: -30px;
-
-    background: var(--accent);
-    opacity: .07;
-}
-
-.training-head {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-}
-
-.training-icon {
-    font-size: 32px;
-}
-
-.badge {
-    display: inline-flex;
-
-    padding: 5px 9px;
-
-    border-radius: 8px;
-
-    background: var(--surface-2);
-    color: var(--muted);
-
-    font-size: 11px;
-    font-weight: 800;
-}
-
-.exercise-list {
-    margin: 20px 0 0;
-    padding: 0;
-
-    list-style: none;
-}
-
-.exercise-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 9px 0;
-
-    border-bottom: 1px solid var(--border);
-
-    font-size: 14px;
-}
-
-.exercise-list li:last-child {
-    border-bottom: 0;
-}
-
-.exercise-list li::before {
-    content: "✓";
-
-    width: 22px;
-    height: 22px;
-
-    display: grid;
-    place-items: center;
-
-    background: var(--surface-2);
-
-    border-radius: 7px;
-
-    font-size: 11px;
-    font-weight: 900;
-}
-
-/* =========================================================
-   DAYS
-========================================================= */
-
-.days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 9px;
-}
-
-.day {
-    border: 1px solid var(--border);
-    background: var(--surface);
-
-    border-radius: 15px;
-
-    padding: 15px 8px;
-
-    text-align: center;
-
-    cursor: pointer;
-}
-
-.day:hover {
-    border-color: var(--accent);
-}
-
-.day strong {
-    display: block;
     font-size: 13px;
 }
 
-.day small {
-    display: block;
-    margin-top: 7px;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.day.jjb {
-    border-color: var(--accent);
-    background: color-mix(
-        in srgb,
-        var(--accent) 8%,
-        var(--surface)
-    );
-}
-
 /* =========================================================
-   TASKS
+   GENERATOR
 ========================================================= */
 
-.tasks {
+.generator {
     display: grid;
-    gap: 10px;
+
+    grid-template-columns:
+        .8fr
+        1.2fr;
+
+    gap: 20px;
 }
 
-.task {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    padding: 15px;
+.panel {
+    background: var(--panel);
 
     border: 1px solid var(--border);
 
-    background: var(--surface);
+    border-radius: 25px;
 
-    border-radius: 15px;
+    padding: 25px;
 
-    cursor: pointer;
+    box-shadow: var(--shadow);
 }
 
-.task:hover {
+.panel h2 {
+    margin-top: 0;
+
+    letter-spacing: -.8px;
+}
+
+label.field {
+    display: block;
+
+    margin: 18px 0;
+}
+
+.field span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: 850;
+
+    color: var(--muted);
+}
+
+select {
+    width: 100%;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel2);
+    color: var(--text);
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    outline: none;
+}
+
+select:focus {
     border-color: var(--accent);
 }
 
-.task input {
-    width: 20px;
-    height: 20px;
+.generate {
+    width: 100%;
 
-    accent-color: var(--accent);
+    border: 0;
 
-    cursor: pointer;
+    padding: 14px;
+
+    border-radius: 13px;
+
+    background: var(--accent);
+
+    color: white;
+
+    font-weight: 900;
 }
 
-.task-content {
-    flex: 1;
-}
-
-.task-title {
-    font-weight: 800;
-}
-
-.task-description {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 3px;
-}
-
-.task.done .task-title {
-    text-decoration: line-through;
-    opacity: .5;
+.generate:hover {
+    background: var(--accent2);
 }
 
 /* =========================================================
-   BUTTONS
+   SESSION
 ========================================================= */
 
-.button-row {
+.session {
+    display: none;
+}
+
+.session.active {
+    display: block;
+}
+
+.session-header {
     display: flex;
-    gap: 10px;
+
+    justify-content: space-between;
+
+    align-items: start;
+
+    gap: 20px;
+}
+
+.session-header h2 {
+    margin: 0 0 5px;
+
+    font-size: 28px;
+}
+
+.session-header p {
+    margin: 0;
+
+    color: var(--muted);
+}
+
+.exercise {
+    margin-top: 15px;
+
+    padding: 18px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel2);
+
+    border-radius: 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    align-items: center;
+}
+
+.exercise-name {
+    font-weight: 850;
+}
+
+.exercise-detail {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.exercise button {
+    border: 0;
+
+    background: var(--panel);
+
+    color: var(--text);
+
+    padding: 10px 13px;
+
+    border-radius: 10px;
+
+    font-weight: 800;
+}
+
+.exercise button:hover {
+    background: var(--accent);
+
+    color: white;
+}
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+.timer-box {
+    text-align: center;
+
+    padding: 25px 0 5px;
+}
+
+.timer {
+    font-size:
+        clamp(55px, 10vw, 100px);
+
+    font-weight: 950;
+
+    letter-spacing: -5px;
+
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-state {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.timer-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 9px;
+
     flex-wrap: wrap;
+
+    margin-top: 18px;
 }
 
 .btn {
@@ -676,9 +675,7 @@ main {
 
     border-radius: 12px;
 
-    cursor: pointer;
-
-    font-weight: 800;
+    font-weight: 850;
 }
 
 .btn-primary {
@@ -687,33 +684,229 @@ main {
 }
 
 .btn-secondary {
-    background: var(--surface-2);
+    background: var(--panel2);
     color: var(--text);
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+.btn-green {
+    background: var(--green);
+    color: white;
 }
 
 /* =========================================================
-   TIPS
+   ROUND TIMER
 ========================================================= */
 
-.tip {
-    padding: 23px;
+.round-box {
+    text-align: center;
+}
+
+.round-number {
+    color: var(--muted);
+
+    font-weight: 900;
+
+    font-size: 13px;
+}
+
+.round-timer {
+    font-size:
+        clamp(60px, 12vw, 110px);
+
+    font-weight: 950;
+
+    letter-spacing: -5px;
+
+    margin: 10px 0;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.stat {
+    background: var(--panel);
+
+    border: 1px solid var(--border);
 
     border-radius: 20px;
 
-    background: var(--surface-2);
-
-    border-left: 4px solid var(--accent);
-
-    line-height: 1.6;
+    padding: 22px;
 }
 
-.tip strong {
-    display: block;
-    margin-bottom: 5px;
+.stat-label {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.stat-value {
+    margin-top: 5px;
+
+    font-size: 38px;
+
+    font-weight: 950;
+
+    letter-spacing: -2px;
+}
+
+.progress-item {
+    margin: 18px 0;
+}
+
+.progress-head {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.progress-track {
+    height: 9px;
+
+    background: var(--panel2);
+
+    border-radius: 100px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    width: 0;
+
+    background: var(--accent);
+
+    border-radius: inherit;
+
+    transition: width .4s;
+}
+
+/* =========================================================
+   LOG
+========================================================= */
+
+.log {
+    display: grid;
+
+    gap: 9px;
+}
+
+.log-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px 16px;
+
+    background: var(--panel2);
+
+    border-radius: 13px;
+}
+
+.log-name {
+    font-weight: 800;
+}
+
+.log-date {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    display: none;
+
+    place-items: center;
+
+    background: rgba(0,0,0,.65);
+
+    padding: 20px;
+}
+
+.modal.active {
+    display: grid;
+}
+
+.modal-content {
+    width: min(500px, 100%);
+
+    background: var(--panel);
+
+    border: 1px solid var(--border);
+
+    border-radius: 25px;
+
+    padding: 28px;
+
+    box-shadow: 0 30px 80px rgba(0,0,0,.3);
+
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.rating {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 20px 0;
+}
+
+.rating button {
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid var(--border);
+
+    background: var(--panel2);
+
+    border-radius: 13px;
+
+    font-size: 19px;
+}
+
+.rating button:hover,
+.rating button.selected {
+    background: var(--accent);
+
+    color: white;
+
+    border-color: var(--accent);
 }
 
 /* =========================================================
@@ -721,16 +914,17 @@ main {
 ========================================================= */
 
 footer {
-    width: min(1200px, 94%);
+    width: min(1150px, 94%);
+
     margin: auto;
-
-    padding: 25px 0 40px;
-
-    color: var(--muted);
 
     text-align: center;
 
-    font-size: 12px;
+    color: var(--muted);
+
+    font-size: 11px;
+
+    padding: 20px 0 40px;
 }
 
 /* =========================================================
@@ -739,23 +933,21 @@ footer {
 
 @media (max-width: 900px) {
 
-    .hero {
+    .hero,
+    .generator {
         grid-template-columns: 1fr;
     }
 
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
+    .card-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .training-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .nav button {
+    nav button {
         display: none;
     }
 
-    .nav button:first-child {
+    nav button:first-child {
         display: block;
     }
 }
@@ -763,59 +955,41 @@ footer {
 @media (max-width: 600px) {
 
     main {
-        padding-top: 25px;
+        padding-top: 20px;
     }
 
-    .header-inner {
-        min-height: 65px;
-    }
-
-    .logo-text {
+    .logo-sub,
+    .logo-name {
         display: none;
     }
 
     .hero-main {
-        padding: 28px;
-        min-height: 280px;
+        padding: 30px;
+
+        min-height: 300px;
     }
 
     .hero-main h1 {
-        letter-spacing: -2px;
+        letter-spacing: -3px;
     }
 
-    .week-card {
-        padding: 25px;
-    }
-
-    .grid {
+    .card-grid,
+    .stats {
         grid-template-columns: 1fr;
     }
 
-    .days {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .days .day:nth-child(n+5) {
-        display: none;
-    }
-
-    .card {
+    .panel {
         padding: 20px;
     }
-}
 
-@media (max-width: 380px) {
-
-    .days {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .days .day:nth-child(n+5) {
-        display: block;
+    .exercise {
+        align-items: flex-start;
+        flex-direction: column;
     }
 }
 </style>
 </head>
+
 
 <body>
 
@@ -825,48 +999,61 @@ footer {
 
 <header>
 
-    <div class="header-inner">
+<div class="header-inner">
 
-        <div class="logo">
+    <div class="logo">
 
-            <div class="logo-icon">
-                🥋
-            </div>
-
-            <div class="logo-text">
-                JJB TRAINING
-                <span>Discipline • Force • Technique</span>
-            </div>
-
+        <div class="logo-icon">
+            🥋
         </div>
 
-        <nav class="nav">
+        <div>
+            <div class="logo-name">
+                JJB COACH
+            </div>
 
-            <button
-                class="active"
-                onclick="showPage('home', this)">
-                Accueil
-            </button>
-
-            <button onclick="showPage('training', this)">
-                Entraînement
-            </button>
-
-            <button onclick="showPage('week', this)">
-                Ma semaine
-            </button>
-
-        </nav>
-
-        <button
-            class="theme-btn"
-            onclick="toggleTheme()"
-            id="themeButton"
-            title="Changer le thème">
-            🌙
-        </button>
+            <div class="logo-sub">
+                Train smarter.
+            </div>
+        </div>
 
     </div>
+
+
+    <nav>
+
+        <button
+            class="active"
+            onclick="showPage('home', this)">
+            Accueil
+        </button>
+
+        <button
+            onclick="showPage('coach', this)">
+            Coach
+        </button>
+
+        <button
+            onclick="showPage('timerPage', this)">
+            Timer
+        </button>
+
+        <button
+            onclick="showPage('progress', this)">
+            Progression
+        </button>
+
+    </nav>
+
+
+    <button
+        class="theme"
+        id="themeButton"
+        onclick="toggleTheme()">
+        🌙
+    </button>
+
+</div>
 
 </header>
 
@@ -877,6 +1064,7 @@ footer {
 
 <main>
 
+
 <!-- =====================================================
      HOME
 ===================================================== -->
@@ -885,928 +1073,1130 @@ footer {
     id="home"
     class="page active">
 
-    <div class="hero">
 
-        <div class="hero-main">
+<div class="hero">
 
-            <h1>
-                Devient<br>
-                plus solide.
-            </h1>
+    <div class="hero-main">
 
-            <p>
-                Un espace simple pour suivre ton entraînement,
-                améliorer ton grip, développer ta force et
-                progresser en Jiu-Jitsu Brésilien.
+        <h1>
+            Train.<br>
+            Fight.<br>
+            Improve.
+        </h1>
+
+        <p>
+            Ton petit coach JJB personnel.
+            Choisis ton objectif, ton temps disponible
+            et laisse le site construire ta séance.
+        </p>
+
+        <button
+            class="big-btn"
+            onclick="showPage('coach')">
+            🎯 Créer une séance
+        </button>
+
+    </div>
+
+
+    <div class="today">
+
+        <div>
+
+            <div class="today-label">
+                Aujourd'hui
+            </div>
+
+            <h2 id="todayTitle">
+                Chargement...
+            </h2>
+
+            <p id="todayDescription">
+                ...
             </p>
 
+        </div>
+
+
+        <button
+            class="btn btn-primary"
+            onclick="startToday()">
+            Commencer →
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="section-title">
+
+    <h2>
+        Ton système
+    </h2>
+
+    <span>
+        Pas besoin de papier 😎
+    </span>
+
+</div>
+
+
+<div class="card-grid">
+
+    <div class="card">
+
+        <div class="card-icon">
+            🎯
+        </div>
+
+        <h3>
+            Générateur
+        </h3>
+
+        <p>
+            Choisis une durée et un objectif.
+            Le coach construit une séance adaptée.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">
+            ⏱️
+        </div>
+
+        <h3>
+            Timers
+        </h3>
+
+        <p>
+            Chronomètre les exercices, les rounds
+            et les périodes de repos.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">
+            📈
+        </div>
+
+        <h3>
+            Progression
+        </h3>
+
+        <p>
+            Tes séances et performances sont
+            enregistrées automatiquement.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">
+            ✊
+        </div>
+
+        <h3>
+            Grip
+        </h3>
+
+        <p>
+            Développe une vraie force de préhension
+            utile au JJB.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">
+            💪
+        </div>
+
+        <h3>
+            Force
+        </h3>
+
+        <p>
+            Des exercices orientés vers les besoins
+            du grappling.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-icon">
+            🥋
+        </div>
+
+        <h3>
+            JJB
+        </h3>
+
+        <p>
+            Lundi, mercredi et vendredi :
+            ton entraînement principal.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     COACH
+===================================================== -->
+
+<section
+    id="coach"
+    class="page">
+
+
+<div class="section-title">
+
+    <div>
+
+        <h2>
+            🎯 Ton coach
+        </h2>
+
+        <span>
+            Construis ta séance
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="generator">
+
+
+<div class="panel">
+
+    <h2>
+        Paramètres
+    </h2>
+
+
+    <label class="field">
+
+        <span>
+            TEMPS DISPONIBLE
+        </span>
+
+        <select id="duration">
+
+            <option value="10">
+                10 minutes
+            </option>
+
+            <option value="20" selected>
+                20 minutes
+            </option>
+
+            <option value="30">
+                30 minutes
+            </option>
+
+            <option value="45">
+                45 minutes
+            </option>
+
+            <option value="60">
+                1 heure
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label class="field">
+
+        <span>
+            OBJECTIF
+        </span>
+
+        <select id="goal">
+
+            <option value="random">
+                🎲 Aléatoire
+            </option>
+
+            <option value="jjb">
+                🥋 JJB
+            </option>
+
+            <option value="grip">
+                ✊ Grip
+            </option>
+
+            <option value="strength">
+                💪 Force
+            </option>
+
+            <option value="cardio">
+                🫁 Cardio
+            </option>
+
+            <option value="mobility">
+                🧘 Mobilité
+            </option>
+
+            <option value="core">
+                🧱 Core
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <button
+        class="generate"
+        onclick="generateSession()">
+        ⚡ Générer ma séance
+    </button>
+
+</div>
+
+
+<div
+    class="panel"
+    id="sessionPanel">
+
+    <div
+        id="emptySession"
+        style="text-align:center; padding:45px 10px;">
+
+        <div
+            style="font-size:55px;">
+            🎯
+        </div>
+
+        <h2>
+            Prêt ?
+        </h2>
+
+        <p style="color:var(--muted);">
+            Choisis tes paramètres puis génère
+            ta première séance.
+        </p>
+
+    </div>
+
+
+    <div
+        class="session"
+        id="session">
+
+        <div class="session-header">
+
+            <div>
+
+                <h2 id="sessionTitle">
+                    —
+                </h2>
+
+                <p id="sessionSubtitle">
+                    —
+                </p>
+
+            </div>
+
+            <span
+                class="btn btn-secondary"
+                id="sessionDuration">
+                —
+            </span>
+
+        </div>
+
+
+        <div id="exerciseContainer">
+        </div>
+
+
+        <div
+            style="
+                margin-top:20px;
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+            ">
+
             <button
-                class="hero-btn"
-                onclick="showPage('training')">
-                Voir les entraînements →
+                class="btn btn-primary"
+                onclick="finishSession()">
+                ✓ Terminer la séance
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="generateSession()">
+                🔄 Autre séance
             </button>
 
         </div>
 
-
-        <div class="week-card">
-
-            <div>
-
-                <div class="week-title">
-                    Objectif hebdomadaire
-                </div>
-
-                <div class="percent">
-                    <span id="weeklyProgress">0</span>
-                    <small>%</small>
-                </div>
-
-                <div class="progress-track">
-
-                    <div
-                        class="progress-bar"
-                        id="progressBar">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div>
-
-                <p
-                    id="progressText"
-                    style="
-                        color:var(--muted);
-                        font-size:13px;
-                        margin-bottom:15px;
-                    ">
-                    Rien de fait pour l'instant. On commence ? 💪
-                </p>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="showPage('week')">
-                    Voir ma semaine
-                </button>
-
-            </div>
-
-        </div>
-
     </div>
 
+</div>
 
-    <!-- QUICK STATS -->
+</div>
 
-    <div class="section-title">
+</section>
+
+
+<!-- =====================================================
+     TIMER
+===================================================== -->
+
+<section
+    id="timerPage"
+    class="page">
+
+
+<div class="section-title">
+
+    <div>
 
         <h2>
-            Les fondamentaux
+            ⏱️ Timer
         </h2>
 
         <span>
-            Ce qui fait progresser sur le tapis
+            Exercices et rounds
         </span>
 
     </div>
 
+</div>
 
-    <div class="grid">
 
-        <div class="card">
+<div class="card-grid">
 
-            <div class="card-icon">
-                🥋
-            </div>
 
-            <h3>
-                Technique
-            </h3>
+<div class="panel">
 
-            <p>
-                Positions, déplacements, contrôles,
-                transitions, soumissions et défenses.
-            </p>
+    <h2>
+        ⏱️ Chronomètre
+    </h2>
 
+    <div class="timer-box">
+
+        <div
+            class="timer"
+            id="timer">
+            00:30
+        </div>
+
+        <div
+            class="timer-state"
+            id="timerState">
+            Prêt
         </div>
 
 
-        <div class="card">
+        <div class="timer-buttons">
 
-            <div class="card-icon">
-                ✊
-            </div>
+            <button
+                class="btn btn-primary"
+                onclick="toggleTimer()"
+                id="timerStart">
+                ▶ Démarrer
+            </button>
 
-            <h3>
-                Grip
-            </h3>
+            <button
+                class="btn btn-secondary"
+                onclick="resetTimer()">
+                ↺ Reset
+            </button>
 
-            <p>
-                Renforce tes doigts, tes avant-bras et
-                ta capacité à contrôler le kimono.
-            </p>
+            <button
+                class="btn btn-secondary"
+                onclick="setTimer(30)">
+                30s
+            </button>
 
-        </div>
+            <button
+                class="btn btn-secondary"
+                onclick="setTimer(60)">
+                60s
+            </button>
 
-
-        <div class="card">
-
-            <div class="card-icon">
-                💪
-            </div>
-
-            <h3>
-                Force
-            </h3>
-
-            <p>
-                Développe une force utile au combat :
-                tirage, poussée, gainage et jambes.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                🫁
-            </div>
-
-            <h3>
-                Cardio
-            </h3>
-
-            <p>
-                Améliore ton endurance pour rester dangereux
-                même lorsque le round commence à devenir dur.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                🧘
-            </div>
-
-            <h3>
-                Mobilité
-            </h3>
-
-            <p>
-                Hanches, épaules, chevilles et colonne :
-                bouger mieux permet aussi de mieux combattre.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-icon">
-                🧠
-            </div>
-
-            <h3>
-                Mental
-            </h3>
-
-            <p>
-                Régularité, patience et capacité à rester calme
-                lorsque ça commence à chauffer.
-            </p>
+            <button
+                class="btn btn-secondary"
+                onclick="setTimer(120)">
+                2m
+            </button>
 
         </div>
 
     </div>
+
+</div>
+
+
+<div class="panel">
+
+    <h2>
+        🥊 Rounds JJB
+    </h2>
+
+    <div class="round-box">
+
+        <div
+            class="round-number"
+            id="roundNumber">
+            Round 1 / 5
+        </div>
+
+        <div
+            class="round-timer"
+            id="roundTimer">
+            05:00
+        </div>
+
+        <div class="timer-buttons">
+
+            <button
+                class="btn btn-primary"
+                onclick="toggleRound()"
+                id="roundStart">
+                ▶ Démarrer
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="resetRound()">
+                ↺ Reset
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="nextRound()">
+                Round suivant →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="section-title">
+
+    <h2>
+        Configuration des rounds
+    </h2>
+
+</div>
+
+
+<div class="panel">
+
+    <label class="field">
+
+        <span>
+            DURÉE D'UN ROUND
+        </span>
+
+        <select id="roundDuration">
+
+            <option value="180">
+                3 minutes
+            </option>
+
+            <option value="300" selected>
+                5 minutes
+            </option>
+
+            <option value="600">
+                10 minutes
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label class="field">
+
+        <span>
+            NOMBRE DE ROUNDS
+        </span>
+
+        <select id="roundCount">
+
+            <option value="3">
+                3 rounds
+            </option>
+
+            <option value="5" selected>
+                5 rounds
+            </option>
+
+            <option value="6">
+                6 rounds
+            </option>
+
+            <option value="8">
+                8 rounds
+            </option>
+
+        </select>
+
+    </label>
+
+    <button
+        class="btn btn-primary"
+        onclick="configureRounds()">
+        Appliquer
+    </button>
+
+</div>
 
 </section>
 
 
 <!-- =====================================================
-     TRAINING
+     PROGRESS
 ===================================================== -->
 
 <section
-    id="training"
+    id="progress"
     class="page">
 
-    <div class="section-title">
 
-        <div>
-            <h2>
-                Bibliothèque d'entraînement
-            </h2>
+<div class="section-title">
 
-            <span>
-                À adapter selon ton niveau et ta récupération.
-            </span>
-        </div>
-
-    </div>
-
-
-    <div class="training-grid">
-
-
-        <!-- JJB -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        PRIORITÉ
-                    </span>
-
-                    <h3>
-                        🥋 Jiu-Jitsu Brésilien
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    🥋
-                </div>
-
-            </div>
-
-            <p>
-                Les séances principales : technique,
-                sparring et travail spécifique.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Technique du jour
-                </li>
-
-                <li>
-                    Drills de déplacement
-                </li>
-
-                <li>
-                    Transitions positionnelles
-                </li>
-
-                <li>
-                    3–5 rounds de sparring
-                </li>
-
-                <li>
-                    Revoir une erreur après la séance
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- GRIP -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        GRIP
-                    </span>
-
-                    <h3>
-                        ✊ Travail du grip
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    ✊
-                </div>
-
-            </div>
-
-            <p>
-                Des avant-bras solides pour contrôler,
-                tirer et maintenir les grips plus longtemps.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Farmer walk
-                </li>
-
-                <li>
-                    Dead hang
-                </li>
-
-                <li>
-                    Serviette suspendue
-                </li>
-
-                <li>
-                    Wrist curls
-                </li>
-
-                <li>
-                    Extensions des doigts
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- MUSCU -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        FORCE
-                    </span>
-
-                    <h3>
-                        💪 Musculation
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    💪
-                </div>
-
-            </div>
-
-            <p>
-                Une base de force générale pensée pour
-                compléter le JJB plutôt que le remplacer.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Squats
-                </li>
-
-                <li>
-                    Pompes
-                </li>
-
-                <li>
-                    Tractions
-                </li>
-
-                <li>
-                    Rowing
-                </li>
-
-                <li>
-                    Gainage
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- CORE -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        CORE
-                    </span>
-
-                    <h3>
-                        🧱 Gainage
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    🧱
-                </div>
-
-            </div>
-
-            <p>
-                Un tronc solide pour mieux transmettre
-                la force et résister aux contrôles.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Planche
-                </li>
-
-                <li>
-                    Side plank
-                </li>
-
-                <li>
-                    Hollow body hold
-                </li>
-
-                <li>
-                    Dead bug
-                </li>
-
-                <li>
-                    Bird dog
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- CARDIO -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        CONDITIONING
-                    </span>
-
-                    <h3>
-                        🫁 Cardio
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    🫁
-                </div>
-
-            </div>
-
-            <p>
-                Construis une meilleure capacité à récupérer
-                entre les échanges.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Course légère
-                </li>
-
-                <li>
-                    Corde à sauter
-                </li>
-
-                <li>
-                    Intervalles courts
-                </li>
-
-                <li>
-                    Assault bike si disponible
-                </li>
-
-                <li>
-                    Marche active
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- MOBILITY -->
-
-        <div class="card training">
-
-            <div class="training-head">
-
-                <div>
-
-                    <span class="badge">
-                        RÉCUPÉRATION
-                    </span>
-
-                    <h3>
-                        🧘 Mobilité
-                    </h3>
-
-                </div>
-
-                <div class="training-icon">
-                    🧘
-                </div>
-
-            </div>
-
-            <p>
-                Quelques minutes régulièrement valent mieux
-                qu'une grosse séance une fois par mois.
-            </p>
-
-            <ul class="exercise-list">
-
-                <li>
-                    Hanches
-                </li>
-
-                <li>
-                    Chevilles
-                </li>
-
-                <li>
-                    Épaules
-                </li>
-
-                <li>
-                    Rotation thoracique
-                </li>
-
-                <li>
-                    Étirements légers
-                </li>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
+    <div>
 
         <h2>
-            Petit rappel
+            📈 Progression
         </h2>
 
-    </div>
-
-    <div class="tip">
-
-        <strong>
-            🧠 Le but n'est pas de tout faire.
-        </strong>
-
-        Le JJB reste la priorité. Le grip, la musculation,
-        le cardio et la mobilité doivent servir ta pratique,
-        pas te laisser complètement détruit avant le prochain
-        entraînement. La récupération fait partie du programme.
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     WEEK
-===================================================== -->
-
-<section
-    id="week"
-    class="page">
-
-    <div class="section-title">
-
-        <div>
-
-            <h2>
-                Ma semaine
-            </h2>
-
-            <span>
-                Planifie et coche ce que tu accomplis.
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <!-- DAYS -->
-
-    <div class="days">
-
-        <div class="day">
-
-            <strong>Lun</strong>
-            <small>JJB 🥋</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Mar</strong>
-            <small>Repos</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Mer</strong>
-            <small>JJB 🥋</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Jeu</strong>
-            <small>Repos</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Ven</strong>
-            <small>JJB 🥋</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Sam</strong>
-            <small>Optionnel</small>
-
-        </div>
-
-        <div class="day">
-
-            <strong>Dim</strong>
-            <small>Repos</small>
-
-        </div>
-
-    </div>
-
-
-    <div class="section-title">
-
-        <h2>
-            Objectifs de la semaine
-        </h2>
-
-        <span id="taskCounter">
-            0 / 8
+        <span>
+            Tes données restent dans ton navigateur.
         </span>
 
     </div>
 
+</div>
 
-    <div class="tasks">
 
+<div class="stats">
 
-        <label class="task">
 
-            <input
-                type="checkbox"
-                class="task-checkbox">
+<div class="stat">
 
-            <div class="task-content">
+    <div class="stat-label">
+        SÉANCES
+    </div>
 
-                <div class="task-title">
-                    🥋 JJB — Lundi
-                </div>
+    <div
+        class="stat-value"
+        id="totalSessions">
+        0
+    </div>
 
-                <div class="task-description">
-                    Technique + sparring
-                </div>
+</div>
 
-            </div>
 
-        </label>
+<div class="stat">
 
+    <div class="stat-label">
+        MINUTES
+    </div>
 
-        <label class="task">
+    <div
+        class="stat-value"
+        id="totalMinutes">
+        0
+    </div>
 
-            <input
-                type="checkbox"
-                class="task-checkbox">
+</div>
 
-            <div class="task-content">
 
-                <div class="task-title">
-                    ✊ Grip
-                </div>
+<div class="stat">
 
-                <div class="task-description">
-                    10–15 minutes
-                </div>
+    <div class="stat-label">
+        STREAK 🔥
+    </div>
 
-            </div>
+    <div
+        class="stat-value"
+        id="streak">
+        0
+    </div>
 
-        </label>
+</div>
 
+</div>
 
-        <label class="task">
 
-            <input
-                type="checkbox"
-                class="task-checkbox">
+<div class="section-title">
 
-            <div class="task-content">
+    <h2>
+        Compétences
+    </h2>
 
-                <div class="task-title">
-                    💪 Musculation
-                </div>
+</div>
 
-                <div class="task-description">
-                    Force générale
-                </div>
 
-            </div>
+<div class="panel">
 
-        </label>
 
+<div class="progress-item">
 
-        <label class="task">
+    <div class="progress-head">
 
-            <input
-                type="checkbox"
-                class="task-checkbox">
+        <span>
+            🥋 JJB
+        </span>
 
-            <div class="task-content">
-
-                <div class="task-title">
-                    🥋 JJB — Mercredi
-                </div>
-
-                <div class="task-description">
-                    Technique + sparring
-                </div>
-
-            </div>
-
-        </label>
-
-
-        <label class="task">
-
-            <input
-                type="checkbox"
-                class="task-checkbox">
-
-            <div class="task-content">
-
-                <div class="task-title">
-                    🧱 Core
-                </div>
-
-                <div class="task-description">
-                    Gainage et stabilité
-                </div>
-
-            </div>
-
-        </label>
-
-
-        <label class="task">
-
-            <input
-                type="checkbox"
-                class="task-checkbox">
-
-            <div class="task-content">
-
-                <div class="task-title">
-                    🥋 JJB — Vendredi
-                </div>
-
-                <div class="task-description">
-                    Technique + sparring
-                </div>
-
-            </div>
-
-        </label>
-
-
-        <label class="task">
-
-            <input
-                type="checkbox"
-                class="task-checkbox">
-
-            <div class="task-content">
-
-                <div class="task-title">
-                    🫁 Cardio
-                </div>
-
-                <div class="task-description">
-                    20–30 minutes
-                </div>
-
-            </div>
-
-        </label>
-
-
-        <label class="task">
-
-            <input
-                type="checkbox"
-                class="task-checkbox">
-
-            <div class="task-content">
-
-                <div class="task-title">
-                    🧘 Mobilité
-                </div>
-
-                <div class="task-description">
-                    10 minutes de mobilité
-                </div>
-
-            </div>
-
-        </label>
+        <span id="skillJjb">
+            0%
+        </span>
 
     </div>
 
+    <div class="progress-track">
 
-    <div class="section-title">
+        <div
+            class="progress-fill"
+            id="fillJjb">
+        </div>
 
-        <h2>
-            Gestion
-        </h2>
+    </div>
+
+</div>
+
+
+<div class="progress-item">
+
+    <div class="progress-head">
+
+        <span>
+            ✊ Grip
+        </span>
+
+        <span id="skillGrip">
+            0%
+        </span>
 
     </div>
 
-    <div class="button-row">
+    <div class="progress-track">
 
-        <button
-            class="btn btn-secondary"
-            onclick="resetWeek()">
-            Réinitialiser la semaine
-        </button>
-
-        <button
-            class="btn btn-primary"
-            onclick="showPage('training')">
-            Ajouter de l'entraînement →
-        </button>
+        <div
+            class="progress-fill"
+            id="fillGrip">
+        </div>
 
     </div>
+
+</div>
+
+
+<div class="progress-item">
+
+    <div class="progress-head">
+
+        <span>
+            💪 Force
+        </span>
+
+        <span id="skillStrength">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="fillStrength">
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="progress-item">
+
+    <div class="progress-head">
+
+        <span>
+            🫁 Cardio
+        </span>
+
+        <span id="skillCardio">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="fillCardio">
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="progress-item">
+
+    <div class="progress-head">
+
+        <span>
+            🧘 Mobilité
+        </span>
+
+        <span id="skillMobility">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="fillMobility">
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="section-title">
+
+    <h2>
+        Historique
+    </h2>
+
+</div>
+
+
+<div class="panel">
+
+    <div
+        class="log"
+        id="history">
+
+        <div
+            style="
+                color:var(--muted);
+                text-align:center;
+                padding:20px;
+            ">
+
+            Aucune séance enregistrée.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    style="
+        margin-top:15px;
+        display:flex;
+        justify-content:flex-end;
+    ">
+
+    <button
+        class="btn btn-secondary"
+        onclick="clearData()">
+        🗑️ Effacer mes données
+    </button>
+
+</div>
 
 </section>
+
 
 </main>
 
 
 <footer>
 
-    JJB Training Hub • Construis ta progression, une séance à la fois 🥋
+    JJB Coach • Ton entraînement, tes données, ta progression 🥋
 
 </footer>
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     RATING MODAL
 ===================================================== -->
 
+<div
+    class="modal"
+    id="ratingModal">
+
+    <div class="modal-content">
+
+        <h2>
+            Séance terminée ! 🔥
+        </h2>
+
+        <p>
+            Comment était la difficulté ?
+        </p>
+
+
+        <div class="rating">
+
+            <button onclick="rateSession(1)">
+                😭
+            </button>
+
+            <button onclick="rateSession(2)">
+                😐
+            </button>
+
+            <button onclick="rateSession(3)">
+                🙂
+            </button>
+
+            <button onclick="rateSession(4)">
+                😤
+            </button>
+
+            <button onclick="rateSession(5)">
+                🗿
+            </button>
+
+        </div>
+
+
+        <button
+            class="btn btn-secondary"
+            onclick="closeRating()">
+            Annuler
+        </button>
+
+    </div>
+
+</div>
+
+
 <script>
+
+/* =========================================================
+   DATA
+========================================================= */
+
+const workouts = {
+
+    jjb: {
+
+        title: "🥋 JJB Technique",
+
+        subtitle:
+            "Technique + drills + préparation au sparring",
+
+        exercises: [
+
+            ["Hip escape", "3 × 10 répétitions"],
+
+            ["Technical stand-up", "3 × 8 répétitions"],
+
+            ["Guard retention drill", "3 × 2 min"],
+
+            ["Bridge + shrimp", "3 × 10"],
+
+            ["Sparring à thème", "3–5 × 5 min"]
+
+        ]
+
+    },
+
+
+    grip: {
+
+        title: "✊ Grip",
+
+        subtitle:
+            "Avant-bras et force de préhension",
+
+        exercises: [
+
+            ["Dead hang", "3 × 30 secondes"],
+
+            ["Towel hang", "3 × 20 secondes"],
+
+            ["Farmer hold", "3 × 40 secondes"],
+
+            ["Wrist curls", "3 × 15"],
+
+            ["Finger extensions", "3 × 25"]
+
+        ]
+
+    },
+
+
+    strength: {
+
+        title: "💪 Force JJB",
+
+        subtitle:
+            "Force générale utile au grappling",
+
+        exercises: [
+
+            ["Squats", "3 × 8–12"],
+
+            ["Tractions", "3 × 5–10"],
+
+            ["Pompes", "3 × 10–20"],
+
+            ["Rowing", "3 × 8–12"],
+
+            ["Gainage", "3 × 30–60 secondes"]
+
+        ]
+
+    },
+
+
+    cardio: {
+
+        title: "🫁 Cardio",
+
+        subtitle:
+            "Améliorer ton endurance et ta récupération",
+
+        exercises: [
+
+            ["Corde à sauter", "3 × 2 min"],
+
+            ["Course légère", "10 min"],
+
+            ["Intervalles", "6 × 30s rapide / 60s lent"],
+
+            ["Burpees contrôlés", "3 × 10"],
+
+            ["Marche active", "5–10 min"]
+
+        ]
+
+    },
+
+
+    mobility: {
+
+        title: "🧘 Mobilité",
+
+        subtitle:
+            "Hanches, épaules et colonne",
+
+        exercises: [
+
+            ["90/90 hips", "2 × 60 secondes"],
+
+            ["Deep squat hold", "2 × 45 secondes"],
+
+            ["Shoulder rotations", "2 × 15"],
+
+            ["Thoracic rotations", "2 × 10 / côté"],
+
+            ["Ankle mobility", "2 × 45 secondes"]
+
+        ]
+
+    },
+
+
+    core: {
+
+        title: "🧱 Core",
+
+        subtitle:
+            "Stabilité et transmission de force",
+
+        exercises: [
+
+            ["Plank", "3 × 45 secondes"],
+
+            ["Side plank", "3 × 30 secondes / côté"],
+
+            ["Dead bug", "3 × 10 / côté"],
+
+            ["Hollow hold", "3 × 20 secondes"],
+
+            ["Bird dog", "3 × 10 / côté"]
+
+        ]
+
+    }
+
+};
+
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
-function showPage(pageId, clickedButton = null) {
+function showPage(id, button = null) {
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
 
-    const page = document.getElementById(pageId);
+
+    const page =
+        document.getElementById(id);
 
     if (page) {
         page.classList.add("active");
     }
 
-    document.querySelectorAll(".nav button").forEach(button => {
-        button.classList.remove("active");
-    });
 
-    if (clickedButton) {
-        clickedButton.classList.add("active");
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+
+    if (button) {
+        button.classList.add("active");
     }
+
 
     window.scrollTo({
         top: 0,
@@ -1816,261 +2206,1091 @@ function showPage(pageId, clickedButton = null) {
 
 
 /* =========================================================
-   DARK MODE
+   THEME
 ========================================================= */
 
 function toggleTheme() {
 
     document.body.classList.toggle("dark");
 
-    const isDark =
+    const dark =
         document.body.classList.contains("dark");
 
     localStorage.setItem(
         "jjb-theme",
-        isDark ? "dark" : "light"
+        dark ? "dark" : "light"
     );
 
-    updateThemeButton();
+    updateTheme();
 }
 
 
-function updateThemeButton() {
+function updateTheme() {
 
-    const button =
-        document.getElementById("themeButton");
-
-    const isDark =
+    const dark =
         document.body.classList.contains("dark");
 
-    button.textContent =
-        isDark ? "☀️" : "🌙";
+    document.getElementById(
+        "themeButton"
+    ).textContent =
+        dark ? "☀️" : "🌙";
 }
 
 
-/* Charger le thème sauvegardé */
-
-const savedTheme =
-    localStorage.getItem("jjb-theme");
-
-if (savedTheme === "dark") {
+if (
+    localStorage.getItem("jjb-theme")
+    === "dark"
+) {
     document.body.classList.add("dark");
 }
 
-updateThemeButton();
+updateTheme();
 
 
 /* =========================================================
-   WEEKLY PROGRESS
+   TODAY
 ========================================================= */
 
-const checkboxes =
-    document.querySelectorAll(".task-checkbox");
+function updateToday() {
+
+    const day =
+        new Date().getDay();
+
+    const title =
+        document.getElementById("todayTitle");
+
+    const desc =
+        document.getElementById("todayDescription");
 
 
-function updateWeeklyProgress() {
+    if (day === 1) {
 
-    const total =
-        checkboxes.length;
+        title.textContent =
+            "JJB";
 
-    const completed =
-        document.querySelectorAll(
-            ".task-checkbox:checked"
-        ).length;
+        desc.textContent =
+            "Lundi : séance principale. Technique, drills et sparring.";
 
-    /*
-        IMPORTANT :
+    }
 
-        Si rien n'est coché :
-        0 / total = 0%
+    else if (day === 3) {
 
-        Il n'y a donc aucun pourcentage
-        pré-rempli à 72% ou autre.
-    */
+        title.textContent =
+            "JJB";
 
-    const percentage =
-        total === 0
-            ? 0
-            : Math.round(
-                (completed / total) * 100
-            );
+        desc.textContent =
+            "Mercredi : travaille une compétence précise et mets-la en pratique.";
 
+    }
 
-    document.getElementById(
-        "weeklyProgress"
-    ).textContent = percentage;
+    else if (day === 5) {
 
+        title.textContent =
+            "JJB";
 
-    document.getElementById(
-        "progressBar"
-    ).style.width =
-        percentage + "%";
+        desc.textContent =
+            "Vendredi : dernière séance JJB de la semaine. 🔥";
 
+    }
 
-    document.getElementById(
-        "taskCounter"
-    ).textContent =
-        completed + " / " + total;
+    else {
+
+        title.textContent =
+            "Préparation";
+
+        desc.textContent =
+            "Jour sans JJB : grip, force, cardio ou mobilité selon ton énergie.";
+
+    }
+}
 
 
-    const progressText =
+updateToday();
+
+
+function startToday() {
+
+    const day =
+        new Date().getDay();
+
+    if (
+        day === 1 ||
+        day === 3 ||
+        day === 5
+    ) {
+
         document.getElementById(
-            "progressText"
-        );
+            "goal"
+        ).value = "jjb";
 
+    }
 
-    if (percentage === 0) {
+    else {
 
-        progressText.textContent =
-            "Rien de fait pour l'instant. On commence ? 💪";
-
-    } else if (percentage < 50) {
-
-        progressText.textContent =
-            "C'est parti ! Continue comme ça. 🔥";
-
-    } else if (percentage < 100) {
-
-        progressText.textContent =
-            "Plus de la moitié ! Ne lâche rien. 🥋";
-
-    } else {
-
-        progressText.textContent =
-            "Objectif hebdomadaire terminé ! 🗿🔥";
+        document.getElementById(
+            "goal"
+        ).value = "random";
 
     }
 
 
-    /* Ajouter / retirer l'état terminé */
+    showPage("coach");
 
-    checkboxes.forEach(checkbox => {
+    generateSession();
+}
 
-        const task =
-            checkbox.closest(".task");
 
-        if (checkbox.checked) {
-            task.classList.add("done");
-        } else {
-            task.classList.remove("done");
+/* =========================================================
+   RANDOM GOAL
+========================================================= */
+
+function randomGoal() {
+
+    const goals = [
+        "jjb",
+        "grip",
+        "strength",
+        "cardio",
+        "mobility",
+        "core"
+    ];
+
+    return goals[
+        Math.floor(
+            Math.random() * goals.length
+        )
+    ];
+}
+
+
+/* =========================================================
+   GENERATE SESSION
+========================================================= */
+
+let currentWorkout = null;
+
+function generateSession() {
+
+    let goal =
+        document.getElementById(
+            "goal"
+        ).value;
+
+
+    const duration =
+        Number(
+            document.getElementById(
+                "duration"
+            ).value
+        );
+
+
+    if (goal === "random") {
+        goal = randomGoal();
+    }
+
+
+    currentWorkout = {
+        goal,
+        duration
+    };
+
+
+    const workout =
+        workouts[goal];
+
+
+    document.getElementById(
+        "emptySession"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "session"
+    ).classList.add("active");
+
+
+    document.getElementById(
+        "sessionTitle"
+    ).textContent =
+        workout.title;
+
+
+    document.getElementById(
+        "sessionSubtitle"
+    ).textContent =
+        workout.subtitle;
+
+
+    document.getElementById(
+        "sessionDuration"
+    ).textContent =
+        duration + " min";
+
+
+    const container =
+        document.getElementById(
+            "exerciseContainer"
+        );
+
+
+    container.innerHTML = "";
+
+
+    workout.exercises.forEach(
+        (exercise, index) => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "exercise";
+
+
+            div.innerHTML = `
+
+                <div>
+
+                    <div class="exercise-name">
+                        ${index + 1}. ${exercise[0]}
+                    </div>
+
+                    <div class="exercise-detail">
+                        ${exercise[1]}
+                    </div>
+
+                </div>
+
+                <button
+                    onclick="exerciseTimer('${exercise[0]}')">
+                    ⏱️ Timer
+                </button>
+
+            `;
+
+
+            container.appendChild(div);
+
         }
+    );
+}
+
+
+/* =========================================================
+   EXERCISE TIMER
+========================================================= */
+
+function exerciseTimer(name) {
+
+    setTimer(30);
+
+    showPage("timerPage");
+
+    document.getElementById(
+        "timerState"
+    ).textContent =
+        name;
+
+}
+
+
+/* =========================================================
+   FINISH SESSION
+========================================================= */
+
+let pendingWorkout = null;
+
+function finishSession() {
+
+    if (!currentWorkout) {
+        return;
+    }
+
+    pendingWorkout =
+        currentWorkout;
+
+    document
+        .getElementById("ratingModal")
+        .classList.add("active");
+}
+
+
+function rateSession(rating) {
+
+    if (!pendingWorkout) {
+        return;
+    }
+
+
+    const data =
+        getData();
+
+
+    data.sessions.push({
+
+        date:
+            new Date().toISOString(),
+
+        goal:
+            pendingWorkout.goal,
+
+        duration:
+            pendingWorkout.duration,
+
+        rating
 
     });
 
 
-    saveTasks();
+    data.skills[
+        pendingWorkout.goal
+    ] = Math.min(
+        100,
+        (data.skills[
+            pendingWorkout.goal
+        ] || 0) + 5
+    );
+
+
+    saveData(data);
+
+    pendingWorkout = null;
+
+    closeRating();
+
+    updateProgress();
+
+
+    alert(
+        "Séance enregistrée ! 🔥"
+    );
+}
+
+
+function closeRating() {
+
+    document
+        .getElementById("ratingModal")
+        .classList.remove("active");
 }
 
 
 /* =========================================================
-   CHECKBOX EVENTS
+   TIMER
 ========================================================= */
 
-checkboxes.forEach(checkbox => {
+let timerSeconds = 30;
 
-    checkbox.addEventListener(
-        "change",
-        updateWeeklyProgress
-    );
+let timerInterval = null;
 
-});
+let timerRunning = false;
+
+
+function formatTime(seconds) {
+
+    const min =
+        Math.floor(seconds / 60)
+            .toString()
+            .padStart(2, "0");
+
+    const sec =
+        (seconds % 60)
+            .toString()
+            .padStart(2, "0");
+
+    return min + ":" + sec;
+}
+
+
+function renderTimer() {
+
+    document.getElementById(
+        "timer"
+    ).textContent =
+        formatTime(timerSeconds);
+}
+
+
+function setTimer(seconds) {
+
+    clearInterval(timerInterval);
+
+    timerSeconds = seconds;
+
+    timerRunning = false;
+
+    document.getElementById(
+        "timerStart"
+    ).textContent =
+        "▶ Démarrer";
+
+    renderTimer();
+}
+
+
+function toggleTimer() {
+
+    if (timerRunning) {
+
+        clearInterval(timerInterval);
+
+        timerRunning = false;
+
+        document.getElementById(
+            "timerStart"
+        ).textContent =
+            "▶ Reprendre";
+
+        return;
+    }
+
+
+    timerRunning = true;
+
+    document.getElementById(
+        "timerStart"
+    ).textContent =
+        "⏸ Pause";
+
+
+    timerInterval =
+        setInterval(() => {
+
+            if (timerSeconds <= 0) {
+
+                clearInterval(
+                    timerInterval
+                );
+
+                timerRunning = false;
+
+                document.getElementById(
+                    "timerStart"
+                ).textContent =
+                    "▶ Démarrer";
+
+                document.getElementById(
+                    "timerState"
+                ).textContent =
+                    "🔥 Terminé !";
+
+                beep();
+
+                return;
+            }
+
+
+            timerSeconds--;
+
+            renderTimer();
+
+        }, 1000);
+}
+
+
+function resetTimer() {
+
+    setTimer(30);
+
+    document.getElementById(
+        "timerState"
+    ).textContent =
+        "Prêt";
+}
 
 
 /* =========================================================
-   LOCAL STORAGE
+   ROUND TIMER
 ========================================================= */
 
-function saveTasks() {
+let roundSeconds = 300;
 
-    const states =
-        Array.from(checkboxes).map(
-            checkbox => checkbox.checked
+let currentRound = 1;
+
+let totalRounds = 5;
+
+let roundInterval = null;
+
+let roundRunning = false;
+
+
+function renderRound() {
+
+    document.getElementById(
+        "roundTimer"
+    ).textContent =
+        formatTime(roundSeconds);
+
+
+    document.getElementById(
+        "roundNumber"
+    ).textContent =
+        "Round "
+        + currentRound
+        + " / "
+        + totalRounds;
+}
+
+
+function toggleRound() {
+
+    if (roundRunning) {
+
+        clearInterval(
+            roundInterval
         );
 
-    localStorage.setItem(
-        "jjb-week-tasks",
-        JSON.stringify(states)
+        roundRunning = false;
+
+        document.getElementById(
+            "roundStart"
+        ).textContent =
+            "▶ Reprendre";
+
+        return;
+    }
+
+
+    roundRunning = true;
+
+    document.getElementById(
+        "roundStart"
+    ).textContent =
+        "⏸ Pause";
+
+
+    roundInterval =
+        setInterval(() => {
+
+            if (roundSeconds <= 0) {
+
+                clearInterval(
+                    roundInterval
+                );
+
+                roundRunning = false;
+
+                document.getElementById(
+                    "roundStart"
+                ).textContent =
+                    "▶ Démarrer";
+
+                beep();
+
+                if (
+                    currentRound <
+                    totalRounds
+                ) {
+
+                    nextRound();
+
+                } else {
+
+                    alert(
+                        "Tous les rounds sont terminés ! 🥋🔥"
+                    );
+
+                }
+
+                return;
+            }
+
+
+            roundSeconds--;
+
+            renderRound();
+
+        }, 1000);
+}
+
+
+function resetRound() {
+
+    clearInterval(
+        roundInterval
+    );
+
+    roundRunning = false;
+
+    currentRound = 1;
+
+    roundSeconds =
+        Number(
+            document.getElementById(
+                "roundDuration"
+            ).value
+        );
+
+
+    document.getElementById(
+        "roundStart"
+    ).textContent =
+        "▶ Démarrer";
+
+    renderRound();
+}
+
+
+function nextRound() {
+
+    clearInterval(
+        roundInterval
+    );
+
+    roundRunning = false;
+
+    if (
+        currentRound <
+        totalRounds
+    ) {
+
+        currentRound++;
+
+        roundSeconds =
+            Number(
+                document.getElementById(
+                    "roundDuration"
+                ).value
+            );
+
+    } else {
+
+        currentRound = 1;
+
+        roundSeconds =
+            Number(
+                document.getElementById(
+                    "roundDuration"
+                ).value
+            );
+
+    }
+
+
+    document.getElementById(
+        "roundStart"
+    ).textContent =
+        "▶ Démarrer";
+
+    renderRound();
+}
+
+
+function configureRounds() {
+
+    totalRounds =
+        Number(
+            document.getElementById(
+                "roundCount"
+            ).value
+        );
+
+    resetRound();
+
+    alert(
+        totalRounds
+        + " rounds configurés. 🥋"
     );
 }
 
 
-function loadTasks() {
+renderRound();
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+function beep() {
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        const audio =
+            new AudioContext();
+
+        const oscillator =
+            audio.createOscillator();
+
+        const gain =
+            audio.createGain();
+
+        oscillator.connect(
+            gain
+        );
+
+        gain.connect(
+            audio.destination
+        );
+
+        oscillator.frequency.value =
+            700;
+
+        gain.gain.value =
+            .15;
+
+        oscillator.start();
+
+        oscillator.stop(
+            audio.currentTime + .2
+        );
+
+    } catch (e) {
+
+        console.log(
+            "Audio indisponible."
+        );
+
+    }
+}
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const defaultData = {
+
+    sessions: [],
+
+    skills: {
+
+        jjb: 0,
+
+        grip: 0,
+
+        strength: 0,
+
+        cardio: 0,
+
+        mobility: 0,
+
+        core: 0
+
+    }
+
+};
+
+
+function getData() {
 
     const saved =
         localStorage.getItem(
-            "jjb-week-tasks"
+            "jjb-coach-data"
         );
+
 
     if (!saved) {
 
-        /*
-            IMPORTANT :
+        return structuredClone(
+            defaultData
+        );
 
-            Aucun ancien état n'est appliqué.
-            La première visite commence donc
-            bien à 0%.
-        */
-
-        updateWeeklyProgress();
-        return;
     }
 
 
     try {
 
-        const states =
-            JSON.parse(saved);
+        return JSON.parse(saved);
 
-        checkboxes.forEach(
-            (checkbox, index) => {
+    } catch {
 
-                checkbox.checked =
-                    states[index] === true;
-
-            }
-        );
-
-    } catch (error) {
-
-        console.log(
-            "Impossible de charger les objectifs."
+        return structuredClone(
+            defaultData
         );
 
     }
+}
 
-    updateWeeklyProgress();
+
+function saveData(data) {
+
+    localStorage.setItem(
+        "jjb-coach-data",
+        JSON.stringify(data)
+    );
 }
 
 
 /* =========================================================
-   RESET WEEK
+   PROGRESS
 ========================================================= */
 
-function resetWeek() {
+function updateProgress() {
 
-    const confirmation =
-        confirm(
-            "Réinitialiser tous les objectifs de la semaine ?"
+    const data =
+        getData();
+
+
+    document.getElementById(
+        "totalSessions"
+    ).textContent =
+        data.sessions.length;
+
+
+    const totalMinutes =
+        data.sessions.reduce(
+            (sum, session) =>
+                sum + Number(
+                    session.duration || 0
+                ),
+            0
         );
 
-    if (!confirmation) {
+
+    document.getElementById(
+        "totalMinutes"
+    ).textContent =
+        totalMinutes;
+
+
+    updateStreak(
+        data.sessions
+    );
+
+
+    updateSkill(
+        "Jjb",
+        data.skills.jjb
+    );
+
+    updateSkill(
+        "Grip",
+        data.skills.grip
+    );
+
+    updateSkill(
+        "Strength",
+        data.skills.strength
+    );
+
+    updateSkill(
+        "Cardio",
+        data.skills.cardio
+    );
+
+    updateSkill(
+        "Mobility",
+        data.skills.mobility
+    );
+
+
+    const history =
+        document.getElementById(
+            "history"
+        );
+
+
+    if (
+        data.sessions.length === 0
+    ) {
+
+        history.innerHTML = `
+
+            <div style="
+                color:var(--muted);
+                text-align:center;
+                padding:20px;
+            ">
+
+                Aucune séance enregistrée.
+
+            </div>
+
+        `;
+
         return;
     }
 
 
-    checkboxes.forEach(
-        checkbox => {
-            checkbox.checked = false;
+    history.innerHTML = "";
+
+
+    [...data.sessions]
+        .reverse()
+        .slice(0, 10)
+        .forEach(session => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "log-item";
+
+
+            const workout =
+                workouts[
+                    session.goal
+                ];
+
+
+            div.innerHTML = `
+
+                <div>
+
+                    <div class="log-name">
+                        ${workout
+                            ? workout.title
+                            : session.goal}
+                    </div>
+
+                    <div class="log-date">
+                        ${formatDate(
+                            session.date
+                        )}
+                    </div>
+
+                </div>
+
+                <strong>
+                    ${session.duration} min
+                </strong>
+
+            `;
+
+
+            history.appendChild(div);
+
+        });
+}
+
+
+function updateSkill(name, value) {
+
+    const safe =
+        Math.min(
+            100,
+            Number(value || 0)
+        );
+
+
+    document.getElementById(
+        "skill" + name
+    ).textContent =
+        safe + "%";
+
+
+    document.getElementById(
+        "fill" + name
+    ).style.width =
+        safe + "%";
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+function updateStreak(sessions) {
+
+    if (!sessions.length) {
+
+        document.getElementById(
+            "streak"
+        ).textContent = 0;
+
+        return;
+    }
+
+
+    const dates =
+        new Set(
+            sessions.map(
+                session =>
+                    session.date
+                        .slice(0,10)
+            )
+        );
+
+
+    let streak = 0;
+
+    const current =
+        new Date();
+
+
+    while (true) {
+
+        const date =
+            current.toISOString()
+                .slice(0,10);
+
+
+        if (!dates.has(date)) {
+            break;
+        }
+
+
+        streak++;
+
+        current.setDate(
+            current.getDate() - 1
+        );
+
+    }
+
+
+    document.getElementById(
+        "streak"
+    ).textContent =
+        streak;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(dateString) {
+
+    return new Date(
+        dateString
+    ).toLocaleDateString(
+        "fr-FR",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
         }
     );
+}
+
+
+/* =========================================================
+   CLEAR DATA
+========================================================= */
+
+function clearData() {
+
+    const confirmDelete =
+        confirm(
+            "Supprimer toutes tes séances et ta progression ?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
 
 
     localStorage.removeItem(
-        "jjb-week-tasks"
+        "jjb-coach-data"
     );
 
 
-    updateWeeklyProgress();
+    updateProgress();
+
+
+    alert(
+        "Données supprimées."
+    );
 }
 
 
@@ -2078,7 +3298,7 @@ function resetWeek() {
    INITIALISATION
 ========================================================= */
 
-loadTasks();
+updateProgress();
 
 </script>
 
