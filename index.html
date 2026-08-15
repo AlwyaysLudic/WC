@@ -1,48 +1,44 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JJB — Training Lab</title>
+<title>JJB Lab</title>
 
 <style>
-/* =========================================================
-   JJB TRAINING LAB — V2
-========================================================= */
+:root{
+    --bg:#0b0d0f;
+    --panel:#13171a;
+    --panel2:#191e22;
+    --line:#293036;
+    --text:#f4f5f5;
+    --muted:#8e999f;
+    --accent:#d7ff3f;
+    --accent-dark:#9fca00;
+    --danger:#ff5c5c;
+    --orange:#ffad42;
+    --blue:#63b3ff;
+    --shadow:0 20px 60px rgba(0,0,0,.28);
+}
+
+body.light{
+    --bg:#f1f2ef;
+    --panel:#ffffff;
+    --panel2:#e8ebe6;
+    --line:#d4d9d3;
+    --text:#101311;
+    --muted:#657067;
+    --accent:#507500;
+    --accent-dark:#3d5900;
+    --danger:#d73e3e;
+    --orange:#d87900;
+    --blue:#1476bd;
+    --shadow:0 20px 50px rgba(20,30,20,.1);
+}
 
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --bg:#eeeae3;
-    --panel:#f8f6f1;
-    --panel2:#e5e0d7;
-    --text:#171717;
-    --muted:#77736c;
-    --line:#d3cec4;
-    --accent:#d9482b;
-    --accent2:#f1b24a;
-    --green:#3d8b62;
-    --blue:#416d9b;
-    --shadow:0 12px 35px rgba(30,25,20,.08);
-}
-
-body.dark{
-    --bg:#101112;
-    --panel:#181a1b;
-    --panel2:#232628;
-    --text:#f4f2ed;
-    --muted:#9a9994;
-    --line:#333638;
-    --accent:#ed5b3d;
-    --accent2:#e5a13d;
-    --green:#4da777;
-    --blue:#6192c5;
-    --shadow:0 15px 40px rgba(0,0,0,.3);
 }
 
 html{
@@ -50,195 +46,151 @@ html{
 }
 
 body{
-    min-height:100vh;
+    margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:Inter,Arial,Helvetica,sans-serif;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     transition:.25s;
 }
 
-/* =========================================================
-   APP
-========================================================= */
-
-.app{
-    width:min(1250px,94%);
-    margin:auto;
-    padding:18px 0 35px;
+button,
+select,
+textarea{
+    font:inherit;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+button{
+    cursor:pointer;
+}
 
-header{
+.app{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:240px 1fr;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:240px;
+    padding:24px 16px;
+    background:var(--panel);
+    border-right:1px solid var(--line);
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    margin-bottom:28px;
+    flex-direction:column;
+    z-index:20;
 }
 
 .brand{
+    padding:8px 12px 30px;
+}
+
+.brand-top{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-1px;
 }
 
-.brand-icon{
-    width:45px;
-    height:45px;
-    border-radius:14px;
+.brand-mark{
+    width:38px;
+    height:38px;
+    border-radius:11px;
     background:var(--accent);
-    color:white;
+    color:#101400;
     display:grid;
     place-items:center;
-    font-size:23px;
-    box-shadow:var(--shadow);
+    font-size:20px;
 }
 
-.brand h1{
-    font-size:18px;
-    letter-spacing:-.5px;
-}
-
-.brand p{
+.brand small{
+    display:block;
     color:var(--muted);
-    font-size:10px;
-    letter-spacing:1.5px;
-    margin-top:2px;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:6px;
 }
-
-.header-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    width:42px;
-    height:42px;
-    border:1px solid var(--line);
-    background:var(--panel);
-    color:var(--text);
-    border-radius:12px;
-    cursor:pointer;
-    font-size:17px;
-}
-
-.icon-btn:hover{
-    transform:translateY(-1px);
-}
-
-/* =========================================================
-   NAV
-========================================================= */
 
 .nav{
     display:flex;
-    gap:6px;
-    padding:5px;
-    background:var(--panel2);
-    border-radius:15px;
-    margin-bottom:28px;
-    overflow-x:auto;
+    flex-direction:column;
+    gap:5px;
 }
 
 .nav button{
+    width:100%;
     border:0;
     background:transparent;
     color:var(--muted);
-    padding:10px 15px;
-    border-radius:11px;
-    cursor:pointer;
-    font-weight:800;
-    white-space:nowrap;
+    text-align:left;
+    padding:13px 14px;
+    border-radius:10px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    transition:.15s;
+}
+
+.nav button:hover{
+    background:var(--panel2);
+    color:var(--text);
 }
 
 .nav button.active{
-    background:var(--panel);
-    color:var(--text);
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    background:var(--accent);
+    color:#101400;
 }
 
-/* =========================================================
-   PAGES
-========================================================= */
+.sidebar-bottom{
+    margin-top:auto;
+}
+
+.theme{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+    padding:11px;
+    border-radius:10px;
+}
+
+/* MAIN */
+
+main{
+    grid-column:2;
+    min-width:0;
+    padding:30px;
+}
 
 .page{
     display:none;
-    animation:appear .2s ease;
+    width:min(1200px,100%);
+    margin:auto;
 }
 
 .page.active{
     display:block;
 }
 
-@keyframes appear{
-    from{
-        opacity:0;
-        transform:translateY(5px);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-    border:0;
-    border-radius:11px;
-    padding:12px 16px;
-    cursor:pointer;
-    font-weight:800;
-    color:var(--text);
-    background:var(--panel2);
-}
-
-.btn:hover{
-    transform:translateY(-1px);
-}
-
-.btn.primary{
-    background:var(--accent);
-    color:white;
-}
-
-.btn.dark{
-    background:var(--text);
-    color:var(--bg);
-}
-
-.btn.small{
-    padding:8px 11px;
-    font-size:12px;
-}
-
-/* =========================================================
-   HOME
-========================================================= */
-
-.hero{
-    display:grid;
-    grid-template-columns:1.5fr .8fr;
-    gap:18px;
-}
-
-.hero-main{
-    min-height:350px;
-    border-radius:25px;
-    padding:38px;
-    background:
-        radial-gradient(circle at 90% 10%,rgba(217,72,43,.2),transparent 30%),
-        var(--panel);
-    border:1px solid var(--line);
-    box-shadow:var(--shadow);
+.topbar{
     display:flex;
-    flex-direction:column;
     justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
 }
 
 .eyebrow{
@@ -246,650 +198,189 @@ header{
     font-size:11px;
     font-weight:900;
     letter-spacing:2px;
+    text-transform:uppercase;
 }
 
-.hero-main h2{
-    max-width:650px;
-    font-size:clamp(42px,7vw,78px);
-    line-height:.9;
-    letter-spacing:-5px;
-    margin:18px 0;
-}
-
-.hero-main h2 span{
-    color:var(--accent);
-}
-
-.hero-main p{
-    max-width:600px;
-    color:var(--muted);
-    line-height:1.6;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:22px;
-}
-
-.today{
-    border-radius:25px;
-    padding:27px;
-    background:var(--text);
-    color:var(--bg);
-    min-height:350px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-}
-
-body.dark .today{
-    background:#25282a;
-}
-
-.today .eyebrow{
-    color:var(--accent2);
-}
-
-.today h3{
-    font-size:29px;
-    margin-top:15px;
-}
-
-.today p{
-    color:#aaa;
-    line-height:1.5;
-    margin-top:10px;
-}
-
-.today-bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-}
-
-.today-number{
-    font-size:42px;
-    font-weight:900;
-}
-
-/* =========================================================
-   QUICK GRID
-========================================================= */
-
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-top:18px;
-}
-
-.quick{
-    min-height:145px;
-    padding:20px;
-    border:1px solid var(--line);
-    border-radius:19px;
-    background:var(--panel);
-    cursor:pointer;
-    transition:.2s;
-}
-
-.quick:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow);
-}
-
-.quick-icon{
-    font-size:25px;
-    margin-bottom:25px;
-}
-
-.quick h3{
-    font-size:15px;
-}
-
-.quick p{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.4;
-    margin-top:5px;
-}
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:16px;
-}
-
-.section-head h2{
-    font-size:27px;
-    letter-spacing:-1px;
-}
-
-.section-head p{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* =========================================================
-   CARDS
-========================================================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.card{
-    padding:22px;
-    border:1px solid var(--line);
-    border-radius:18px;
-    background:var(--panel);
-    box-shadow:0 5px 20px rgba(0,0,0,.03);
-}
-
-.card h3{
-    margin:8px 0;
-}
-
-.card p{
-    color:var(--muted);
-    line-height:1.55;
-    font-size:13px;
-}
-
-.tag{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:7px;
-    background:var(--panel2);
-    color:var(--muted);
-    font-size:10px;
-    font-weight:900;
-}
-
-/* =========================================================
-   TECHNIQUES
-========================================================= */
-
-.tech-layout{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    gap:15px;
-}
-
-.tech-menu{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:10px;
-    height:max-content;
-}
-
-.tech-menu button{
-    width:100%;
-    text-align:left;
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:12px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:800;
-}
-
-.tech-menu button.active{
-    background:var(--accent);
-    color:white;
-}
-
-.tech-content{
-    min-height:420px;
-}
-
-.tech-detail{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:27px;
-}
-
-.tech-detail h2{
-    font-size:32px;
+h1{
+    font-size:clamp(38px,6vw,72px);
+    line-height:.95;
+    letter-spacing:-4px;
     margin:8px 0 12px;
 }
 
-.tech-detail p{
+h2{
+    letter-spacing:-1.5px;
+}
+
+.muted{
     color:var(--muted);
-    line-height:1.6;
 }
 
-.tech-steps{
+/* DASHBOARD */
+
+.hero{
     display:grid;
-    gap:8px;
-    margin-top:22px;
+    grid-template-columns:1.5fr .7fr;
+    gap:20px;
+    margin-bottom:20px;
 }
 
-.step{
-    padding:13px;
-    background:var(--panel2);
-    border-radius:11px;
+.hero-main{
+    min-height:330px;
+    padding:35px;
+    border-radius:24px;
+    background:
+        radial-gradient(circle at 80% 20%,rgba(215,255,63,.12),transparent 35%),
+        var(--panel);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
     display:flex;
-    gap:12px;
-    align-items:center;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.step-number{
-    width:28px;
-    height:28px;
-    border-radius:8px;
+.hero-main p{
+    max-width:650px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.hero-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 17px;
+    font-weight:800;
+    transition:.15s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
     background:var(--accent);
-    color:white;
-    display:grid;
-    place-items:center;
-    font-size:12px;
-    font-weight:900;
-    flex:none;
+    color:#101400;
 }
 
-.warning{
-    margin-top:18px;
-    padding:15px;
-    border-left:4px solid var(--accent2);
+.btn-secondary{
     background:var(--panel2);
-    border-radius:8px;
-    font-size:13px;
+    color:var(--text);
+    border:1px solid var(--line);
 }
 
-/* =========================================================
-   SCENARIO
-========================================================= */
-
-.scenario{
-    max-width:800px;
-    margin:auto;
-}
-
-.scenario-box{
+.today{
+    border-radius:24px;
+    padding:28px;
     background:var(--panel);
     border:1px solid var(--line);
-    border-radius:23px;
-    padding:30px;
-    box-shadow:var(--shadow);
 }
 
-.scenario-position{
-    color:var(--accent);
+.today .day{
+    color:var(--muted);
     font-size:11px;
     font-weight:900;
     letter-spacing:2px;
 }
 
-.scenario-box h2{
-    font-size:35px;
+.today h2{
+    font-size:30px;
     margin:12px 0;
 }
 
-.scenario-box p{
-    color:var(--muted);
-    line-height:1.65;
-}
-
-.answers{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-    margin-top:22px;
-}
-
-.answer{
-    padding:17px;
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--text);
-    border-radius:12px;
-    text-align:left;
-    cursor:pointer;
-    font-weight:800;
-}
-
-.answer:hover{
-    border-color:var(--accent);
-}
-
-.answer.correct{
-    background:rgba(61,139,98,.2);
-    border-color:var(--green);
-}
-
-.answer.wrong{
-    background:rgba(217,72,43,.15);
-    border-color:var(--accent);
-}
-
-.scenario-result{
-    margin-top:18px;
-    padding:17px;
-    background:var(--panel2);
-    border-radius:12px;
-    line-height:1.5;
-    display:none;
-}
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-.quiz-box{
-    max-width:800px;
-    margin:auto;
-}
-
-.quiz-question{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:22px;
-    padding:30px;
-}
-
-.quiz-question h2{
-    font-size:27px;
-    margin:12px 0 20px;
-}
-
-.quiz-options{
-    display:grid;
-    gap:9px;
-}
-
-.quiz-option{
-    padding:15px;
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--text);
-    border-radius:11px;
-    cursor:pointer;
-    text-align:left;
-    font-weight:800;
-}
-
-.quiz-option.correct{
-    background:rgba(61,139,98,.2);
-    border-color:var(--green);
-}
-
-.quiz-option.wrong{
-    background:rgba(217,72,43,.15);
-    border-color:var(--accent);
-}
-
-.quiz-result{
-    margin-top:15px;
-    color:var(--muted);
-    line-height:1.5;
-}
-
-/* =========================================================
-   GENERATOR
-========================================================= */
-
-.generator{
-    display:grid;
-    grid-template-columns:280px 1fr;
-    gap:15px;
-}
-
-.controls{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:20px;
-    height:max-content;
-}
-
-.field{
-    margin:15px 0;
-}
-
-.field label{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1px;
-    margin-bottom:6px;
-}
-
-select,
-textarea,
-input{
-    width:100%;
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--text);
-    border-radius:10px;
-    padding:11px;
-    outline:none;
-}
-
-.session-box{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:22px;
-}
-
-.session-empty{
-    text-align:center;
-    padding:70px 20px;
-    color:var(--muted);
-}
-
-.generated-exercise{
-    border-bottom:1px solid var(--line);
-    padding:18px 3px;
-}
-
-.generated-exercise:last-child{
-    border-bottom:0;
-}
-
-.ex-head{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.ex-name{
-    font-weight:900;
-    font-size:18px;
-}
-
-.ex-info{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:5px;
-}
-
-.feelings{
-    display:flex;
-    gap:6px;
-    margin-top:13px;
-    flex-wrap:wrap;
-}
-
-.feeling{
-    border:1px solid var(--line);
-    background:var(--panel2);
-    color:var(--text);
-    border-radius:8px;
-    padding:8px 10px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:800;
-}
-
-.feeling.selected{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:white;
-}
-
-/* =========================================================
-   ROUNDS
-========================================================= */
-
-.round-box{
-    max-width:700px;
-    margin:auto;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:25px;
-    padding:35px;
-    text-align:center;
-    box-shadow:var(--shadow);
-}
-
-.round-status{
+.today .schedule{
     color:var(--accent);
-    font-weight:900;
-    letter-spacing:2px;
-    font-size:11px;
+    font-weight:800;
 }
 
-.round-timer{
-    font-size:clamp(70px,15vw,130px);
-    line-height:1;
-    font-weight:900;
-    letter-spacing:-7px;
-    margin:30px 0;
-}
+/* CARDS */
 
-.round-exercise{
-    font-size:22px;
-    font-weight:900;
-    margin-bottom:8px;
-}
-
-.round-rest{
-    color:var(--muted);
-}
-
-.round-controls{
-    display:flex;
-    justify-content:center;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-/* =========================================================
-   JOURNAL
-========================================================= */
-
-.journal-grid{
+.grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
     gap:15px;
 }
 
-.journal-box{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:20px;
+.grid-3{
+    grid-template-columns:repeat(3,1fr);
 }
 
-.journal-box h3{
-    margin-bottom:10px;
-}
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-.journal-list{
-    margin-top:15px;
-    display:grid;
-    gap:8px;
-}
-
-.journal-entry{
-    background:var(--panel2);
-    padding:14px;
-    border-radius:11px;
-}
-
-.journal-entry small{
-    color:var(--muted);
-}
-
-.journal-entry p{
-    margin-top:7px;
-    white-space:pre-wrap;
-    line-height:1.5;
-}
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.stats{
-    display:grid;
+.grid-4{
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
 }
 
-.stat{
+.card{
     background:var(--panel);
     border:1px solid var(--line);
-    border-radius:17px;
+    border-radius:16px;
     padding:20px;
 }
 
-.stat small{
+.stat-value{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.stat-label{
     color:var(--muted);
     font-size:10px;
     font-weight:900;
-    letter-spacing:1px;
+    letter-spacing:1.5px;
+    margin-top:4px;
 }
 
-.stat strong{
-    display:block;
-    font-size:36px;
-    margin-top:7px;
+/* SKILLS */
+
+.section{
+    margin-top:30px;
 }
 
-.progress-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-top:15px;
-}
-
-.progress-card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:20px;
-}
-
-.progress-top{
+.section-heading{
     display:flex;
     justify-content:space-between;
-    margin-bottom:9px;
-    font-weight:900;
+    align-items:end;
+    margin-bottom:14px;
 }
 
-.track{
-    height:8px;
+.section-heading h2{
+    margin:0;
+}
+
+.skill{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.skill-icon{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:var(--panel2);
+    display:grid;
+    place-items:center;
+}
+
+.skill-info{
+    flex:1;
+}
+
+.skill-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.bar{
+    height:7px;
     background:var(--panel2);
     border-radius:20px;
     overflow:hidden;
@@ -899,108 +390,350 @@ textarea{
     height:100%;
     width:0;
     background:var(--accent);
-    transition:.4s;
+    border-radius:20px;
+    transition:.5s;
 }
 
-/* =========================================================
-   DATA
-========================================================= */
+/* COACH */
 
-.data-grid{
+.coach-layout{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:280px 1fr;
+    gap:20px;
 }
 
-.data-card{
+.controls{
     background:var(--panel);
     border:1px solid var(--line);
     border-radius:18px;
     padding:22px;
+    height:max-content;
+    position:sticky;
+    top:20px;
 }
 
-.data-card p{
+.control{
+    margin-bottom:18px;
+}
+
+.control label{
+    display:block;
     color:var(--muted);
-    line-height:1.5;
-    margin:8px 0 15px;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.4px;
+    margin-bottom:7px;
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+select{
+    width:100%;
+    padding:12px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+}
+
+.session{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.session-head{
+    padding:25px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.session-head h2{
+    margin:0 0 5px;
+}
+
+.exercise{
+    padding:22px 25px;
+    border-bottom:1px solid var(--line);
+}
+
+.exercise:last-child{
+    border-bottom:0;
+}
+
+.exercise-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.exercise-number{
+    color:var(--accent);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.exercise-name{
+    font-size:20px;
+    font-weight:900;
+    margin-top:4px;
+}
+
+.prescription{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.feedback{
+    margin-top:17px;
+}
+
+.feedback-title{
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    margin-bottom:8px;
+}
+
+.feedback-buttons{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.feedback-btn{
+    border:1px solid var(--line);
+    background:var(--panel2);
+    color:var(--text);
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.feedback-btn.selected{
+    background:var(--accent);
+    color:#101400;
+    border-color:var(--accent);
+}
+
+.note{
+    width:100%;
+    margin-top:10px;
+    resize:vertical;
+    min-height:45px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--panel2);
+    color:var(--text);
+    padding:10px;
+}
+
+.next-time{
+    margin-top:10px;
+    color:var(--accent);
+    font-size:12px;
+    font-weight:800;
+}
+
+/* TIMER */
+
+.timer-wrap{
+    max-width:700px;
+    margin:60px auto;
+    text-align:center;
+}
+
+.timer-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:25px;
+    padding:55px 25px;
+    box-shadow:var(--shadow);
+}
+
+.timer-number{
+    font-size:clamp(80px,15vw,150px);
+    font-weight:900;
+    letter-spacing:-8px;
+    margin:20px 0 30px;
+}
+
+.timer-actions{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* PROGRESS */
+
+.progress-card{
+    margin-bottom:15px;
+}
+
+.history-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.history-item:last-child{
+    border-bottom:0;
+}
+
+.history-main{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.history-icon{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    background:var(--panel2);
+    display:grid;
+    place-items:center;
+}
+
+.history-date{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* DATA */
+
+.data-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.data-box{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:25px;
+}
+
+/* EMPTY */
+
+.empty{
+    padding:60px 20px;
+    text-align:center;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+}
 
 @media(max-width:900px){
 
-    .hero,
-    .generator,
-    .tech-layout{
-        grid-template-columns:1fr;
-    }
-
-    .quick-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .cards{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:600px){
-
     .app{
-        width:92%;
+        display:block;
     }
 
-    header{
-        margin-bottom:15px;
+    .sidebar{
+        position:fixed;
+        top:auto;
+        left:0;
+        right:0;
+        bottom:0;
+        width:100%;
+        height:70px;
+        padding:6px;
+        border-right:0;
+        border-top:1px solid var(--line);
+        flex-direction:row;
+        justify-content:center;
     }
 
-    .brand p{
+    .brand,
+    .sidebar-bottom{
         display:none;
     }
 
     .nav{
-        margin-bottom:18px;
+        width:100%;
+        flex-direction:row;
+        justify-content:space-around;
     }
 
     .nav button{
-        padding:9px 11px;
-        font-size:11px;
+        width:auto;
+        flex:1;
+        justify-content:center;
+        text-align:center;
+        font-size:10px;
+        padding:8px 4px;
+    }
+
+    .nav button span{
+        display:none;
+    }
+
+    main{
+        padding:20px 15px 90px;
+    }
+
+    .hero,
+    .coach-layout,
+    .data-grid{
+        grid-template-columns:1fr;
+    }
+
+    .controls{
+        position:static;
+    }
+
+    .grid-4{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    h1{
+        letter-spacing:-2px;
     }
 
     .hero-main{
-        min-height:390px;
         padding:25px;
+        min-height:300px;
     }
 
-    .hero-main h2{
-        font-size:48px;
-        letter-spacing:-3px;
-    }
-
-    .today{
-        min-height:230px;
-    }
-
-    .quick-grid,
-    .cards,
-    .journal-grid,
-    .data-grid,
-    .progress-grid{
+    .grid-3{
         grid-template-columns:1fr;
     }
 
-    .answers{
-        grid-template-columns:1fr;
+    .session-head,
+    .exercise-row{
+        flex-direction:column;
     }
 
-    .stats{
+    .feedback-buttons{
+        display:grid;
         grid-template-columns:1fr 1fr;
+    }
+
+    .feedback-btn{
+        width:100%;
     }
 }
 </style>
@@ -1010,108 +743,83 @@ textarea{
 
 <div class="app">
 
-<header>
+<aside class="sidebar">
 
 <div class="brand">
-
-<div class="brand-icon">🥋</div>
-
-<div>
-<h1>JJB TRAINING LAB</h1>
-<p>TRAIN • THINK • IMPROVE</p>
+    <div class="brand-top">
+        <div class="brand-mark">🥋</div>
+        JJB LAB
+    </div>
+    <small>TRAIN • ADAPT • IMPROVE</small>
 </div>
-
-</div>
-
-<div class="header-actions">
-
-<button
-class="icon-btn"
-onclick="toggleTheme()"
-id="themeBtn">
-🌙
-</button>
-
-</div>
-
-</header>
-
 
 <nav class="nav">
 
-<button class="active" onclick="showPage('home',this)">
-Accueil
+<button class="active" onclick="showPage('dashboard',this)">
+    🏠 <span>Dashboard</span>
 </button>
 
-<button onclick="showPage('jjb',this)">
-🥋 JJB
+<button onclick="showPage('coach',this)">
+    🎯 <span>Coach</span>
 </button>
 
-<button onclick="showPage('training',this)">
-💪 Training
-</button>
-
-<button onclick="showPage('rounds',this)">
-🥊 Rounds
-</button>
-
-<button onclick="showPage('journal',this)">
-📝 Journal
+<button onclick="showPage('timerPage',this)">
+    ⏱️ <span>Timer</span>
 </button>
 
 <button onclick="showPage('progress',this)">
-📈 Progression
+    📈 <span>Progress</span>
 </button>
 
-<button onclick="showPage('data',this)">
-⚙️ Données
+<button onclick="showPage('dataPage',this)">
+    💾 <span>Data</span>
 </button>
 
 </nav>
 
+<div class="sidebar-bottom">
+<button class="theme" onclick="toggleTheme()" id="themeButton">
+    🌙 Toggle theme
+</button>
+</div>
 
-<!-- =====================================================
-HOME
-===================================================== -->
+</aside>
 
-<section id="home" class="page active">
+
+<main>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active">
+
+<div class="topbar">
+<div>
+<div class="eyebrow">Jiu-Jitsu Training System</div>
+</div>
+</div>
 
 <div class="hero">
 
 <div class="hero-main">
 
-<div>
+<div class="eyebrow">Build your game</div>
 
-<div class="eyebrow">
-JJB TRAINING LAB
-</div>
-
-<h2>
-TRAIN<br>
-<span>SMART.</span><br>
-FIGHT.
-</h2>
+<h1>TRAIN<br>FOR THE<br><span style="color:var(--accent)">ROLL.</span></h1>
 
 <p>
-Un espace pour apprendre le JJB,
-réfléchir aux situations, travailler
-ton physique et suivre ta progression.
+A simple training companion built around the things that actually
+matter for grappling: movement, conditioning, strength, grip,
+mobility and consistency.
 </p>
 
-</div>
+<div class="hero-actions">
 
-<div class="hero-buttons">
-
-<button
-class="btn primary"
-onclick="startToday()">
-🥋 Séance du jour →
+<button class="btn btn-primary" onclick="startToday()">
+    Start today's session →
 </button>
 
-<button
-class="btn"
-onclick="showPage('jjb')">
-🧠 Travailler le JJB
+<button class="btn btn-secondary" onclick="showPage('coach')">
+    Build a workout
 </button>
 
 </div>
@@ -1121,395 +829,149 @@ onclick="showPage('jjb')">
 
 <div class="today">
 
-<div>
+<div class="day" id="todayDay">TODAY</div>
 
-<div class="eyebrow">
-AUJOURD'HUI
-</div>
+<h2 id="todayTitle">—</h2>
 
-<h3 id="todayTitle">
-—
-</h3>
+<p class="muted" id="todayDescription">—</p>
 
-<p id="todayText">
-—
-</p>
-
-</div>
-
-<div class="today-bottom">
-
-<div>
-
-<div class="today-number" id="homeSessions">
-0
-</div>
-
-<div style="color:#aaa;font-size:10px">
-SÉANCES
-</div>
-
-</div>
-
-<button
-class="btn"
-onclick="newScenario()">
-🧠 Situation
-</button>
-
-</div>
+<div class="schedule" id="todaySchedule">—</div>
 
 </div>
 
 </div>
 
 
-<div style="margin-top:25px">
+<div class="grid grid-4">
 
-<div class="section-head">
+<div class="card">
+<div class="stat-value" id="dashSessions">0</div>
+<div class="stat-label">WORKOUTS</div>
+</div>
 
-<div>
-<h2>À faire maintenant</h2>
-<p>Quelques outils rapides.</p>
+<div class="card">
+<div class="stat-value" id="dashMinutes">0</div>
+<div class="stat-label">MINUTES</div>
+</div>
+
+<div class="card">
+<div class="stat-value" id="dashStreak">0</div>
+<div class="stat-label">DAY STREAK</div>
+</div>
+
+<div class="card">
+<div class="stat-value" id="dashXP">0</div>
+<div class="stat-label">TRAINING XP</div>
 </div>
 
 </div>
 
 
-<div class="quick-grid">
+<div class="section">
 
-<div class="quick" onclick="newScenario()">
-
-<div class="quick-icon">🧠</div>
-
-<h3>Situation JJB</h3>
-
-<p>
-Une situation et une décision
-à prendre.
-</p>
-
+<div class="section-heading">
+<h2>Your game</h2>
+<span class="muted">Skill development</span>
 </div>
 
-
-<div class="quick" onclick="newQuiz()">
-
-<div class="quick-icon">❓</div>
-
-<h3>Quiz</h3>
-
-<p>
-Teste ta compréhension
-du JJB.
-</p>
-
-</div>
-
-
-<div class="quick" onclick="generateTraining()">
-
-<div class="quick-icon">🎲</div>
-
-<h3>Entraînement</h3>
-
-<p>
-Une séance adaptée à ton objectif.
-</p>
-
-</div>
-
-
-<div class="quick" onclick="dailyChallenge()">
-
-<div class="quick-icon">🔥</div>
-
-<h3>Challenge</h3>
-
-<p>
-Un petit défi pour aujourd'hui.
-</p>
-
-</div>
-
-</div>
+<div class="grid grid-3" id="dashboardSkills"></div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-JJB
-===================================================== -->
+<!-- COACH -->
 
-<section id="jjb" class="page">
+<section id="coach" class="page">
 
-<div class="section-head">
-
+<div class="topbar">
 <div>
-<h2>🥋 JJB</h2>
-<p>Apprendre → réfléchir → pratiquer.</p>
-</div>
-
-</div>
-
-
-<div class="cards" style="margin-bottom:15px">
-
-<div class="card" onclick="showJjbTab('techniques')">
-<span class="tag">APPRENDRE</span>
-<h3>📚 Techniques</h3>
-<p>
-Comprendre les mouvements et leurs objectifs.
+<div class="eyebrow">Training generator</div>
+<h1>YOUR SESSION.</h1>
+<p class="muted">
+The system adapts exercise difficulty from your previous feedback.
 </p>
 </div>
-
-<div class="card" onclick="showJjbTab('sequences')">
-<span class="tag">ENCHAÎNER</span>
-<h3>🔗 Séquences</h3>
-<p>
-Apprendre quoi faire après la première action.
-</p>
 </div>
 
-<div class="card" onclick="showJjbTab('scenario')">
-<span class="tag">RÉFLÉCHIR</span>
-<h3>🧠 Situations</h3>
-<p>
-Décider quoi faire face à une situation.
-</p>
-</div>
-
-</div>
-
-
-<div id="techniquesTab">
-
-<div class="tech-layout">
-
-<div class="tech-menu" id="techMenu">
-</div>
-
-<div class="tech-content">
-
-<div
-class="tech-detail"
-id="techDetail">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="sequencesTab" style="display:none">
-
-<div class="cards">
-
-<div class="card">
-
-<span class="tag">SIDE CONTROL</span>
-
-<h3>Escape → Guard</h3>
-
-<p>
-Frame → créer de l'espace →
-shrimp → genou à l'intérieur →
-récupérer la garde.
-</p>
-
-<button
-class="btn small"
-style="margin-top:15px"
-onclick="showSequence('side')">
-Voir la séquence
-</button>
-
-</div>
-
-
-<div class="card">
-
-<span class="tag">MOUNT</span>
-
-<h3>Escape → Half Guard</h3>
-
-<p>
-Frame → bridge →
-tourner → insérer le genou →
-récupérer une position défensive.
-</p>
-
-<button
-class="btn small"
-style="margin-top:15px"
-onclick="showSequence('mount')">
-Voir la séquence
-</button>
-
-</div>
-
-
-<div class="card">
-
-<span class="tag">CLOSED GUARD</span>
-
-<h3>Posture → attaque</h3>
-
-<p>
-Contrôler la posture →
-créer une réaction →
-attaquer selon la réaction.
-</p>
-
-<button
-class="btn small"
-style="margin-top:15px"
-onclick="showSequence('guard')">
-Voir la séquence
-</button>
-
-</div>
-
-</div>
-
-<div
-id="sequenceResult"
-style="margin-top:15px">
-</div>
-
-</div>
-
-
-<div id="scenarioTab" style="display:none">
-
-<div class="scenario">
-
-<div class="scenario-box">
-
-<div class="scenario-position">
-SITUATION JJB
-</div>
-
-<h2 id="scenarioTitle">
-—
-</h2>
-
-<p id="scenarioQuestion">
-—
-</p>
-
-<div
-class="answers"
-id="scenarioAnswers">
-</div>
-
-<div
-class="scenario-result"
-id="scenarioResult">
-</div>
-
-<button
-class="btn primary"
-style="margin-top:15px"
-onclick="newScenario()">
-Nouvelle situation
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-TRAINING
-===================================================== -->
-
-<section id="training" class="page">
-
-<div class="section-head">
-
-<div>
-<h2>💪 Training</h2>
-<p>Préparation physique utile au JJB.</p>
-</div>
-
-</div>
-
-
-<div class="generator">
+<div class="coach-layout">
 
 <div class="controls">
 
-<div class="field">
-
-<label>DURÉE</label>
+<div class="control">
+<label>SESSION LENGTH</label>
 
 <select id="duration">
-
-<option value="10">10 min</option>
-<option value="20" selected>20 min</option>
-<option value="30">30 min</option>
-<option value="45">45 min</option>
-<option value="60">60 min</option>
-
+<option value="10">10 minutes</option>
+<option value="20" selected>20 minutes</option>
+<option value="30">30 minutes</option>
+<option value="45">45 minutes</option>
+<option value="60">60 minutes</option>
 </select>
-
 </div>
 
 
-<div class="field">
-
-<label>OBJECTIF</label>
+<div class="control">
+<label>FOCUS</label>
 
 <select id="goal">
-
-<option value="random">🎲 Mix</option>
-<option value="jjb">🥋 JJB</option>
-<option value="movement">🔄 Mouvements</option>
+<option value="random">🎲 Random</option>
+<option value="jjb">🥋 JJB movement</option>
+<option value="movement">🔄 Movement</option>
 <option value="grip">✊ Grip</option>
-<option value="strength">💪 Force</option>
-<option value="cardio">🫁 Cardio</option>
-<option value="mobility">🧘 Mobilité</option>
+<option value="strength">💪 Strength</option>
+<option value="cardio">🫁 Conditioning</option>
+<option value="mobility">🧘 Mobility</option>
 <option value="core">🧱 Core</option>
-
 </select>
-
 </div>
 
 
-<button
-class="btn primary"
-style="width:100%"
-onclick="generateTraining()">
-🎲 Générer
+<button class="btn btn-primary" style="width:100%" onclick="generateSession()">
+🎲 Generate workout
 </button>
 
 </div>
 
 
-<div class="session-box">
+<div id="sessionArea">
 
-<div id="trainingResult"
-class="session-empty">
-
-<div style="font-size:45px">
-🎲
+<div class="empty" id="emptySession">
+<div class="empty-icon">🎯</div>
+<h2>No workout yet</h2>
+<p>
+Pick a focus and generate your session.
+</p>
 </div>
 
-<h3 style="margin:10px">
-Aucune séance
-</h3>
+<div class="session" id="session" style="display:none">
 
-<p>
-Choisis ton objectif et génère une séance.
-</p>
+<div class="session-head">
+
+<div>
+<div class="eyebrow">Today's workout</div>
+<h2 id="sessionTitle">—</h2>
+<div class="muted" id="sessionSubtitle">—</div>
+</div>
+
+<div class="muted" id="sessionDuration">—</div>
+
+</div>
+
+<div id="exerciseContainer"></div>
+
+<div style="padding:20px;display:flex;gap:8px;flex-wrap:wrap">
+
+<button class="btn btn-primary" onclick="finishSession()">
+Complete workout
+</button>
+
+<button class="btn btn-secondary" onclick="generateSession()">
+Generate another
+</button>
+
+</div>
 
 </div>
 
@@ -1520,142 +982,46 @@ Choisis ton objectif et génère une séance.
 </section>
 
 
-<!-- =====================================================
-ROUNDS
-===================================================== -->
+<!-- TIMER -->
 
-<section id="rounds" class="page">
+<section id="timerPage" class="page">
 
-<div class="section-head">
+<div class="timer-wrap">
 
-<div>
-<h2>🥊 Rounds</h2>
-<p>Travaille comme pendant un round.</p>
+<div class="eyebrow">Round timer</div>
+
+<h1>ROLL TIMER.</h1>
+
+<div class="timer-card">
+
+<div class="muted" id="timerLabel">Ready</div>
+
+<div class="timer-number" id="timer">
+05:00
 </div>
 
-</div>
+<div class="timer-actions">
 
-
-<div class="round-box">
-
-<div class="round-status" id="roundStatus">
-PRÊT
-</div>
-
-<div
-class="round-exercise"
-id="roundExercise">
-Prépare-toi
-</div>
-
-<div
-class="round-timer"
-id="roundTimer">
-02:00
-</div>
-
-<div class="round-rest" id="roundRest">
-Round 1 / 5
-</div>
-
-<div class="round-controls" style="margin-top:25px">
-
-<button
-class="btn primary"
-onclick="toggleRound()"
-id="roundButton">
-▶ Démarrer
+<button class="btn btn-primary" onclick="toggleTimer()" id="timerButton">
+▶ Start
 </button>
 
-<button
-class="btn"
-onclick="resetRound()">
+<button class="btn btn-secondary" onclick="resetTimer()">
 Reset
 </button>
 
-<button
-class="btn small"
-onclick="setRound(60)">
-1 min
+<button class="btn btn-secondary" onclick="setTimer(60)">
+1:00
 </button>
 
-<button
-class="btn small"
-onclick="setRound(120)">
-2 min
+<button class="btn btn-secondary" onclick="setTimer(180)">
+3:00
 </button>
 
-<button
-class="btn small"
-onclick="setRound(180)">
-3 min
+<button class="btn btn-secondary" onclick="setTimer(300)">
+5:00
 </button>
 
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-JOURNAL
-===================================================== -->
-
-<section id="journal" class="page">
-
-<div class="section-head">
-
-<div>
-<h2>📝 Journal de JJB</h2>
-<p>Ce que tu apprends aujourd'hui devient ton travail de demain.</p>
-</div>
-
-</div>
-
-
-<div class="journal-grid">
-
-<div class="journal-box">
-
-<h3>🥋 Cours du jour</h3>
-
-<div class="field">
-<label>TECHNIQUE / POSITION</label>
-<input id="journalTechnique" placeholder="Ex : side control escape">
-</div>
-
-<div class="field">
-<label>CE QUE J'AI APPRIS</label>
-<textarea id="journalLearned"></textarea>
-</div>
-
-<div class="field">
-<label>CE QUI M'A POSÉ PROBLÈME</label>
-<textarea id="journalProblem"></textarea>
-</div>
-
-<div class="field">
-<label>À TRAVAILLER</label>
-<textarea id="journalWork"></textarea>
-</div>
-
-<button
-class="btn primary"
-onclick="saveJournal()">
-Enregistrer le cours
-</button>
-
-</div>
-
-
-<div class="journal-box">
-
-<h3>📖 Historique</h3>
-
-<div
-id="journalList"
-class="journal-list">
 </div>
 
 </div>
@@ -1665,185 +1031,131 @@ class="journal-list">
 </section>
 
 
-<!-- =====================================================
-PROGRESS
-===================================================== -->
+<!-- PROGRESS -->
 
 <section id="progress" class="page">
 
-<div class="section-head">
+<div class="topbar">
 
 <div>
-<h2>📈 Progression</h2>
-<p>Pas de magie : juste du travail accumulé.</p>
+<div class="eyebrow">Long game</div>
+<h1>PROGRESS.</h1>
 </div>
 
 </div>
 
 
-<div class="stats">
+<div class="grid grid-3">
 
-<div class="stat">
-<small>SÉANCES</small>
-<strong id="statSessions">0</strong>
+<div class="card">
+<div class="stat-value" id="progressSessions">0</div>
+<div class="stat-label">WORKOUTS</div>
 </div>
 
-<div class="stat">
-<small>MINUTES</small>
-<strong id="statMinutes">0</strong>
+<div class="card">
+<div class="stat-value" id="progressMinutes">0</div>
+<div class="stat-label">MINUTES</div>
 </div>
 
-<div class="stat">
-<small>SCÉNARIOS</small>
-<strong id="statScenarios">0</strong>
-</div>
-
-<div class="stat">
-<small>QUIZ</small>
-<strong id="statQuiz">0</strong>
+<div class="card">
+<div class="stat-value" id="progressXP">0</div>
+<div class="stat-label">XP</div>
 </div>
 
 </div>
 
 
-<div class="progress-grid">
+<div class="section">
 
-<div class="progress-card">
-<div class="progress-top">
-<span>🥋 JJB</span>
-<span id="pJjb">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fJjb"></div>
-</div>
+<div class="section-heading">
+<h2>Skills</h2>
+<span class="muted">Based on completed sessions</span>
 </div>
 
-<div class="progress-card">
-<div class="progress-top">
-<span>💪 Force</span>
-<span id="pStrength">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fStrength"></div>
-</div>
+<div class="card" id="progressSkills"></div>
+
 </div>
 
-<div class="progress-card">
-<div class="progress-top">
-<span>✊ Grip</span>
-<span id="pGrip">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fGrip"></div>
-</div>
+
+<div class="section">
+
+<div class="section-heading">
+<h2>Recent sessions</h2>
 </div>
 
-<div class="progress-card">
-<div class="progress-top">
-<span>🫁 Cardio</span>
-<span id="pCardio">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fCardio"></div>
-</div>
-</div>
-
-<div class="progress-card">
-<div class="progress-top">
-<span>🧘 Mobilité</span>
-<span id="pMobility">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fMobility"></div>
-</div>
-</div>
-
-<div class="progress-card">
-<div class="progress-top">
-<span>🧠 Connaissance</span>
-<span id="pKnowledge">0%</span>
-</div>
-<div class="track">
-<div class="fill" id="fKnowledge"></div>
-</div>
-</div>
+<div class="card" id="history"></div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-DATA
-===================================================== -->
+<!-- DATA -->
 
-<section id="data" class="page">
+<section id="dataPage" class="page">
 
-<div class="section-head">
+<div class="topbar">
 
 <div>
-<h2>⚙️ Données</h2>
-<p>Tout reste sur ton navigateur.</p>
+<div class="eyebrow">Your data</div>
+<h1>BACKUP.</h1>
+<p class="muted">
+Everything is stored locally in your browser.
+</p>
 </div>
 
 </div>
-
 
 <div class="data-grid">
 
-<div class="data-card">
+<div class="data-box">
 
-<h3>💾 Sauvegarde</h3>
+<h2>Export</h2>
 
-<p>
-Exporte ta progression dans un fichier JSON.
-Tu pourras la restaurer plus tard.
+<p class="muted">
+Save your complete JJB Lab progression as a JSON file.
 </p>
 
-<button
-class="btn primary"
-onclick="exportData()">
-Exporter
+<button class="btn btn-primary" onclick="exportData()">
+Download backup
 </button>
 
 </div>
 
 
-<div class="data-card">
+<div class="data-box">
 
-<h3>📥 Restaurer</h3>
+<h2>Import</h2>
 
-<p>
-Importe une sauvegarde précédemment créée.
+<p class="muted">
+Restore a previous backup.
 </p>
 
 <input
 type="file"
 id="importFile"
-accept=".json">
+accept=".json"
+style="margin-bottom:12px;max-width:100%;">
 
-<button
-class="btn primary"
-style="margin-top:10px"
-onclick="importData()">
-Importer
+<br>
+
+<button class="btn btn-primary" onclick="importData()">
+Import backup
 </button>
 
 </div>
 
 
-<div class="data-card">
+<div class="data-box">
 
-<h3>🧹 Réinitialiser</h3>
+<h2>Reset</h2>
 
-<p>
-Supprime les données enregistrées sur ce navigateur.
+<p class="muted">
+Delete all local training data from this browser.
 </p>
 
-<button
-class="btn"
-onclick="resetData()">
-Tout supprimer
+<button class="btn btn-secondary" onclick="clearData()">
+Reset everything
 </button>
 
 </div>
@@ -1851,6 +1163,8 @@ Tout supprimer
 </div>
 
 </section>
+
+</main>
 
 </div>
 
@@ -1858,1473 +1172,1352 @@ Tout supprimer
 <script>
 
 /* =========================================================
-DATA
+   EXERCISES
 ========================================================= */
 
-const DEFAULT_DATA={
+const exercises = {
+
+jjb: [
+
+{
+id:"jjb_shrimp",
+name:"Hip Escape",
+levels:[
+"2 × 6 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 12 / side",
+"4 × 12 / side"
+]
+},
+
+{
+id:"jjb_bridge",
+name:"Bridge + Hip Rotation",
+levels:[
+"2 × 6",
+"2 × 8",
+"3 × 8",
+"3 × 12",
+"4 × 12"
+]
+},
+
+{
+id:"jjb_standup",
+name:"Technical Stand-Up",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+},
+
+{
+id:"jjb_sprawl",
+name:"Sprawl",
+levels:[
+"2 × 5",
+"2 × 8",
+"3 × 8",
+"3 × 10",
+"4 × 10"
+]
+},
+
+{
+id:"jjb_sitthrough",
+name:"Sit-Through",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 12 / side",
+"4 × 12 / side"
+]
+},
+
+{
+id:"jjb_granby",
+name:"Granby Roll",
+levels:[
+"2 × 4 / side",
+"2 × 5 / side",
+"3 × 5 / side",
+"3 × 8 / side",
+"4 × 8 / side"
+]
+}
+
+],
+
+movement:[
+
+{
+id:"shrimp",
+name:"Hip Escape",
+levels:[
+"2 × 6 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 12 / side",
+"4 × 12 / side"
+]
+},
+
+{
+id:"reverse_shrimp",
+name:"Reverse Shrimp",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+},
+
+{
+id:"bridge",
+name:"Bridge",
+levels:[
+"2 × 8",
+"2 × 12",
+"3 × 12",
+"3 × 15",
+"4 × 15"
+]
+},
+
+{
+id:"technical_standup",
+name:"Technical Stand-Up",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+},
+
+{
+id:"sprawl",
+name:"Sprawl",
+levels:[
+"2 × 5",
+"2 × 8",
+"3 × 8",
+"3 × 10",
+"4 × 10"
+]
+},
+
+{
+id:"bear",
+name:"Bear Crawl",
+levels:[
+"2 × 15 sec",
+"2 × 20 sec",
+"3 × 20 sec",
+"3 × 30 sec",
+"4 × 30 sec"
+]
+},
+
+{
+id:"sitthrough",
+name:"Sit-Through",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 12 / side",
+"4 × 12 / side"
+]
+}
+
+],
+
+grip:[
+
+{
+id:"towel_squeeze",
+name:"Towel Crush",
+levels:[
+"2 × 15 sec",
+"2 × 20 sec",
+"3 × 20 sec",
+"3 × 30 sec",
+"4 × 30 sec"
+]
+},
+
+{
+id:"towel_wring",
+name:"Towel Wring",
+levels:[
+"2 × 15 sec",
+"2 × 20 sec",
+"3 × 20 sec",
+"3 × 30 sec",
+"4 × 30 sec"
+]
+},
+
+{
+id:"towel_hold",
+name:"Towel Isometric Hold",
+levels:[
+"2 × 10 sec",
+"2 × 15 sec",
+"3 × 20 sec",
+"3 × 30 sec",
+"4 × 40 sec"
+]
+},
+
+{
+id:"finger_extension",
+name:"Finger Extensions",
+levels:[
+"2 × 10",
+"2 × 15",
+"3 × 15",
+"3 × 20",
+"4 × 25"
+]
+},
+
+{
+id:"wrist_rotation",
+name:"Wrist Rotations",
+levels:[
+"2 × 10",
+"2 × 15",
+"3 × 15",
+"3 × 20",
+"4 × 20"
+]
+}
+
+],
+
+strength:[
+
+{
+id:"pushups",
+name:"Push-Ups",
+levels:[
+"2 × 6",
+"2 × 8",
+"3 × 10",
+"3 × 15",
+"4 × 15"
+]
+},
+
+{
+id:"squat",
+name:"Bodyweight Squats",
+levels:[
+"2 × 10",
+"2 × 15",
+"3 × 15",
+"3 × 20",
+"4 × 20"
+]
+},
+
+{
+id:"lunges",
+name:"Reverse Lunges",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 12 / side",
+"4 × 12 / side"
+]
+},
+
+{
+id:"pike",
+name:"Pike Push-Ups",
+levels:[
+"2 × 4",
+"2 × 6",
+"3 × 6",
+"3 × 10",
+"4 × 10"
+]
+},
+
+{
+id:"glute_bridge",
+name:"Glute Bridge",
+levels:[
+"2 × 10",
+"2 × 15",
+"3 × 15",
+"3 × 20",
+"4 × 20"
+]
+},
+
+{
+id:"superman",
+name:"Superman",
+levels:[
+"2 × 8",
+"2 × 12",
+"3 × 12",
+"3 × 15",
+"4 × 15"
+]
+}
+
+],
+
+cardio:[
+
+{
+id:"mountain",
+name:"Mountain Climbers",
+levels:[
+"2 × 20 sec",
+"2 × 30 sec",
+"3 × 30 sec",
+"4 × 30 sec",
+"4 × 45 sec"
+]
+},
+
+{
+id:"burpee",
+name:"Burpees",
+levels:[
+"2 × 5",
+"2 × 8",
+"3 × 8",
+"3 × 10",
+"4 × 10"
+]
+},
+
+{
+id:"high_knees",
+name:"High Knees",
+levels:[
+"2 × 20 sec",
+"2 × 30 sec",
+"3 × 30 sec",
+"4 × 30 sec",
+"4 × 45 sec"
+]
+},
+
+{
+id:"jumping_jacks",
+name:"Jumping Jacks",
+levels:[
+"2 × 30 sec",
+"2 × 45 sec",
+"3 × 45 sec",
+"4 × 45 sec",
+"5 × 45 sec"
+]
+}
+
+],
+
+mobility:[
+
+{
+id:"ninety",
+name:"90/90 Hip Switches",
+levels:[
+"2 × 6 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+},
+
+{
+id:"deep_squat",
+name:"Deep Squat Hold",
+levels:[
+"20 sec",
+"30 sec",
+"45 sec",
+"60 sec",
+"75 sec"
+]
+},
+
+{
+id:"thoracic",
+name:"Thoracic Rotations",
+levels:[
+"2 × 6 / side",
+"2 × 8 / side",
+"2 × 10 / side",
+"3 × 10 / side",
+"3 × 12 / side"
+]
+},
+
+{
+id:"shoulder",
+name:"Shoulder Circles",
+levels:[
+"2 × 10",
+"2 × 15",
+"3 × 15",
+"3 × 20",
+"4 × 20"
+]
+},
+
+{
+id:"ankle",
+name:"Ankle Mobility",
+levels:[
+"30 sec / side",
+"40 sec / side",
+"60 sec / side",
+"75 sec / side",
+"90 sec / side"
+]
+}
+
+],
+
+core:[
+
+{
+id:"plank",
+name:"Plank",
+levels:[
+"2 × 20 sec",
+"2 × 30 sec",
+"3 × 30 sec",
+"3 × 45 sec",
+"4 × 45 sec"
+]
+},
+
+{
+id:"side_plank",
+name:"Side Plank",
+levels:[
+"2 × 15 sec / side",
+"2 × 20 sec / side",
+"3 × 20 sec / side",
+"3 × 30 sec / side",
+"4 × 30 sec / side"
+]
+},
+
+{
+id:"dead_bug",
+name:"Dead Bug",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+},
+
+{
+id:"bird_dog",
+name:"Bird Dog",
+levels:[
+"2 × 5 / side",
+"2 × 8 / side",
+"3 × 8 / side",
+"3 × 10 / side",
+"4 × 10 / side"
+]
+}
+
+]
+
+};
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+const labels = {
+jjb:"🥋 JJB",
+movement:"🔄 Movement",
+grip:"✊ Grip",
+strength:"💪 Strength",
+cardio:"🫁 Conditioning",
+mobility:"🧘 Mobility",
+core:"🧱 Core"
+};
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+const defaultData = {
     sessions:[],
-    exercises:{},
-    scenarios:0,
-    quiz:0,
-    journals:[],
+    levels:{},
+    feedback:{},
+    notes:{},
     skills:{
         jjb:0,
-        strength:0,
+        movement:0,
         grip:0,
+        strength:0,
         cardio:0,
         mobility:0,
-        knowledge:0
-    }
+        core:0
+    },
+    xp:0
 };
+
 
 function loadData(){
 
-    const saved=localStorage.getItem("jjbLabV2");
+    const raw=localStorage.getItem("jjbLabData");
 
-    if(!saved)
-        return structuredClone(DEFAULT_DATA);
+    if(!raw)
+        return structuredClone(defaultData);
 
     try{
-        const data=JSON.parse(saved);
+
+        const data=JSON.parse(raw);
 
         return {
-            ...structuredClone(DEFAULT_DATA),
+            ...structuredClone(defaultData),
             ...data,
             skills:{
-                ...DEFAULT_DATA.skills,
+                ...structuredClone(defaultData.skills),
                 ...(data.skills||{})
             }
         };
 
     }catch{
-        return structuredClone(DEFAULT_DATA);
+
+        return structuredClone(defaultData);
+
     }
 }
 
+
 function saveData(data){
     localStorage.setItem(
-        "jjbLabV2",
+        "jjbLabData",
         JSON.stringify(data)
     );
 }
 
 
 /* =========================================================
-THEME
+   UTILS
 ========================================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("dark");
-
-    const dark=
-        document.body.classList.contains("dark");
-
-    localStorage.setItem(
-        "jjbThemeV2",
-        dark ? "dark" : "light"
-    );
-
-    document.getElementById("themeBtn").textContent=
-        dark ? "☀️" : "🌙";
-}
-
-if(localStorage.getItem("jjbThemeV2")==="dark"){
-    document.body.classList.add("dark");
-    document.getElementById("themeBtn").textContent="☀️";
-}
-
-
-/* =========================================================
-NAVIGATION
-========================================================= */
-
-function showPage(id,button){
-
-    document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
-
-    const page=document.getElementById(id);
-
-    if(page)
-        page.classList.add("active");
-
-    document.querySelectorAll(".nav button")
-        .forEach(b=>b.classList.remove("active"));
-
-    if(button)
-        button.classList.add("active");
-
-    window.scrollTo(0,0);
-}
-
-
-/* =========================================================
-TODAY
-========================================================= */
-
-function updateToday(){
-
-    const day=new Date().getDay();
-
-    const title=document.getElementById("todayTitle");
-    const text=document.getElementById("todayText");
-
-    if(day===1 || day===3 || day===5){
-
-        title.textContent="🥋 JJB";
-
-        text.textContent=
-            "Jour de cours. Travaille surtout ce que ton coach t'a montré aujourd'hui.";
-
-    }else if(day===2 || day===4){
-
-        title.textContent="💪 Préparation";
-
-        text.textContent=
-            "Une petite séance de force, grip, mobilité ou mouvements.";
-
-    }else{
-
-        title.textContent="🧠 Travail libre";
-
-        text.textContent=
-            "Technique, scénarios, mobilité ou récupération.";
-
-    }
-}
-
-
-/* =========================================================
-TECHNIQUES
-========================================================= */
-
-const techniques={
-
-    shrimp:{
-        title:"Hip Escape / Shrimp",
-        category:"MOUVEMENT",
-        description:
-            "Créer de l'espace avec les hanches pour récupérer une position défensive ou replacer une garde.",
-        steps:[
-            "Créer une frame avec les bras.",
-            "Ramener les talons près des fesses.",
-            "Pousser le sol et déplacer les hanches.",
-            "Ramener les genoux entre toi et l'adversaire.",
-            "Replacer ta garde."
-        ],
-        warning:
-            "Évite de pousser uniquement avec les bras. Le mouvement vient surtout des hanches."
-    },
-
-    bridge:{
-        title:"Bridge",
-        category:"ESCAPE",
-        description:
-            "Utilisé notamment pour créer de l'espace depuis la mount et déséquilibrer l'adversaire.",
-        steps:[
-            "Ramener les pieds près des fesses.",
-            "Garder les genoux actifs.",
-            "Pousser fort dans le sol.",
-            "Monter les hanches.",
-            "Combiner avec une direction et une action technique."
-        ],
-        warning:
-            "Ne fais pas simplement un gros pont vers le haut : cherche à déplacer le poids adverse."
-    },
-
-    technical:{
-        title:"Technical Stand-Up",
-        category:"MOUVEMENT",
-        description:
-            "Se relever en restant protégé et capable de réagir à une attaque.",
-        steps:[
-            "Une main au sol.",
-            "Pied opposé devant.",
-            "Protéger la tête avec l'autre bras.",
-            "Décoller les hanches.",
-            "Se relever sans croiser les jambes."
-        ],
-        warning:
-            "Garde une main disponible pour protéger ton visage et contrôler la distance."
-    },
-
-    sprawl:{
-        title:"Sprawl",
-        category:"TAKEDOWN DEFENSE",
-        description:
-            "Réaction fondamentale pour défendre une tentative de double ou single leg.",
-        steps:[
-            "Réagir dès que tu détectes l'entrée.",
-            "Jeter les jambes en arrière.",
-            "Amener les hanches vers l'adversaire.",
-            "Garder une bonne position du haut du corps.",
-            "Chercher ensuite une position dominante."
-        ],
-        warning:
-            "Le timing compte énormément. Un sprawl tardif est beaucoup moins efficace."
-    },
-
-    frame:{
-        title:"Frame",
-        category:"CONCEPT",
-        description:
-            "Utiliser la structure de tes bras et de ton corps pour gérer la distance sans pousser inutilement.",
-        steps:[
-            "Positionner l'avant-bras entre toi et l'adversaire.",
-            "Garder le coude protégé.",
-            "Créer une structure solide.",
-            "Bouger tes hanches autour de cette structure.",
-            "Rechercher une meilleure position."
-        ],
-        warning:
-            "Évite de tendre complètement les bras et de perdre ta structure."
-    }
-
-};
-
-
-function initTechniques(){
-
-    const menu=document.getElementById("techMenu");
-
-    menu.innerHTML="";
-
-    Object.entries(techniques).forEach(
-        ([id,tech],index)=>{
-
-            const button=document.createElement("button");
-
-            button.textContent=tech.title;
-
-            button.onclick=()=>{
-                document.querySelectorAll(".tech-menu button")
-                    .forEach(b=>b.classList.remove("active"));
-
-                button.classList.add("active");
-
-                displayTechnique(id);
-            };
-
-            menu.appendChild(button);
-
-            if(index===0){
-                button.classList.add("active");
-                displayTechnique(id);
-            }
-
-        }
-    );
-}
-
-function displayTechnique(id){
-
-    const tech=techniques[id];
-
-    document.getElementById("techDetail").innerHTML=`
-
-        <span class="tag">${tech.category}</span>
-
-        <h2>${tech.title}</h2>
-
-        <p>${tech.description}</p>
-
-        <div class="tech-steps">
-
-            ${tech.steps.map(
-                (step,i)=>`
-                    <div class="step">
-                        <div class="step-number">${i+1}</div>
-                        <div>${step}</div>
-                    </div>
-                `
-            ).join("")}
-
-        </div>
-
-        <div class="warning">
-            ⚠️ <strong>À retenir :</strong> ${tech.warning}
-        </div>
-    `;
-}
-
-
-/* =========================================================
-JJB TABS
-========================================================= */
-
-function showJjbTab(tab){
-
-    document.getElementById("techniquesTab").style.display=
-        tab==="techniques" ? "block" : "none";
-
-    document.getElementById("sequencesTab").style.display=
-        tab==="sequences" ? "block" : "none";
-
-    document.getElementById("scenarioTab").style.display=
-        tab==="scenario" ? "block" : "none";
-}
-
-
-/* =========================================================
-SEQUENCES
-========================================================= */
-
-function showSequence(type){
-
-    const sequences={
-
-        side:{
-            title:"Side Control → Guard",
-            steps:[
-                "Créer une frame avec le bras proche.",
-                "Protéger ton coude et ton cou.",
-                "Faire un shrimp pour créer de l'espace.",
-                "Insérer le genou entre toi et l'adversaire.",
-                "Récupérer une demi-garde ou une garde."
-            ]
-        },
-
-        mount:{
-            title:"Mount → Half Guard",
-            steps:[
-                "Contrôler la posture adverse.",
-                "Créer une frame.",
-                "Faire un bridge pour déséquilibrer.",
-                "Tourner vers l'espace créé.",
-                "Insérer une jambe et récupérer une position défensive."
-            ]
-        },
-
-        guard:{
-            title:"Closed Guard → Attaque",
-            steps:[
-                "Contrôler la posture.",
-                "Créer une réaction.",
-                "Utiliser cette réaction pour attaquer.",
-                "Si l'adversaire défend, enchaîner vers une autre option.",
-                "Revenir au contrôle si nécessaire."
-            ]
-        }
-
-    };
-
-    const s=sequences[type];
-
-    document.getElementById("sequenceResult").innerHTML=`
-
-        <div class="card">
-
-            <span class="tag">SÉQUENCE</span>
-
-            <h3>${s.title}</h3>
-
-            <div class="tech-steps">
-
-                ${s.steps.map(
-                    (x,i)=>`
-                        <div class="step">
-                            <div class="step-number">${i+1}</div>
-                            <div>${x}</div>
-                        </div>
-                    `
-                ).join("")}
-
-            </div>
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-SCENARIOS
-========================================================= */
-
-const scenarios=[
-
-    {
-        position:"SIDE CONTROL",
-        title:"Tu es en side control bottom.",
-        question:
-            "Ton adversaire met de la pression sur ton torse. Quelle est une priorité raisonnable ?",
-        answers:[
-            "Pousser très fort avec les deux bras",
-            "Créer une frame et travailler à récupérer de l'espace",
-            "Tourner immédiatement le dos",
-            "Bloquer sa tête avec les jambes"
-        ],
-        correct:1,
-        explanation:
-            "Une frame te permet de gérer la distance tout en travaillant avec tes hanches. Ensuite, tu peux utiliser un shrimp pour récupérer une meilleure position."
-    },
-
-    {
-        position:"MOUNT",
-        title:"Ton adversaire est en mount.",
-        question:
-            "Quel mouvement peut servir à déséquilibrer l'adversaire ?",
-        answers:[
-            "Bridge",
-            "Tirer ses bras au hasard",
-            "Lever uniquement la tête",
-            "Tendre les jambes"
-        ],
-        correct:0,
-        explanation:
-            "Le bridge peut servir à déplacer le poids de l'adversaire et créer une opportunité d'escape."
-    },
-
-    {
-        position:"DEBOUT",
-        title:"Ton adversaire plonge sur tes jambes.",
-        question:
-            "Quelle réaction fait partie des défenses fondamentales ?",
-        answers:[
-            "S'allonger sur le dos",
-            "Sprawl",
-            "Fermer les yeux",
-            "Sauter vers lui"
-        ],
-        correct:1,
-        explanation:
-            "Le sprawl est une réponse fondamentale aux entrées de takedown. Le timing et la position des hanches sont essentiels."
-    },
-
-    {
-        position:"GARDE",
-        title:"Tu es en closed guard.",
-        question:
-            "Quelle est une priorité importante avant certaines attaques ?",
-        answers:[
-            "Laisser l'adversaire se relever",
-            "Contrôler sa posture",
-            "Ouvrir immédiatement la garde",
-            "Tourner le dos"
-        ],
-        correct:1,
-        explanation:
-            "Le contrôle de posture donne beaucoup plus de possibilités pour créer des réactions et attaquer."
-    }
-
-];
-
-let currentScenario=null;
-
-function newScenario(){
-
-    currentScenario=
-        scenarios[
-            Math.floor(Math.random()*scenarios.length)
-        ];
-
-    showPage("jjb");
-
-    showJjbTab("scenario");
-
-    document.getElementById("scenarioTitle").textContent=
-        currentScenario.title;
-
-    document.getElementById("scenarioQuestion").textContent=
-        currentScenario.question;
-
-    const container=
-        document.getElementById("scenarioAnswers");
-
-    container.innerHTML="";
-
-    currentScenario.answers.forEach(
-        (answer,index)=>{
-
-            const btn=document.createElement("button");
-
-            btn.className="answer";
-
-            btn.textContent=answer;
-
-            btn.onclick=()=>{
-                answerScenario(index,btn);
-            };
-
-            container.appendChild(btn);
-
-        }
-    );
-
-    const result=
-        document.getElementById("scenarioResult");
-
-    result.style.display="none";
-    result.innerHTML="";
-}
-
-function answerScenario(index,button){
-
-    if(button.classList.contains("correct") ||
-       button.classList.contains("wrong"))
-        return;
-
-    const buttons=
-        document.querySelectorAll(".answer");
-
-    buttons.forEach(
-        (b,i)=>{
-
-            if(i===currentScenario.correct)
-                b.classList.add("correct");
-
-        }
-    );
-
-    if(index!==currentScenario.correct){
-        button.classList.add("wrong");
-    }
-
-    const correct=
-        index===currentScenario.correct;
-
-    const result=
-        document.getElementById("scenarioResult");
-
-    result.style.display="block";
-
-    result.innerHTML=
-        (correct ? "✅ <strong>Bonne réponse.</strong> " :
-                   "❌ <strong>Pas forcément.</strong> ")
-        +
-        currentScenario.explanation;
-
-    const data=loadData();
-
-    data.scenarios++;
-
-    if(correct)
-        data.skills.knowledge=
-            Math.min(100,data.skills.knowledge+2);
-
-    saveData(data);
-
-    updateProgress();
-}
-
-
-/* =========================================================
-QUIZ
-========================================================= */
-
-const quizQuestions=[
-
-    {
-        q:"Quel est l'objectif principal d'un shrimp dans beaucoup de situations ?",
-        a:["Créer de l'espace avec les hanches","Fatiguer les bras","Sauter","Faire tomber l'adversaire"],
-        c:0
-    },
-
-    {
-        q:"Pourquoi les frames sont-elles utiles ?",
-        a:["Pour gérer la distance","Pour remplacer les jambes","Pour frapper","Pour arrêter de respirer"],
-        c:0
-    },
-
-    {
-        q:"Quelle qualité est particulièrement importante pendant un round de JJB ?",
-        a:["Contrôle de la respiration","Ne jamais bouger","Bloquer les genoux","Toujours aller à 100 %"],
-        c:0
-    },
-
-    {
-        q:"Que cherche souvent à faire un bon escape ?",
-        a:["Créer de l'espace puis récupérer une position","Pousser au hasard","Se fatiguer rapidement","Tourner le dos"],
-        c:0
-    }
-
-];
-
-let currentQuiz=null;
-
-function newQuiz(){
-
-    currentQuiz=
-        quizQuestions[
-            Math.floor(Math.random()*quizQuestions.length)
-        ];
-
-    showPage("jjb");
-
-    showJjbTab("scenario");
-
-    const container=
-        document.getElementById("scenarioTab");
-
-    container.innerHTML=`
-
-        <div class="quiz-box">
-
-            <div class="quiz-question">
-
-                <span class="tag">QUIZ JJB</span>
-
-                <h2>${currentQuiz.q}</h2>
-
-                <div class="quiz-options" id="quizOptions"></div>
-
-                <div class="quiz-result" id="quizResult"></div>
-
-            </div>
-
-            <button
-                class="btn primary"
-                style="margin-top:15px"
-                onclick="newQuiz()">
-                Nouvelle question
-            </button>
-
-        </div>
-
-    `;
-
-    const options=
-        document.getElementById("quizOptions");
-
-    currentQuiz.a.forEach(
-        (answer,index)=>{
-
-            const btn=document.createElement("button");
-
-            btn.className="quiz-option";
-
-            btn.textContent=answer;
-
-            btn.onclick=()=>{
-                answerQuiz(index,btn);
-            };
-
-            options.appendChild(btn);
-
-        }
-    );
-}
-
-function answerQuiz(index,button){
-
-    const buttons=
-        document.querySelectorAll(".quiz-option");
-
-    buttons.forEach(
-        (b,i)=>{
-            if(i===currentQuiz.c)
-                b.classList.add("correct");
-        }
-    );
-
-    if(index!==currentQuiz.c)
-        button.classList.add("wrong");
-
-    document.getElementById("quizResult").textContent=
-        index===currentQuiz.c
-        ? "✅ Exact. Continue à réfléchir en termes de position, espace et réaction."
-        : "❌ Pas cette fois. Regarde la réponse correcte et essaie de retenir le principe.";
-
-    const data=loadData();
-
-    data.quiz++;
-
-    if(index===currentQuiz.c)
-        data.skills.knowledge=
-            Math.min(100,data.skills.knowledge+2);
-
-    saveData(data);
-
-    updateProgress();
-}
-
-
-/* =========================================================
-EXERCISES
-========================================================= */
-
-const exercisePool={
-
-    jjb:[
-        ["Shrimp","2 × 8 / côté","Mouvement"],
-        ["Bridge","3 × 10","Mouvement"],
-        ["Technical stand-up","2 × 6 / côté","Mouvement"],
-        ["Sprawl","3 × 8","Défense"],
-        ["Sit-through","2 × 8 / côté","Mouvement"],
-        ["Bear crawl","3 × 20 s","Conditionnement"]
-    ],
-
-    movement:[
-        ["Shrimp","2 × 8 / côté","Hanches"],
-        ["Reverse shrimp","2 × 8 / côté","Hanches"],
-        ["Bridge","3 × 10","Hanches"],
-        ["Technical stand-up","2 × 6 / côté","Mouvement"],
-        ["Sit-through","2 × 8 / côté","Coordination"],
-        ["Shoulder roll","2 × 5 / côté","Mobilité"]
-    ],
-
-    grip:[
-        ["Towel squeeze","3 × 20 s","Serviette"],
-        ["Towel wringing","3 × 20 s","Serviette"],
-        ["Towel hold","3 × 20 s","Serviette"],
-        ["Finger extensions","3 × 15","Doigts"],
-        ["Fist isometric","3 × 20 s","Avant-bras"],
-        ["Wrist rotations","2 × 15","Poignets"]
-    ],
-
-    strength:[
-        ["Pompes","3 × 8","Poussée"],
-        ["Squats","3 × 15","Jambes"],
-        ["Fentes","3 × 8 / côté","Jambes"],
-        ["Pike push-ups","3 × 6","Épaules"],
-        ["Glute bridge","3 × 15","Hanches"],
-        ["Superman","3 × 12","Dos"],
-        ["Plank","3 × 30 s","Core"]
-    ],
-
-    cardio:[
-        ["Mountain climbers","3 × 30 s","Cardio"],
-        ["Burpees","3 × 8","Cardio"],
-        ["High knees","3 × 30 s","Cardio"],
-        ["Jumping jacks","3 × 40 s","Cardio"]
-    ],
-
-    mobility:[
-        ["90/90 hanches","45 s / côté","Hanches"],
-        ["Deep squat hold","45 s","Hanches"],
-        ["Rotations thoraciques","2 × 8 / côté","Dos"],
-        ["Cercles d'épaules","2 × 15","Épaules"],
-        ["Mobilité chevilles","45 s / côté","Chevilles"]
-    ],
-
-    core:[
-        ["Plank","3 × 30 s","Core"],
-        ["Side plank","2 × 20 s / côté","Core"],
-        ["Dead bug","3 × 8 / côté","Core"],
-        ["Bird dog","3 × 8 / côté","Core"]
-    ]
-
-};
-
-const goalNames={
-    jjb:"🥋 JJB",
-    movement:"🔄 Mouvements",
-    grip:"✊ Grip",
-    strength:"💪 Force",
-    cardio:"🫁 Cardio",
-    mobility:"🧘 Mobilité",
-    core:"🧱 Core"
-};
 
 function shuffle(arr){
 
-    return [...arr].sort(
-        ()=>Math.random()-.5
-    );
+    const copy=[...arr];
+
+    for(let i=copy.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [copy[i],copy[j]]=[copy[j],copy[i]];
+
+    }
+
+    return copy;
 }
 
-function generateTraining(){
 
-    let goal=
-        document.getElementById("goal").value;
-
-    const duration=
-        Number(document.getElementById("duration").value);
-
-    if(goal==="random"){
-
-        const goals=
-            Object.keys(exercisePool);
-
-        goal=
-            goals[
-                Math.floor(Math.random()*goals.length)
-            ];
-
-    }
-
-    let pool=[];
-
-    if(goal==="random"){
-        pool=Object.values(exercisePool).flat();
-    }else{
-        pool=exercisePool[goal]||[];
-    }
-
-    const count=
-        duration<=10 ? 4 :
-        duration<=20 ? 5 :
-        duration<=30 ? 7 :
-        duration<=45 ? 9 : 11;
-
-    const selected=
-        shuffle(pool).slice(
-            0,
-            Math.min(count,pool.length)
-        );
+function getLevel(id){
 
     const data=loadData();
 
-    let html=`
+    const value=data.levels[id];
 
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:10px;
-            margin-bottom:10px;
-        ">
+    if(typeof value!=="number")
+        return 2;
 
-            <div>
-                <span class="tag">${goalNames[goal]}</span>
-                <h2 style="margin-top:8px">
-                    ${duration} min
-                </h2>
-            </div>
-
-            <button
-                class="btn small"
-                onclick="generateTraining()">
-                🎲 Refaire
-            </button>
-
-        </div>
-    `;
-
-    selected.forEach(
-        (ex,index)=>{
-
-            const key=ex[0];
-
-            const saved=
-                data.exercises[key]||{
-                    level:0,
-                    feeling:null
-                };
-
-            let reps=ex[1];
-
-            if(saved.level>=2)
-                reps=upgradeExercise(ex[1],saved.level);
-
-            if(saved.level<=-1)
-                reps=downgradeExercise(ex[1]);
-
-            html+=`
-
-                <div
-                    class="generated-exercise"
-                    data-exercise="${escapeHtml(key)}">
-
-                    <div class="ex-head">
-
-                        <div>
-
-                            <div style="
-                                color:var(--accent);
-                                font-size:10px;
-                                font-weight:900">
-                                ${String(index+1).padStart(2,"0")}
-                            </div>
-
-                            <div class="ex-name">
-                                ${ex[0]}
-                            </div>
-
-                            <div class="ex-info">
-                                ${reps} • ${ex[2]}
-                            </div>
-
-                        </div>
-
-                        <span class="tag">
-                            ${saved.level>0 ? "↑ progressif" :
-                              saved.level<0 ? "↓ allégé" :
-                              "niveau actuel"}
-                        </span>
-
-                    </div>
-
-                    <div class="feelings">
-
-                        <button
-                            class="feeling"
-                            onclick="setFeeling('${escapeJs(key)}','easy',this)">
-                            🟢 Trop facile
-                        </button>
-
-                        <button
-                            class="feeling"
-                            onclick="setFeeling('${escapeJs(key)}','good',this)">
-                            🟡 Bien
-                        </button>
-
-                        <button
-                            class="feeling"
-                            onclick="setFeeling('${escapeJs(key)}','hard',this)">
-                            🔴 Difficile
-                        </button>
-
-                        <button
-                            class="feeling"
-                            onclick="setFeeling('${escapeJs(key)}','pain',this)">
-                            ⚠️ Douleur
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-        }
-    );
-
-    html+=`
-
-        <button
-            class="btn primary"
-            style="margin-top:15px"
-            onclick="finishTraining('${goal}',${duration})">
-            ✓ Terminer la séance
-        </button>
-    `;
-
-    document.getElementById("trainingResult").innerHTML=html;
-
-    document.getElementById("trainingResult")
-        .classList.remove("session-empty");
+    return Math.max(0,Math.min(4,value));
 }
 
-function upgradeExercise(value,level){
 
-    if(value.includes("× 8"))
-        return "3 × 10";
+function getCount(minutes){
 
-    if(value.includes("× 10"))
-        return "3 × 12";
+    if(minutes<=10) return 4;
+    if(minutes<=20) return 6;
+    if(minutes<=30) return 8;
+    if(minutes<=45) return 10;
 
-    if(value.includes("× 15"))
-        return "3 × 20";
-
-    if(value.includes("20 s"))
-        return "3 × 30 s";
-
-    if(value.includes("30 s"))
-        return "3 × 45 s";
-
-    return value;
+    return 12;
 }
 
-function downgradeExercise(value){
 
-    if(value.includes("× 10"))
-        return "2 × 8";
+function randomGoal(){
 
-    if(value.includes("× 15"))
-        return "2 × 10";
-
-    if(value.includes("× 8"))
-        return "2 × 6";
-
-    if(value.includes("30 s"))
-        return "2 × 20 s";
-
-    if(value.includes("20 s"))
-        return "2 × 15 s";
-
-    return value;
-}
-
-function escapeHtml(text){
-
-    return text
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-}
-
-function escapeJs(text){
-
-    return text.replaceAll("'","\\'");
+    return shuffle([
+        "jjb",
+        "movement",
+        "grip",
+        "strength",
+        "cardio",
+        "mobility",
+        "core"
+    ])[0];
 }
 
 
 /* =========================================================
-FEELING
+   GENERATOR
 ========================================================= */
 
-function setFeeling(exercise,feeling,button){
+let currentSession=null;
+
+
+function generateSession(){
+
+    let goal=document.getElementById("goal").value;
+
+    const duration=Number(
+        document.getElementById("duration").value
+    );
+
+    if(goal==="random")
+        goal=randomGoal();
+
+    const pool=exercises[goal];
+
+    if(!pool)
+        return;
+
+    const selected=shuffle(pool)
+        .slice(0,Math.min(getCount(duration),pool.length));
+
+    currentSession={
+        goal,
+        duration,
+        exercises:selected.map(ex=>({
+            id:ex.id,
+            name:ex.name,
+            level:getLevel(ex.id),
+            feedback:null,
+            note:""
+        }))
+    };
+
+    displaySession();
+}
+
+
+function displaySession(){
+
+    document.getElementById("emptySession").style.display="none";
+
+    const session=document.getElementById("session");
+
+    session.style.display="block";
+
+    document.getElementById("sessionTitle").textContent=
+        labels[currentSession.goal];
+
+    document.getElementById("sessionSubtitle").textContent=
+        `${currentSession.exercises.length} exercises · adaptive difficulty`;
+
+    document.getElementById("sessionDuration").textContent=
+        currentSession.duration+" min";
+
+    const container=document.getElementById("exerciseContainer");
+
+    container.innerHTML="";
+
+    currentSession.exercises.forEach((ex,index)=>{
+
+        const original=exercises[currentSession.goal]
+            .find(x=>x.id===ex.id);
+
+        const div=document.createElement("div");
+
+        div.className="exercise";
+
+        div.id="exercise-"+ex.id;
+
+        div.innerHTML=`
+
+            <div class="exercise-row">
+
+                <div>
+
+                    <div class="exercise-number">
+                        EXERCISE ${index+1} · LEVEL ${ex.level+1}/5
+                    </div>
+
+                    <div class="exercise-name">
+                        ${ex.name}
+                    </div>
+
+                    <div class="prescription">
+                        ${original.levels[ex.level]}
+                    </div>
+
+                    <div class="next-time" id="next-${ex.id}"></div>
+
+                </div>
+
+            </div>
+
+            <div class="feedback">
+
+                <div class="feedback-title">
+                    HOW DID IT FEEL?
+                </div>
+
+                <div class="feedback-buttons">
+
+                    <button
+                        class="feedback-btn"
+                        onclick="feedback('${ex.id}','easy',this)">
+                        🟢 Too easy
+                    </button>
+
+                    <button
+                        class="feedback-btn"
+                        onclick="feedback('${ex.id}','good',this)">
+                        🟡 Good
+                    </button>
+
+                    <button
+                        class="feedback-btn"
+                        onclick="feedback('${ex.id}','hard',this)">
+                        🔴 Too hard
+                    </button>
+
+                    <button
+                        class="feedback-btn"
+                        onclick="feedback('${ex.id}','pain',this)">
+                        ⚠️ Pain
+                    </button>
+
+                </div>
+
+                <textarea
+                    class="note"
+                    id="note-${ex.id}"
+                    placeholder="Optional note..."></textarea>
+
+            </div>
+        `;
+
+        container.appendChild(div);
+
+    });
+}
+
+
+/* =========================================================
+   ADAPTIVE FEEDBACK
+========================================================= */
+
+function feedback(id,type,button){
+
+    if(!currentSession)
+        return;
+
+    const exercise=currentSession.exercises
+        .find(x=>x.id===id);
+
+    if(!exercise)
+        return;
+
+    exercise.feedback=type;
 
     const data=loadData();
 
-    const current=
-        data.exercises[exercise]||{
-            level:0,
-            feeling:null
-        };
+    let level=getLevel(id);
 
-    if(feeling==="easy")
-        current.level=
-            Math.min(3,current.level+1);
+    if(type==="easy"){
 
-    if(feeling==="good")
-        current.level=0;
+        level=Math.min(4,level+1);
 
-    if(feeling==="hard")
-        current.level=
-            Math.max(-2,current.level-1);
+        showNext(id,"Next time: increase the difficulty ↑");
 
-    if(feeling==="pain")
-        current.level=
-            Math.max(-2,current.level-2);
+    }
 
-    current.feeling=feeling;
-    current.lastDate=new Date().toISOString();
+    if(type==="good"){
 
-    data.exercises[exercise]=current;
+        showNext(id,"Next time: keep this level →");
+
+    }
+
+    if(type==="hard"){
+
+        level=Math.max(0,level-1);
+
+        showNext(id,"Next time: slightly easier ↓");
+
+    }
+
+    if(type==="pain"){
+
+        level=Math.max(0,level-1);
+
+        showNext(
+            id,
+            "Next time: easier. If something hurts, stop the exercise."
+        );
+
+    }
+
+    data.levels[id]=level;
+
+    data.feedback[id]={
+        type,
+        date:Date.now()
+    };
+
+    const note=document.getElementById("note-"+id);
+
+    if(note)
+        data.notes[id]=note.value;
 
     saveData(data);
 
-    button.parentElement
-        .querySelectorAll(".feeling")
+    button
+        .parentElement
+        .querySelectorAll(".feedback-btn")
         .forEach(b=>b.classList.remove("selected"));
 
     button.classList.add("selected");
 }
 
 
-/* =========================================================
-FINISH TRAINING
-========================================================= */
+function showNext(id,text){
 
-function finishTraining(goal,duration){
+    const element=document.getElementById("next-"+id);
 
-    const data=loadData();
-
-    data.sessions.push({
-        date:new Date().toISOString(),
-        goal,
-        duration
-    });
-
-    const skillMap={
-        jjb:"jjb",
-        movement:"jjb",
-        grip:"grip",
-        strength:"strength",
-        cardio:"cardio",
-        mobility:"mobility",
-        core:"strength"
-    };
-
-    const skill=skillMap[goal];
-
-    if(skill){
-
-        data.skills[skill]=
-            Math.min(
-                100,
-                data.skills[skill]+5
-            );
-    }
-
-    saveData(data);
-
-    updateProgress();
-
-    alert("🥋 Séance enregistrée !");
-
+    if(element)
+        element.textContent=text;
 }
 
 
 /* =========================================================
-TODAY / START
+   COMPLETE SESSION
 ========================================================= */
+
+function finishSession(){
+
+    if(!currentSession)
+        return;
+
+    const missing=currentSession.exercises
+        .filter(ex=>!ex.feedback);
+
+    if(missing.length){
+
+        alert(
+            "Give feedback for every exercise before completing the workout."
+        );
+
+        return;
+    }
+
+    const data=loadData();
+
+    currentSession.exercises.forEach(ex=>{
+
+        const note=document.getElementById("note-"+ex.id);
+
+        if(note)
+            data.notes[ex.id]=note.value;
+
+    });
+
+    data.sessions.push({
+        date:new Date().toISOString(),
+        goal:currentSession.goal,
+        duration:currentSession.duration,
+        exercises:currentSession.exercises.map(ex=>({
+            id:ex.id,
+            feedback:ex.feedback
+        }))
+    });
+
+    data.skills[currentSession.goal]=Math.min(
+        100,
+        (data.skills[currentSession.goal]||0)+5
+    );
+
+    data.xp+=currentSession.exercises.length*10;
+
+    saveData(data);
+
+    currentSession=null;
+
+    document.getElementById("session").style.display="none";
+    document.getElementById("emptySession").style.display="block";
+
+    updateAll();
+
+    alert("Workout completed. Keep stacking those sessions. 🥋");
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+function updateToday(){
+
+    const day=new Date().getDay();
+
+    const days=[
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+
+    document.getElementById("todayDay").textContent=
+        days[day].toUpperCase();
+
+    if(day===1 || day===3 || day===5){
+
+        document.getElementById("todayTitle").textContent=
+            "JJB Day";
+
+        document.getElementById("todayDescription").textContent=
+            "Use today for your Jiu-Jitsu session and movement work.";
+
+        document.getElementById("todaySchedule").textContent=
+            "🥋 Monday · Wednesday · Friday";
+
+    }else{
+
+        document.getElementById("todayTitle").textContent=
+            "Build the engine";
+
+        document.getElementById("todayDescription").textContent=
+            "Strength, grip, mobility or conditioning without replacing your JJB days.";
+
+        document.getElementById("todaySchedule").textContent=
+            "💪 Preparation day";
+
+    }
+}
+
 
 function startToday(){
 
     const day=new Date().getDay();
 
-    const goal=
-        day===1 || day===3 || day===5
-        ? "jjb"
-        : "movement";
+    document.getElementById("goal").value=
+        (day===1 || day===3 || day===5)
+        ?"jjb"
+        :"movement";
 
-    document.getElementById("goal").value=goal;
+    showPage("coach");
 
-    showPage("training");
-
-    generateTraining();
+    generateSession();
 }
 
 
 /* =========================================================
-CHALLENGE
+   NAVIGATION
 ========================================================= */
 
-function dailyChallenge(){
+function showPage(id,button){
 
-    const challenges=[
+    document
+        .querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
 
-        "🔥 5 rounds : 10 squats + 5 pompes + 20 mountain climbers",
+    document
+        .getElementById(id)
+        .classList.add("active");
 
-        "🥋 5 minutes de shrimp, bridge et technical stand-up",
+    document
+        .querySelectorAll(".nav button")
+        .forEach(b=>b.classList.remove("active"));
 
-        "✊ 5 × 20 secondes de towel squeeze avec 20 secondes de repos",
+    if(button)
+        button.classList.add("active");
 
-        "🧠 Fais 3 situations JJB et explique à voix haute pourquoi tu choisis ta réponse",
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
 
-        "🫁 6 rounds : 30 secondes rapide / 30 secondes récupération",
 
-        "🧘 10 minutes de mobilité hanches + épaules"
+/* =========================================================
+   THEME
+========================================================= */
 
-    ];
+function toggleTheme(){
 
-    const challenge=
-        challenges[
-            new Date().getDate() %
-            challenges.length
-        ];
+    document.body.classList.toggle("light");
 
-    alert(
-        "🔥 CHALLENGE DU JOUR\n\n"+
-        challenge
+    const light=document.body.classList.contains("light");
+
+    localStorage.setItem(
+        "jjbLabTheme",
+        light ? "light" : "dark"
     );
+
+    document.getElementById("themeButton").textContent=
+        light
+        ?"☀️ Light mode"
+        :"🌙 Dark mode";
+}
+
+
+if(localStorage.getItem("jjbLabTheme")==="light"){
+
+    document.body.classList.add("light");
+
+    document.getElementById("themeButton").textContent=
+        "☀️ Light mode";
 }
 
 
 /* =========================================================
-ROUNDS
+   TIMER
 ========================================================= */
 
-let roundSeconds=120;
-let roundRunning=false;
-let roundInterval=null;
-let roundNumber=1;
-let roundWork=true;
+let timerSeconds=300;
+let timerRunning=false;
+let timerInterval=null;
+
 
 function formatTime(seconds){
 
-    const m=
-        Math.floor(seconds/60)
+    const m=Math.floor(seconds/60)
         .toString()
         .padStart(2,"0");
 
-    const s=
-        (seconds%60)
+    const s=(seconds%60)
         .toString()
         .padStart(2,"0");
 
-    return m+":"+s;
+    return `${m}:${s}`;
 }
 
-function renderRound(){
 
-    document.getElementById("roundTimer")
-        .textContent=formatTime(roundSeconds);
+function renderTimer(){
 
-    document.getElementById("roundRest")
-        .textContent=
-        roundWork
-        ? `Round ${roundNumber} / 5`
-        : "Repos";
-
-    document.getElementById("roundStatus")
-        .textContent=
-        roundWork ? "TRAVAIL" : "REPOS";
-
-    document.getElementById("roundExercise")
-        .textContent=
-        roundWork
-        ? "Travail spécifique JJB"
-        : "Respire • récupère • prépare le prochain round";
+    document.getElementById("timer").textContent=
+        formatTime(timerSeconds);
 }
 
-function setRound(seconds){
 
-    clearInterval(roundInterval);
+function setTimer(seconds){
 
-    roundSeconds=seconds;
-    roundRunning=false;
-    roundNumber=1;
-    roundWork=true;
+    clearInterval(timerInterval);
 
-    document.getElementById("roundButton")
-        .textContent="▶ Démarrer";
+    timerSeconds=seconds;
+    timerRunning=false;
 
-    renderRound();
+    document.getElementById("timerButton").textContent=
+        "▶ Start";
+
+    document.getElementById("timerLabel").textContent=
+        "Ready";
+
+    renderTimer();
 }
 
-function toggleRound(){
 
-    if(roundRunning){
+function toggleTimer(){
 
-        clearInterval(roundInterval);
-        roundRunning=false;
+    if(timerRunning){
 
-        document.getElementById("roundButton")
-            .textContent="▶ Reprendre";
+        clearInterval(timerInterval);
+
+        timerRunning=false;
+
+        document.getElementById("timerButton").textContent=
+            "▶ Resume";
 
         return;
     }
 
-    roundRunning=true;
+    if(timerSeconds<=0)
+        return;
 
-    document.getElementById("roundButton")
-        .textContent="⏸ Pause";
+    timerRunning=true;
 
-    roundInterval=setInterval(()=>{
+    document.getElementById("timerButton").textContent=
+        "⏸ Pause";
 
-        if(roundSeconds<=0){
+    document.getElementById("timerLabel").textContent=
+        "Round in progress";
 
-            if(roundWork){
+    timerInterval=setInterval(()=>{
 
-                roundWork=false;
-                roundSeconds=30;
+        if(timerSeconds<=0){
 
-            }else{
+            clearInterval(timerInterval);
 
-                roundWork=true;
-                roundNumber++;
+            timerRunning=false;
 
-                if(roundNumber>5){
+            document.getElementById("timerButton").textContent=
+                "▶ Start";
 
-                    clearInterval(roundInterval);
-                    roundRunning=false;
+            document.getElementById("timerLabel").textContent=
+                "Round complete";
 
-                    document.getElementById("roundStatus")
-                        .textContent="TERMINÉ";
-
-                    document.getElementById("roundExercise")
-                        .textContent="🔥 Session terminée";
-
-                    document.getElementById("roundButton")
-                        .textContent="▶ Démarrer";
-
-                    return;
-                }
-
-                roundSeconds=120;
-            }
-
-        }else{
-
-            roundSeconds--;
-
+            return;
         }
 
-        renderRound();
+        timerSeconds--;
+
+        renderTimer();
 
     },1000);
 }
 
-function resetRound(){
 
-    setRound(120);
+function resetTimer(){
+    setTimer(300);
 }
 
 
 /* =========================================================
-JOURNAL
+   STREAK
 ========================================================= */
 
-function saveJournal(){
+function calculateStreak(sessions){
 
-    const technique=
-        document.getElementById("journalTechnique").value.trim();
+    if(!sessions.length)
+        return 0;
 
-    const learned=
-        document.getElementById("journalLearned").value.trim();
+    const dates=new Set(
+        sessions.map(s=>s.date.slice(0,10))
+    );
 
-    const problem=
-        document.getElementById("journalProblem").value.trim();
+    let streak=0;
 
-    const work=
-        document.getElementById("journalWork").value.trim();
+    const date=new Date();
 
-    if(!technique && !learned && !problem && !work){
+    while(true){
 
-        alert("Écris au moins quelque chose avant d'enregistrer 😭");
+        const key=date.toISOString().slice(0,10);
 
-        return;
+        if(!dates.has(key))
+            break;
+
+        streak++;
+
+        date.setDate(date.getDate()-1);
     }
 
-    const data=loadData();
-
-    data.journals.unshift({
-
-        date:new Date().toISOString(),
-
-        technique,
-        learned,
-        problem,
-        work
-
-    });
-
-    data.skills.knowledge=
-        Math.min(
-            100,
-            data.skills.knowledge+3
-        );
-
-    saveData(data);
-
-    document.getElementById("journalTechnique").value="";
-    document.getElementById("journalLearned").value="";
-    document.getElementById("journalProblem").value="";
-    document.getElementById("journalWork").value="";
-
-    renderJournal();
-    updateProgress();
-
-    alert("📝 Cours enregistré !");
+    return streak;
 }
 
-function renderJournal(){
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+function skillHTML(key,icon){
 
     const data=loadData();
 
-    const list=document.getElementById("journalList");
+    const value=Math.min(
+        100,
+        Number(data.skills[key]||0)
+    );
 
-    if(!data.journals.length){
+    return `
 
-        list.innerHTML=`
-            <div style="color:var(--muted)">
-                Aucun cours enregistré.
+        <div class="skill">
+
+            <div class="skill-icon">
+                ${icon}
+            </div>
+
+            <div class="skill-info">
+
+                <div class="skill-top">
+                    <span>${labels[key]}</span>
+                    <span>${value}%</span>
+                </div>
+
+                <div class="bar">
+                    <div
+                        class="fill"
+                        style="width:${value}%">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+function renderSkills(){
+
+    const keys=[
+        ["jjb","🥋"],
+        ["movement","🔄"],
+        ["grip","✊"],
+        ["strength","💪"],
+        ["cardio","🫁"],
+        ["mobility","🧘"],
+        ["core","🧱"]
+    ];
+
+    document.getElementById("dashboardSkills").innerHTML=
+        keys.slice(0,6)
+        .map(([key,icon])=>`
+            <div class="card">
+                ${skillHTML(key,icon)}
+            </div>
+        `)
+        .join("");
+
+    document.getElementById("progressSkills").innerHTML=
+        keys.map(([key,icon])=>`
+            <div style="margin-bottom:18px">
+                ${skillHTML(key,icon)}
+            </div>
+        `).join("");
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+    const data=loadData();
+
+    const history=document.getElementById("history");
+
+    if(!data.sessions.length){
+
+        history.innerHTML=`
+            <div class="empty">
+                No workouts yet.
+                Your first one is waiting. 👀
             </div>
         `;
 
         return;
     }
 
-    list.innerHTML=
-        data.journals
-        .slice(0,15)
-        .map(
-            j=>`
+    history.innerHTML="";
 
-                <div class="journal-entry">
+    [...data.sessions]
+        .reverse()
+        .slice(0,20)
+        .forEach(session=>{
 
-                    <small>
-                        ${new Date(j.date).toLocaleDateString("fr-FR")}
-                    </small>
+            const date=new Date(session.date);
 
-                    ${
-                        j.technique
-                        ? `<strong style="display:block;margin-top:5px">
-                            🥋 ${escapeHtml(j.technique)}
-                           </strong>`
-                        :""
-                    }
+            const item=document.createElement("div");
 
-                    ${
-                        j.learned
-                        ? `<p><strong>Appris :</strong><br>
-                            ${escapeHtml(j.learned)}</p>`
-                        :""
-                    }
+            item.className="history-item";
 
-                    ${
-                        j.problem
-                        ? `<p><strong>Problème :</strong><br>
-                            ${escapeHtml(j.problem)}</p>`
-                        :""
-                    }
+            item.innerHTML=`
 
-                    ${
-                        j.work
-                        ? `<p><strong>À travailler :</strong><br>
-                            ${escapeHtml(j.work)}</p>`
-                        :""
-                    }
+                <div class="history-main">
+
+                    <div class="history-icon">
+                        ${session.goal==="jjb"?"🥋":"🏋️"}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${labels[session.goal]}
+                        </strong>
+
+                        <div class="history-date">
+                            ${date.toLocaleDateString("en-GB")}
+                        </div>
+
+                    </div>
 
                 </div>
-            `
-        )
-        .join("");
+
+                <strong>
+                    ${session.duration} min
+                </strong>
+            `;
+
+            history.appendChild(item);
+        });
 }
 
 
 /* =========================================================
-PROGRESS
+   UPDATE DASHBOARD
 ========================================================= */
 
-function updateProgress(){
+function updateAll(){
 
     const data=loadData();
 
-    const sessions=data.sessions||[];
-
-    document.getElementById("statSessions")
-        .textContent=sessions.length;
-
-    document.getElementById("homeSessions")
-        .textContent=sessions.length;
-
-    document.getElementById("statMinutes")
-        .textContent=
-        sessions.reduce(
-            (sum,s)=>sum+Number(s.duration||0),
-            0
-        );
-
-    document.getElementById("statScenarios")
-        .textContent=data.scenarios||0;
-
-    document.getElementById("statQuiz")
-        .textContent=data.quiz||0;
-
-    setProgress(
-        "Jjb",
-        data.skills.jjb
+    const minutes=data.sessions.reduce(
+        (sum,s)=>sum+Number(s.duration||0),
+        0
     );
 
-    setProgress(
-        "Strength",
-        data.skills.strength
-    );
+    const streak=calculateStreak(data.sessions);
 
-    setProgress(
-        "Grip",
-        data.skills.grip
-    );
+    document.getElementById("dashSessions").textContent=
+        data.sessions.length;
 
-    setProgress(
-        "Cardio",
-        data.skills.cardio
-    );
+    document.getElementById("dashMinutes").textContent=
+        minutes;
 
-    setProgress(
-        "Mobility",
-        data.skills.mobility
-    );
+    document.getElementById("dashStreak").textContent=
+        streak;
 
-    setProgress(
-        "Knowledge",
-        data.skills.knowledge
-    );
-}
+    document.getElementById("dashXP").textContent=
+        data.xp||0;
 
-function setProgress(name,value){
+    document.getElementById("progressSessions").textContent=
+        data.sessions.length;
 
-    value=Math.max(
-        0,
-        Math.min(100,Number(value||0))
-    );
+    document.getElementById("progressMinutes").textContent=
+        minutes;
 
-    document.getElementById("p"+name)
-        .textContent=value+"%";
+    document.getElementById("progressXP").textContent=
+        data.xp||0;
 
-    document.getElementById("f"+name)
-        .style.width=value+"%";
+    document.getElementById("dashStreak").textContent=
+        streak;
+
+    renderSkills();
+    renderHistory();
 }
 
 
 /* =========================================================
-EXPORT
+   EXPORT
 ========================================================= */
 
 function exportData(){
@@ -3332,39 +2525,39 @@ function exportData(){
     const data=loadData();
 
     const blob=new Blob(
-        [
-            JSON.stringify(data,null,2)
-        ],
-        {
-            type:"application/json"
-        }
+        [JSON.stringify(data,null,2)],
+        {type:"application/json"}
     );
 
     const url=URL.createObjectURL(blob);
 
-    const a=document.createElement("a");
+    const link=document.createElement("a");
 
-    a.href=url;
-    a.download="jjb-training-backup.json";
+    link.href=url;
 
-    a.click();
+    link.download="jjb-lab-backup.json";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
 
     URL.revokeObjectURL(url);
 }
 
 
 /* =========================================================
-IMPORT
+   IMPORT
 ========================================================= */
 
 function importData(){
 
-    const input=
-        document.getElementById("importFile");
+    const input=document.getElementById("importFile");
 
     if(!input.files.length){
 
-        alert("Choisis un fichier JSON.");
+        alert("Choose a JSON backup first.");
 
         return;
     }
@@ -3379,24 +2572,28 @@ function importData(){
 
             if(
                 !data.sessions ||
+                !data.levels ||
                 !data.skills
             ){
-                throw new Error();
+
+                throw new Error("Invalid backup");
+
             }
 
-            saveData(data);
+            saveData({
+                ...structuredClone(defaultData),
+                ...data
+            });
 
-            updateProgress();
-            renderJournal();
+            updateAll();
 
-            alert("✅ Sauvegarde restaurée !");
+            alert("Backup restored successfully.");
 
         }catch{
 
-            alert("❌ Fichier invalide.");
+            alert("This file is not a valid JJB Lab backup.");
 
         }
-
     };
 
     reader.readAsText(input.files[0]);
@@ -3404,36 +2601,35 @@ function importData(){
 
 
 /* =========================================================
-RESET
+   RESET
 ========================================================= */
 
-function resetData(){
+function clearData(){
 
-    const ok=confirm(
-        "Supprimer toute ta progression, tes séances et ton journal ?"
+    const confirmed=confirm(
+        "Delete ALL JJB Lab training data from this browser?"
     );
 
-    if(!ok)
+    if(!confirmed)
         return;
 
-    localStorage.removeItem("jjbLabV2");
+    localStorage.removeItem("jjbLabData");
 
-    updateProgress();
-    renderJournal();
+    updateAll();
 
-    alert("Progression supprimée.");
+    alert("Training data deleted.");
 }
 
 
 /* =========================================================
-INIT
+   START
 ========================================================= */
 
 updateToday();
-initTechniques();
-renderJournal();
-updateProgress();
-renderRound();
+
+renderTimer();
+
+updateAll();
 
 </script>
 
