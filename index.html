@@ -4,21 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JJB Coach</title>
+<title>JJB — Training Companion</title>
 
 <style>
 :root{
-    --bg:#0b0d0f;
-    --panel:#121518;
-    --panel2:#181c20;
-    --border:#292e33;
-    --text:#f2f3f4;
-    --muted:#8e969f;
-    --accent:#d8ff3e;
-    --accent-dark:#b9dc20;
-    --danger:#ff5d5d;
-    --good:#65d391;
-    --warning:#e6bd52;
+    --bg:#101010;
+    --panel:#171717;
+    --panel2:#1d1d1d;
+    --line:#303030;
+    --text:#f1f1f1;
+    --muted:#969696;
+    --accent:#d7ff3f;
+    --danger:#ff5c5c;
+    --warning:#e9b949;
+    --good:#71d38b;
 }
 
 *{
@@ -33,18 +32,14 @@ body{
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    line-height:1.5;
 }
 
 button,
 select,
-textarea,
-input{
+input,
+textarea{
     font:inherit;
 }
 
@@ -52,96 +47,61 @@ button{
     cursor:pointer;
 }
 
-.app{
-    width:min(1180px,94%);
-    margin:auto;
-}
-
-/* HEADER */
-
 header{
-    height:72px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
     position:sticky;
     top:0;
     z-index:50;
-    background:rgba(11,13,15,.94);
+    background:rgba(16,16,16,.94);
     backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
 }
 
 .header-inner{
-    width:min(1180px,94%);
+    width:min(1200px,94%);
     margin:auto;
+    min-height:68px;
+
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.logo{
+.brand{
     font-weight:900;
     letter-spacing:-1px;
-    font-size:20px;
+    white-space:nowrap;
 }
 
-.logo span{
+.brand span{
     color:var(--accent);
 }
 
 nav{
     display:flex;
     gap:4px;
+    overflow-x:auto;
 }
 
 nav button{
-    border:0;
     background:transparent;
+    border:0;
     color:var(--muted);
     padding:9px 12px;
-    border-radius:7px;
+    border-radius:5px;
+    white-space:nowrap;
 }
 
 nav button:hover,
 nav button.active{
-    color:var(--text);
     background:var(--panel2);
-}
-
-.theme{
-    border:1px solid var(--border);
-    background:var(--panel);
     color:var(--text);
-    width:36px;
-    height:36px;
-    border-radius:7px;
-    margin-left:8px;
 }
-
-/* LIGHT */
-
-body.light{
-    --bg:#f4f4f0;
-    --panel:#ffffff;
-    --panel2:#ededeb;
-    --border:#d8d8d2;
-    --text:#111;
-    --muted:#707070;
-    --accent:#789b00;
-    --accent-dark:#5d7900;
-    --danger:#c73737;
-    --good:#278b55;
-    --warning:#a47700;
-}
-
-body.light header{
-    background:rgba(244,244,240,.94);
-}
-
-/* MAIN */
 
 main{
-    padding:50px 0 90px;
+    width:min(1200px,94%);
+    margin:auto;
+    padding:45px 0 80px;
 }
 
 .page{
@@ -152,19 +112,18 @@ main{
     display:block;
 }
 
-/* HOME */
-
 .hero{
     display:grid;
-    grid-template-columns:1.5fr .8fr;
-    gap:30px;
-    margin-bottom:55px;
+    grid-template-columns:1.4fr .6fr;
+    gap:35px;
+    align-items:end;
+    margin-bottom:60px;
 }
 
 .hero h1{
-    font-size:clamp(48px,8vw,92px);
-    line-height:.88;
-    letter-spacing:-6px;
+    font-size:clamp(52px,9vw,105px);
+    line-height:.85;
+    letter-spacing:-7px;
     margin:0 0 25px;
 }
 
@@ -173,78 +132,77 @@ main{
 }
 
 .hero p{
-    max-width:650px;
     color:var(--muted);
-    line-height:1.7;
+    max-width:650px;
+    font-size:16px;
 }
 
-.hero-actions{
+.focus-card{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:25px;
+}
+
+.small-label{
+    text-transform:uppercase;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    color:var(--muted);
+}
+
+.focus-card h2{
+    margin:8px 0;
+    font-size:25px;
+}
+
+.focus-card p{
+    font-size:13px;
+}
+
+.actions{
     display:flex;
     gap:8px;
-    margin-top:25px;
     flex-wrap:wrap;
+    margin-top:25px;
 }
-
-.today{
-    background:var(--panel);
-    border:1px solid var(--border);
-    padding:25px;
-    align-self:end;
-}
-
-.small-title{
-    color:var(--muted);
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    font-weight:800;
-}
-
-.today h2{
-    margin:8px 0;
-    font-size:26px;
-}
-
-.today p{
-    margin:0;
-}
-
-/* BUTTONS */
 
 .btn{
-    border:0;
-    border-radius:7px;
-    padding:12px 16px;
-    font-weight:800;
-}
-
-.btn-primary{
-    background:var(--accent);
-    color:#101300;
-}
-
-.btn-primary:hover{
-    background:var(--accent-dark);
-}
-
-.btn-secondary{
+    border:1px solid var(--line);
     background:var(--panel2);
     color:var(--text);
-    border:1px solid var(--border);
+    padding:11px 15px;
+    border-radius:5px;
+    font-weight:700;
 }
 
-/* SECTION */
+.btn:hover{
+    border-color:#555;
+}
+
+.btn.primary{
+    background:var(--accent);
+    color:#111;
+    border-color:var(--accent);
+}
+
+.btn.danger{
+    background:var(--danger);
+    color:white;
+    border-color:var(--danger);
+}
 
 .section-head{
     display:flex;
     justify-content:space-between;
     align-items:end;
-    margin:50px 0 18px;
+    gap:20px;
+    margin:50px 0 20px;
 }
 
 .section-head h2{
     margin:0;
-    font-size:26px;
+    font-size:27px;
     letter-spacing:-1px;
 }
 
@@ -254,48 +212,49 @@ main{
     font-size:12px;
 }
 
-/* CATEGORIES */
-
-.categories{
+.cards{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
 }
 
-.category{
-    border:1px solid var(--border);
+.card{
     background:var(--panel);
-    padding:20px;
-    min-height:145px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:23px;
+    min-height:150px;
 }
 
-.category:hover{
-    border-color:var(--accent);
+.card h3{
+    margin:0 0 8px;
 }
 
-.category h3{
-    margin:25px 0 7px;
-}
-
-.category p{
-    margin:0;
+.card p{
     color:var(--muted);
-    line-height:1.5;
     font-size:13px;
+    margin:0;
 }
 
-/* TRAIN */
+.card-link{
+    cursor:pointer;
+}
 
-.train-grid{
+.card-link:hover{
+    background:var(--panel2);
+}
+
+.grid-2{
     display:grid;
-    grid-template-columns:280px 1fr;
+    grid-template-columns:1fr 1fr;
     gap:20px;
 }
 
 .panel{
     background:var(--panel);
-    border:1px solid var(--border);
-    padding:22px;
+    border:1px solid var(--line);
+    padding:25px;
 }
 
 .panel h2,
@@ -303,64 +262,82 @@ main{
     margin-top:0;
 }
 
+.muted{
+    color:var(--muted);
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
 .field{
-    margin:18px 0;
+    margin-bottom:18px;
 }
 
 .field label{
     display:block;
+    margin-bottom:7px;
     color:var(--muted);
-    font-size:10px;
+    font-size:11px;
     font-weight:800;
     text-transform:uppercase;
     letter-spacing:1px;
-    margin-bottom:7px;
 }
 
 select,
-textarea,
-input[type="text"]{
+input,
+textarea{
     width:100%;
-    border:1px solid var(--border);
-    background:var(--panel2);
+    background:#111;
+    border:1px solid var(--line);
     color:var(--text);
     padding:11px;
-    border-radius:6px;
+    border-radius:5px;
     outline:none;
 }
 
 textarea{
-    min-height:110px;
+    min-height:100px;
     resize:vertical;
 }
 
-/* SESSION */
+select:focus,
+input:focus,
+textarea:focus{
+    border-color:#666;
+}
 
-.session-top{
-    border-bottom:1px solid var(--border);
-    padding-bottom:20px;
-    margin-bottom:5px;
+.session{
+    margin-top:25px;
+}
+
+.session-title{
     display:flex;
     justify-content:space-between;
     align-items:end;
+    border-bottom:2px solid var(--text);
+    padding-bottom:13px;
+    margin-bottom:10px;
 }
 
-.session-top h2{
+.session-title h2{
     margin:0;
-    font-size:28px;
 }
 
-.session-top p{
-    margin:6px 0 0;
+.session-title p{
+    margin:5px 0 0;
     color:var(--muted);
+    font-size:12px;
 }
 
 .exercise{
-    padding:23px 5px;
-    border-bottom:1px solid var(--border);
+    padding:22px 5px;
+    border-bottom:1px solid var(--line);
 }
 
-.exercise-header{
+.exercise-top{
     display:flex;
     justify-content:space-between;
     gap:20px;
@@ -370,183 +347,171 @@ textarea{
     color:var(--accent);
     font-size:11px;
     font-weight:900;
-    letter-spacing:1px;
 }
 
 .exercise-name{
     font-size:20px;
     font-weight:900;
+    margin-top:3px;
+}
+
+.exercise-detail{
+    color:var(--muted);
     margin-top:4px;
 }
 
-.exercise-prescription{
-    color:var(--muted);
-    margin-top:5px;
-}
-
-.exercise-level{
-    margin-top:7px;
-    font-size:10px;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
 .feedback{
-    margin-top:18px;
+    margin-top:15px;
 }
 
-.feedback-title{
-    font-size:10px;
+.feedback-label{
     color:var(--muted);
+    font-size:10px;
+    font-weight:800;
     text-transform:uppercase;
-    font-weight:900;
     letter-spacing:1px;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
-.feedback-row{
+.feedback-buttons{
     display:flex;
     gap:6px;
     flex-wrap:wrap;
 }
 
-.feedback-btn{
-    border:1px solid var(--border);
-    background:var(--panel2);
+.feedback-buttons button{
+    background:transparent;
+    border:1px solid var(--line);
     color:var(--text);
-    padding:9px 12px;
-    border-radius:6px;
-    font-size:12px;
-    font-weight:800;
+    padding:8px 11px;
+    border-radius:4px;
 }
 
-.feedback-btn:hover{
-    border-color:var(--accent);
-}
-
-.feedback-btn.selected.easy{
-    background:var(--good);
-    border-color:var(--good);
-    color:white;
-}
-
-.feedback-btn.selected.good{
-    background:var(--warning);
-    border-color:var(--warning);
-    color:white;
-}
-
-.feedback-btn.selected.hard{
-    background:var(--danger);
-    border-color:var(--danger);
-    color:white;
-}
-
-.feedback-btn.selected.pain{
-    background:#555;
-    border-color:#555;
-    color:white;
-}
-
-.next-level{
-    margin-top:12px;
-    padding:11px 13px;
+.feedback-buttons button:hover{
     background:var(--panel2);
-    border-left:3px solid var(--accent);
-    font-size:13px;
 }
 
-.next-level strong{
+.feedback-buttons button.selected{
+    border-color:var(--accent);
     color:var(--accent);
 }
 
-.finish-row{
-    display:flex;
-    gap:8px;
-    margin-top:20px;
+.exercise.done{
+    opacity:.6;
 }
 
-/* TECHNIQUES */
-
-.filters{
+.tech-layout{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:25px;
+    grid-template-columns:250px 1fr;
+    gap:20px;
 }
 
-.technique-list{
-    display:grid;
-    gap:8px;
-}
-
-.technique{
-    border:1px solid var(--border);
+.tech-nav{
     background:var(--panel);
+    border:1px solid var(--line);
+    padding:10px;
+    height:max-content;
+}
+
+.tech-nav button{
+    display:block;
+    width:100%;
+    text-align:left;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:11px;
+    border-radius:4px;
+}
+
+.tech-nav button:hover,
+.tech-nav button.active{
+    background:var(--panel2);
+    color:var(--text);
+}
+
+.tech-content{
+    min-width:0;
+}
+
+.position-title{
+    font-size:35px;
+    margin:0 0 5px;
+}
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:25px;
+}
+
+.tech-card{
+    background:var(--panel);
+    border:1px solid var(--line);
     padding:20px;
 }
 
-.technique:hover{
-    border-color:var(--accent);
+.tech-card h3{
+    margin:0 0 5px;
 }
 
-.technique-top{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.technique h3{
-    margin:0;
-}
-
-.badge{
-    font-size:9px;
-    padding:5px 7px;
-    border:1px solid var(--border);
-    border-radius:5px;
-    color:var(--muted);
-    text-transform:uppercase;
-    font-weight:900;
-}
-
-.technique p{
+.tech-card p{
     color:var(--muted);
     font-size:13px;
-    line-height:1.6;
 }
 
-.technique-detail{
-    display:none;
-    margin-top:15px;
-    border-top:1px solid var(--border);
-    padding-top:15px;
-}
-
-.technique.open .technique-detail{
-    display:block;
-}
-
-.technique-detail div{
-    margin:10px 0;
-}
-
-.technique-detail strong{
-    display:block;
-    font-size:11px;
+.status{
+    display:inline-block;
+    margin-top:12px;
+    font-size:10px;
+    font-weight:900;
     text-transform:uppercase;
     letter-spacing:1px;
-    margin-bottom:3px;
+    color:var(--muted);
 }
 
-/* CHAINS */
+.status.reliable{
+    color:var(--good);
+}
+
+.status.learning{
+    color:var(--warning);
+}
+
+.status.never{
+    color:var(--muted);
+}
+
+.status.comfortable{
+    color:#79bfff;
+}
+
+.tech-actions{
+    margin-top:15px;
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+}
+
+.tech-actions button{
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--muted);
+    padding:6px 8px;
+    font-size:11px;
+    border-radius:4px;
+}
+
+.tech-actions button:hover{
+    color:var(--text);
+}
 
 .chain{
     background:var(--panel);
-    border:1px solid var(--border);
+    border:1px solid var(--line);
     padding:25px;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .chain h3{
@@ -554,166 +519,205 @@ textarea{
 }
 
 .chain-step{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 0;
-    border-bottom:1px solid var(--border);
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
 }
 
 .chain-step:last-child{
     border-bottom:0;
 }
 
-.step-number{
-    color:var(--accent);
-    font-weight:900;
-    width:25px;
+.chain-step strong{
+    display:block;
 }
 
-.arrow{
+.chain-step span{
     color:var(--muted);
-    text-align:center;
-    margin:4px 0;
+    font-size:13px;
 }
 
-/* PROGRESS */
+.submission-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.submission{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:20px;
+}
+
+.submission h3{
+    margin:0 0 5px;
+}
+
+.submission p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.log-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
 
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:8px;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
 }
 
 .stat{
     background:var(--panel);
-    border:1px solid var(--border);
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
     padding:22px;
 }
 
 .stat-label{
     color:var(--muted);
     font-size:10px;
-    text-transform:uppercase;
-    font-weight:900;
+    font-weight:800;
     letter-spacing:1px;
 }
 
 .stat-number{
     font-size:38px;
     font-weight:900;
-    margin-top:5px;
+    margin-top:4px;
 }
 
-.skill-list{
-    margin-top:10px;
+.progress-row{
+    margin:20px 0;
 }
 
-.skill{
-    background:var(--panel);
-    border:1px solid var(--border);
-    padding:18px;
-    margin-bottom:8px;
-}
-
-.skill-top{
+.progress-top{
     display:flex;
     justify-content:space-between;
-    margin-bottom:9px;
-    font-weight:800;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:7px;
 }
 
-.track{
+.progress-track{
     height:6px;
-    background:var(--panel2);
+    background:#292929;
 }
 
-.fill{
+.progress-fill{
     height:100%;
     width:0;
     background:var(--accent);
 }
 
-.level-list{
-    margin-top:30px;
-    display:grid;
-    gap:7px;
-}
-
-.level-row{
+.history-item{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    padding:14px;
-    border:1px solid var(--border);
-    background:var(--panel);
+    gap:20px;
+    padding:15px 5px;
+    border-bottom:1px solid var(--line);
 }
 
-.level-name{
+.history-title{
     font-weight:800;
 }
 
-.level-status{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* LOG */
-
-.log-form{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.log-form .full{
-    grid-column:1/-1;
-}
-
-.logs{
-    margin-top:25px;
-}
-
-.log{
-    background:var(--panel);
-    border:1px solid var(--border);
-    padding:20px;
-    margin-bottom:8px;
-}
-
-.log-date{
+.history-date{
     color:var(--muted);
     font-size:11px;
 }
 
-.log h3{
-    margin:6px 0;
-}
-
-.log p{
-    color:var(--muted);
-    line-height:1.6;
-}
-
-/* EMPTY */
-
 .empty{
-    text-align:center;
-    padding:70px 20px;
+    padding:35px;
+    border:1px dashed var(--line);
     color:var(--muted);
-    border:1px dashed var(--border);
+    text-align:center;
 }
 
-/* MOBILE */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.75);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-content{
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:28px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.close{
+    background:transparent;
+    border:0;
+    color:var(--muted);
+    font-size:20px;
+}
+
+.timer{
+    text-align:center;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:50px 20px;
+}
+
+.timer-display{
+    font-size:clamp(70px,12vw,130px);
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-7px;
+    margin:25px 0;
+}
+
+.timer-buttons{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.notice{
+    border-left:3px solid var(--accent);
+    padding:12px 15px;
+    background:var(--panel);
+    color:var(--muted);
+    margin:20px 0;
+}
 
 @media(max-width:850px){
 
     .hero,
-    .train-grid{
+    .tech-layout,
+    .grid-2,
+    .log-grid{
         grid-template-columns:1fr;
     }
 
-    .categories{
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .submission-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -721,48 +725,40 @@ textarea{
         grid-template-columns:repeat(2,1fr);
     }
 
-    nav button{
-        display:none;
-    }
-
-    nav button:first-child{
-        display:block;
-    }
 }
 
-@media(max-width:550px){
+@media(max-width:600px){
 
     main{
         padding-top:30px;
     }
 
     .hero h1{
-        letter-spacing:-3px;
+        letter-spacing:-4px;
     }
 
-    .categories,
-    .stats,
-    .filters,
-    .log-form{
+    .cards,
+    .tech-grid,
+    .submission-grid{
         grid-template-columns:1fr;
     }
 
-    .log-form .full{
-        grid-column:auto;
+    .form-row{
+        grid-template-columns:1fr;
     }
 
-    .exercise-header{
+    .header-inner{
+        align-items:flex-start;
+        padding:12px 0;
         flex-direction:column;
-        gap:5px;
     }
 
-    .feedback-row{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-    }
-
-    .feedback-btn{
+    nav{
         width:100%;
+    }
+
+    .exercise-top{
+        flex-direction:column;
     }
 }
 </style>
@@ -773,34 +769,33 @@ textarea{
 <header>
 <div class="header-inner">
 
-<div class="logo">
-JJB <span>COACH</span>
+<div class="brand">
+JJB <span>TRAINING</span>
 </div>
 
 <nav>
-<button class="active" onclick="showPage('home',this)">Home</button>
-<button onclick="showPage('train',this)">Train</button>
+<button class="active" onclick="showPage('train',this)">Train</button>
 <button onclick="showPage('techniques',this)">Techniques</button>
-<button onclick="showPage('progress',this)">Progress</button>
+<button onclick="showPage('chains',this)">Chains</button>
+<button onclick="showPage('submissions',this)">Submissions</button>
 <button onclick="showPage('log',this)">Log</button>
+<button onclick="showPage('progress',this)">Progress</button>
 </nav>
-
-<button class="theme" onclick="toggleTheme()" id="themeButton">Light</button>
 
 </div>
 </header>
 
-<main class="app">
+<main>
 
-<!-- HOME -->
+<!-- TRAIN -->
 
-<section id="home" class="page active">
+<section id="train" class="page active">
 
 <div class="hero">
 
 <div>
 
-<div class="small-title">Jiu-Jitsu training system</div>
+<div class="small-label">Jiu-Jitsu training companion</div>
 
 <h1>
 TRAIN<br>
@@ -808,38 +803,34 @@ TRAIN<br>
 </h1>
 
 <p>
-A training system built around actual Jiu-Jitsu development.
-Work your technique, movement, grip, strength and conditioning,
-then use your feedback to decide what gets harder next time.
+A simple training system for improving your Jiu-Jitsu between classes.
+Your sessions adapt to what you struggle with, what you have already trained,
+and what needs more work.
 </p>
 
-<div class="hero-actions">
+<div class="actions">
 
-<button class="btn btn-primary" onclick="startToday()">
-Start today's training
+<button class="btn primary" onclick="generateToday()">
+Start today's session
 </button>
 
-<button class="btn btn-secondary" onclick="showPage('techniques')">
-Study techniques
+<button class="btn" onclick="showPage('techniques')">
+Explore techniques
 </button>
 
 </div>
 
 </div>
 
-<div class="today">
+<div class="focus-card">
 
-<div class="small-title">Recommended today</div>
+<div class="small-label">Recommended today</div>
 
-<h2 id="todayTitle">Loading...</h2>
+<h2 id="todayFocus">Loading...</h2>
 
-<p id="todayDescription"></p>
-
-<br>
-
-<button class="btn btn-primary" onclick="startToday()">
-Start
-</button>
+<p id="todayReason">
+Looking at your previous training.
+</p>
 
 </div>
 
@@ -847,77 +838,87 @@ Start
 
 
 <div class="section-head">
+<div>
 <h2>Training areas</h2>
-<p>Everything supports your JJB.</p>
+<p>Everything here has a purpose for JJB.</p>
+</div>
 </div>
 
-<div class="categories">
+<div class="cards">
 
-<div class="category">
-<div class="small-title">01</div>
-<h3>JJB</h3>
-<p>Position-specific drills, escapes, transitions and solo practice.</p>
+<div class="card card-link" onclick="setGoalAndGenerate('jjb')">
+<h3>JJB Drills</h3>
+<p>Movement patterns, escapes, guard recovery, stand-ups and grappling-specific drills.</p>
 </div>
 
-<div class="category">
-<div class="small-title">02</div>
+<div class="card card-link" onclick="setGoalAndGenerate('submissions')">
+<h3>Submissions</h3>
+<p>Build submission knowledge through technique chains and solo drilling.</p>
+</div>
+
+<div class="card card-link" onclick="setGoalAndGenerate('movement')">
 <h3>Movement</h3>
-<p>Shrimp, bridges, stand-ups, sprawls, rolls and grappling movement.</p>
+<p>Shrimping, bridging, technical stand-ups, sprawls and positional movement.</p>
 </div>
 
-<div class="category">
-<div class="small-title">03</div>
+<div class="card card-link" onclick="setGoalAndGenerate('strength')">
+<h3>Strength</h3>
+<p>Bodyweight strength selected to support grappling rather than replace it.</p>
+</div>
+
+<div class="card card-link" onclick="setGoalAndGenerate('grip')">
 <h3>Grip</h3>
 <p>Grip endurance and forearm work using bodyweight or a towel.</p>
 </div>
 
-<div class="category">
-<div class="small-title">04</div>
-<h3>Strength</h3>
-<p>Bodyweight strength designed to support grappling.</p>
+<div class="card card-link" onclick="setGoalAndGenerate('conditioning')">
+<h3>Conditioning</h3>
+<p>Short conditioning blocks designed around the demands of rolling.</p>
 </div>
 
-<div class="category">
-<div class="small-title">05</div>
-<h3>Cardio</h3>
-<p>Conditioning for rounds, scrambles and repeated efforts.</p>
-</div>
-
-<div class="category">
-<div class="small-title">06</div>
+<div class="card card-link" onclick="setGoalAndGenerate('mobility')">
 <h3>Mobility</h3>
 <p>Hips, shoulders, spine and ankles for better movement.</p>
 </div>
 
-<div class="category">
-<div class="small-title">07</div>
-<h3>Core</h3>
-<p>Bracing, rotation and control for grappling positions.</p>
+<div class="card card-link" onclick="showPage('log')">
+<h3>Training Log</h3>
+<p>Record what happened during your real BJJ sessions.</p>
+</div>
+
+<div class="card card-link" onclick="showPage('progress')">
+<h3>Progress</h3>
+<p>See what you actually know instead of just counting workouts.</p>
 </div>
 
 </div>
 
-</section>
-
-
-<!-- TRAIN -->
-
-<section id="train" class="page">
 
 <div class="section-head">
-
 <div>
-<h2>Today's training</h2>
-<p>Your session adapts to your previous feedback.</p>
+<h2>Session generator</h2>
+<p>Choose a focus or let the system decide.</p>
 </div>
-
 </div>
-
-<div class="train-grid">
 
 <div class="panel">
 
-<h3>Session setup</h3>
+<div class="form-row">
+
+<div class="field">
+<label>Focus</label>
+
+<select id="goal">
+<option value="smart">Smart recommendation</option>
+<option value="jjb">JJB drills</option>
+<option value="submissions">Submissions</option>
+<option value="movement">Movement</option>
+<option value="strength">Strength</option>
+<option value="grip">Grip</option>
+<option value="conditioning">Conditioning</option>
+<option value="mobility">Mobility</option>
+</select>
+</div>
 
 <div class="field">
 <label>Duration</label>
@@ -929,50 +930,18 @@ Start
 <option value="45">45 minutes</option>
 <option value="60">60 minutes</option>
 </select>
+</div>
 
 </div>
 
-<div class="field">
-<label>Focus</label>
-
-<select id="goal">
-
-<option value="smart">Smart recommendation</option>
-<option value="jjb">JJB</option>
-<option value="movement">Movement</option>
-<option value="grip">Grip</option>
-<option value="strength">Strength</option>
-<option value="cardio">Cardio</option>
-<option value="mobility">Mobility</option>
-<option value="core">Core</option>
-
-</select>
-
-</div>
-
-<button class="btn btn-primary" style="width:100%" onclick="generateSession()">
+<button class="btn primary" onclick="generateSession()">
 Generate session
 </button>
 
 </div>
 
-<div>
 
-<div id="emptySession" class="empty">
-
-<h2>No session yet</h2>
-
-<p>
-Choose a focus or let the coach decide for you.
-</p>
-
-</div>
-
-<div id="session" style="display:none"></div>
-
-</div>
-
-</div>
+<div id="session" class="session"></div>
 
 </section>
 
@@ -982,90 +951,64 @@ Choose a focus or let the coach decide for you.
 <section id="techniques" class="page">
 
 <div class="section-head">
-
 <div>
 <h2>Technique library</h2>
-<p>Learn positions, problems, solutions and drills.</p>
+<p>Position → problem → solution.</p>
+</div>
+</div>
+
+<div class="tech-layout">
+
+<div class="tech-nav" id="positionNav"></div>
+
+<div class="tech-content">
+
+<h1 class="position-title" id="positionTitle"></h1>
+
+<p class="muted" id="positionDescription"></p>
+
+<div class="tech-grid" id="techGrid"></div>
+
 </div>
 
 </div>
-
-<div class="filters">
-
-<select id="positionFilter" onchange="renderTechniques()">
-<option value="all">All positions</option>
-<option value="side">Side control</option>
-<option value="mount">Mount</option>
-<option value="guard">Guard</option>
-<option value="turtle">Turtle</option>
-<option value="standing">Standing</option>
-</select>
-
-<select id="problemFilter" onchange="renderTechniques()">
-<option value="all">All problems</option>
-<option value="escape">Escaping</option>
-<option value="passing">Passing</option>
-<option value="sweep">Sweeping</option>
-<option value="takedown">Takedowns</option>
-</select>
-
-</div>
-
-<div id="techniqueList" class="technique-list"></div>
-
-<div class="section-head">
-<h2>Chains</h2>
-<p>Think in sequences, not isolated moves.</p>
-</div>
-
-<div id="chains"></div>
 
 </section>
 
 
-<!-- PROGRESS -->
+<!-- CHAINS -->
 
-<section id="progress" class="page">
-
-<div class="section-head">
-<h2>Progress</h2>
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<div class="stat-label">Sessions</div>
-<div class="stat-number" id="statSessions">0</div>
-</div>
-
-<div class="stat">
-<div class="stat-label">Minutes</div>
-<div class="stat-number" id="statMinutes">0</div>
-</div>
-
-<div class="stat">
-<div class="stat-label">Exercises</div>
-<div class="stat-number" id="statExercises">0</div>
-</div>
-
-<div class="stat">
-<div class="stat-label">Techniques</div>
-<div class="stat-number" id="statTechniques">0</div>
-</div>
-
-</div>
+<section id="chains" class="page">
 
 <div class="section-head">
-<h2>Training areas</h2>
+<div>
+<h2>Technique chains</h2>
+<p>Stop thinking about techniques as isolated movements.</p>
+</div>
 </div>
 
-<div id="skills" class="skill-list"></div>
+<div id="chainsContainer"></div>
+
+</section>
+
+
+<!-- SUBMISSIONS -->
+
+<section id="submissions" class="page">
 
 <div class="section-head">
-<h2>Technique knowledge</h2>
+<div>
+<h2>Submissions</h2>
+<p>Learn the submission, then learn how it connects to the position.</p>
+</div>
 </div>
 
-<div id="techniqueProgress" class="level-list"></div>
+<div class="notice">
+The goal is not to collect submissions. The goal is to understand the position,
+create the opening, control the position and finish safely.
+</div>
+
+<div class="submission-grid" id="submissionGrid"></div>
 
 </section>
 
@@ -1075,77 +1018,245 @@ Choose a focus or let the coach decide for you.
 <section id="log" class="page">
 
 <div class="section-head">
-
 <div>
 <h2>Training log</h2>
-<p>Record what actually happened during your JJB sessions.</p>
+<p>Record what actually happened in class.</p>
 </div>
+</div>
+
+<div class="log-grid">
+
+<div class="panel">
+
+<h2>After training</h2>
+
+<div class="field">
+<label>Position I struggled with</label>
+
+<select id="logPosition">
+<option value="">Select...</option>
+<option>Side control</option>
+<option>Mount</option>
+<option>Back control</option>
+<option>Closed guard</option>
+<option>Half guard</option>
+<option>Open guard</option>
+<option>Turtle</option>
+<option>Standing</option>
+</select>
+</div>
+
+<div class="field">
+<label>What did you struggle with?</label>
+
+<textarea
+id="logProblem"
+placeholder="Example: I could not recover guard from side control."
+></textarea>
+</div>
+
+<div class="field">
+<label>Technique learned</label>
+
+<input
+id="logTechnique"
+placeholder="Example: elbow-knee escape"
+/>
+</div>
+
+<div class="field">
+<label>Difficulty</label>
+
+<select id="logDifficulty">
+<option value="easy">Easy</option>
+<option value="medium" selected>Medium</option>
+<option value="hard">Hard</option>
+</select>
+</div>
+
+<div class="field">
+<label>What should I work on next?</label>
+
+<textarea
+id="logNext"
+placeholder="Example: Drill the escape from bottom side control."
+></textarea>
+</div>
+
+<button class="btn primary" onclick="saveTrainingLog()">
+Save training session
+</button>
 
 </div>
 
 <div class="panel">
 
-<div class="log-form">
+<h2>Previous sessions</h2>
 
+<div id="logHistory"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<section id="progress" class="page">
+
+<div class="section-head">
 <div>
-<label class="small-title">Position</label>
-
-<input
-type="text"
-id="logPosition"
-placeholder="Example: Side control">
+<h2>Progress</h2>
+<p>Measure skill development, not just exercise volume.</p>
+</div>
 </div>
 
+<div class="stats">
+
+<div class="stat">
+<div class="stat-label">TRAINING SESSIONS</div>
+<div class="stat-number" id="statSessions">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">MINUTES</div>
+<div class="stat-number" id="statMinutes">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">TECHNIQUES LEARNED</div>
+<div class="stat-number" id="statTechniques">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">RELIABLE TECHNIQUES</div>
+<div class="stat-number" id="statReliable">0</div>
+</div>
+
+</div>
+
+
+<div class="section-head">
 <div>
-<label class="small-title">Technique</label>
+<h2>Skill map</h2>
+<p>Your current technique status.</p>
+</div>
+</div>
 
+<div class="panel" id="skillMap"></div>
+
+
+<div class="section-head">
+<div>
+<h2>Data</h2>
+<p>Everything is stored locally in your browser.</p>
+</div>
+</div>
+
+<div class="actions">
+
+<button class="btn primary" onclick="exportData()">
+Export data
+</button>
+
+<label class="btn">
+Import data
 <input
-type="text"
-id="logTechnique"
-placeholder="Example: Kesa escape">
-</div>
+type="file"
+id="importFile"
+accept=".json"
+onchange="importData()"
+style="display:none"
+>
+</label>
 
-<div class="full">
-
-<label class="small-title">What did you struggle with?</label>
-
-<textarea
-id="logProblem"
-placeholder="Describe what happened during training..."></textarea>
-
-</div>
-
-<div class="full">
-
-<label class="small-title">What should you work on next?</label>
-
-<textarea
-id="logNext"
-placeholder="What do you want to improve?"></textarea>
+<button class="btn danger" onclick="resetData()">
+Reset everything
+</button>
 
 </div>
 
-<div class="full">
+</section>
 
-<button class="btn btn-primary" onclick="saveLog()">
-Save training log
+
+<!-- TIMER -->
+
+<section id="timerPage" class="page">
+
+<div class="section-head">
+<div>
+<h2>Round timer</h2>
+<p>Useful for positional drills and conditioning.</p>
+</div>
+</div>
+
+<div class="timer">
+
+<div class="small-label">Round timer</div>
+
+<div class="timer-display" id="timerDisplay">
+00:30
+</div>
+
+<div class="timer-buttons">
+
+<button class="btn primary" id="timerButton" onclick="toggleTimer()">
+Start
+</button>
+
+<button class="btn" onclick="setTimer(30)">
+30 sec
+</button>
+
+<button class="btn" onclick="setTimer(60)">
+1 min
+</button>
+
+<button class="btn" onclick="setTimer(120)">
+2 min
+</button>
+
+<button class="btn" onclick="setTimer(300)">
+5 min
+</button>
+
+<button class="btn" onclick="resetTimer()">
+Reset
 </button>
 
 </div>
 
 </div>
 
-</div>
-
-<div class="section-head">
-<h2>Previous sessions</h2>
-</div>
-
-<div id="logs" class="logs"></div>
-
 </section>
 
 </main>
+
+
+<!-- TECHNIQUE MODAL -->
+
+<div class="modal" id="techModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<div>
+<div class="small-label">Technique</div>
+<h2 id="modalTitle"></h2>
+</div>
+
+<button class="close" onclick="closeModal()">×</button>
+
+</div>
+
+<div id="modalBody"></div>
+
+</div>
+
+</div>
 
 
 <script>
@@ -1154,190 +1265,510 @@ Save training log
 DATA
 ========================================================= */
 
-const exerciseDatabase = {
+const TECHNIQUES = {
+
+"Side Control":[
+
+{
+id:"sc_frame",
+name:"Frame + hip escape",
+problem:"You are stuck underneath side control.",
+steps:[
+"Build a strong frame against the opponent.",
+"Protect your neck and create space.",
+"Bridge slightly to make the opponent react.",
+"Shrimp your hips away.",
+"Bring your knee back inside."
+],
+when:"Use when the opponent is controlling your upper body and your legs are trapped.",
+mistake:"Trying to bench-press the opponent instead of creating space with your frames and hips.",
+drill:"Start flat, create frames, shrimp and recover your knee. Reset and repeat."
+},
+
+{
+id:"sc_underhook",
+name:"Underhook escape",
+problem:"The opponent is controlling your upper body.",
+steps:[
+"Protect your neck.",
+"Create a small pocket of space.",
+"Swim your arm underneath.",
+"Build the underhook.",
+"Turn toward your side and recover your guard or come up."
+],
+when:"Useful when the opponent gives you enough space to fight for the underhook.",
+mistake:"Reaching for the underhook before creating enough space.",
+drill:"Practice the frame-to-underhook transition slowly."
+},
+
+{
+id:"sc_bridge_roll",
+name:"Bridge and turn",
+problem:"The opponent is driving pressure through your chest.",
+steps:[
+"Bring your feet close.",
+"Bridge strongly.",
+"Turn onto your side.",
+"Use the reaction to create space.",
+"Recover guard or continue to an underhook."
+],
+when:"Especially useful when the opponent is applying heavy pressure.",
+mistake:"Bridging straight upward without following with your hips."
+}
+
+],
+
+"Mount":[
+
+{
+id:"mount_elbow_knee",
+name:"Elbow-knee escape",
+problem:"You are mounted.",
+steps:[
+"Protect your arms and neck.",
+"Create a frame.",
+"Move one elbow toward your hip.",
+"Shrimp your hips.",
+"Bring your knee inside.",
+"Recover half guard or full guard."
+],
+when:"One of the fundamental mount escapes to understand.",
+mistake:"Trying to move your knee before creating enough space.",
+drill:"Practice the movement slowly from mount with no resistance."
+},
+
+{
+id:"mount_bridge_roll",
+name:"Bridge and roll",
+problem:"The opponent is mounted high or commits weight forward.",
+steps:[
+"Trap one arm.",
+"Control the corresponding leg.",
+"Bring your feet close.",
+"Bridge explosively.",
+"Roll toward the trapped side.",
+"Finish in top position."
+],
+when:"Works especially well when the opponent's base is compromised.",
+mistake:"Trying to roll without controlling the opponent's post."
+}
+
+],
+
+"Back Control":[
+
+{
+id:"back_handfight",
+name:"Hand fighting",
+problem:"The opponent is trying to escape your back control.",
+steps:[
+"Protect your neck.",
+"Control the opponent's hands.",
+"Keep your chest connected.",
+"Maintain your hooks or body triangle.",
+"Return to your preferred control."
+],
+when:"Your first priority before chasing submissions.",
+mistake:"Ignoring the opponent's hands and immediately attacking the neck."
+},
+
+{
+id:"back_rnc",
+name:"Rear naked choke",
+problem:"You have strong back control.",
+steps:[
+"Control the opponent's upper body.",
+"Win the hand fight.",
+"Get your choking arm around the neck.",
+"Hide your choking hand.",
+"Use your second arm to finish the position."
+],
+when:"When the neck becomes available and your control is stable.",
+mistake:"Sacrificing back control to chase the submission."
+}
+
+],
+
+"Closed Guard":[
+
+{
+id:"cg_break_posture",
+name:"Break posture",
+problem:"The opponent is standing or sitting tall in your guard.",
+steps:[
+"Control the upper body.",
+"Bring the opponent's posture forward.",
+"Keep your legs connected.",
+"Use your grips to maintain broken posture.",
+"Attack once their posture is compromised."
+],
+when:"Before most attacks from closed guard.",
+mistake:"Trying submissions against a fully upright opponent."
+},
+
+{
+id:"cg_armbar",
+name:"Closed guard armbar",
+problem:"The opponent posts an arm incorrectly.",
+steps:[
+"Control the arm.",
+"Break posture.",
+"Angle your hips.",
+"Bring your leg over the shoulder.",
+"Control the head and finish the armbar."
+],
+when:"When one arm becomes isolated.",
+mistake:"Trying to finish flat on your back without creating an angle."
+}
+
+],
+
+"Half Guard":[
+
+{
+id:"hg_underhook",
+name:"Half guard underhook",
+problem:"You are trapped underneath.",
+steps:[
+"Protect your neck.",
+"Create an underhook.",
+"Get onto your side.",
+"Build a frame.",
+"Work toward recovering guard or coming up."
+],
+when:"One of the most important battles from bottom half guard.",
+mistake:"Staying flat while trying to win the underhook."
+},
+
+{
+id:"hg_knee_shield",
+name:"Knee shield",
+problem:"The opponent is applying pressure.",
+steps:[
+"Turn onto your side.",
+"Place your knee between you and the opponent.",
+"Use your frame to control distance.",
+"Look for an underhook or guard recovery."
+],
+when:"When you need space against top pressure.",
+mistake:"Letting the knee shield collapse."
+}
+
+],
+
+"Standing":[
+
+{
+id:"stand_base",
+name:"Basic stance and movement",
+problem:"You feel unstable while standing.",
+steps:[
+"Keep a balanced stance.",
+"Keep your head over your hips.",
+"Move your feet instead of crossing them.",
+"Maintain your base while changing direction."
+],
+when:"Always.",
+mistake:"Standing too tall or crossing your feet."
+},
+
+{
+id:"technical_standup",
+name:"Technical stand-up",
+problem:"You need to stand safely from the ground.",
+steps:[
+"Post with one hand.",
+"Protect your face.",
+"Bring the opposite foot underneath you.",
+"Lift your hips.",
+"Stand while maintaining distance."
+],
+when:"Whenever you need to stand while maintaining defensive awareness.",
+mistake:"Turning your back or standing without protecting yourself."
+}
+
+],
+
+"Turtle":[
+
+{
+id:"turtle_single",
+name:"Turtle recovery",
+problem:"You are defending from turtle.",
+steps:[
+"Protect your neck.",
+"Keep your elbows tight.",
+"Create a frame.",
+"Work toward guard or a safe standing position."
+],
+when:"When recovering from a failed takedown or scramble.",
+mistake:"Exposing the neck while trying to move."
+}
+
+]
+
+};
+
+
+/* =========================================================
+SUBMISSIONS
+========================================================= */
+
+const SUBMISSIONS=[
+
+{
+name:"Rear Naked Choke",
+position:"Back control",
+description:"A fundamental back-control submission.",
+setup:"Win the hand fight and secure the neck without sacrificing your back control.",
+finish:"Use your second arm and chest connection to finish the choke."
+},
+
+{
+name:"Armbar",
+position:"Mount / Guard",
+description:"Isolate the arm and control the shoulder line.",
+setup:"Break posture, isolate the arm and create an angle.",
+finish:"Control the elbow and extend the hips while maintaining control."
+},
+
+{
+name:"Triangle",
+position:"Closed Guard",
+description:"Use your legs to isolate the opponent's head and arm.",
+setup:"Break posture and bring one arm inside while controlling the head.",
+finish:"Adjust the angle and close the legs securely."
+},
+
+{
+name:"Kimura",
+position:"Guard / Side Control",
+description:"A powerful shoulder-locking attack.",
+setup:"Isolate the wrist and establish the figure-four grip.",
+finish:"Control the elbow and rotate the shoulder carefully."
+},
+
+{
+name:"Americana",
+position:"Mount / Side Control",
+description:"A shoulder lock from top control.",
+setup:"Pin the opponent's arm and establish the figure-four.",
+finish:"Keep the elbow controlled and rotate the wrist toward the mat."
+},
+
+{
+name:"Guillotine",
+position:"Front Headlock",
+description:"A front-headlock submission.",
+setup:"Control the head and arm while maintaining strong posture.",
+finish:"Close the space and use your body position rather than only your arms."
+},
+
+{
+name:"Arm Triangle",
+position:"Mount / Side Control",
+description:"A pressure submission using your shoulder and the opponent's arm.",
+setup:"Isolate the head and arm and establish strong chest pressure.",
+finish:"Walk around or adjust your angle while maintaining pressure."
+},
+
+{
+name:"Bow and Arrow",
+position:"Back Control",
+description:"A powerful gi-based back submission.",
+setup:"Secure the collar and control the opposite leg.",
+finish:"Extend the body while maintaining the back-control structure."
+},
+
+{
+name:"Straight Ankle Lock",
+position:"Ashigarami / Open Guard",
+description:"A fundamental lower-body submission.",
+setup:"Control the leg and establish your position before attacking.",
+finish:"Control the foot and apply the submission gradually."
+}
+
+];
+
+
+/* =========================================================
+CHAINS
+========================================================= */
+
+const CHAINS=[
+
+{
+title:"Side Control Escape Chain",
+description:"A basic defensive chain from bottom side control.",
+steps:[
+["Frame","Create space and protect your neck."],
+["Bridge","Make the top player react."],
+["Shrimp","Move your hips away."],
+["Knee inside","Recover your guard structure."],
+["Half guard","Stabilize the position."],
+["Underhook","Begin your next escape or reversal."]
+]
+},
+
+{
+title:"Mount Escape Chain",
+description:"Two fundamental mount escapes connected together.",
+steps:[
+["Frame","Protect your neck and establish structure."],
+["Bridge","Attack the opponent's base."],
+["Elbow-knee escape","Create space and insert the knee."],
+["Recover guard","Return to a safer position."],
+["Underhook","Build your next attacking structure."]
+]
+},
+
+{
+title:"Back Attack Chain",
+description:"Control first, submission second.",
+steps:[
+["Back control","Secure your hooks or body triangle."],
+["Hand fight","Control the opponent's defensive hands."],
+["Rear naked choke","Attack the neck when available."],
+["Armbar","If they defend the neck, attack the arm."],
+["Back control","Return to the position instead of forcing the finish."]
+]
+},
+
+{
+title:"Closed Guard Attack Chain",
+description:"Use posture control to create multiple attacks.",
+steps:[
+["Break posture","Bring the opponent forward."],
+["Control an arm","Isolate one side."],
+["Armbar","Attack the arm."],
+["Triangle","If the armbar is defended, change the angle."],
+["Kimura","Use the opponent's defensive reaction."]
+]
+},
+
+{
+title:"Standing to Ground Chain",
+description:"A simple way to connect standing movement with ground work.",
+steps:[
+["Stance","Maintain balance and defensive posture."],
+["Technical stand-up","Understand safe ground-to-standing movement."],
+["Sprawl","Defend the legs."],
+["Front headlock","Control the head and arm."],
+["Guillotine","Attack if the position is appropriate."]
+]
+}
+
+];
+
+
+/* =========================================================
+EXERCISES
+========================================================= */
+
+const EXERCISES={
 
 jjb:[
 {
-id:"side_escape",
-name:"Side control escape",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
+id:"shrimp",
+name:"Hip escape / Shrimp",
+detail:"3 × 8 each side",
+skill:"movement"
 },
 {
-id:"bridge_escape",
-name:"Bridge and recover",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 12 / side",
-"4 x 12 / side"
-]
+id:"bridge",
+name:"Bridge",
+detail:"3 × 12",
+skill:"movement"
 },
 {
-id:"technical_standup_jjb",
+id:"technical_standup",
 name:"Technical stand-up",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
+detail:"3 × 6 each side",
+skill:"jjb"
 },
 {
-id:"sprawl_jjb",
-name:"Sprawl",
-levels:[
-"2 x 5",
-"2 x 8",
-"3 x 8",
-"3 x 10",
-"4 x 10"
-]
-},
-{
-id:"sitthrough_jjb",
+id:"sitthrough",
 name:"Sit-through",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 12 / side",
-"4 x 12 / side"
-]
+detail:"3 × 8 each side",
+skill:"movement"
+},
+{
+id:"sprawl",
+name:"Sprawl",
+detail:"3 × 8",
+skill:"jjb"
+},
+{
+id:"bearcrawl",
+name:"Bear crawl",
+detail:"3 × 30 seconds",
+skill:"conditioning"
+}
+],
+
+submissions:[
+{
+id:"armbar_drill",
+name:"Armbar movement drill",
+detail:"3 × 5 each side",
+skill:"submissions"
+},
+{
+id:"triangle_drill",
+name:"Triangle angle drill",
+detail:"3 × 5 each side",
+skill:"submissions"
+},
+{
+id:"rnc_drill",
+name:"Rear naked choke mechanics",
+detail:"3 × 5",
+skill:"submissions"
+},
+{
+id:"kimura_drill",
+name:"Kimura grip drill",
+detail:"3 × 5 each side",
+skill:"submissions"
 }
 ],
 
 movement:[
 {
 id:"shrimp",
-name:"Shrimp",
-levels:[
-"2 x 6 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 12 / side",
-"4 x 12 / side"
-]
+name:"Hip escape / Shrimp",
+detail:"3 × 10 each side",
+skill:"movement"
 },
 {
 id:"reverse_shrimp",
 name:"Reverse shrimp",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
+detail:"3 × 8 each side",
+skill:"movement"
 },
 {
 id:"bridge",
 name:"Bridge",
-levels:[
-"2 x 8",
-"2 x 12",
-"3 x 12",
-"3 x 15",
-"4 x 15"
-]
+detail:"3 × 15",
+skill:"movement"
 },
 {
 id:"technical_standup",
 name:"Technical stand-up",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
+detail:"3 × 8 each side",
+skill:"movement"
 },
 {
-id:"bear_crawl",
-name:"Bear crawl",
-levels:[
-"2 x 15 sec",
-"2 x 20 sec",
-"3 x 20 sec",
-"3 x 30 sec",
-"4 x 30 sec"
-]
+id:"sitthrough",
+name:"Sit-through",
+detail:"3 × 10 each side",
+skill:"movement"
 },
 {
-id:"sprawl",
-name:"Sprawl",
-levels:[
-"2 x 5",
-"2 x 8",
-"3 x 8",
-"3 x 10",
-"4 x 10"
-]
-}
-],
-
-grip:[
-{
-id:"towel_squeeze",
-name:"Towel squeeze",
-levels:[
-"2 x 15 sec",
-"2 x 20 sec",
-"3 x 20 sec",
-"3 x 30 sec",
-"4 x 30 sec"
-]
-},
-{
-id:"towel_hold",
-name:"Towel grip hold",
-levels:[
-"2 x 10 sec",
-"2 x 15 sec",
-"3 x 20 sec",
-"3 x 30 sec",
-"4 x 40 sec"
-]
-},
-{
-id:"towel_wring",
-name:"Towel wringing",
-levels:[
-"2 x 15 sec",
-"2 x 20 sec",
-"3 x 20 sec",
-"3 x 30 sec",
-"4 x 30 sec"
-]
-},
-{
-id:"finger_extension",
-name:"Finger extensions",
-levels:[
-"2 x 10",
-"2 x 15",
-"3 x 15",
-"3 x 20",
-"4 x 25"
-]
-},
-{
-id:"wrist_rotation",
-name:"Wrist rotations",
-levels:[
-"2 x 10",
-"2 x 15",
-"3 x 15",
-"3 x 20",
-"4 x 20"
-]
+id:"shoulder_roll",
+name:"Shoulder roll",
+detail:"3 × 6 each side",
+skill:"movement"
 }
 ],
 
@@ -1345,1294 +1776,183 @@ strength:[
 {
 id:"pushups",
 name:"Push-ups",
-levels:[
-"2 x 6",
-"2 x 10",
-"3 x 10",
-"3 x 15",
-"4 x 15"
-]
+detail:"3 × 8–15",
+skill:"strength"
 },
 {
 id:"squat",
-name:"Squats",
-levels:[
-"2 x 10",
-"2 x 15",
-"3 x 15",
-"3 x 20",
-"4 x 20"
-]
+name:"Bodyweight squats",
+detail:"3 × 15",
+skill:"strength"
 },
 {
 id:"lunges",
-name:"Lunges",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 12 / side",
-"4 x 12 / side"
-]
+name:"Reverse lunges",
+detail:"3 × 8 each side",
+skill:"strength"
 },
 {
-id:"pike_pushup",
+id:"pike",
 name:"Pike push-ups",
-levels:[
-"2 x 4",
-"2 x 6",
-"3 x 6",
-"3 x 10",
-"4 x 10"
-]
+detail:"3 × 6–10",
+skill:"strength"
 },
 {
-id:"glute_bridge",
+id:"glute",
 name:"Glute bridge",
-levels:[
-"2 x 10",
-"2 x 15",
-"3 x 15",
-"3 x 20",
-"4 x 20"
-]
+detail:"3 × 15",
+skill:"strength"
 },
 {
-id:"plank_strength",
+id:"plank",
 name:"Plank",
-levels:[
-"2 x 20 sec",
-"2 x 30 sec",
-"3 x 30 sec",
-"3 x 45 sec",
-"4 x 45 sec"
-]
+detail:"3 × 30–45 sec",
+skill:"core"
 }
 ],
 
-cardio:[
+grip:[
+{
+id:"towel_squeeze",
+name:"Towel squeeze",
+detail:"3 × 30 sec",
+skill:"grip"
+},
+{
+id:"towel_hold",
+name:"Towel grip hold",
+detail:"3 × 20 sec",
+skill:"grip"
+},
+{
+id:"towel_wring",
+name:"Towel wringing",
+detail:"3 × 30 sec",
+skill:"grip"
+},
+{
+id:"finger_extension",
+name:"Finger extensions",
+detail:"3 × 20",
+skill:"grip"
+}
+],
+
+conditioning:[
 {
 id:"mountain",
 name:"Mountain climbers",
-levels:[
-"2 x 20 sec",
-"2 x 30 sec",
-"3 x 30 sec",
-"4 x 30 sec",
-"4 x 45 sec"
-]
+detail:"4 × 30 sec",
+skill:"conditioning"
 },
 {
-id:"burpees",
+id:"burpee",
 name:"Burpees",
-levels:[
-"2 x 5",
-"2 x 8",
-"3 x 8",
-"3 x 10",
-"4 x 10"
-]
+detail:"4 × 8",
+skill:"conditioning"
 },
 {
-id:"high_knees",
+id:"highknees",
 name:"High knees",
-levels:[
-"2 x 20 sec",
-"2 x 30 sec",
-"3 x 30 sec",
-"4 x 30 sec",
-"4 x 45 sec"
-]
+detail:"4 × 30 sec",
+skill:"conditioning"
 },
 {
-id:"jumping_jacks",
+id:"jacks",
 name:"Jumping jacks",
-levels:[
-"2 x 30 sec",
-"2 x 45 sec",
-"3 x 45 sec",
-"4 x 45 sec",
-"5 x 45 sec"
-]
+detail:"4 × 45 sec",
+skill:"conditioning"
+},
+{
+id:"bearcrawl",
+name:"Bear crawl",
+detail:"4 × 30 sec",
+skill:"conditioning"
 }
 ],
 
 mobility:[
 {
-id:"hip_90",
-name:"90/90 hip rotation",
-levels:[
-"30 sec / side",
-"40 sec / side",
-"60 sec / side",
-"75 sec / side",
-"90 sec / side"
-]
+id:"hips",
+name:"90/90 hip switches",
+detail:"3 × 45 sec",
+skill:"mobility"
 },
 {
 id:"deep_squat",
 name:"Deep squat hold",
-levels:[
-"20 sec",
-"30 sec",
-"45 sec",
-"60 sec",
-"75 sec"
-]
+detail:"3 × 30 sec",
+skill:"mobility"
 },
 {
 id:"thoracic",
-name:"Thoracic rotation",
-levels:[
-"2 x 6 / side",
-"2 x 8 / side",
-"2 x 10 / side",
-"3 x 10 / side",
-"3 x 12 / side"
-]
+name:"Thoracic rotations",
+detail:"3 × 8 each side",
+skill:"mobility"
 },
 {
-id:"shoulder_circle",
+id:"shoulders",
 name:"Shoulder circles",
-levels:[
-"2 x 10",
-"2 x 15",
-"3 x 15",
-"3 x 20",
-"4 x 20"
-]
-}
-],
-
-core:[
-{
-id:"core_plank",
-name:"Plank",
-levels:[
-"2 x 20 sec",
-"2 x 30 sec",
-"3 x 30 sec",
-"3 x 45 sec",
-"4 x 45 sec"
-]
+detail:"3 × 20",
+skill:"mobility"
 },
 {
-id:"side_plank",
-name:"Side plank",
-levels:[
-"2 x 15 sec / side",
-"2 x 20 sec / side",
-"3 x 20 sec / side",
-"3 x 30 sec / side",
-"4 x 30 sec / side"
-]
-},
-{
-id:"dead_bug",
-name:"Dead bug",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
-},
-{
-id:"bird_dog",
-name:"Bird dog",
-levels:[
-"2 x 5 / side",
-"2 x 8 / side",
-"3 x 8 / side",
-"3 x 10 / side",
-"4 x 10 / side"
-]
+id:"ankles",
+name:"Ankle mobility",
+detail:"3 × 45 sec each side",
+skill:"mobility"
 }
 ]
 
 };
-
-
-/* =========================================================
-TECHNIQUES
-========================================================= */
-
-const techniques=[
-
-{
-name:"Frame and hip escape",
-position:"side",
-problem:"escape",
-description:"Create space with your frames before moving your hips.",
-how:"Frame against the shoulder and hip, bridge slightly, shrimp away, then bring your knee inside.",
-when:"When trapped underneath side control.",
-mistake:"Trying to shrimp before creating enough space.",
-drill:"Start flat, create frames, shrimp, recover a knee inside. Reset and repeat."
-},
-
-{
-name:"Bridge escape",
-position:"side",
-problem:"escape",
-description:"Use your bridge to make the top player adjust their base.",
-how:"Bring your feet close, bridge explosively, turn toward the opening and recover position.",
-when:"When the opponent's base is narrow or their weight is poorly distributed.",
-mistake:"Bridging straight upward without moving toward a useful direction.",
-drill:"Bridge, turn, recover guard, reset."
-},
-
-{
-name:"Elbow escape",
-position:"mount",
-problem:"escape",
-description:"Create space with your elbows and hips to recover half guard or guard.",
-how:"Frame, bridge, shrimp your hips away and slide one knee between you and your opponent.",
-when:"When mounted and the opponent is not controlling your hips completely.",
-mistake:"Trying to move the leg without first making space.",
-drill:"Practice the hip movement slowly before adding resistance."
-},
-
-{
-name:"Technical stand-up",
-position:"guard",
-problem:"escape",
-description:"Stand safely while maintaining distance and protecting yourself.",
-how:"Post one hand, bring the opposite leg back, lift your hips and stand while keeping your lead leg ready.",
-when:"When you have created enough distance to disengage.",
-mistake:"Turning your back while standing.",
-drill:"Sit, post, stand, reset."
-},
-
-{
-name:"Hip bump sweep",
-position:"guard",
-problem:"sweep",
-description:"Use your opponent's forward pressure to reverse the position.",
-how:"Sit up, control the arm, post your hand and drive your hips forward.",
-when:"When the opponent is leaning forward.",
-mistake:"Trying to sweep only with the arms.",
-drill:"Closed guard to hip bump, reset after every repetition."
-},
-
-{
-name:"Technical stand-up from guard",
-position:"guard",
-problem:"escape",
-description:"Create distance and stand rather than staying underneath the opponent.",
-how:"Post, move your hips back, place your lead foot and stand while maintaining distance.",
-when:"When the opponent gives enough space to disengage.",
-mistake:"Standing without controlling distance.",
-drill:"Practice slowly with a clear reset position."
-},
-
-{
-name:"Sprawl",
-position:"standing",
-problem:"takedown",
-description:"Stop a shot by removing your hips from the attack.",
-how:"Throw your legs back, drive your hips down and control the head and shoulders.",
-when:"When defending a double-leg or similar shot.",
-mistake:"Leaving the hips high.",
-drill:"Level change, sprawl, recover stance."
-},
-
-{
-name:"Sit-out",
-position:"turtle",
-problem:"escape",
-description:"Move around the opponent while creating an opening to escape.",
-how:"Post your hand, bring your leg through and rotate your hips away.",
-when:"When starting from turtle.",
-mistake:"Trying to rush before controlling the opponent's grip.",
-drill:"Turtle, sit-out, recover stance, reset."
-}
-
-];
-
-
-/* =========================================================
-CHAINS
-========================================================= */
-
-const chains=[
-
-{
-title:"Side control escape chain",
-steps:[
-"Create frames",
-"Hip escape",
-"Bring knee inside",
-"Recover half guard",
-"Underhook",
-"Come up or recover full guard"
-]
-},
-
-{
-title:"Mount escape chain",
-steps:[
-"Protect your elbows",
-"Bridge",
-"Create space",
-"Elbow escape",
-"Recover half guard",
-"Recover guard"
-]
-},
-
-{
-title:"Takedown defense chain",
-steps:[
-"Recognize the shot",
-"Sprawl",
-"Control head and shoulders",
-"Circle away",
-"Recover stance",
-"Attack your own position"
-]
-},
-
-{
-title:"Guard attack chain",
-steps:[
-"Establish grips",
-"Create posture break",
-"Threaten sweep",
-"Force reaction",
-"Attack submission or transition",
-"Reset if unsuccessful"
-]
-}
-
-];
-
-
-/* =========================================================
-CONFIG
-========================================================= */
-
-const areaNames={
-jjb:"JJB",
-movement:"Movement",
-grip:"Grip",
-strength:"Strength",
-cardio:"Cardio",
-mobility:"Mobility",
-core:"Core"
-};
-
-const defaultData={
-levels:{},
-feedback:{},
-sessions:[],
-logs:[],
-techniqueStatus:{}
-};
-
-let currentSession=null;
 
 
 /* =========================================================
 STORAGE
 ========================================================= */
 
+const DEFAULT_DATA={
+sessions:[],
+logs:[],
+techniques:{},
+feedback:{}
+};
+
 function getData(){
 
-const raw=localStorage.getItem("jjbCoachData");
+const raw=localStorage.getItem("jjb_training_v3");
 
 if(!raw){
-return structuredClone(defaultData);
+return structuredClone(DEFAULT_DATA);
 }
 
 try{
-return JSON.parse(raw);
+
+const data=JSON.parse(raw);
+
+return {
+...structuredClone(DEFAULT_DATA),
+...data,
+techniques:data.techniques||{},
+feedback:data.feedback||{},
+sessions:data.sessions||[],
+logs:data.logs||[]
+};
+
 }catch{
-return structuredClone(defaultData);
+
+return structuredClone(DEFAULT_DATA);
+
 }
 
 }
 
 function saveData(data){
+
 localStorage.setItem(
-"jjbCoachData",
+"jjb_training_v3",
 JSON.stringify(data)
 );
-}
-
-
-/* =========================================================
-UTILITIES
-========================================================= */
-
-function shuffle(arr){
-
-const result=[...arr];
-
-for(let i=result.length-1;i>0;i--){
-
-const j=Math.floor(Math.random()*(i+1));
-
-[result[i],result[j]]=[
-result[j],
-result[i]
-];
-
-}
-
-return result;
-
-}
-
-function exerciseCount(minutes){
-
-if(minutes<=10) return 4;
-if(minutes<=20) return 6;
-if(minutes<=30) return 8;
-if(minutes<=45) return 10;
-
-return 12;
-}
-
-function getLevel(id){
-
-const data=getData();
-
-if(typeof data.levels[id]!=="number"){
-return 1;
-}
-
-return Math.max(
-0,
-Math.min(
-4,
-data.levels[id]
-)
-);
-
-}
-
-
-/* =========================================================
-SMART FOCUS
-========================================================= */
-
-function smartGoal(){
-
-const data=getData();
-
-if(!data.sessions.length){
-return "jjb";
-}
-
-/*
-Find the training area used least recently.
-*/
-
-const last={};
-
-data.sessions.forEach(session=>{
-last[session.goal]=session.date;
-});
-
-const areas=Object.keys(areaNames);
-
-areas.sort((a,b)=>{
-
-const aDate=last[a]
-?new Date(last[a]).getTime()
-:0;
-
-const bDate=last[b]
-?new Date(last[b]).getTime()
-:0;
-
-return aDate-bDate;
-
-});
-
-return areas[0]||"jjb";
-
-}
-
-
-/* =========================================================
-GENERATE SESSION
-========================================================= */
-
-function generateSession(){
-
-let goal=document.getElementById("goal").value;
-
-const duration=Number(
-document.getElementById("duration").value
-);
-
-if(goal==="smart"){
-goal=smartGoal();
-}
-
-let pool=exerciseDatabase[goal];
-
-if(!pool) return;
-
-const selected=shuffle(pool)
-.slice(
-0,
-Math.min(
-exerciseCount(duration),
-pool.length
-)
-);
-
-currentSession={
-goal,
-duration,
-exercises:selected.map(ex=>({
-id:ex.id,
-name:ex.name,
-level:getLevel(ex.id),
-feedback:null
-}))
-};
-
-renderSession();
-
-showPage("train");
-
-}
-
-
-/* =========================================================
-SESSION DISPLAY
-========================================================= */
-
-function renderSession(){
-
-const empty=document.getElementById("emptySession");
-const session=document.getElementById("session");
-
-empty.style.display="none";
-session.style.display="block";
-
-let html=`
-
-<div class="session-top">
-
-<div>
-<h2>${areaNames[currentSession.goal]}</h2>
-<p>${currentSession.exercises.length} exercises</p>
-</div>
-
-<div>
-${currentSession.duration} min
-</div>
-
-</div>
-`;
-
-currentSession.exercises.forEach((ex,index)=>{
-
-const original=exerciseDatabase[
-currentSession.goal
-].find(x=>x.id===ex.id);
-
-html+=`
-
-<div class="exercise" id="exercise-${ex.id}">
-
-<div class="exercise-header">
-
-<div>
-
-<div class="exercise-number">
-EXERCISE ${index+1}
-</div>
-
-<div class="exercise-name">
-${ex.name}
-</div>
-
-<div class="exercise-prescription">
-${original.levels[ex.level]}
-</div>
-
-<div class="exercise-level">
-Level ${ex.level+1} / 5
-</div>
-
-</div>
-
-</div>
-
-<div class="feedback">
-
-<div class="feedback-title">
-How did it feel?
-</div>
-
-<div class="feedback-row">
-
-<button
-class="feedback-btn"
-onclick="feedback('${ex.id}','easy',this)">
-Too easy
-</button>
-
-<button
-class="feedback-btn"
-onclick="feedback('${ex.id}','good',this)">
-Good
-</button>
-
-<button
-class="feedback-btn"
-onclick="feedback('${ex.id}','hard',this)">
-Too hard
-</button>
-
-<button
-class="feedback-btn"
-onclick="feedback('${ex.id}','pain',this)">
-Pain
-</button>
-
-</div>
-
-<div
-class="next-level"
-id="next-${ex.id}"
-style="display:none">
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-html+=`
-
-<div class="finish-row">
-
-<button
-class="btn btn-primary"
-onclick="finishSession()">
-Finish session
-</button>
-
-<button
-class="btn btn-secondary"
-onclick="generateSession()">
-New session
-</button>
-
-</div>
-`;
-
-session.innerHTML=html;
-
-}
-
-
-/* =========================================================
-FEEDBACK
-========================================================= */
-
-function feedback(id,type,button){
-
-if(!currentSession) return;
-
-const ex=currentSession.exercises.find(
-x=>x.id===id
-);
-
-if(!ex) return;
-
-ex.feedback=type;
-
-const data=getData();
-
-let level=getLevel(id);
-
-let message="";
-
-if(type==="easy"){
-
-level=Math.min(4,level+1);
-
-message=
-"<strong>Next time:</strong> Increase the difficulty.";
-
-}
-
-if(type==="good"){
-
-message=
-"<strong>Next time:</strong> Keep the same level.";
-
-}
-
-if(type==="hard"){
-
-level=Math.max(0,level-1);
-
-message=
-"<strong>Next time:</strong> Use an easier level.";
-
-}
-
-if(type==="pain"){
-
-level=Math.max(0,level-1);
-
-message=
-"<strong>Next time:</strong> Skip or replace this exercise if it causes pain.";
-
-}
-
-data.levels[id]=level;
-
-data.feedback[id]={
-type,
-date:Date.now()
-};
-
-saveData(data);
-
-const parent=button.closest(".exercise");
-
-parent
-.querySelectorAll(".feedback-btn")
-.forEach(btn=>{
-btn.classList.remove(
-"selected",
-"easy",
-"good",
-"hard",
-"pain"
-);
-});
-
-button.classList.add(
-"selected",
-type
-);
-
-const next=document.getElementById(
-"next-"+id
-);
-
-next.innerHTML=message;
-next.style.display="block";
-
-}
-
-
-/* =========================================================
-FINISH SESSION
-========================================================= */
-
-function finishSession(){
-
-if(!currentSession) return;
-
-const incomplete=currentSession.exercises.filter(
-x=>!x.feedback
-);
-
-if(incomplete.length){
-
-alert(
-"Give feedback for every exercise before finishing."
-);
-
-return;
-
-}
-
-const data=getData();
-
-data.sessions.push({
-date:new Date().toISOString(),
-goal:currentSession.goal,
-duration:currentSession.duration,
-exerciseCount:currentSession.exercises.length
-});
-
-saveData(data);
-
-currentSession=null;
-
-document.getElementById("session").style.display="none";
-document.getElementById("emptySession").style.display="block";
-
-updateProgress();
-
-alert("Session saved.");
-
-}
-
-
-/* =========================================================
-TECHNIQUES
-========================================================= */
-
-function renderTechniques(){
-
-const position=document.getElementById(
-"positionFilter"
-).value;
-
-const problem=document.getElementById(
-"problemFilter"
-).value;
-
-const list=document.getElementById(
-"techniqueList"
-);
-
-const filtered=techniques.filter(t=>{
-
-const positionMatch=
-position==="all" ||
-t.position===position;
-
-const problemMatch=
-problem==="all" ||
-t.problem===problem;
-
-return positionMatch && problemMatch;
-
-});
-
-if(!filtered.length){
-
-list.innerHTML=
-`<div class="empty">No techniques found.</div>`;
-
-return;
-
-}
-
-list.innerHTML="";
-
-filtered.forEach((t,index)=>{
-
-const div=document.createElement("div");
-
-div.className="technique";
-
-div.innerHTML=`
-
-<div
-class="technique-top"
-onclick="toggleTechnique(this.parentElement)">
-
-<h3>${t.name}</h3>
-
-<div class="badge">
-${t.position}
-</div>
-
-</div>
-
-<p>${t.description}</p>
-
-<div class="technique-detail">
-
-<div>
-<strong>How</strong>
-${t.how}
-</div>
-
-<div>
-<strong>When</strong>
-${t.when}
-</div>
-
-<div>
-<strong>Common mistake</strong>
-${t.mistake}
-</div>
-
-<div>
-<strong>Solo drill</strong>
-${t.drill}
-</div>
-
-<div>
-
-<button
-class="btn btn-secondary"
-onclick="markTechnique('${t.name}')">
-Mark as learned
-</button>
-
-</div>
-
-</div>
-`;
-
-list.appendChild(div);
-
-});
-
-}
-
-
-function toggleTechnique(element){
-
-element.classList.toggle("open");
-
-}
-
-
-function markTechnique(name){
-
-const data=getData();
-
-data.techniqueStatus[name]="learned";
-
-saveData(data);
-
-updateProgress();
-
-alert(
-"Technique marked as learned."
-);
-
-}
-
-
-/* =========================================================
-CHAINS
-========================================================= */
-
-function renderChains(){
-
-const container=document.getElementById(
-"chains"
-);
-
-container.innerHTML="";
-
-chains.forEach(chain=>{
-
-const div=document.createElement("div");
-
-div.className="chain";
-
-let html=`<h3>${chain.title}</h3>`;
-
-chain.steps.forEach((step,index)=>{
-
-html+=`
-
-<div class="chain-step">
-
-<div class="step-number">
-${index+1}
-</div>
-
-<div>
-${step}
-</div>
-
-</div>
-`;
-
-});
-
-div.innerHTML=html;
-
-container.appendChild(div);
-
-});
-
-}
-
-
-/* =========================================================
-PROGRESS
-========================================================= */
-
-function updateProgress(){
-
-const data=getData();
-
-document.getElementById(
-"statSessions"
-).textContent=data.sessions.length;
-
-document.getElementById(
-"statMinutes"
-).textContent=data.sessions.reduce(
-(sum,s)=>sum+Number(s.duration||0),
-0
-);
-
-document.getElementById(
-"statExercises"
-).textContent=data.sessions.reduce(
-(sum,s)=>sum+Number(s.exerciseCount||0),
-0
-);
-
-document.getElementById(
-"statTechniques"
-).textContent=
-Object.keys(data.techniqueStatus||{}).length;
-
-
-/* AREA PROGRESS */
-
-const skills=document.getElementById("skills");
-
-skills.innerHTML="";
-
-Object.keys(areaNames).forEach(area=>{
-
-const sessions=data.sessions.filter(
-s=>s.goal===area
-).length;
-
-const value=Math.min(
-100,
-sessions*10
-);
-
-skills.innerHTML+=`
-
-<div class="skill">
-
-<div class="skill-top">
-
-<span>${areaNames[area]}</span>
-
-<span>${value}%</span>
-
-</div>
-
-<div class="track">
-<div
-class="fill"
-style="width:${value}%">
-</div>
-</div>
-
-</div>
-`;
-
-});
-
-
-/* TECHNIQUE PROGRESS */
-
-const progress=document.getElementById(
-"techniqueProgress"
-);
-
-progress.innerHTML="";
-
-techniques.forEach(t=>{
-
-const status=
-data.techniqueStatus[t.name]||
-"Not started";
-
-progress.innerHTML+=`
-
-<div class="level-row">
-
-<div class="level-name">
-${t.name}
-</div>
-
-<div class="level-status">
-${status}
-</div>
-
-</div>
-`;
-
-});
-
-}
-
-
-/* =========================================================
-TRAINING LOG
-========================================================= */
-
-function saveLog(){
-
-const position=document.getElementById(
-"logPosition"
-).value.trim();
-
-const technique=document.getElementById(
-"logTechnique"
-).value.trim();
-
-const problem=document.getElementById(
-"logProblem"
-).value.trim();
-
-const next=document.getElementById(
-"logNext"
-).value.trim();
-
-if(!position && !technique && !problem && !next){
-
-alert("Write something before saving.");
-
-return;
-
-}
-
-const data=getData();
-
-data.logs.unshift({
-
-date:new Date().toISOString(),
-position,
-technique,
-problem,
-next
-
-});
-
-saveData(data);
-
-document.getElementById("logPosition").value="";
-document.getElementById("logTechnique").value="";
-document.getElementById("logProblem").value="";
-document.getElementById("logNext").value="";
-
-renderLogs();
-
-alert("Training log saved.");
-
-}
-
-
-function renderLogs(){
-
-const data=getData();
-
-const container=document.getElementById("logs");
-
-if(!data.logs.length){
-
-container.innerHTML=
-`<div class="empty">No training logs yet.</div>`;
-
-return;
-
-}
-
-container.innerHTML="";
-
-data.logs.forEach(log=>{
-
-const div=document.createElement("div");
-
-div.className="log";
-
-div.innerHTML=`
-
-<div class="log-date">
-${new Date(log.date).toLocaleDateString(
-"en-GB",
-{
-day:"numeric",
-month:"long",
-year:"numeric"
-}
-)}
-</div>
-
-<h3>
-${log.position || "Training session"}
-</h3>
-
-${log.technique
-?`<p><strong>Technique:</strong> ${log.technique}</p>`
-:""}
-
-${log.problem
-?`<p><strong>Problem:</strong> ${log.problem}</p>`
-:""}
-
-${log.next
-?`<p><strong>Next focus:</strong> ${log.next}</p>`
-:""}
-
-`;
-
-container.appendChild(div);
-
-});
-
-}
-
-
-/* =========================================================
-TODAY
-========================================================= */
-
-function updateToday(){
-
-const data=getData();
-
-let title;
-let description;
-
-if(!data.sessions.length){
-
-title="Build your base";
-
-description=
-"Start with JJB movement and fundamental escapes.";
-
-}else{
-
-const goal=smartGoal();
-
-title=areaNames[goal];
-
-description=
-"Based on your previous training, this is the area that needs attention next.";
-
-}
-
-document.getElementById(
-"todayTitle"
-).textContent=title;
-
-document.getElementById(
-"todayDescription"
-).textContent=description;
-
-}
-
-
-/* =========================================================
-START TODAY
-========================================================= */
-
-function startToday(){
-
-document.getElementById(
-"goal"
-).value="smart";
-
-showPage("train");
-
-generateSession();
 
 }
 
@@ -2649,10 +1969,10 @@ document
 page.classList.remove("active");
 });
 
-const page=document.getElementById(id);
+const target=document.getElementById(id);
 
-if(page){
-page.classList.add("active");
+if(target){
+target.classList.add("active");
 }
 
 document
@@ -2665,60 +1985,1139 @@ if(button){
 button.classList.add("active");
 }
 
-if(id==="progress"){
-updateProgress();
+if(id==="techniques"){
+renderTechniqueLibrary();
 }
 
-if(id==="techniques"){
-renderTechniques();
+if(id==="chains"){
 renderChains();
+}
+
+if(id==="submissions"){
+renderSubmissions();
+}
+
+if(id==="progress"){
+updateProgress();
 }
 
 if(id==="log"){
 renderLogs();
 }
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================================================
+TODAY RECOMMENDATION
+========================================================= */
+
+function getRecommendedFocus(){
+
+const data=getData();
+
+const hardLogs=data.logs.filter(
+x=>x.difficulty==="hard"
+);
+
+if(hardLogs.length){
+
+const latest=hardLogs[hardLogs.length-1];
+
+return {
+focus:"Work on "+(latest.position||"your weak position"),
+reason:"Your last difficult training session suggests returning to this area."
+};
+
+}
+
+const statuses=Object.entries(data.techniques);
+
+const learning=statuses.find(
+([id,status])=>status==="learning"
+);
+
+if(learning){
+
+const technique=findTechniqueById(learning[0]);
+
+if(technique){
+
+return {
+focus:technique.name,
+reason:"You marked this technique as Learning. Repetition is the next step."
+};
+
+}
+
+}
+
+return {
+focus:"Fundamental movement",
+reason:"No weak point is recorded yet. Build a strong movement base first."
+};
+
+}
+
+function updateToday(){
+
+const rec=getRecommendedFocus();
+
+document.getElementById("todayFocus").textContent=rec.focus;
+
+document.getElementById("todayReason").textContent=rec.reason;
+
+}
+
+
+/* =========================================================
+SESSION GENERATOR
+========================================================= */
+
+function shuffle(array){
+
+return [...array].sort(
+()=>Math.random()-.5
+);
+
+}
+
+function getSmartGoal(){
+
+const data=getData();
+
+const hard=data.logs
+.filter(x=>x.difficulty==="hard")
+.at(-1);
+
+if(hard){
+
+if(
+hard.position==="Side control" ||
+hard.position==="Mount" ||
+hard.position==="Half guard"
+){
+return "jjb";
+}
+
+}
+
+const statuses=Object.values(data.techniques);
+
+if(statuses.includes("learning")){
+return "submissions";
+}
+
+return "movement";
+
+}
+
+function generateToday(){
+
+document.getElementById("goal").value="smart";
+
+document.getElementById("duration").value="20";
+
+generateSession();
+
+}
+
+function setGoalAndGenerate(goal){
+
+document.getElementById("goal").value=goal;
+
+showPage("train");
+
+generateSession();
+
+}
+
+function generateSession(){
+
+let goal=document.getElementById("goal").value;
+
+if(goal==="smart"){
+goal=getSmartGoal();
+}
+
+const minutes=
+Number(document.getElementById("duration").value);
+
+let pool=EXERCISES[goal];
+
+if(!pool){
+pool=EXERCISES.movement;
+goal="movement";
+}
+
+let count=4;
+
+if(minutes>=20) count=6;
+if(minutes>=30) count=8;
+if(minutes>=45) count=10;
+if(minutes>=60) count=12;
+
+const selected=shuffle(pool)
+.slice(0,Math.min(count,pool.length));
+
+const session={
+goal,
+duration:minutes,
+exercises:selected,
+created:Date.now()
+};
+
+renderSession(session);
+
+}
+
+
+function renderSession(session){
+
+const container=document.getElementById("session");
+
+container.innerHTML="";
+
+const title=document.createElement("div");
+
+title.className="session-title";
+
+title.innerHTML=`
+<div>
+<h2>${formatGoal(session.goal)}</h2>
+<p>${session.exercises.length} exercises · ${session.duration} minutes</p>
+</div>
+<div class="muted">Train with intent</div>
+`;
+
+container.appendChild(title);
+
+session.exercises.forEach(
+(ex,index)=>{
+
+const div=document.createElement("div");
+
+div.className="exercise";
+
+div.innerHTML=`
+
+<div class="exercise-top">
+
+<div>
+
+<div class="exercise-number">
+EXERCISE ${index+1}
+</div>
+
+<div class="exercise-name">
+${ex.name}
+</div>
+
+<div class="exercise-detail">
+${ex.detail}
+</div>
+
+</div>
+
+</div>
+
+<div class="feedback">
+
+<div class="feedback-label">
+How did it feel?
+</div>
+
+<div class="feedback-buttons">
+
+<button onclick="sessionFeedback('${ex.id}','easy',this)">
+Easy
+</button>
+
+<button onclick="sessionFeedback('${ex.id}','good',this)">
+Good
+</button>
+
+<button onclick="sessionFeedback('${ex.id}','hard',this)">
+Hard
+</button>
+
+<button onclick="sessionFeedback('${ex.id}','pain',this)">
+Pain
+</button>
+
+</div>
+
+</div>
+`;
+
+container.appendChild(div);
+
+});
+
+const actions=document.createElement("div");
+
+actions.className="actions";
+
+actions.innerHTML=`
+<button class="btn primary" onclick="finishGeneratedSession()">
+Finish session
+</button>
+
+<button class="btn" onclick="generateSession()">
+Generate another
+</button>
+`;
+
+container.appendChild(actions);
+
+window.currentGeneratedSession=session;
+
+}
+
+function sessionFeedback(id,type,button){
+
+button
+.parentElement
+.querySelectorAll("button")
+.forEach(
+b=>b.classList.remove("selected")
+);
+
+button.classList.add("selected");
+
+const exercise=button.closest(".exercise");
+
+exercise.classList.add("done");
+
+const data=getData();
+
+data.feedback[id]={
+type,
+date:Date.now()
+};
+
+saveData(data);
+
+}
+
+function finishGeneratedSession(){
+
+if(!window.currentGeneratedSession)
+return;
+
+const session=window.currentGeneratedSession;
+
+const data=getData();
+
+data.sessions.push({
+date:new Date().toISOString(),
+goal:session.goal,
+duration:session.duration
+});
+
+saveData(data);
+
+alert("Session saved.");
+
+updateToday();
+updateProgress();
+
+window.currentGeneratedSession=null;
+
+}
+
+
+/* =========================================================
+TECHNIQUE LIBRARY
+========================================================= */
+
+let currentPosition="Side Control";
+
+function renderPositionNav(){
+
+const nav=document.getElementById("positionNav");
+
+nav.innerHTML="";
+
+Object.keys(TECHNIQUES).forEach(position=>{
+
+const button=document.createElement("button");
+
+button.textContent=position;
+
+if(position===currentPosition){
+button.classList.add("active");
+}
+
+button.onclick=()=>{
+currentPosition=position;
+renderTechniqueLibrary();
+};
+
+nav.appendChild(button);
+
+});
+
+}
+
+function renderTechniqueLibrary(){
+
+renderPositionNav();
+
+const techniques=TECHNIQUES[currentPosition]||[];
+
+document.getElementById("positionTitle").textContent=currentPosition;
+
+document.getElementById("positionDescription").textContent=
+"Study the problem, understand the movement, then drill it.";
+
+const grid=document.getElementById("techGrid");
+
+grid.innerHTML="";
+
+techniques.forEach(tech=>{
+
+const data=getData();
+
+const status=data.techniques[tech.id]||"never";
+
+const card=document.createElement("div");
+
+card.className="tech-card";
+
+card.innerHTML=`
+
+<h3>${tech.name}</h3>
+
+<p>
+<strong>Problem:</strong> ${tech.problem}
+</p>
+
+<p>
+<strong>When:</strong> ${tech.when}
+</p>
+
+<div class="status ${status}">
+${formatStatus(status)}
+</div>
+
+<div class="tech-actions">
+
+<button onclick="openTechnique('${tech.id}')">
+Study
+</button>
+
+<button onclick="setTechniqueStatus('${tech.id}','learning')">
+Learning
+</button>
+
+<button onclick="setTechniqueStatus('${tech.id}','comfortable')">
+Comfortable
+</button>
+
+<button onclick="setTechniqueStatus('${tech.id}','reliable')">
+Reliable
+</button>
+
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+function formatStatus(status){
+
+const map={
+never:"Never trained",
+learning:"Learning",
+comfortable:"Comfortable",
+reliable:"Reliable"
+};
+
+return map[status]||"Never trained";
+
+}
+
+function setTechniqueStatus(id,status){
+
+const data=getData();
+
+data.techniques[id]=status;
+
+saveData(data);
+
+renderTechniqueLibrary();
+
+updateProgress();
+
+}
+
+function findTechniqueById(id){
+
+for(const position of Object.keys(TECHNIQUES)){
+
+const found=TECHNIQUES[position]
+.find(x=>x.id===id);
+
+if(found)
+return found;
+
+}
+
+return null;
+
+}
+
+function openTechnique(id){
+
+const tech=findTechniqueById(id);
+
+if(!tech)
+return;
+
+document.getElementById("modalTitle").textContent=tech.name;
+
+document.getElementById("modalBody").innerHTML=`
+
+<p>
+<strong>Problem</strong><br>
+${tech.problem}
+</p>
+
+<p>
+<strong>When to use it</strong><br>
+${tech.when}
+</p>
+
+<h3>How</h3>
+
+<ol>
+${tech.steps.map(step=>`<li>${step}</li>`).join("")}
+</ol>
+
+<h3>Common mistake</h3>
+
+<p>${tech.mistake}</p>
+
+<h3>Solo drill</h3>
+
+<p>${tech.drill}</p>
+
+<div class="actions">
+
+<button class="btn primary"
+onclick="setTechniqueStatus('${tech.id}','learning');closeModal();">
+Mark as learning
+</button>
+
+</div>
+`;
+
+document.getElementById("techModal")
+.classList.add("active");
+
+}
+
+function closeModal(){
+
+document
+.getElementById("techModal")
+.classList.remove("active");
+
+}
+
+
+/* =========================================================
+CHAINS
+========================================================= */
+
+function renderChains(){
+
+const container=document.getElementById("chainsContainer");
+
+container.innerHTML="";
+
+CHAINS.forEach(chain=>{
+
+const div=document.createElement("div");
+
+div.className="chain";
+
+div.innerHTML=`
+
+<h3>${chain.title}</h3>
+
+<p class="muted">
+${chain.description}
+</p>
+
+${chain.steps.map(
+(step,index)=>`
+
+<div class="chain-step">
+
+<strong>
+${index+1}. ${step[0]}
+</strong>
+
+<span>
+${step[1]}
+</span>
+
+</div>
+
+`
+).join("")}
+
+<div class="actions">
+
+<button class="btn primary"
+onclick="generateChainSession('${chain.title}')">
+Drill this chain
+</button>
+
+</div>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+function generateChainSession(title){
+
+alert(
+"Chain drilling selected: "+title+
+"\n\nStart slowly, focus on the transitions, then gradually add resistance."
+);
+
+}
+
+
+/* =========================================================
+SUBMISSIONS
+========================================================= */
+
+function renderSubmissions(){
+
+const grid=document.getElementById("submissionGrid");
+
+grid.innerHTML="";
+
+SUBMISSIONS.forEach(sub=>{
+
+const card=document.createElement("div");
+
+card.className="submission";
+
+card.innerHTML=`
+
+<div class="small-label">
+${sub.position}
+</div>
+
+<h3>${sub.name}</h3>
+
+<p>${sub.description}</p>
+
+<p>
+<strong>Setup:</strong><br>
+${sub.setup}
+</p>
+
+<p>
+<strong>Finish:</strong><br>
+${sub.finish}
+</p>
+
+<button class="btn"
+onclick="findSubmissionTechnique('${sub.name}')">
+Add to study
+</button>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+function findSubmissionTechnique(name){
+
+const found=SUBMISSIONS.find(
+x=>x.name===name
+);
+
+if(!found)
+return;
+
+alert(
+name+
+"\n\nPosition: "+
+found.position+
+"\n\nSetup: "+
+found.setup+
+"\n\nFinish: "+
+found.finish+
+"\n\nPractice slowly and focus on control before speed."
+);
+
+}
+
+
+/* =========================================================
+TRAINING LOG
+========================================================= */
+
+function saveTrainingLog(){
+
+const position=
+document.getElementById("logPosition").value;
+
+const problem=
+document.getElementById("logProblem").value.trim();
+
+const technique=
+document.getElementById("logTechnique").value.trim();
+
+const difficulty=
+document.getElementById("logDifficulty").value;
+
+const next=
+document.getElementById("logNext").value.trim();
+
+if(!position && !problem && !technique){
+
+alert("Add at least one piece of information about the session.");
+
+return;
+
+}
+
+const data=getData();
+
+data.logs.push({
+
+date:new Date().toISOString(),
+
+position,
+problem,
+technique,
+difficulty,
+next
+
+});
+
+saveData(data);
+
+document.getElementById("logProblem").value="";
+document.getElementById("logTechnique").value="";
+document.getElementById("logNext").value="";
+
+alert("Training log saved.");
+
+renderLogs();
+updateToday();
+
+}
+
+function renderLogs(){
+
+const container=document.getElementById("logHistory");
+
+const data=getData();
+
+if(!data.logs.length){
+
+container.innerHTML=`
+<div class="empty">
+No training sessions logged yet.
+</div>
+`;
+
+return;
+
+}
+
+container.innerHTML="";
+
+[...data.logs]
+.reverse()
+.forEach(log=>{
+
+const div=document.createElement("div");
+
+div.className="history-item";
+
+div.innerHTML=`
+
+<div>
+
+<div class="history-title">
+${log.position||"Training session"}
+</div>
+
+<div class="history-date">
+${new Date(log.date).toLocaleDateString()}
+</div>
+
+</div>
+
+<div class="muted">
+${log.difficulty}
+</div>
+
+`;
+
+div.onclick=()=>{
+
+alert(
+"Position: "+(log.position||"-")+
+"\n\nProblem: "+(log.problem||"-")+
+"\n\nTechnique: "+(log.technique||"-")+
+"\n\nNext: "+(log.next||"-")
+);
+
+};
+
+container.appendChild(div);
+
 });
 
 }
 
 
 /* =========================================================
-THEME
+PROGRESS
 ========================================================= */
 
-function toggleTheme(){
+function updateProgress(){
 
-document.body.classList.toggle("light");
+const data=getData();
 
-const light=document.body.classList.contains(
-"light"
+document.getElementById("statSessions")
+.textContent=data.sessions.length;
+
+document.getElementById("statMinutes")
+.textContent=data.sessions.reduce(
+(total,x)=>total+Number(x.duration||0),
+0
 );
 
-localStorage.setItem(
-"jjbTheme",
-light?"light":"dark"
-);
+const statuses=Object.values(data.techniques);
 
-document.getElementById(
-"themeButton"
-).textContent=
-light?"Dark":"Light";
+document.getElementById("statTechniques")
+.textContent=statuses.filter(
+x=>x!=="never"
+).length;
+
+document.getElementById("statReliable")
+.textContent=statuses.filter(
+x=>x==="reliable"
+).length;
+
+const map=document.getElementById("skillMap");
+
+map.innerHTML="";
+
+const allTechniques=[];
+
+Object.entries(TECHNIQUES).forEach(
+([position,techniques])=>{
+
+techniques.forEach(
+tech=>{
+
+const status=
+data.techniques[tech.id]||"never";
+
+allTechniques.push({
+...tech,
+position,
+status
+});
+
+});
+
+});
+
+allTechniques.forEach(tech=>{
+
+let percent=0;
+
+if(tech.status==="learning")
+percent=33;
+
+if(tech.status==="comfortable")
+percent=66;
+
+if(tech.status==="reliable")
+percent=100;
+
+const row=document.createElement("div");
+
+row.className="progress-row";
+
+row.innerHTML=`
+
+<div class="progress-top">
+
+<span>
+${tech.name}
+</span>
+
+<span>
+${formatStatus(tech.status)}
+</span>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+style="width:${percent}%">
+</div>
+
+</div>
+
+`;
+
+map.appendChild(row);
+
+});
 
 }
 
-if(
-localStorage.getItem("jjbTheme")==="light"
-){
 
-document.body.classList.add("light");
+/* =========================================================
+EXPORT / IMPORT
+========================================================= */
+
+function exportData(){
+
+const data=getData();
+
+const blob=new Blob(
+[
+JSON.stringify(data,null,2)
+],
+{
+type:"application/json"
+}
+);
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download="jjb-training-backup.json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+function importData(){
+
+const input=document.getElementById("importFile");
+
+if(!input.files.length)
+return;
+
+const reader=new FileReader();
+
+reader.onload=()=>{
+
+try{
+
+const data=JSON.parse(reader.result);
+
+if(
+!Array.isArray(data.sessions) ||
+!Array.isArray(data.logs)
+){
+throw new Error();
+}
+
+localStorage.setItem(
+"jjb_training_v3",
+JSON.stringify(data)
+);
+
+alert("Data imported.");
+
+updateProgress();
+updateToday();
+renderLogs();
+
+}catch{
+
+alert("Invalid backup file.");
+
+}
+
+};
+
+reader.readAsText(input.files[0]);
+
+}
+
+
+/* =========================================================
+RESET
+========================================================= */
+
+function resetData(){
+
+const yes=confirm(
+"Delete all JJB training data from this browser?"
+);
+
+if(!yes)
+return;
+
+localStorage.removeItem("jjb_training_v3");
+
+updateProgress();
+updateToday();
+renderLogs();
+
+alert("All data has been reset.");
+
+}
+
+
+/* =========================================================
+TIMER
+========================================================= */
+
+let timerSeconds=30;
+
+let timerRunning=false;
+
+let timerInterval=null;
+
+function formatTime(seconds){
+
+const m=Math.floor(seconds/60)
+.toString()
+.padStart(2,"0");
+
+const s=(seconds%60)
+.toString()
+.padStart(2,"0");
+
+return m+":"+s;
+
+}
+
+function renderTimer(){
 
 document.getElementById(
-"themeButton"
-).textContent="Dark";
+"timerDisplay"
+).textContent=
+formatTime(timerSeconds);
+
+}
+
+function setTimer(seconds){
+
+clearInterval(timerInterval);
+
+timerSeconds=seconds;
+
+timerRunning=false;
+
+document.getElementById(
+"timerButton"
+).textContent="Start";
+
+renderTimer();
+
+}
+
+function toggleTimer(){
+
+if(timerRunning){
+
+clearInterval(timerInterval);
+
+timerRunning=false;
+
+document.getElementById(
+"timerButton"
+).textContent="Resume";
+
+return;
+
+}
+
+timerRunning=true;
+
+document.getElementById(
+"timerButton"
+).textContent="Pause";
+
+timerInterval=setInterval(()=>{
+
+if(timerSeconds<=0){
+
+clearInterval(timerInterval);
+
+timerRunning=false;
+
+document.getElementById(
+"timerButton"
+).textContent="Start";
+
+return;
+
+}
+
+timerSeconds--;
+
+renderTimer();
+
+},1000);
+
+}
+
+function resetTimer(){
+
+setTimer(30);
+
+}
+
+
+/* =========================================================
+HELPERS
+========================================================= */
+
+function formatGoal(goal){
+
+const names={
+jjb:"JJB Drills",
+submissions:"Submission Training",
+movement:"Movement",
+strength:"Strength",
+grip:"Grip",
+conditioning:"Conditioning",
+mobility:"Mobility"
+};
+
+return names[goal]||goal;
 
 }
 
@@ -2728,10 +3127,18 @@ INIT
 ========================================================= */
 
 updateToday();
+
 updateProgress();
-renderTechniques();
-renderChains();
+
 renderLogs();
+
+renderTechniqueLibrary();
+
+renderChains();
+
+renderSubmissions();
+
+renderTimer();
 
 </script>
 
